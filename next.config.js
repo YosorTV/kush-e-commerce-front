@@ -14,6 +14,16 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**/*',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
         hostname: 'lh3.googleusercontent.com',
       },
       {
@@ -23,4 +33,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
