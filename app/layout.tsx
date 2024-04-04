@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { auth } from '@/auth';
 import { BaseLayout } from '@/components/layouts';
 import { getStrapiData } from '@/services/strapi';
 import { generateStrapiQuery } from '@/lib/qs';
@@ -25,9 +26,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await getStrapiData('global', layoutQP);
+  const session = await auth();
 
   return (
-    <BaseLayout header={data?.header} footer={data?.footer}>
+    <BaseLayout header={data?.header} footer={data?.footer} session={session}>
       {children}
     </BaseLayout>
   );
