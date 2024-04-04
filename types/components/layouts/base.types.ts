@@ -1,8 +1,15 @@
 import React from 'react';
-import { FooterProps, HeaderProps } from '../elements';
+import { FooterProps, StripeLinkType } from '../elements';
+
+type StrapiHeaderData = {
+  id: number | string;
+  logoText: StripeLinkType;
+  ctaButton: StripeLinkType;
+};
 
 export type BaseLayoutProps = {
   children: React.ReactNode;
-  header: HeaderProps;
+  header: StrapiHeaderData;
   footer: FooterProps;
+  session?: any;
 };
