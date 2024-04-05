@@ -4,6 +4,7 @@ import React, { FC, useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 
 import { FormProps, InputProps } from '@/types/components';
+import { toaster } from '@/lib';
 
 export const Form: FC<FormProps<any>> = ({
   children,
@@ -19,10 +20,18 @@ export const Form: FC<FormProps<any>> = ({
   const [formState, formAction] = useFormState(action, state);
 
   useEffect(() => {
-    if (formState?.data === 'ok') {
+    if (!formState?.errors) {
       ref.current?.reset();
     }
-  }, [formState?.data]);
+
+    if (formState?.strapiError) {
+      toaster({
+        key: 'error',
+        message: formState.message,
+        description: formState.strapiError?.message ?? formState.strapiError,
+      });
+    }
+  }, [formState]);
 
   return (
     <form ref={ref} action={formAction} className={className}>

@@ -19,7 +19,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
       return {
         ...prevState,
         errors,
-        strapiErrors: null,
+        strapiError: null,
         message: 'Missing Fields. Failed to Login.',
       };
     }
@@ -29,7 +29,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
     return {
       ...prevState,
       errors: null,
-      strapiErrors: null,
+      strapiError: null,
       data: 'ok',
       message: 'Welcome back!',
     };
@@ -38,19 +38,19 @@ export async function authUserAction(prevState: any, formData: FormData) {
       switch (error.type) {
         case 'CredentialsSignin':
           return {
-            message: 'credentials error',
-            errors: {
-              ...prevState,
-              credentials: 'incorrect email or password',
-            },
+            ...prevState,
+            data: null,
+            errors: null,
+            message: 'Credentials error',
+            strapiError: 'Invalid credentials or provider authentication',
           };
         default:
           return {
-            message: 'unknown error',
-            errors: {
-              ...prevState,
-              unknown: 'unknown error',
-            },
+            ...prevState,
+            data: null,
+            errors: null,
+            message: 'Bad request',
+            strapiError: 'Something went wrong',
           };
       }
     }
