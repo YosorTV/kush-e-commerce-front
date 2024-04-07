@@ -69,6 +69,7 @@ export const STRAPI_API_ROUTES = {
     populate: [
       'header.logoText',
       'header.ctaButton',
+      'header.sessionLinks',
       'footer.logoText',
       'footer.ctaButton',
     ],

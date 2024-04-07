@@ -24,7 +24,10 @@ export async function createUserAction(prevState: any, formData: FormData) {
     };
   }
 
-  const response = await createUser(validatedData.data);
+  const response = await createUser({
+    ...validatedData.data,
+    confirmed: false,
+  });
 
   if (response.error) {
     return {

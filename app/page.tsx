@@ -11,11 +11,9 @@ export default async function Home() {
   if (!data?.blocks) return <p>No sections found</p>;
 
   return (
-    <div className='flex flex-grow flex-col items-center justify-between overflow-y-auto overflow-x-hidden'>
-      <div className='text-center'>
-        <h1>{data?.title}</h1>
-        <p>{data?.description}</p>
-      </div>
+    <div className='text-center'>
+      <h1>{data?.title}</h1>
+      <p>{data?.description}</p>
     </div>
   );
 }
