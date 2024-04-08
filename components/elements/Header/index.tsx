@@ -12,6 +12,7 @@ export const Header: FC<HeaderProps> = ({ data, session }) => {
         </Link>
         <UserSession
           session={session?.user}
+          sessionLinks={data?.sessionLinks}
           cta={data?.ctaButton}
           authorized={session?.user}
         />

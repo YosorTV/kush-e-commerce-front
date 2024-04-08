@@ -5,29 +5,34 @@ import { schemas } from '@/lib/zod';
 import { authUserAction } from '@/services';
 import { SignInProviders, SubmitButton } from '@/components/complex';
 
-export const SignInForm = () => {
+export const SignInForm = ({ formFields, providers, submitBtn }: any) => {
+  const printInputs = (data: any) => {
+    return data?.map((input: any) => <Input key={input.id} {...input} />);
+  };
+
+  const printProviders = (data: any) => {
+    return data.map((provider: any) => (
+      <SignInProviders
+        key={provider.id}
+        text={provider.text}
+        identifier={provider.key}
+      />
+    ));
+  };
+
   return (
     <Form
       action={authUserAction}
       schema={schemas.login}
       className='flex flex-col gap-y-5'
     >
-      <Input
-        name='identifier'
-        type='email'
-        label='Email'
-        placeholder='Enter your email address'
-        autoComplete='email'
+      {printInputs(formFields)}
+      <SubmitButton
+        className='w-full'
+        text={submitBtn.text}
+        loadingText={submitBtn.loadingText}
       />
-      <Input
-        name='password'
-        type='password'
-        label='Password'
-        placeholder='Enter your password'
-        autoComplete='password'
-      />
-      <SubmitButton className='w-full' text='Sign In' loadingText='Loading' />
-      <SignInProviders />
+      {printProviders(providers)}
     </Form>
   );
 };

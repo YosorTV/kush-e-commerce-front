@@ -24,8 +24,14 @@ const signupSchema = z.object({
   password: passwordSchema,
 });
 
-export const resetPasswordSchema = z.object({
+export const forgotPasswordSchema = z.object({
   email: emailSchema,
+});
+
+export const resetPasswordSchema = z.object({
+  password: passwordSchema,
+  passwordConfirmation: passwordSchema,
+  code: z.string().readonly(),
 });
 
 export const updatePasswordScema = z.object({
@@ -38,4 +44,5 @@ export const schemas = {
   signup: signupSchema,
   'reset-password': resetPasswordSchema,
   'update-password': updatePasswordScema,
+  'forgot-password': forgotPasswordSchema,
 };

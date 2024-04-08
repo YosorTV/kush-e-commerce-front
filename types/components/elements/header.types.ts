@@ -6,5 +6,6 @@ export type HeaderProps = {
     id: number | string;
     logoText: StripeLinkType;
     ctaButton: StripeLinkType;
+    sessionLinks: StripeLinkType[];
   };
 };

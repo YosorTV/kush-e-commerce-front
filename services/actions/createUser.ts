@@ -19,19 +19,22 @@ export async function createUserAction(prevState: any, formData: FormData) {
     return {
       ...prevState,
       errors,
-      strapiErrors: null,
+      strapiError: null,
       message: 'Missing Fields. Failed to Register.',
     };
   }
 
-  const response = await createUser(validatedData.data);
+  const response = await createUser({
+    ...validatedData.data,
+    confirmed: false,
+  });
 
   if (response.error) {
     return {
       ...prevState,
       errors: null,
-      strapiErrors: response.error,
-      message: response.error.message,
+      message: 'Bad request',
+      strapiError: response.error.message,
     };
   }
 

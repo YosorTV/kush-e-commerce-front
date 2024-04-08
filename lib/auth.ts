@@ -3,7 +3,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialProvider, {
   CredentialInput,
 } from 'next-auth/providers/credentials';
-// import { getStrapiAuthData } from '@/services/strapi';
+import { getStrapiAuthData, postStrapiData } from '@/services/strapi';
 import { login } from '@/services/api/login';
 import { sessionAdapter, tokenAdapter } from '@/adapters/auth';
 
@@ -16,14 +16,14 @@ export const authOptions: NextAuthConfig = {
       id: 'credentials',
       name: 'Credentials',
       credentials: {} as Record<string, CredentialInput>,
-      authorize: async (credentials: any) => {
-        const res = await login(credentials);
+      async authorize(credentials: any) {
+        const response = await login(credentials);
 
-        if (res?.jwt) {
-          return res;
+        if (!response?.jwt) {
+          return null;
         }
 
-        return null;
+        return response;
       },
     }),
     GoogleProvider({
@@ -31,6 +31,21 @@ export const authOptions: NextAuthConfig = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
+  events: {
+    async signIn({ account, user }) {
+      if (account.access_token) {
+        const response = await postStrapiData('user-check', {
+          email: user.email,
+        });
+        if (!response.isExist) {
+          await getStrapiAuthData({
+            provider: account.provider,
+            token: account.access_token,
+          });
+        }
+      }
+    },
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) return tokenAdapter({ token, user });
@@ -38,7 +53,6 @@ export const authOptions: NextAuthConfig = {
     },
     async session({ token, session }: any) {
       if (token) return sessionAdapter({ token });
-
       return Promise.resolve(session);
     },
   },

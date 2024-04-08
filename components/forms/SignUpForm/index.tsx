@@ -1,10 +1,18 @@
 'use client';
 
+import { FC } from 'react';
 import { SubmitButton } from '@/components/complex';
 import { Form, Input } from '@/components/elements';
 import { createUserAction } from '@/services';
 
-export const SignUpForm = () => {
+export const SignUpForm: FC<{ formFields: any[]; cta: any }> = ({
+  formFields,
+  cta,
+}) => {
+  const printInputs = (data: any) => {
+    return data?.map((input: any) => <Input key={input.id} {...input} />);
+  };
+
   return (
     <Form
       id='signup-form'
@@ -12,31 +20,12 @@ export const SignUpForm = () => {
       className='flex w-full flex-col gap-5'
       action={createUserAction}
     >
-      <Input
-        name='username'
-        type='text'
-        label='How should we call you?'
-        placeholder='Enter your profile name'
-        className='border p-2'
-        autoComplete='name'
+      {printInputs(formFields)}
+      <SubmitButton
+        text={cta.text}
+        loadingText={cta.loadingText}
+        className='w-full'
       />
-      <Input
-        name='email'
-        type='email'
-        label='What is your email?'
-        placeholder='Enter your email address'
-        className='border p-2'
-        autoComplete='email'
-      />
-      <Input
-        name='password'
-        type='password'
-        label='Create a password'
-        placeholder='Enter your password'
-        className='border p-2'
-        autoComplete='password'
-      />
-      <SubmitButton className='w-full' text='Sign Up' loadingText='Loading' />
     </Form>
   );
 };
