@@ -12,7 +12,7 @@ export const UserSession = ({
 }: any) => {
   if (!authorized) {
     return (
-      <NextLink href={cta.url} className='btn btn-ghost uppercase text-black'>
+      <NextLink href={cta.url} className='btn btn-ghost text-black'>
         {cta.text}
       </NextLink>
     );

@@ -4,6 +4,7 @@ interface RegisterUserProps {
   username: string;
   password: string;
   email: string;
+  confirmed: boolean;
 }
 
 export async function createUser(user: RegisterUserProps) {

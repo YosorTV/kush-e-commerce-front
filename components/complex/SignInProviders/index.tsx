@@ -1,10 +1,18 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
+import { FC } from 'react';
 
-export const SignInProviders = () => {
+export const SignInProviders: FC<{ text: string; identifier: string }> = ({
+  text,
+  identifier,
+}) => {
   const handleGoogle = async () => {
     await signIn('google', { callbackUrl: '/' });
+  };
+
+  const actionProvider: any = {
+    google: handleGoogle,
   };
 
   return (
@@ -12,9 +20,9 @@ export const SignInProviders = () => {
       <button
         type='button'
         className='btn btn-ghost w-full'
-        onClick={handleGoogle}
+        onClick={actionProvider[identifier]}
       >
-        Continue with Google
+        {text}
       </button>
     </div>
   );
