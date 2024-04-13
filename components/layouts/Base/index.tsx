@@ -14,7 +14,7 @@ export async function BaseLayout({
     <html lang='en'>
       <body className={cn('relative h-full overflow-hidden', roboto.className)}>
         <Header data={header} session={session} />
-        <main className='grid min-h-screen py-16'>{children}</main>
+        <main className='z-0 grid h-screen scroll-auto py-14'>{children}</main>
         <Footer {...footer} />
       </body>
     </html>

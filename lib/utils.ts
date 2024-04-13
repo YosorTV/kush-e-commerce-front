@@ -48,14 +48,3 @@ export const flattenAttributes = (data: any): any => {
 
   return flattened;
 };
-
-export const blockRenderer = (block: any) => {
-  switch (block.__component) {
-    case 'layouts.hero-section':
-      return { data: block, key: block.id };
-    case 'layouts.features-section':
-      return { data: block, key: block.id };
-    default:
-      return { data: null, key: null };
-  }
-};

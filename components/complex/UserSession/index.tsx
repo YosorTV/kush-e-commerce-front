@@ -1,7 +1,7 @@
 import { NextLink } from '@/components/elements';
 
 import Image from 'next/image';
-import { SignOutButton } from '../SignOutButton';
+import { SignOutButton } from '../../simple/SignOutButton';
 import { StripeLinkType } from '@/types/components';
 
 export const UserSession = ({

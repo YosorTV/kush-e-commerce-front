@@ -88,6 +88,23 @@ export const STRAPI_API_ROUTES = {
       },
     },
   },
+  listOfProducts: {
+    populate: {
+      products: {
+        populate: {
+          cover: {
+            fields: ['url', 'alternativeText'],
+          },
+          images: {
+            fields: ['url', 'alternativeText'],
+          },
+          meta: {
+            populate: true,
+          },
+        },
+      },
+    },
+  },
   auth: {
     registration: { populate: ['formFields', 'redirectUrl', 'submitBtn'] },
     success: { populate: ['title', 'description', 'redirectUrl'] },

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .hero-footer {
+    @apply absolute bottom-1/2 flex w-full flex-col items-center justify-center;
+  }
+}

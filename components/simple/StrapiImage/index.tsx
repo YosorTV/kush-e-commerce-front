@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Image } from '@/components/elements';
 import { getStrapiMedia } from '@/lib/utils';
 
 interface StrapiImageProps {

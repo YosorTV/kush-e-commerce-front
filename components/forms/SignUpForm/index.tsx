@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { SubmitButton } from '@/components/complex';
+import { SubmitButton } from '@/components/simple';
 import { Form, Input } from '@/components/elements';
 import { createUserAction } from '@/services';
 
