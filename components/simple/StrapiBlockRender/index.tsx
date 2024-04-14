@@ -1,5 +1,5 @@
+import { FC } from 'react';
 import { HeroSection } from '@/components/complex';
-import React from 'react';
 
 function blockRenderer(block: any) {
   switch (block.__component) {
@@ -12,7 +12,7 @@ function blockRenderer(block: any) {
   }
 }
 
-export const StrapiBlockRender = ({ data }: any) => {
+export const StrapiBlockRender: FC<any> = ({ data }) => {
   if (!data) return <p>No sections found</p>;
 
   return data.map(blockRenderer);

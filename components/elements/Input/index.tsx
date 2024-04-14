@@ -1,3 +1,4 @@
+import { cn } from '@/lib';
 import { InputProps } from '@/types/components';
 import React from 'react';
 
@@ -20,9 +21,11 @@ export const Input = ({
         {...rest}
         type={type}
         placeholder={placeholder}
-        className={`input ${className} ${
-          !error ? 'input input-bordered' : 'input-error'
-        } cursor-pointer`}
+        className={cn(
+          'input cursor-pointer',
+          !error ? 'input input-bordered' : 'input-error',
+          className
+        )}
       />
       {error && <span className={`relative text-xs text-error`}>{error}</span>}
     </div>

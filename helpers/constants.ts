@@ -88,9 +88,11 @@ export const STRAPI_API_ROUTES = {
       },
     },
   },
-  listOfProducts: {
+  listOfProducts: ({ searchParams }: any) => ({
     populate: {
       products: {
+        limit: searchParams?.limit,
+        start: searchParams?.start,
         populate: {
           cover: {
             fields: ['url', 'alternativeText'],
@@ -102,9 +104,14 @@ export const STRAPI_API_ROUTES = {
             populate: true,
           },
         },
+        filters: {
+          title: {
+            $contains: searchParams?.name,
+          },
+        },
       },
     },
-  },
+  }),
   auth: {
     registration: { populate: ['formFields', 'redirectUrl', 'submitBtn'] },
     success: { populate: ['title', 'description', 'redirectUrl'] },

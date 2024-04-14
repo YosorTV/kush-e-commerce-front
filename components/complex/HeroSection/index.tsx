@@ -5,7 +5,6 @@ import { FC } from 'react';
 export const HeroSection: FC<any> = ({ data }) => {
   return (
     <section className='hero relative min-h-full'>
-      <div className='hero-overlay bg-opacity-60' />
       <figure className='hero-content text-center text-white'>
         <StrapiImage
           height={3000}
@@ -14,12 +13,13 @@ export const HeroSection: FC<any> = ({ data }) => {
           src={data?.image?.url}
           alt={data?.image?.alternativeText}
         />
-        <figcaption className='flex max-w-md flex-col gap-y-5'>
+        <div className='hero-overlay absolute z-10 bg-black/50' />
+        <figcaption className='relative z-20 flex max-w-md flex-col gap-y-5'>
           <Title level='1' className='text-5xl font-bold'>
             {data?.title}
           </Title>
           <p className='text-xl font-medium'>{data?.description}</p>
-          <NextLink href={data?.link?.url} className='btn btn-ghost'>
+          <NextLink href={data?.link?.url} className='btn btn-ghost z-50'>
             {data?.link?.text}
           </NextLink>
         </figcaption>

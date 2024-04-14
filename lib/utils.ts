@@ -48,3 +48,28 @@ export const flattenAttributes = (data: any): any => {
 
   return flattened;
 };
+
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null;
+
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+}
+
+export function createQueryString(
+  name: string,
+  value: string,
+  searchParams?: URLSearchParams
+): string {
+  const params = searchParams || new URLSearchParams();
+  params.set(name, value);
+
+  return params.toString();
+}

@@ -1,5 +1,5 @@
-import { Card } from '@/components/elements/Card';
-import React from 'react';
+import { Card, Title } from '@/components/elements';
+import { ProductsController } from '@/components/simple';
 
 export const ProductsSection = ({ data }: any) => {
   const printProduct = (product: any) => (
@@ -7,9 +7,13 @@ export const ProductsSection = ({ data }: any) => {
   );
 
   return (
-    <section className='w-full py-5'>
+    <section className='h-full py-5'>
+      <ProductsController
+        search={{ placeholder: 'Search' }}
+        className='flex flex-1 items-center justify-center pb-10'
+      />
       <div className='grid grid-cols-fluid place-items-center items-start gap-5'>
-        {data?.map(printProduct)}
+        {data.map(printProduct) || <Title level='2'>Not found</Title>}
       </div>
     </section>
   );
