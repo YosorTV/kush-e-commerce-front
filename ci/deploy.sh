@@ -1,4 +1,5 @@
 #!/bin/bash
+cp "/home/github-runner/.env.frontend.${ENV_NAME}" .env
 
 docker build --build-arg NEXT_PUBLIC_API_URL="${NEXT_PUBLIC_API_URL}" \
              --build-arg NEXTAUTH_URL="${NEXTAUTH_URL}" \

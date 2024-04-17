@@ -17,3 +17,4 @@ jobs:
           NEXT_PUBLIC_URL: https://dev.kush-test.pp.ua
           NEXT_PUBLIC_STRAPI_URL: https://dev.kush-test.pp.ua/strapi
           NEXTAUTH_SECRET: ${{ secrets.PREVIEW_SECRET }}
+          ENV_NAME: dev
