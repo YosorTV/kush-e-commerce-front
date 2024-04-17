@@ -19,7 +19,10 @@ export const HeroSection: FC<any> = ({ data }) => {
             {data?.title}
           </Title>
           <p className='text-xl font-medium'>{data?.description}</p>
-          <NextLink href={data?.link?.url} className='btn btn-ghost z-50'>
+          <NextLink
+            href='/products?page=1&per_page=5'
+            className='btn btn-ghost z-50'
+          >
             {data?.link?.text}
           </NextLink>
         </figcaption>

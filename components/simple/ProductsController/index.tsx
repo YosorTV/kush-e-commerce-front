@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Input } from '@/components/elements';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { cn, createQueryString } from '@/lib';
+import { cn } from '@/lib';
 import { useDebounce } from 'use-debounce';
 
 export const ProductsController: FC<{
@@ -24,11 +24,15 @@ export const ProductsController: FC<{
   };
 
   const handleSearch = () => {
-    if (!query) {
-      router.push(pathname);
+    const searchQuery = new URLSearchParams(searchParams);
+
+    if (query) {
+      searchQuery.set('name', query);
     } else {
-      router.push(`${pathname}?${createQueryString('name', query)}`);
+      searchQuery.delete('name');
     }
+
+    router.replace(`${pathname}?${searchQuery.toString()}`);
   };
 
   useEffect(() => {

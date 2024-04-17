@@ -13,7 +13,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const data = await getStrapiData('login-page', metaQP);
 
   return {
-    title: data?.title,
+    title: {
+      default: `KUSH | ${data?.title?.toUpperCase()}`,
+      template: '%s | KUSH',
+    },
     description: data?.description,
   };
 }

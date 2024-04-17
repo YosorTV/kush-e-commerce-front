@@ -6,3 +6,4 @@ export * from '@/components/elements/Input';
 export * from '@/components/elements/Image';
 export * from '@/components/elements/Title';
 export * from '@/components/elements/Card';
+export * from '@/components/elements/Artboard';
