@@ -15,8 +15,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        hostname: 'dev.kush-test.pp.ua',
+        port: '443',
         pathname: '/uploads/**/*',
       },
       {
