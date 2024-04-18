@@ -5,30 +5,35 @@ import { SignOutButton } from '../../simple/SignOutButton';
 import { StripeLinkType } from '@/types/components';
 
 export const UserSession = ({
-  authorized,
+  authorized = false,
   cta,
   session,
-  sessionLinks,
+  sessionLinks = [],
 }: any) => {
   if (!authorized) {
     return (
-      <NextLink href={cta.url} className='btn btn-ghost text-black'>
-        {cta.text}
-      </NextLink>
+      cta && (
+        <NextLink href={cta.url} className='btn btn-ghost text-black'>
+          {cta.text}
+        </NextLink>
+      )
     );
   }
 
   const printMenuLinks = (links: StripeLinkType[]) => {
-    return links.map((link: StripeLinkType, index) => (
-      <li tabIndex={index + 1} key={link.id}>
-        <NextLink
-          href={link.url}
-          className='font-semibold capitalize text-black hover:bg-none'
-        >
-          {link.text}
-        </NextLink>
-      </li>
-    ));
+    return (
+      links.length &&
+      links.map((link: StripeLinkType, index) => (
+        <li tabIndex={index + 1} key={link.id}>
+          <NextLink
+            href={link.url}
+            className='font-semibold capitalize text-black hover:bg-none'
+          >
+            {link.text}
+          </NextLink>
+        </li>
+      ))
+    );
   };
 
   return (
@@ -39,9 +44,9 @@ export const UserSession = ({
           className='flex cursor-pointer items-center justify-center gap-5'
         >
           <figcaption className='text-black'>{session.name}</figcaption>
-          {session?.avatar && (
+          {session.avatar && (
             <Image
-              src={session?.avatar}
+              src={session.avatar}
               height={100}
               width={100}
               className='h-8 w-8 rounded-full'

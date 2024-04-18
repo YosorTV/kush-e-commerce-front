@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { HeroSection } from '@/components/complex';
+import { notFound } from 'next/navigation';
 
 function blockRenderer(block: any) {
   switch (block.__component) {
@@ -13,7 +14,7 @@ function blockRenderer(block: any) {
 }
 
 export const StrapiBlockRender: FC<any> = ({ data }) => {
-  if (!data) return <p>No sections found</p>;
+  if (!data) return notFound();
 
   return data.map(blockRenderer);
 };
