@@ -12,25 +12,28 @@ const nextConfig = {
   },
   reactStrictMode: false,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'dev.kush-test.pp.ua',
-        port: '443',
-        pathname: '/uploads/**/*',
-      },
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-      },
-      {
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        hostname: 'files.stripe.com',
-      },
-    ],
-  },
+    domains: ['dev.kush-test.pp.ua']
+  }
+  // images: {
+  //   remotePatterns: [
+  //     {
+  //       protocol: 'http',
+  //       hostname: 'dev.kush-test.pp.ua',
+  //       port: '443',
+  //       pathname: '/uploads/**/*',
+  //     },
+  //     {
+  //       protocol: 'https',
+  //       hostname: 'placehold.co',
+  //     },
+  //     {
+  //       hostname: 'lh3.googleusercontent.com',
+  //     },
+  //     {
+  //       hostname: 'files.stripe.com',
+  //     },
+  //   ],
+  // },
 };
 
 module.exports = nextConfig;
