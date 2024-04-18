@@ -1,6 +1,6 @@
 Dockerfile
 script
-.dockerignore
+# .dockerignore
 .github/*
 ci/*
 .git/*
