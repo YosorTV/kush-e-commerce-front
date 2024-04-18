@@ -12,7 +12,7 @@ const nextConfig = {
   },
   reactStrictMode: false,
   images: {
-    domains: ['dev.kush-test.pp.ua']
+    domains: ['dev.kush-test.pp.ua', 'lh3.googleusercontent.com'],
   }
   // images: {
   //   remotePatterns: [
