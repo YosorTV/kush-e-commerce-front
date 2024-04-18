@@ -21,3 +21,12 @@ docker run -d --restart always -e NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" \
                                -e PREVIEW_SECRET="${PREVIEW_SECRET}" \
                                -p 3000:3000 \
                                kush-e-commerce-front:"${GITHUB_RUN_ID}" 
+
+root_usage=$(df -h | awk '$NF=="/"{print $(NF-1)}' | sed 's/%//')
+if [ "$root_usage" -gt 80 ]; then
+    echo "Cleanup..."
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+else
+    echo "Disk usage on /dev/root is below 80%. No cleanup needed."
+fi                               
