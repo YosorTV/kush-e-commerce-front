@@ -19,6 +19,7 @@ docker run -d --restart always -e NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" \
                                -e NEXTAUTH_URL="${NEXTAUTH_URL}" \
                                -e NEXT_PUBLIC_STRAPI_API_URL="${NEXT_PUBLIC_STRAPI_API_URL}" \
                                -e PREVIEW_SECRET="${PREVIEW_SECRET}" \
+                               -e NEXT_PUBLIC_STRAPI_URL="${NEXT_PUBLIC_STRAPI_URL}" \
                                -p 3000:3000 \
                                kush-e-commerce-front:"${GITHUB_RUN_ID}" 
 

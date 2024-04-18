@@ -32,3 +32,4 @@ export const getStrapiAuthData = async ({ provider, token }: any) => {
 
   return response;
 };
+
