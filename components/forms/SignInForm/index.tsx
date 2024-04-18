@@ -1,9 +1,10 @@
 'use client';
 
+import { SignInProviders } from '@/components/complex';
 import { Form, Input } from '@/components/elements';
+import { SubmitButton } from '@/components/simple';
 import { schemas } from '@/lib/zod';
 import { authUserAction } from '@/services';
-import { SignInProviders, SubmitButton } from '@/components/complex';
 
 export const SignInForm = ({ formFields, providers, submitBtn }: any) => {
   const printInputs = (data: any) => {

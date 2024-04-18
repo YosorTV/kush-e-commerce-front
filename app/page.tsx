@@ -1,6 +1,6 @@
+import { StrapiBlockRender } from '@/components/simple';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib/qs';
-// import { blockRenderer } from '@/lib/utils';
 import { getStrapiData } from '@/services/strapi';
 import { Metadata } from 'next';
 
@@ -11,7 +11,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const data = await getStrapiData('home-page', metaQP);
 
   return {
-    title: data?.title,
+    title: {
+      default: `KUSH | ${data?.title?.toUpperCase()}`,
+      template: '%s | KUSH',
+    },
     description: data?.description,
   };
 }
@@ -19,12 +22,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const data = await getStrapiData('home-page', homeQP);
 
-  if (!data?.blocks) return <p>No sections found</p>;
-
-  return (
-    <div className='text-center'>
-      <h1>{data?.title}</h1>
-      <p>{data?.description}</p>
-    </div>
-  );
+  return <StrapiBlockRender data={data?.blocks} />;
 }

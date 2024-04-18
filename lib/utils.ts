@@ -49,13 +49,45 @@ export const flattenAttributes = (data: any): any => {
   return flattened;
 };
 
-export const blockRenderer = (block: any) => {
-  switch (block.__component) {
-    case 'layouts.hero-section':
-      return { data: block, key: block.id };
-    case 'layouts.features-section':
-      return { data: block, key: block.id };
-    default:
-      return { data: null, key: null };
-  }
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null;
+
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+}
+
+export function createQueryString(
+  name: string,
+  value: string,
+  searchParams?: URLSearchParams
+): string {
+  const params = searchParams || new URLSearchParams();
+
+  params.set(name, value);
+
+  return params.toString();
+}
+
+export const getUrlParams = ({
+  searchParams,
+}: {
+  searchParams: URLSearchParams;
+}) => {
+  const params: Record<string, string | null> = {};
+
+  searchParams.forEach((value, key) => {
+    params[key] = value || null;
+  });
+
+  params.page = params.page ?? '1';
+  params.per_page = params.per_page ?? '2';
+
+  return params;
 };

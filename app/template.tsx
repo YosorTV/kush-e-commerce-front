@@ -6,7 +6,7 @@ export default function RootTemplate({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='flex flex-grow flex-col overflow-y-auto overflow-x-hidden'>
+    <div className='flex flex-grow flex-col overflow-x-hidden'>
       {children}
       <ClientSideRender />
     </div>

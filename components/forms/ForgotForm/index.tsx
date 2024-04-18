@@ -3,7 +3,7 @@
 import { Form, Input } from '@/components/elements';
 import { schemas } from '@/lib/zod';
 import { forgotPassword } from '@/services';
-import { SubmitButton } from '@/components/complex';
+import { SubmitButton } from '@/components/simple';
 
 export const ForgotForm = ({ formFields, submitBtn }: any) => {
   const printInputs = (inputs: any) => {
