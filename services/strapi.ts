@@ -28,7 +28,6 @@ export const getStrapiAuthData = async ({ provider, token }: any) => {
     `api/auth/${provider}/callback?access_token=${token}`,
     process.env.NEXT_PUBLIC_STRAPI_URL
   );
-
   const response = await getData(url.href, { cache: 'no-store' });
 
   return response;
