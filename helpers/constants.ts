@@ -1,61 +1,70 @@
-export const getParams = (options?: any) => {
+interface RequestOptions {
+  token?: string;
+  body?: any;
+}
+
+const baseHeaders = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
+
+const getParams = (options: RequestOptions = {}): RequestInit => {
+  const headers: HeadersInit = { ...baseHeaders };
+
+  if (options.token) {
+    headers.Authorization = `Bearer ${options.token}`;
+  }
+
   return {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
     ...options,
   };
 };
 
-export const postParams = ({ data, options }: any) => {
+const postParams = (options: RequestOptions = {}): RequestInit => {
+  const headers: HeadersInit = { ...baseHeaders };
+
+  if (options.token) {
+    headers.Authorization = `Bearer ${options.token}`;
+  }
+
   return {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    ...options,
-    body: JSON.stringify(data),
+    headers,
+    body: options.body ? JSON.stringify(options.body) : undefined,
   };
 };
 
-export const putParams = (options: any, body: any) => {
+const putParams = (options: RequestOptions = {}): RequestInit => {
+  const headers: HeadersInit = { ...baseHeaders };
+
+  if (options.token) {
+    headers.Authorization = `Bearer ${options.token}`;
+  }
+
   return {
     method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    ...options,
-    body: JSON.stringify(body),
+    headers,
+    body: options.body ? JSON.stringify(options.body) : undefined,
   };
 };
 
-export const patchParams = (options: any, body: any) => {
+const deleteParams = (options: RequestOptions = {}): RequestInit => {
+  const headers: HeadersInit = { ...baseHeaders };
+
+  if (options.token) {
+    headers.Authorization = `Bearer ${options.token}`;
+  }
+
   return {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    method: 'DELETE',
+    headers,
     ...options,
-    body: JSON.stringify(body),
   };
 };
 
-export const deleteParams = (options: any, body: any) => {
-  return {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      ...options,
-    },
-    body: JSON.stringify(body),
-  };
-};
+export { getParams, postParams, putParams, deleteParams };
 
 export const PRICE_LOCALE = {
   USD: {
@@ -113,7 +122,13 @@ export const STRAPI_API_ROUTES = {
       populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
     },
   },
+  me: {
+    populate: ['formFields', 'profilePicture', 'avatar'],
+  },
   meta: {
     fields: ['title', 'description'],
   },
 };
+
+export const ROOT = '/';
+export const PRIVATE_ROUTES = ['/profile', '/orders'];

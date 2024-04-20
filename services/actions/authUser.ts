@@ -3,6 +3,7 @@
 import { schemas } from '@/lib/zod';
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
+import { ROOT } from '@/helpers/constants';
 
 export async function authUserAction(prevState: any, formData: FormData) {
   try {
@@ -24,15 +25,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
       };
     }
 
-    await signIn('credentials', { ...validatedData.data, redirectTo: '/' });
-
-    return {
-      ...prevState,
-      errors: null,
-      strapiError: null,
-      data: 'ok',
-      message: 'Welcome back!',
-    };
+    await signIn('credentials', { ...validatedData.data, redirectTo: ROOT });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

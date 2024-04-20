@@ -8,8 +8,6 @@ export async function resetPassword(prevState: any, formData: FormData) {
     passwordConfirmation: formData.get('passwordConfirmation'),
   };
 
-  console.log({ fields });
-
   const validatedData: any = schemas['reset-password'].safeParse(fields);
 
   if (!validatedData.success) {

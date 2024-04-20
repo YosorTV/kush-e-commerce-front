@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+const withPlugins = require('next-compose-plugins');
+const withImages = require('next-images');
 
 const nextConfig = {
   compiler: {
@@ -12,28 +13,33 @@ const nextConfig = {
   },
   reactStrictMode: false,
   images: {
-    domains: ['dev.kush-test.pp.ua', 'lh3.googleusercontent.com'],
-  }
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: 'http',
-  //       hostname: 'dev.kush-test.pp.ua',
-  //       port: '443',
-  //       pathname: '/uploads/**/*',
-  //     },
-  //     {
-  //       protocol: 'https',
-  //       hostname: 'placehold.co',
-  //     },
-  //     {
-  //       hostname: 'lh3.googleusercontent.com',
-  //     },
-  //     {
-  //       hostname: 'files.stripe.com',
-  //     },
-  //   ],
-  // },
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dev.kush-test.pp.ua',
+        pathname: 'uploads/**/*',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        hostname: 'files.stripe.com',
+      },
+    ],
+  },
 };
 
-module.exports = nextConfig;
+module.exports = withPlugins([[withImages]], nextConfig);

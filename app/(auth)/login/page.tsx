@@ -6,10 +6,8 @@ import { getStrapiData } from '@/services/strapi';
 import { StripeLinkType } from '@/types/components';
 import { Metadata } from 'next';
 
-const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta);
-const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth.login);
-
 export async function generateMetadata(): Promise<Metadata> {
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta);
   const data = await getStrapiData('login-page', metaQP);
 
   return {
@@ -22,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LoginPage() {
+  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth.login);
   const data = await getStrapiData('login-page', pageQP);
 
   const printLinks = (links: StripeLinkType[]) => {

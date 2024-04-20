@@ -10,7 +10,7 @@ export const Artboard: FC<ArtboardProps> = ({ className, width, height }) => {
         'artboard artboard-horizontal flex items-center justify-center'
       )}
     >
-      <span className='flex h-5/6 w-5/6 items-center justify-center bg-white/50 font-thin text-black'>
+      <span className='flex h-full w-full items-center justify-center bg-white/50 font-thin text-black'>
         {width}×{height}
       </span>
     </div>

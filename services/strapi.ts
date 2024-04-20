@@ -1,11 +1,15 @@
 import { flattenAttributes } from '@/lib/utils';
 import { getData, postData } from '@/lib/fetch';
 
-export const getStrapiData = async (path: string, options?: any) => {
+export const getStrapiData = async (
+  path: string,
+  queryParams?: any,
+  options?: any
+) => {
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
-  url.search = options || null;
+  url.search = queryParams || null;
 
-  const response = await getData(url.href, { cache: 'no-store' });
+  const response = await getData(url.href, { ...options, cache: 'no-store' });
 
   return flattenAttributes(response);
 };
@@ -18,7 +22,7 @@ export const postStrapiData = async (
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
   url.search = options;
 
-  const response = await postData(url.href, data, { cache: 'no-store' });
+  const response = await postData(url.href, data);
 
   return response;
 };
@@ -32,4 +36,3 @@ export const getStrapiAuthData = async ({ provider, token }: any) => {
 
   return response;
 };
-

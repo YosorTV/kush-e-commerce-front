@@ -18,6 +18,15 @@ const loginSchema = z.object({
   password: passwordSchema,
 });
 
+const profileSchema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  password: passwordSchema,
+  newPassword: passwordSchema,
+  identifier: emailSchema,
+  avatar: z.string(),
+});
+
 const signupSchema = z.object({
   username: z.string().trim().min(3, 'Name must be at least 3 characters long'),
   email: z.string().email('Invalid email format'),
@@ -42,6 +51,7 @@ export const updatePasswordScema = z.object({
 export const schemas = {
   login: loginSchema,
   signup: signupSchema,
+  profile: profileSchema,
   'reset-password': resetPasswordSchema,
   'update-password': updatePasswordScema,
   'forgot-password': forgotPasswordSchema,
