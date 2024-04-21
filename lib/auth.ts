@@ -31,24 +31,30 @@ export const authOptions: NextAuthConfig = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  events: {
-    async signIn({ account, user }) {
-      if (account.access_token) {
-        const response = await postStrapiData('user-check', {
-          email: user.email,
-        });
-        if (!response.isExist) {
-          await getStrapiAuthData({
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (account) {
+        if (account.provider === 'credentials') {
+          return tokenAdapter({ token, user });
+        }
+        if (account.provider === 'google') {
+          const userData = await getStrapiAuthData({
             provider: account.provider,
             token: account.access_token,
           });
+
+          if (userData.status === 400) {
+            const existingUser = await postStrapiData('user-check', {
+              email: user.email,
+            });
+
+            return tokenAdapter({ token, user: existingUser });
+          }
+
+          return tokenAdapter({ token, user: userData });
         }
       }
-    },
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) return tokenAdapter({ token, user });
+
       return Promise.resolve(token);
     },
     async session({ token, session }: any) {

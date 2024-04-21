@@ -123,7 +123,11 @@ export const STRAPI_API_ROUTES = {
     },
   },
   me: {
-    populate: ['formFields', 'profilePicture', 'avatar'],
+    populate: {
+      formFields: {
+        populate: ['general', 'additional', 'actions', 'avatar'],
+      },
+    },
   },
   meta: {
     fields: ['title', 'description'],

@@ -10,7 +10,7 @@ export const sessionAdapter = ({ token }: any) => {
       id: token.id,
       name: token.name,
       email: token.email,
-      avatar: token.picture,
+      avatar: token.avatar,
     },
   };
 };
@@ -18,10 +18,10 @@ export const sessionAdapter = ({ token }: any) => {
 export const tokenAdapter = ({ token, user }: any) => {
   if (!token || !user) return null;
 
-  token.accessToken = user?.jwt && user.jwt;
+  token.accessToken = user.jwt;
   token.name = user?.user?.username || user?.name;
   token.email = user?.user?.email || user.email;
-  token.avatar = user?.image || null;
+  token.avatar = user?.avatar || null;
   token.id = user.id || user.sub;
 
   return token;

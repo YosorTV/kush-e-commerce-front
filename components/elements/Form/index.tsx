@@ -22,7 +22,6 @@ export const Form: FC<FormProps<any>> = ({
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const [formState, formAction] = useFormState(action, state);
-  console.log('formState: ', formState);
 
   useEffect(() => {
     if (!formState?.strapiError) {

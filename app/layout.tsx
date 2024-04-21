@@ -6,13 +6,13 @@ import { STRAPI_API_ROUTES } from '@/helpers/constants';
 
 import './globals.css';
 
-const layoutQP = generateStrapiQuery(STRAPI_API_ROUTES.global);
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const layoutQP = generateStrapiQuery(STRAPI_API_ROUTES.global);
+
   const data = await getStrapiData('global', layoutQP);
   const session = await auth();
 

@@ -5,15 +5,16 @@ import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
 
 export default async function ProfilePage(params: any) {
-  const session = await auth();
   const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.me);
+  const session = await auth();
+
   const data = await getStrapiData('profile-page', pageQP, {
     token: session.accessToken,
   });
 
   return (
-    <section>
-      <ProfileForm data={data} state={session.user} />
+    <section className='container h-full pt-10'>
+      <ProfileForm data={data?.formFields} state={session.user} />
     </section>
   );
 }
