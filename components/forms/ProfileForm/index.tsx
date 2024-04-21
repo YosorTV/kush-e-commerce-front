@@ -3,6 +3,8 @@
 import { Form, Input } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
 import { DeleteButton } from '@/components/simple/DeleteButton';
+
+import { updateProfileAction } from '@/services';
 import { schemas } from '@/lib';
 
 export const ProfileForm = ({ data, state }: any) => {
@@ -30,27 +32,29 @@ export const ProfileForm = ({ data, state }: any) => {
 
   const printActions = (data: any) => data?.map(formActions);
 
-  const printInputs = (data: any) =>
-    data?.map((input: any) => <Input key={input.id} {...input} />);
+  const printInputs = (data: any) => {
+    return data?.map((input: any) => <Input key={input.id} {...input} />);
+  };
 
   return (
     <Form
-      action={null}
       schema={schemas.profile}
-      className='m-auto flex w-2/3 flex-col justify-center gap-y-5'
+      action={updateProfileAction}
+      className='m-auto flex w-2/3 flex-col justify-center gap-y-5 pb-10'
     >
       <div className='flex flex-col'>
         <div className='flex flex-col gap-x-5'>
-          {printInputs(data?.general)}
+          <Input type='hidden' name='userId' value={state.id} />
+          {printInputs(data.general)}
         </div>
       </div>
       <div className='flex flex-col'>
         <div className='flex flex-col gap-x-5'>
-          {printInputs(data?.additional)}
+          {printInputs(data.additional)}
         </div>
       </div>
       <div className='flex items-center justify-center gap-5'>
-        {printActions(data?.actions)}
+        {printActions(data.actions)}
       </div>
     </Form>
   );

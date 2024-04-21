@@ -3,8 +3,8 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 
-import { FormProps, InputProps } from '@/types/components';
-import { toaster } from '@/lib';
+import { FormProps } from '@/types/components';
+import { processChild, toaster } from '@/lib';
 import { useRouter } from 'next/navigation';
 
 export const Form: FC<FormProps<any>> = ({
@@ -24,7 +24,7 @@ export const Form: FC<FormProps<any>> = ({
   const [formState, formAction] = useFormState(action, state);
 
   useEffect(() => {
-    if (!formState?.strapiError) {
+    if (!formState?.strapiError && !formState?.errors) {
       ref.current?.reset();
 
       if (formState.message) {
@@ -45,17 +45,9 @@ export const Form: FC<FormProps<any>> = ({
 
   return (
     <form ref={ref} action={formAction} className={className}>
-      {React.Children.map(children, (child, index) => {
-        return child.props?.name
-          ? React.createElement<InputProps>(child.type, {
-              ...{
-                ...child?.props,
-                key: `${child.props?.name}_${index}`,
-                error: formState?.errors?.[child.props?.name] || null,
-              },
-            })
-          : child;
-      })}
+      {React.Children.map(children as React.ReactElement[], (child, index) =>
+        processChild(child, index, formState)
+      )}
     </form>
   );
 };

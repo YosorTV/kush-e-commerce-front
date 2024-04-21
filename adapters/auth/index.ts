@@ -19,10 +19,10 @@ export const tokenAdapter = ({ token, user }: any) => {
   if (!token || !user) return null;
 
   token.accessToken = user.jwt;
-  token.name = user?.user?.username || user?.name;
-  token.email = user?.user?.email || user.email;
-  token.avatar = user?.avatar || null;
-  token.id = user.id || user.sub;
+  token.name = user?.user?.username;
+  token.email = user?.user?.email;
+  token.avatar = user?.avatar;
+  token.id = user?.user?.id;
 
   return token;
 };

@@ -1,3 +1,6 @@
+import React from 'react';
+import { InputProps } from '@/types/components';
+
 export function getStrapiURL() {
   return process.env.NEXT_PUBLIC_STRAPI_URL ?? 'http://localhost:1337';
 }
@@ -90,4 +93,32 @@ export const getUrlParams = ({
   params.per_page = params.per_page ?? '2';
 
   return params;
+};
+
+export const processChild = (
+  child: React.ReactElement,
+  index: number,
+  state: any
+): React.ReactNode => {
+  // If the child is an input element with a name prop, modify it
+  if (child.props?.name) {
+    return React.createElement(child.type as React.ComponentType<InputProps>, {
+      ...child.props,
+      key: `${child.props.name}_${index}`,
+      error: state.errors?.[child?.props?.name] || null,
+    });
+  }
+  // If the child has its own children, recursively process them
+  if (child.props?.children) {
+    return React.cloneElement(child, {
+      ...child.props,
+      children: React.Children.map(
+        child.props.children,
+        (childElement, childIndex) =>
+          processChild(childElement as React.ReactElement, childIndex, state)
+      ),
+    });
+  }
+  // If it's not an input or container, return the child unchanged
+  return child;
 };

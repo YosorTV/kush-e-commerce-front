@@ -19,12 +19,24 @@ const loginSchema = z.object({
 });
 
 const profileSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-  password: passwordSchema,
-  newPassword: passwordSchema,
-  identifier: emailSchema,
-  avatar: z.string(),
+  firstName: z.string().refine((val) => val.trim() !== '', {
+    message: 'First name cannot be empty',
+  }),
+  lastName: z.string().refine((val) => val.trim() !== '', {
+    message: 'Last name cannot be empty',
+  }),
+  delivery: z.string().refine((val) => val.trim() !== '', {
+    message: 'Delivery address cannot be empty',
+  }),
+  billing: z.string().refine((val) => val.trim() !== '', {
+    message: 'Billing address cannot be empty',
+  }),
+  contactNumber: z.string().refine((val) => val.trim() !== '', {
+    message: 'Contact number cannot be empty',
+  }),
+  email: z.string().email().readonly(),
+  username: z.string().readonly(),
+  userId: z.string().readonly(),
 });
 
 const signupSchema = z.object({

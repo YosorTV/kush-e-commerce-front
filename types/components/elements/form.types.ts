@@ -1,12 +1,12 @@
 import * as Zod from 'zod';
 
 export interface FormProps<T> {
-  children: any;
+  children: React.ReactNode;
   state?: Partial<T> | null;
   className?: string;
   schema?: Zod.ZodObject<any>;
   onSubmit?: () => void;
-  action?: any;
-  method?: any;
+  action?: any | Promise<any>;
+  method?: string;
   id?: string;
 }
