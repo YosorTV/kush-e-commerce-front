@@ -1,0 +1,20 @@
+name: Push
+on:
+  push:
+    paths-ignore:
+      - '.github/workflows/*'
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test
+        run: ./ci/deploy.sh
+        env:
+          NEXT_PUBLIC_API_URL: https://dev.kush-test.pp.ua
+          NEXTAUTH_URL: https://dev.kush-test.pp.ua
+          PREVIEW_SECRET: ${{ secrets.PREVIEW_SECRET }}
+          NEXT_PUBLIC_URL: https://dev.kush-test.pp.ua
+          NEXT_PUBLIC_STRAPI_URL: https://dev.kush-test.pp.ua/strapi/
+          NEXTAUTH_SECRET: ${{ secrets.PREVIEW_SECRET }}
+          ENV_NAME: dev

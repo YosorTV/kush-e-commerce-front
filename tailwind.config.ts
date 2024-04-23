@@ -28,13 +28,14 @@ module.exports = {
         cornerColor: 'white',
       },
       gridTemplateColumns: {
-        fluid: 'repeat(auto-fit, minmax(15rem, 1fr))',
+        hero: 'auto 1fr',
+        fluid: 'repeat(auto-fit, minmax(20rem, 1fr))',
       },
     },
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ['light', 'dark', 'luxary'],
+    themes: ['light', 'dark'],
     themeRoot: ':root',
     styled: true,
     base: true,

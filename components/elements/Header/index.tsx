@@ -1,20 +1,21 @@
 import { FC } from 'react';
 import { HeaderProps } from '@/types/components';
 import { NextLink as Link } from '@/components/elements';
+import { UserSession } from '@/components/complex';
 
-export const Header: FC<HeaderProps> = (props) => {
+export const Header: FC<HeaderProps> = ({ data, session }) => {
   return (
-    <header className='fixed flex min-h-14 w-full items-center bg-slate-200 px-5 '>
+    <header className='fixed z-50 flex min-h-14 w-full items-center bg-slate-200 px-5'>
       <div className='flex w-full items-center justify-between'>
-        <Link href={props.logoText?.url} className='link text-black'>
-          {props.logoText.text}
+        <Link href={data?.logoText?.url} className='link text-black'>
+          {data?.logoText.text}
         </Link>
-        <Link
-          href={props.ctaButton?.url}
-          className='btn btn-ghost uppercase text-black'
-        >
-          {props.ctaButton.text}
-        </Link>
+        <UserSession
+          session={session?.user}
+          sessionLinks={data?.sessionLinks}
+          cta={data?.ctaButton}
+          authorized={session?.user}
+        />
       </div>
     </header>
   );

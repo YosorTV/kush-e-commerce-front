@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+const withPlugins = require('next-compose-plugins');
+const withImages = require('next-images');
 
 const nextConfig = {
   compiler: {
@@ -11,13 +12,24 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  env: {
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'http',
         hostname: 'localhost',
         port: '1337',
-        pathname: '/uploads/**/*',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dev.kush-test.pp.ua',
+        pathname: 'uploads/**/*',
       },
       {
         protocol: 'https',
@@ -33,4 +45,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withPlugins([[withImages]], nextConfig);

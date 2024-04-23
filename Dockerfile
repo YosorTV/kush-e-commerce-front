@@ -1,0 +1,40 @@
+FROM node:20.9.0 as builder
+WORKDIR /app
+COPY . .
+
+ARG NEXT_PUBLIC_API_URL
+ARG NEXTAUTH_URL
+ARG PREVIEW_SECRET
+ARG NEXT_PUBLIC_URL
+ARG NEXT_PUBLIC_STRAPI_URL
+ARG NEXTAUTH_SECRET
+
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXTAUTH_URL=$NEXTAUTH_URL
+ENV PREVIEW_SECRET=$PREVIEW_SECRET
+ENV NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
+ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
+ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
+ENV NEXT_PUBLIC_DATABASE_URL=postgres://strapi_admin:hepiek9eephahnohth4Eihe8Vei7wa9o@dev.kush-test.pp.ua:5432/api?synchronize=true
+ENV GOOGLE_CLIENT_ID=86751189471-8dcn81dhp8eorhnr13js6t9dr32ofl5n.apps.googleusercontent.com
+ENV GOOGLE_CLIENT_SECRET=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
+ENV JWT_SECRET=eyJhbGciOiJIUzI1NiJ9eyJjcmVhdGVkQXQiOiIyMDIzLTA5LTA5VDE3OjQwOjExLjYyM1oiLCJleHBpcmVkIjoiMjAyMy0wOS0wOVQxNzo0MDoxMS42MjNaIiwibmFtZSI6Im5hbWUiLCJ1c2VySWQiOiJpZCIsImVtYWlsIjoiZW1haWwifQ.PCwTY1WR9NnFyCzpkk7Jaf-PR-jIsMcEv_uFyiXFRDI
+RUN yarn install
+RUN NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL} NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} yarn build
+
+FROM node:20.9.0 as runner
+WORKDIR /app
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.env ./
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]

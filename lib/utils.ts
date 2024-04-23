@@ -1,3 +1,6 @@
+import React from 'react';
+import { InputProps } from '@/types/components';
+
 export function getStrapiURL() {
   return process.env.NEXT_PUBLIC_STRAPI_URL ?? 'http://localhost:1337';
 }
@@ -49,13 +52,73 @@ export const flattenAttributes = (data: any): any => {
   return flattened;
 };
 
-export const blockRenderer = (block: any) => {
-  switch (block.__component) {
-    case 'layouts.hero-section':
-      return { data: block, key: block.id };
-    case 'layouts.features-section':
-      return { data: block, key: block.id };
-    default:
-      return { data: null, key: null };
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null;
+
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+}
+
+export function createQueryString(
+  name: string,
+  value: string,
+  searchParams?: URLSearchParams
+): string {
+  const params = searchParams || new URLSearchParams();
+
+  params.set(name, value);
+
+  return params.toString();
+}
+
+export const getUrlParams = ({
+  searchParams,
+}: {
+  searchParams: URLSearchParams;
+}) => {
+  const params: Record<string, string | null> = {};
+
+  searchParams.forEach((value, key) => {
+    params[key] = value || null;
+  });
+
+  params.page = params.page ?? '1';
+  params.per_page = params.per_page ?? '2';
+
+  return params;
+};
+
+export const processChild = (
+  child: React.ReactElement,
+  index: number,
+  state: any
+): React.ReactNode => {
+  // If the child is an input element with a name prop, modify it
+  if (child.props?.name) {
+    return React.createElement(child.type as React.ComponentType<InputProps>, {
+      ...child.props,
+      key: `${child.props.name}_${index}`,
+      error: state.errors?.[child?.props?.name] || null,
+    });
   }
+  // If the child has its own children, recursively process them
+  if (child.props?.children) {
+    return React.cloneElement(child, {
+      ...child.props,
+      children: React.Children.map(
+        child.props.children,
+        (childElement, childIndex) =>
+          processChild(childElement as React.ReactElement, childIndex, state)
+      ),
+    });
+  }
+  // If it's not an input or container, return the child unchanged
+  return child;
 };

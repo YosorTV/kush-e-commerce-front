@@ -2,7 +2,7 @@ import { LinkType } from '@/types/components';
 import Link from 'next/link';
 
 export const NextLink: React.FC<LinkType> = ({
-  href,
+  href = '/',
   children,
   className,
   replace,
