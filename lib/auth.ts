@@ -9,6 +9,7 @@ import { sessionAdapter, tokenAdapter } from '@/adapters/auth';
 
 export const authOptions: NextAuthConfig = {
   secret: process.env.NEXTAUTH_SECRET,
+  trustHost: true,
   session: { strategy: 'jwt' },
   pages: { signIn: '/login' },
   providers: [
