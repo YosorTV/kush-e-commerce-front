@@ -11,7 +11,7 @@ export const SignOutButton = () => {
     <button
       type='button'
       onClick={handleSignOut}
-      className='font-semibold capitalize text-black hover:bg-none'
+      className='font-semibold capitalize hover:bg-none'
     >
       Sign out
     </button>

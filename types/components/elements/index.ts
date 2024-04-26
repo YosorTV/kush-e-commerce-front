@@ -6,3 +6,4 @@ export * from '@/types/components/elements/input.types';
 export * from '@/types/components/elements/image.types';
 export * from '@/types/components/elements/title.types';
 export * from '@/types/components/elements/artboard.types';
+export * from '@/types/components/elements/badge.types';

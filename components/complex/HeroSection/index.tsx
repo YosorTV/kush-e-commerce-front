@@ -12,6 +12,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           className='absolute -z-10 h-full w-full object-cover'
           src={data?.image?.url}
           alt={data?.image?.alternativeText}
+          priority
         />
         <div className='hero-overlay absolute z-10 bg-black/50' />
         <figcaption className='relative z-20 flex max-w-md flex-col gap-y-5'>

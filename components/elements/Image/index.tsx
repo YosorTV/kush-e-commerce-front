@@ -8,6 +8,7 @@ export const Image: FC<ImageProps> = ({
   width = 100,
   className,
   alt,
+  priority = false,
 }) => {
   return (
     <NextImage
@@ -15,7 +16,8 @@ export const Image: FC<ImageProps> = ({
       height={height}
       width={width}
       className={className}
-      alt={alt}
+      alt={alt ?? 'image-element'}
+      priority={priority}
     />
   );
 };

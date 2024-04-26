@@ -5,4 +5,5 @@ export type ImageProps = {
   height?: number | 100;
   width?: number | 100;
   className?: string;
+  priority?: boolean;
 };
