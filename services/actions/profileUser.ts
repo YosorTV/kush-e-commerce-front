@@ -2,7 +2,6 @@ import { schemas } from '@/lib';
 
 export async function updateProfileAction(prevState: any, formData: FormData) {
   const fields = Object.fromEntries(formData);
-  console.log('fields: ', fields);
 
   const validatedData: any = schemas.profile.safeParse(fields);
 

@@ -9,7 +9,10 @@ export const Header: FC<HeaderProps> = ({ data, session }) => {
   return (
     <header className='fixed z-50 flex min-h-14 w-full items-center bg-base-100 px-5'>
       <nav className='flex w-full items-center justify-between'>
-        <Link href={data?.logoText?.url} className='link'>
+        <Link
+          href={data?.logoText?.url}
+          className='link font-bold no-underline'
+        >
           {data?.logoText.text}
         </Link>
         <div className='flex gap-x-5'>

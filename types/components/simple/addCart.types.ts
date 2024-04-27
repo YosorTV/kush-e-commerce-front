@@ -1,9 +1,13 @@
 export type ProductItem = {
   id: string;
   name: string;
-  image?: string;
+  image?: {
+    url: string;
+    alternativeText: string;
+  };
   quantity?: number | 1;
   unit_amount: number | null;
+  price?: string;
 };
 
 export type CartItemProps = {

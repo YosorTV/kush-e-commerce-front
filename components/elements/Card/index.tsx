@@ -2,6 +2,7 @@ import { StrapiImage } from '@/components/simple';
 import { FC } from 'react';
 import { Title } from '../Title';
 import { NextLink } from '../Link';
+import { formatPrice } from '@/helpers/formatters';
 
 export const Card: FC<any> = ({ data }) => {
   return (
@@ -20,7 +21,9 @@ export const Card: FC<any> = ({ data }) => {
           {data?.title}
         </Title>
         <p className='text-base-100'>{data?.description}</p>
-        <span className='text-base-100'>${data?.price}</span>
+        <p className='text-base-100'>
+          {data?.price} <span>{formatPrice(data.unitAmount)}</span>
+        </p>
       </div>
     </div>
   );

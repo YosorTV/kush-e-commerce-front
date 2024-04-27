@@ -2,6 +2,7 @@ import { Title } from '@/components/elements';
 import { StrapiImage } from '@/components/simple';
 import { AddCart } from '@/components/simple/AddButton';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
+import { formatPrice } from '@/helpers/formatters';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
 
@@ -16,7 +17,8 @@ export default async function ProductDetails({ params }: any) {
     id: data.id,
     image: data.cover,
     name: data.title,
-    unit_amount: data.price,
+    unit_amount: data.unitAmount,
+    price: data.price,
   };
 
   const printImages = (images: any[]) => {
@@ -57,7 +59,9 @@ export default async function ProductDetails({ params }: any) {
               {data.title}
             </Title>
             <p className='text-base'>{data.description}</p>
-            <p className='text-lg font-semibold'>Price: ${data.price}</p>
+            <p className='text-lg font-semibold'>
+              {data?.price} <span>{formatPrice(data.unitAmount)}</span>
+            </p>
           </div>
           <AddCart data={cartData} />
         </div>

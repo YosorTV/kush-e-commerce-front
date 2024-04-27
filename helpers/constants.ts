@@ -66,13 +66,6 @@ const deleteParams = (options: RequestOptions = {}): RequestInit => {
 
 export { getParams, postParams, putParams, deleteParams };
 
-export const PRICE_LOCALE = {
-  USD: {
-    style: 'currency',
-    currency: 'USD',
-  },
-};
-
 export const STRAPI_API_ROUTES = {
   global: {
     populate: [
@@ -81,6 +74,7 @@ export const STRAPI_API_ROUTES = {
       'header.sessionLinks',
       'footer.logoText',
       'footer.ctaButton',
+      'shoppingCart',
     ],
   },
   home: {
@@ -136,3 +130,13 @@ export const STRAPI_API_ROUTES = {
 
 export const ROOT = '/';
 export const PRIVATE_ROUTES = ['/profile', '/orders'];
+export const PRICE_LOCALE = {
+  USD: {
+    style: 'currency',
+    currency: 'USD',
+  },
+  UAH: {
+    style: 'currency',
+    currency: 'UAH',
+  },
+};
