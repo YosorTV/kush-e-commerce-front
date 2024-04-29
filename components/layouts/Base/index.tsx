@@ -1,22 +1,33 @@
 /* eslint-disable @next/next/no-head-element */
 import { cn } from '@/lib';
 
-import { roboto } from '@/assets/fonts';
+import { montserrat } from '@/assets/fonts';
 import { Footer, Header } from '@/components/elements';
 import { BaseLayoutProps } from '@/types/components';
+import { ShoppingCart } from '@/components/complex/ShoppingCart';
+import { Hydrate } from '@/components/simple';
 
 export async function BaseLayout({
   children,
   header,
   footer,
   session,
+  cart,
 }: BaseLayoutProps) {
   return (
     <html lang='en'>
       <head />
-      <body className={cn('relative h-full overflow-hidden', roboto.className)}>
+      <body
+        className={cn(
+          'relative overflow-hidden scroll-auto',
+          montserrat.className
+        )}
+      >
         <Header data={header} session={session} />
-        <main className='z-0 grid h-screen scroll-auto py-14'>{children}</main>
+        <Hydrate>
+          <ShoppingCart data={cart} />
+        </Hydrate>
+        <main className='z-0 grid h-screen py-14'>{children}</main>
         <Footer {...footer} />
       </body>
     </html>

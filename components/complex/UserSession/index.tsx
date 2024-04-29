@@ -13,7 +13,7 @@ export const UserSession = ({
   if (!authorized) {
     return (
       cta && (
-        <NextLink href={cta.url} className='btn btn-ghost text-black'>
+        <NextLink href={cta.url} className='btn btn-ghost'>
           {cta.text}
         </NextLink>
       )
@@ -27,7 +27,7 @@ export const UserSession = ({
         <li tabIndex={index + 1} key={link.id}>
           <NextLink
             href={link.url}
-            className='font-semibold capitalize text-black hover:bg-none'
+            className='font-semibold capitalize hover:bg-none'
           >
             {link.text}
           </NextLink>
@@ -43,7 +43,9 @@ export const UserSession = ({
           tabIndex={-1}
           className='flex cursor-pointer items-center justify-center gap-5'
         >
-          <figcaption className='text-black'>{session.name}</figcaption>
+          <figcaption className='font-semibold uppercase text-base-200'>
+            {session.name}
+          </figcaption>
           {session.avatar && (
             <Image
               src={session.avatar}
@@ -56,7 +58,7 @@ export const UserSession = ({
         </figure>
         <ul
           tabIndex={0}
-          className='menu dropdown-content top-8 min-w-btn space-y-2.5 rounded-sm bg-slate-200 shadow'
+          className='menu dropdown-content top-8 min-w-btn space-y-2.5 rounded-sm bg-base-100 shadow'
         >
           {printMenuLinks(sessionLinks)}
           <li tabIndex={3}>

@@ -33,9 +33,30 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('tailwind-scrollbar')],
   daisyui: {
-    themes: ['light', 'dark'],
+    themes: [
+      {
+        light: {
+          primary: '#41A139',
+          secondary: '#f6d860',
+          neutral: '#747474',
+          'base-100': '#ECECEC',
+          'base-200': '#3B3B3B',
+          'base-300': '#0A0A0A',
+        },
+      },
+      {
+        sunset: {
+          primary: '#41A139',
+          secondary: '#f6d860',
+          neutral: '#747474',
+          'base-100': '#202020',
+          'base-200': '#CECECE',
+          'base-300': '#0A0A0A',
+        },
+      },
+    ],
     themeRoot: ':root',
     styled: true,
     base: true,

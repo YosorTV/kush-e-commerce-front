@@ -2,10 +2,11 @@ import { StrapiImage } from '@/components/simple';
 import { FC } from 'react';
 import { Title } from '../Title';
 import { NextLink } from '../Link';
+import { formatPrice } from '@/helpers/formatters';
 
 export const Card: FC<any> = ({ data }) => {
   return (
-    <div className='card mx-2.5 w-full max-w-96 bg-neutral shadow-xl'>
+    <div className='card mx-2.5 w-full max-w-96 bg-base-200 shadow-xl'>
       <NextLink href={`/products/${data.id}`} className='p-5'>
         <StrapiImage
           src={data?.cover?.url}
@@ -16,11 +17,13 @@ export const Card: FC<any> = ({ data }) => {
         />
       </NextLink>
       <div className='card-body p-5 pt-0'>
-        <Title level='2' className='card-title'>
+        <Title level='2' className='card-title text-base-100'>
           {data?.title}
         </Title>
-        <p>{data?.description}</p>
-        <span>${data?.price}</span>
+        <p className='text-base-100'>{data?.description}</p>
+        <p className='text-base-100'>
+          {data?.price} <span>{formatPrice(data.unitAmount)}</span>
+        </p>
       </div>
     </div>
   );

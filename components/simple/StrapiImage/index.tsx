@@ -9,6 +9,7 @@ interface StrapiImageProps {
   height: number;
   width: number;
   className?: string;
+  priority?: boolean;
 }
 
 export function StrapiImage({
@@ -17,6 +18,7 @@ export function StrapiImage({
   height,
   width,
   className,
+  priority = false,
 }: Readonly<StrapiImageProps>) {
   const imageUrl = getStrapiMedia(src);
   const imageFallback = `https://placehold.co/${width}x${height}`;
@@ -31,6 +33,7 @@ export function StrapiImage({
       alt={alt}
       height={height}
       width={width}
+      priority={priority}
       className={cn(className)}
     />
   );

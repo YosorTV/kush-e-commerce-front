@@ -51,7 +51,10 @@ export const Pagination: FC<PaginationProps> = ({
       return (
         <button
           key={pageNumber}
-          className={cn('btn join-item', +page === pageNumber && 'btn-active')}
+          className={cn(
+            'btn join-item border-neutral bg-neutral text-black',
+            +page === pageNumber && 'btn-active bg-neutral text-white'
+          )}
           onClick={() => handlePageChange(pageNumber)}
         >
           {pageNumber}
@@ -81,7 +84,7 @@ export const Pagination: FC<PaginationProps> = ({
         aria-label='pagination'
       >
         <button
-          className='btn join-item'
+          className='btn join-item border-neutral bg-neutral'
           disabled={!hasPrevPage}
           onClick={() => handlePageChange(Number(page) - 1)}
         >
@@ -89,7 +92,7 @@ export const Pagination: FC<PaginationProps> = ({
         </button>
         {renderPageButtons}
         <button
-          className='btn join-item'
+          className='btn join-item border-neutral bg-neutral'
           disabled={!hasNextPage}
           onClick={() => handlePageChange(Number(page) + 1)}
         >

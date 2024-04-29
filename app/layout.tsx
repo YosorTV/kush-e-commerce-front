@@ -11,13 +11,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const layoutQP = generateStrapiQuery(STRAPI_API_ROUTES.global);
+  const globalQP = generateStrapiQuery(STRAPI_API_ROUTES.global);
 
-  const data = await getStrapiData('global', layoutQP);
+  const data = await getStrapiData('global', globalQP);
   const session = await auth();
 
   return (
-    <BaseLayout header={data?.header} footer={data?.footer} session={session}>
+    <BaseLayout
+      header={data?.header}
+      footer={data?.footer}
+      cart={data?.shoppingCart}
+      session={session}
+    >
       {children}
     </BaseLayout>
   );
