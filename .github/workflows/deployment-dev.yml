@@ -1,8 +1,9 @@
 name: Push
 on:
   push:
-    paths-ignore:
-      - '.github/workflows/*'
+    branches: ['main']
+  pull_request:
+    branches: ['main']
 jobs:
   test:
     runs-on: self-hosted
