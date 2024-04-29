@@ -1,8 +1,9 @@
 name: Push
 on:
   push:
-    paths-ignore:
-      - '.github/workflows/*'
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   test:
     runs-on: self-hosted
@@ -18,3 +19,4 @@ jobs:
           NEXT_PUBLIC_STRAPI_URL: https://dev.kush-test.pp.ua/strapi/
           NEXTAUTH_SECRET: ${{ secrets.PREVIEW_SECRET }}
           ENV_NAME: dev
+          
