@@ -12,6 +12,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
       ...prevState,
       errors,
       strapiError: null,
+      status: 400,
       message: 'Missing Fields. Failed to send request.',
     };
   }
@@ -22,6 +23,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
     return {
       ...prevState,
       errors: null,
+      status: 400,
       message: 'Bad request',
       strapiError: response.error.message,
     };
@@ -30,7 +32,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
   return {
     errors: null,
     strapiError: null,
-    data: 'ok',
+    status: 200,
     message: 'Reset message was send to your email address',
   };
 }

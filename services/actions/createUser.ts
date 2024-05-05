@@ -20,6 +20,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
       ...prevState,
       errors,
       strapiError: null,
+      status: 400,
       message: 'Missing Fields. Failed to Register.',
     };
   }
@@ -33,7 +34,8 @@ export async function createUserAction(prevState: any, formData: FormData) {
     return {
       ...prevState,
       errors: null,
-      message: 'Bad request',
+      message: `Bad request! ${response.error}`,
+      status: response.error.status,
       strapiError: response.error.message,
     };
   }

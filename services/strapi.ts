@@ -1,5 +1,6 @@
 import { flattenAttributes } from '@/lib/utils';
 import { getData, postData } from '@/lib/fetch';
+import { revalidatePath } from 'next/cache';
 
 export const getStrapiData = async (
   path: string,
@@ -10,6 +11,8 @@ export const getStrapiData = async (
   url.search = queryParams || null;
 
   const response = await getData(url.href, { ...options, cache: 'no-store' });
+
+  revalidatePath('/', 'layout');
 
   return flattenAttributes(response);
 };

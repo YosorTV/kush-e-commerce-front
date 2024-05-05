@@ -7,3 +7,4 @@ export * from '@/components/simple/ProductsController';
 export * from '@/components/simple/ThemeChanger';
 export * from '@/components/simple/CartItem';
 export * from '@/components/simple/CartList';
+export * from '@/components/simple/LangChanger';

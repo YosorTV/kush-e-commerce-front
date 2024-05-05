@@ -11,6 +11,7 @@ export async function updateProfileAction(prevState: any, formData: FormData) {
     return {
       ...prevState,
       errors,
+      status: 400,
       strapiError: null,
       message: 'Missing Fields. Failed to Register.',
     };
@@ -18,7 +19,8 @@ export async function updateProfileAction(prevState: any, formData: FormData) {
 
   return {
     ...prevState,
-    message: 'Profile Updated',
+    message: 'Your profile was updated',
+    status: 200,
     data: null,
     strapiErrors: null,
   };

@@ -1,3 +1,5 @@
+import { PageProps } from '@/types/app/page.types';
+
 interface RequestOptions {
   token?: string;
   body?: any;
@@ -67,36 +69,51 @@ const deleteParams = (options: RequestOptions = {}): RequestInit => {
 export { getParams, postParams, putParams, deleteParams };
 
 export const STRAPI_API_ROUTES = {
-  global: {
-    populate: [
-      'header.logoText',
-      'header.ctaButton',
-      'header.sessionLinks',
-      'footer.logoText',
-      'footer.ctaButton',
-      'shoppingCart',
-    ],
+  global: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: [
+        'header.logoText',
+        'header.ctaButton',
+        'header.sessionLinks',
+        'footer.logoText',
+        'footer.ctaButton',
+        'shoppingCart',
+      ],
+    };
   },
-  home: {
-    populate: {
-      blocks: {
-        populate: {
-          image: {
-            fields: ['url', 'alternativeText'],
-          },
-          link: {
-            populate: true,
+  home: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: {
+        blocks: {
+          populate: {
+            image: {
+              fields: ['url', 'alternativeText'],
+            },
+            link: {
+              populate: true,
+            },
           },
         },
       },
-    },
+    };
   },
-  getProducts: ({ page, per_page, name, id }: any) => ({
-    id,
+  getProducts: ({
+    page,
+    per_page,
     name,
-    page: page || 1,
-    pageSize: per_page || 5,
-  }),
+    locale,
+    id,
+  }: PageProps['searchParams']) => {
+    return {
+      id,
+      locale,
+      name,
+      page: page || 1,
+      pageSize: per_page || 5,
+    };
+  },
   getProductDetails: {
     populate: {
       cover: {
@@ -107,25 +124,36 @@ export const STRAPI_API_ROUTES = {
       },
     },
   },
-  auth: {
-    registration: { populate: ['formFields', 'redirectUrl', 'submitBtn'] },
-    success: { populate: ['title', 'description', 'redirectUrl'] },
-    forgot: { populate: ['formFields', 'submitBtn', 'loginUrl'] },
-    reset: { populate: ['formFields', 'submitBtn'] },
-    login: {
-      populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
-    },
+  auth: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      registration: { populate: ['formFields', 'redirectUrl', 'submitBtn'] },
+      success: { populate: ['title', 'description', 'redirectUrl'] },
+      forgot: { populate: ['formFields', 'submitBtn', 'loginUrl'] },
+      reset: { populate: ['formFields', 'submitBtn'] },
+      login: {
+        populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
+      },
+    };
   },
-  me: {
+  me: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: {
+        formFields: {
+          populate: ['general', 'additional', 'actions', 'avatar'],
+        },
+      },
+    };
+  },
+  meta: ({ locale = 'en' }) => ({
+    locale,
     populate: {
-      formFields: {
-        populate: ['general', 'additional', 'actions', 'avatar'],
+      seo: {
+        fields: ['metaTitle', 'metaDescription'],
       },
     },
-  },
-  meta: {
-    fields: ['title', 'description'],
-  },
+  }),
 };
 
 export const ROOT = '/';

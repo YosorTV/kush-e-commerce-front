@@ -19,7 +19,8 @@ export const Pagination: FC<PaginationProps> = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { page, per_page } = getUrlParams({ searchParams });
+  const { page, per_page, ...params } = getUrlParams({ searchParams });
+
   const totalPages = useMemo(
     () => Math.ceil(total / +per_page),
     [total, per_page]
@@ -27,12 +28,15 @@ export const Pagination: FC<PaginationProps> = ({
 
   const handlePageChange = useCallback(
     (pageNumber: number) => {
-      const queryPage = createQueryString('page', `${pageNumber}`);
-      const queryPerPage = createQueryString('per_page', per_page);
+      const url = createQueryString(pathname, {
+        ...params,
+        page: pageNumber,
+        per_page: per_page,
+      });
 
-      router.push(`${pathname}?${queryPage}&${queryPerPage}`);
+      router.replace(url);
     },
-    [pathname, per_page, router]
+    [params, pathname, per_page, router]
   );
 
   const renderPageButtons = useMemo(() => {
@@ -48,6 +52,7 @@ export const Pagination: FC<PaginationProps> = ({
 
     return Array.from({ length: endPage - startPage + 1 }, (_, index) => {
       const pageNumber = startPage + index;
+
       return (
         <button
           key={pageNumber}
