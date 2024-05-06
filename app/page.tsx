@@ -35,7 +35,7 @@ export async function generateMetadata({
 }
 
 export default async function Home({ searchParams }: PageProps) {
-  const { locale } = searchParams;
+  const { locale = 'uk' } = searchParams;
 
   const homeQP = generateStrapiQuery(STRAPI_API_ROUTES.home({ locale }));
   const data = await getStrapiData('home-page', homeQP);

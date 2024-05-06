@@ -7,7 +7,10 @@ import { formatPrice } from '@/helpers/formatters';
 export const Card: FC<any> = ({ data }) => {
   return (
     <div className='card mx-2.5 w-full max-w-96 bg-base-200 shadow-xl'>
-      <NextLink href={`/products/${data.id}`} className='p-5'>
+      <NextLink
+        href={`/products/${data.title}?id=${data.id}&code=${data.code}`}
+        className='p-5'
+      >
         <StrapiImage
           src={data?.cover?.url}
           alt={data?.cover?.alternativeText}

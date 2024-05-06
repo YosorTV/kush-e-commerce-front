@@ -23,22 +23,23 @@ export const Form: FC<FormProps<any>> = ({
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const [formState, formAction] = useFormState(action, state);
-  console.log('formState: ', formState);
 
   useEffect(() => {
-    if (formState?.status !== 200) {
+    if (formState?.errors || formState.strapiError) {
       toaster({
         key: 'error',
         message: formState.message,
         description: formState.strapiError?.message ?? formState.strapiError,
       });
-    } else {
-      ref.current?.reset();
-      toaster({ key: 'success', message: formState.message });
+    }
 
-      if (formState.redirectUrl) {
-        router.push(formState.redirectUrl);
-      }
+    if (formState.status === 200) {
+      toaster({ key: 'success', message: formState.message });
+      ref.current?.reset();
+    }
+
+    if (formState.redirectUrl) {
+      router.push(formState.redirectUrl);
     }
   }, [formState, router]);
 

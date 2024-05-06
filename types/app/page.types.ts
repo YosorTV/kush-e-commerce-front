@@ -8,5 +8,6 @@ export type PageProps = {
     sortBy?: string;
     filterBy?: string;
     name?: string;
+    code?: string;
   };
 };

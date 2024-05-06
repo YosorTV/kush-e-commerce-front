@@ -2,24 +2,33 @@ import { NextLink } from '@/components/elements';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
+import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta);
-const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth.success);
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const { locale } = searchParams;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const data = await getStrapiData('success-page', metaQP);
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
+  const { seo } = await getStrapiData('success-page', metaQP);
 
   return {
     title: {
-      default: `KUSH | ${data?.title?.toUpperCase()}`,
+      default: `KUSH | ${seo?.metaTitle}`,
       template: '%s | KUSH',
     },
-    description: data?.description,
+    description: seo?.metaDescription,
   };
 }
 
-export default async function SuccessPage() {
+export default async function SuccessPage({ searchParams }: PageProps) {
+  const { locale } = searchParams;
+
+  const pageQP = generateStrapiQuery(
+    STRAPI_API_ROUTES.auth({ locale }).success
+  );
+
   const data = await getStrapiData('success-page', pageQP);
 
   return (

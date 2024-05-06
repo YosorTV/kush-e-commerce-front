@@ -8,15 +8,13 @@ import { LayoutProps } from '@/types/app/layout.types';
 
 import './globals.css';
 
-export default async function RootLayout({
-  children,
-  searchParams,
-}: Readonly<LayoutProps>) {
+export default async function RootLayout({ children }: Readonly<LayoutProps>) {
   const globalQP = generateStrapiQuery(
-    STRAPI_API_ROUTES.global({ locale: 'en' })
+    STRAPI_API_ROUTES.global({ locale: 'uk' })
   );
 
   const data = await getStrapiData('global', globalQP);
+
   const session = await auth();
 
   return (

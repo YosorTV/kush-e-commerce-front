@@ -99,6 +99,12 @@ export const STRAPI_API_ROUTES = {
       },
     };
   },
+  products: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: true,
+    };
+  },
   getProducts: ({
     page,
     per_page,
@@ -114,24 +120,24 @@ export const STRAPI_API_ROUTES = {
       pageSize: per_page || 5,
     };
   },
-  getProductDetails: {
-    populate: {
-      cover: {
-        fields: ['url', 'alternativeText'],
-      },
-      images: {
-        fields: ['url', 'alternativeText'],
-      },
-    },
-  },
+  getProductDetails: ({ locale = 'uk', code = null }) => ({ locale, code }),
   auth: ({ locale = 'uk' }) => {
     return {
-      locale,
-      registration: { populate: ['formFields', 'redirectUrl', 'submitBtn'] },
-      success: { populate: ['title', 'description', 'redirectUrl'] },
-      forgot: { populate: ['formFields', 'submitBtn', 'loginUrl'] },
-      reset: { populate: ['formFields', 'submitBtn'] },
+      registration: {
+        locale,
+        populate: ['formFields', 'redirectUrl', 'submitBtn'],
+      },
+      success: { locale, populate: ['title', 'description', 'redirectUrl'] },
+      forgot: {
+        locale,
+        populate: ['formFields', 'submitBtn', 'loginUrl'],
+      },
+      reset: {
+        locale,
+        populate: ['formFields', 'submitBtn'],
+      },
       login: {
+        locale,
         populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
       },
     };
@@ -146,7 +152,7 @@ export const STRAPI_API_ROUTES = {
       },
     };
   },
-  meta: ({ locale = 'en' }) => ({
+  meta: ({ locale = 'uk' }) => ({
     locale,
     populate: {
       seo: {

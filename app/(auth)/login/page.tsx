@@ -3,24 +3,31 @@ import { SignInForm } from '@/components/forms';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
+import { PageProps } from '@/types/app/page.types';
 import { StripeLinkType } from '@/types/components';
 import { Metadata } from 'next';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta);
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const { locale } = searchParams;
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
   const data = await getStrapiData('login-page', metaQP);
+
+  const { seo } = data;
 
   return {
     title: {
-      default: `KUSH | ${data?.title?.toUpperCase()}`,
+      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
       template: '%s | KUSH',
     },
-    description: data?.description,
+    description: seo?.metaDescription,
   };
 }
 
-export default async function LoginPage() {
-  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth.login);
+export default async function LoginPage({ searchParams }: PageProps) {
+  const { locale } = searchParams;
+  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).login);
   const data = await getStrapiData('login-page', pageQP);
 
   const printLinks = (links: StripeLinkType[]) => {

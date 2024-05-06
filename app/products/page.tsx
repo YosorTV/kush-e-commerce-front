@@ -26,16 +26,20 @@ export async function generateMetadata({
   };
 }
 
-export default async function Products({ searchParams }: any) {
-  const { id, ...rest } = await getStrapiData('products-page');
+export default async function Products({ searchParams }: PageProps) {
+  const { locale } = searchParams;
+
+  const productPageQueryParams = STRAPI_API_ROUTES.products({ locale });
+  const productsPageQP = generateStrapiQuery(productPageQueryParams);
+
+  const { id } = await getStrapiData('products-page', productsPageQP);
 
   if (!id) notFound();
 
   const queryParams = STRAPI_API_ROUTES.getProducts({ id, ...searchParams });
+  const productsListQP = generateStrapiQuery(queryParams);
 
-  const productsQP = generateStrapiQuery(queryParams);
-
-  const data = await getStrapiData('get-products', productsQP);
+  const data = await getStrapiData('get-products', productsListQP);
 
   return (
     <section className='container mb-5 h-max'>

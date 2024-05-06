@@ -3,24 +3,30 @@ import { ForgotForm } from '@/components/forms';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
+import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta);
-const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth.forgot);
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const { locale } = searchParams;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const data = await getStrapiData('forgot-page', metaQP);
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
+  const { seo } = await getStrapiData('forgot-page', metaQP);
 
   return {
     title: {
-      default: `KUSH | ${data?.title?.toUpperCase()}`,
+      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
       template: '%s | KUSH',
     },
-    description: data?.description,
+    description: seo?.metaDescription,
   };
 }
 
-export default async function ForgotPasswordPage() {
+export default async function ForgotPasswordPage({ searchParams }: PageProps) {
+  const { locale } = searchParams;
+
+  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).forgot);
   const data = await getStrapiData('forgot-page', pageQP);
 
   return (

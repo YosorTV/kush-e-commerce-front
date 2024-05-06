@@ -3,9 +3,12 @@ import { ProfileForm } from '@/components/forms';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
+import { PageProps } from '@/types/app/page.types';
 
-export default async function ProfilePage(params: any) {
-  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.me);
+export default async function ProfilePage({ searchParams }: PageProps) {
+  const { locale } = searchParams;
+
+  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.me({ locale }));
   const session = await auth();
 
   const data = await getStrapiData('profile-page', pageQP, {

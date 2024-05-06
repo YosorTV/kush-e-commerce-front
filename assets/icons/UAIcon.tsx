@@ -10,7 +10,7 @@ export const UAIcon = ({ className }: { className: string }) => {
       width={32}
       height={32}
     >
-      <g fill-rule='evenodd' stroke-width='1pt'>
+      <g fillRule='evenodd' strokeWidth='1pt'>
         <path fill='gold' d='M0 0h512v512H0z' />
         <path fill='#0057b8' d='M0 0h512v256H0z' />
       </g>

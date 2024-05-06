@@ -5,7 +5,7 @@ import { Input } from '@/components/elements';
 
 function blockRenderer(block: any) {
   switch (block.__component) {
-    case 'layouts.hero-section':
+    case 'complex.hero-section':
       return <HeroSection key={block.id} data={block} />;
     case 'layouts.features-section':
       return null;
