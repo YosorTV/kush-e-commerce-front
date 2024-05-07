@@ -17,6 +17,7 @@ export async function resetPassword(prevState: any, formData: FormData) {
       ...prevState,
       errors,
       strapiError: null,
+      status: 400,
       message: 'Missing Fields. Failed to reset password.',
     };
   }
@@ -27,6 +28,7 @@ export async function resetPassword(prevState: any, formData: FormData) {
     return {
       ...prevState,
       errors: null,
+      status: 400,
       message: 'Bad request',
       strapiError: response.error.message,
     };
@@ -35,7 +37,7 @@ export async function resetPassword(prevState: any, formData: FormData) {
   return {
     errors: null,
     strapiError: null,
-    data: 'ok',
+    status: 200,
     message: 'You have successfully reset your password!',
     redirectUrl: '/login',
   };

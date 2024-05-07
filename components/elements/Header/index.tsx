@@ -1,9 +1,12 @@
 import { FC } from 'react';
-import { HeaderProps } from '@/types/components';
+
+import { CartIcon } from '@/assets/icons';
+
+import { LangChanger, ThemeChanger } from '@/components/simple';
 import { NextLink as Link } from '@/components/elements';
 import { UserSession } from '@/components/complex';
-import { CartIcon } from '@/assets/icons';
-import { ThemeChanger } from '@/components/simple';
+
+import { HeaderProps } from '@/types/components';
 
 export const Header: FC<HeaderProps> = ({ data, session }) => {
   return (
@@ -16,6 +19,7 @@ export const Header: FC<HeaderProps> = ({ data, session }) => {
           {data?.logoText.text}
         </Link>
         <div className='flex gap-x-5'>
+          <LangChanger />
           <ThemeChanger />
           <CartIcon />
           <UserSession

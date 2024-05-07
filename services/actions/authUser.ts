@@ -21,6 +21,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
         ...prevState,
         errors,
         strapiError: null,
+        status: 400,
         message: 'Missing Fields. Failed to Login.',
       };
     }
@@ -34,6 +35,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
             ...prevState,
             data: null,
             errors: null,
+            status: 400,
             message: 'Credentials error',
             strapiError: 'Invalid credentials or provider authentication',
           };
@@ -42,6 +44,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
             ...prevState,
             data: null,
             errors: null,
+            status: 400,
             message: 'Bad request',
             strapiError: 'Something went wrong',
           };

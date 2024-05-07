@@ -1,3 +1,5 @@
+import { PageProps } from '@/types/app/page.types';
+
 interface RequestOptions {
   token?: string;
   body?: any;
@@ -67,65 +69,97 @@ const deleteParams = (options: RequestOptions = {}): RequestInit => {
 export { getParams, postParams, putParams, deleteParams };
 
 export const STRAPI_API_ROUTES = {
-  global: {
-    populate: [
-      'header.logoText',
-      'header.ctaButton',
-      'header.sessionLinks',
-      'footer.logoText',
-      'footer.ctaButton',
-      'shoppingCart',
-    ],
+  global: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: [
+        'header.logoText',
+        'header.ctaButton',
+        'header.sessionLinks',
+        'footer.logoText',
+        'footer.ctaButton',
+        'shoppingCart',
+      ],
+    };
   },
-  home: {
-    populate: {
-      blocks: {
-        populate: {
-          image: {
-            fields: ['url', 'alternativeText'],
-          },
-          link: {
-            populate: true,
+  home: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: {
+        blocks: {
+          populate: {
+            image: {
+              fields: ['url', 'alternativeText'],
+            },
+            link: {
+              populate: true,
+            },
           },
         },
       },
-    },
+    };
   },
-  getProducts: ({ page, per_page, name, id }: any) => ({
-    id,
+  products: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: true,
+    };
+  },
+  getProducts: ({
+    page,
+    per_page,
     name,
-    page: page || 1,
-    pageSize: per_page || 5,
+    locale,
+    id,
+  }: PageProps['searchParams']) => {
+    return {
+      id,
+      locale,
+      name,
+      page: page || 1,
+      pageSize: per_page || 5,
+    };
+  },
+  getProductDetails: ({ locale = 'uk', code = null }) => ({ locale, code }),
+  auth: ({ locale = 'uk' }) => {
+    return {
+      registration: {
+        locale,
+        populate: ['formFields', 'redirectUrl', 'submitBtn'],
+      },
+      success: { locale, populate: ['title', 'description', 'redirectUrl'] },
+      forgot: {
+        locale,
+        populate: ['formFields', 'submitBtn', 'loginUrl'],
+      },
+      reset: {
+        locale,
+        populate: ['formFields', 'submitBtn'],
+      },
+      login: {
+        locale,
+        populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
+      },
+    };
+  },
+  me: ({ locale = 'uk' }) => {
+    return {
+      locale,
+      populate: {
+        formFields: {
+          populate: ['general', 'additional', 'actions', 'avatar'],
+        },
+      },
+    };
+  },
+  meta: ({ locale = 'uk' }) => ({
+    locale,
+    populate: {
+      seo: {
+        fields: ['metaTitle', 'metaDescription'],
+      },
+    },
   }),
-  getProductDetails: {
-    populate: {
-      cover: {
-        fields: ['url', 'alternativeText'],
-      },
-      images: {
-        fields: ['url', 'alternativeText'],
-      },
-    },
-  },
-  auth: {
-    registration: { populate: ['formFields', 'redirectUrl', 'submitBtn'] },
-    success: { populate: ['title', 'description', 'redirectUrl'] },
-    forgot: { populate: ['formFields', 'submitBtn', 'loginUrl'] },
-    reset: { populate: ['formFields', 'submitBtn'] },
-    login: {
-      populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
-    },
-  },
-  me: {
-    populate: {
-      formFields: {
-        populate: ['general', 'additional', 'actions', 'avatar'],
-      },
-    },
-  },
-  meta: {
-    fields: ['title', 'description'],
-  },
 };
 
 export const ROOT = '/';

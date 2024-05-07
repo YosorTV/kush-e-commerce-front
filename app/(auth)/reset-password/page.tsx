@@ -2,24 +2,30 @@ import { ResetForm } from '@/components/forms';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
+import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta);
-const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth.reset);
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const { locale } = searchParams;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const data = await getStrapiData('reset-page', metaQP);
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
+  const { seo } = await getStrapiData('reset-page', metaQP);
 
   return {
     title: {
-      default: `KUSH | ${data?.title?.toUpperCase()}`,
+      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
       template: '%s | KUSH',
     },
-    description: data?.description,
+    description: seo?.metaDescription,
   };
 }
 
-export default async function ResetPasswordPage({ searchParams }: any) {
+export default async function ResetPasswordPage({ searchParams }: PageProps) {
+  const { locale } = searchParams;
+
+  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).reset);
   const data = await getStrapiData('reset-page', pageQP);
 
   return (

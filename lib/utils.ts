@@ -66,35 +66,6 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-export function createQueryString(
-  name: string,
-  value: string,
-  searchParams?: URLSearchParams
-): string {
-  const params = searchParams || new URLSearchParams();
-
-  params.set(name, value);
-
-  return params.toString();
-}
-
-export const getUrlParams = ({
-  searchParams,
-}: {
-  searchParams: URLSearchParams;
-}) => {
-  const params: Record<string, string | null> = {};
-
-  searchParams.forEach((value, key) => {
-    params[key] = value || null;
-  });
-
-  params.page = params.page ?? '1';
-  params.per_page = params.per_page ?? '2';
-
-  return params;
-};
-
 export const processChild = (
   child: React.ReactElement,
   index: number,
