@@ -10,7 +10,7 @@ import './globals.css';
 
 export default async function RootLayout({ children }: Readonly<LayoutProps>) {
   const globalQP = generateStrapiQuery(
-    STRAPI_API_ROUTES.global({ locale: 'uk' })
+    STRAPI_API_ROUTES.global({ locale: 'en' })
   );
 
   const data = await getStrapiData('global', globalQP);
