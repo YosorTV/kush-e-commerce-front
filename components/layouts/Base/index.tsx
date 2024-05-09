@@ -9,13 +9,14 @@ import { Hydrate } from '@/components/simple';
 
 export async function BaseLayout({
   children,
+  locale,
   header,
   footer,
   session,
   cart,
 }: BaseLayoutProps) {
   return (
-    <html lang='en'>
+    <html lang={locale}>
       <head />
       <body
         className={cn(

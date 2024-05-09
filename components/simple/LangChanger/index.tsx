@@ -1,54 +1,46 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useLocale } from 'next-intl';
 
-import { useLang } from '@/store';
 import { UAIcon, GBIcon } from '@/assets/icons';
-import { useEffect, useMemo, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-import { createQueryString, getUrlParams } from '@/lib';
+import { useMemo, useTransition } from 'react';
+import { useRouter } from '@/lib/navigation';
 import { animLang } from '@/assets/animations';
+import { createQueryString } from '@/lib';
 
 export const LangChanger = () => {
   const router = useRouter();
-  const langStore = useLang();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const locale = useLocale();
 
-  const [flipped, setFlipped] = useState<boolean>(false);
-  const params = getUrlParams({ searchParams });
+  const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    const url = createQueryString(pathname, {
-      ...params,
-      locale: langStore.lang,
+  const handleSwitch = () => {
+    const { pathname, search } = window.location;
+
+    const url = createQueryString(`${pathname}${search}`);
+
+    startTransition(() => {
+      router.replace(url);
     });
-
-    router.push(url);
-  }, [langStore.lang, params, pathname, router]);
-
-  const handleSwitch = async () => {
-    const locale = langStore.lang === 'en' ? 'uk' : 'en';
-
-    langStore.setLang(locale);
-    setFlipped(!flipped);
   };
 
   const printFlagIcon = useMemo(() => {
-    return langStore.lang === 'en' ? (
+    return locale === 'en' && !isPending ? (
       <GBIcon className='border-2 border-base-200' />
     ) : (
       <UAIcon className='border-2 border-base-200' />
     );
-  }, [langStore.lang]);
+  }, [locale, isPending]);
 
   return (
     <motion.button
+      defaultValue={locale}
+      disabled={isPending}
       type='button'
       onClick={handleSwitch}
-      animate={animLang({ flipped }).animate}
-      initial={animLang({ flipped }).initial}
+      animate={animLang({ flipped: isPending }).animate}
+      initial={animLang({ flipped: isPending }).initial}
       transition={{ duration: 0.3 }}
       layout
     >

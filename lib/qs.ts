@@ -6,21 +6,25 @@ interface Params {
   [key: string]: string | number | undefined;
 }
 
-export const createQueryString = (baseUrl: string, params: Params): string => {
-  const existingQuery = baseUrl.includes('?');
-  const query = new URLSearchParams(existingQuery ? '' : baseUrl.split('?')[1]);
+export const createQueryString = (baseUrl: string, params?: Params): string => {
+  const url = new URL(baseUrl, process.env.NEXT_PUBLIC_URL);
+  const locale = url.pathname.startsWith('/en') ? '/uk' : '/en';
 
-  for (const key in params) {
-    if (params[key]) {
-      query.set(key, String(params[key]));
+  if (url.pathname.startsWith('/en/') || url.pathname.startsWith('/uk/')) {
+    url.pathname = locale + url.pathname.substring(3);
+  } else {
+    url.pathname = locale;
+  }
+
+  if (params) {
+    for (const key in params) {
+      if (params[key]) {
+        url.searchParams.set(key, String(params[key]));
+      }
     }
   }
 
-  const queryString = query.toString();
-
-  return existingQuery
-    ? `${baseUrl}&${queryString}`
-    : `${baseUrl}?${queryString}`;
+  return url.toString();
 };
 
 export const getUrlParams = ({

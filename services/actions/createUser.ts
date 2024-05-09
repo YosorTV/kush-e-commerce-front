@@ -2,7 +2,7 @@
 
 import { schemas } from '@/lib/zod';
 import { createUser } from '../api/create-user';
-import { redirect } from 'next/navigation';
+import { redirect } from '@/lib/navigation';
 
 export async function createUserAction(prevState: any, formData: FormData) {
   const fields = {

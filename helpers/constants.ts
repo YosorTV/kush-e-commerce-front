@@ -162,8 +162,12 @@ export const STRAPI_API_ROUTES = {
   }),
 };
 
+export const LOCALES = ['uk', 'en'] as const;
+export const LOCALES_PREFIX = 'always';
+
 export const ROOT = '/';
 export const PRIVATE_ROUTES = ['/profile', '/orders'];
+
 export const PRICE_LOCALE = {
   USD: {
     style: 'currency',

@@ -1,5 +1,6 @@
-const withPlugins = require('next-compose-plugins');
-const withImages = require('next-images');
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig = {
   compiler: {
@@ -45,4 +46,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([[withImages]], nextConfig);
+module.exports = withNextIntl(nextConfig);

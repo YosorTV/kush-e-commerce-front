@@ -1,4 +1,5 @@
 import { ProductsSection } from '@/components/complex';
+import { PageLayout } from '@/components/layouts';
 import { Pagination } from '@/components/simple/Pagination';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
@@ -8,11 +9,9 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const metaQP = generateStrapiQuery(
-    STRAPI_API_ROUTES.meta({ ...searchParams })
-  );
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ ...params }));
   const data = await getStrapiData('products-page', metaQP);
 
   const { seo } = data;
@@ -26,8 +25,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Products({ searchParams }: PageProps) {
-  const { locale } = searchParams;
+export default async function Products({ searchParams, params }: PageProps) {
+  const { locale } = params;
 
   const productPageQueryParams = STRAPI_API_ROUTES.products({ locale });
   const productsPageQP = generateStrapiQuery(productPageQueryParams);
@@ -42,13 +41,15 @@ export default async function Products({ searchParams }: PageProps) {
   const data = await getStrapiData('get-products', productsListQP);
 
   return (
-    <section className='container mb-5 h-max'>
-      <ProductsSection data={data?.products} message={data?.message} />
-      <Pagination
-        total={data?.total}
-        hasPrevPage={data?.hasPreviousPage}
-        hasNextPage={data?.hasNextPage}
-      />
-    </section>
+    <PageLayout>
+      <section className='container mb-5 h-max'>
+        <ProductsSection data={data?.products} message={data?.message} />
+        <Pagination
+          total={data?.total}
+          hasPrevPage={data?.hasPreviousPage}
+          hasNextPage={data?.hasNextPage}
+        />
+      </section>
+    </PageLayout>
   );
 }

@@ -7,9 +7,9 @@ import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = searchParams;
+  const { locale } = params;
 
   const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
   const { seo } = await getStrapiData('forgot-page', metaQP);
@@ -23,8 +23,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function ForgotPasswordPage({ searchParams }: PageProps) {
-  const { locale } = searchParams;
+export default async function ForgotPasswordPage({ params }: PageProps) {
+  const { locale } = params;
 
   const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).forgot);
   const data = await getStrapiData('forgot-page', pageQP);

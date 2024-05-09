@@ -25,7 +25,8 @@ export const Card: FC<any> = ({ data }) => {
         </Title>
         <p className='text-base-100'>{data?.description}</p>
         <p className='text-base-100'>
-          {data?.price} <span>{formatPrice(data.unitAmount)}</span>
+          {data?.price}{' '}
+          <span>{formatPrice(data.unitAmount, data.currency)}</span>
         </p>
       </div>
     </div>

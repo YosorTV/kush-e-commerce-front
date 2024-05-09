@@ -1,11 +1,14 @@
 export type PageProps = {
-  params: any;
+  params: {
+    id?: string;
+    locale: string;
+  };
   searchParams: {
     id?: string;
-    locale?: string;
     page?: string;
     per_page?: string;
     sortBy?: string;
+    locale?: string;
     filterBy?: string;
     name?: string;
     code?: string;

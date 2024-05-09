@@ -11,6 +11,7 @@ type HeaderData = {
 
 export type BaseLayoutProps = {
   children: React.ReactNode;
+  locale: string;
   header: HeaderData;
   footer: FooterProps;
   cart: ShoppingCartData['data'];

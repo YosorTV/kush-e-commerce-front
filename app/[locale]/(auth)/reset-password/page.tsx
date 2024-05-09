@@ -6,9 +6,9 @@ import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = searchParams;
+  const { locale } = params;
 
   const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
   const { seo } = await getStrapiData('reset-page', metaQP);
@@ -22,8 +22,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ResetPasswordPage({ searchParams }: PageProps) {
-  const { locale } = searchParams;
+export default async function ResetPasswordPage({
+  searchParams,
+  params,
+}: PageProps) {
+  const { locale } = params;
+  const { code } = searchParams;
 
   const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).reset);
   const data = await getStrapiData('reset-page', pageQP);
@@ -33,7 +37,7 @@ export default async function ResetPasswordPage({ searchParams }: PageProps) {
       <ResetForm
         formFields={data.formFields}
         submitBtn={data.submitBtn}
-        code={searchParams?.code}
+        code={code}
       />
     </div>
   );

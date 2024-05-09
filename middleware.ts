@@ -1,7 +1,20 @@
+import createIntlMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 
 import { auth } from '@/auth';
-import { PRIVATE_ROUTES, ROOT } from '@/helpers/constants';
+
+import {
+  LOCALES,
+  LOCALES_PREFIX,
+  PRIVATE_ROUTES,
+  ROOT,
+} from '@/helpers/constants';
+
+const intlMiddleware = createIntlMiddleware({
+  defaultLocale: 'uk',
+  locales: LOCALES,
+  localePrefix: LOCALES_PREFIX,
+});
 
 export default auth((req) => {
   const { nextUrl } = req;
@@ -12,8 +25,10 @@ export default auth((req) => {
   if (isPrivateRoute && !isAuthenticated) {
     return NextResponse.redirect(new URL(ROOT, nextUrl));
   }
+
+  return intlMiddleware(req);
 });
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/', '/(uk|en)/:path*'],
 };

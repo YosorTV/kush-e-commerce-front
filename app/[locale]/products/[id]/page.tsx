@@ -1,4 +1,5 @@
 import { Title } from '@/components/elements';
+import { PageLayout } from '@/components/layouts';
 import { StrapiImage } from '@/components/simple';
 import { AddCart } from '@/components/simple/AddButton';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
@@ -7,8 +8,12 @@ import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
 import { PageProps } from '@/types/app/page.types';
 
-export default async function ProductDetails({ searchParams }: PageProps) {
-  const { locale, code } = searchParams;
+export default async function ProductDetails({
+  searchParams,
+  params,
+}: PageProps) {
+  const { locale } = params;
+  const { code } = searchParams;
 
   const productDetailsQP = generateStrapiQuery(
     STRAPI_API_ROUTES.getProductDetails({ locale, code })
@@ -53,23 +58,27 @@ export default async function ProductDetails({ searchParams }: PageProps) {
   };
 
   return (
-    <section className='grid h-full grid-cols-2 gap-x-2'>
-      {printImages(data?.product?.images)}
-      <div className='relative col-start-2 flex flex-col bg-base-100'>
-        <div className='fixed flex h-full max-h-[86vh] w-1/2 flex-col justify-between gap-y-5 px-5 pr-10'>
-          <div className='flex flex-col gap-y-5'>
-            <Title level='2' className='text-2xl font-bold'>
-              {data.product.title}
-            </Title>
-            <p className='text-base'>{data.product.description}</p>
-            <p className='flex gap-x-2.5 text-lg font-semibold'>
-              {data.product?.price}:
-              <span>{formatPrice(data.product.unitAmount)}</span>
-            </p>
+    <PageLayout>
+      <section className='grid h-full grid-cols-2 gap-x-2'>
+        {printImages(data?.product?.images)}
+        <div className='relative col-start-2 flex flex-col bg-base-100'>
+          <div className='fixed flex h-full max-h-[86vh] w-1/2 flex-col justify-between gap-y-5 px-5 pr-10'>
+            <div className='flex flex-col gap-y-5'>
+              <Title level='2' className='text-2xl font-bold'>
+                {data.product.title}
+              </Title>
+              <p className='text-base'>{data.product.description}</p>
+              <p className='flex gap-x-2.5 text-lg font-semibold'>
+                {data.product?.price}:
+                <span>
+                  {formatPrice(data.product.unitAmount, data.product.currency)}
+                </span>
+              </p>
+            </div>
+            <AddCart data={cartData} text={data.cta} />
           </div>
-          <AddCart data={cartData} text={data.cta} />
         </div>
-      </div>
-    </section>
+      </section>
+    </PageLayout>
   );
 }
