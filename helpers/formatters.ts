@@ -1,6 +1,6 @@
 import { PRICE_LOCALE } from './constants';
 
-export const formatPrice = (amount: number) => {
+export const formatPrice = (amount: number, locale: string) => {
   const formattedAmount = new Intl.NumberFormat(
     'en-US',
     PRICE_LOCALE.USD

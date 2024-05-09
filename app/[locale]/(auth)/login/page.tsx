@@ -1,5 +1,6 @@
 import { NextLink } from '@/components/elements';
 import { SignInForm } from '@/components/forms';
+import { PageLayout } from '@/components/layouts';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
@@ -8,13 +9,12 @@ import { StripeLinkType } from '@/types/components';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = searchParams;
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const data = await getStrapiData('login-page', metaQP);
+  const { locale } = params;
 
-  const { seo } = data;
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
+  const { seo } = await getStrapiData('login-page', metaQP);
 
   return {
     title: {
@@ -25,8 +25,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function LoginPage({ searchParams }: PageProps) {
-  const { locale } = searchParams;
+export default async function LoginPage({ params }: PageProps) {
+  const { locale } = params;
+
   const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).login);
   const data = await getStrapiData('login-page', pageQP);
 
@@ -46,15 +47,17 @@ export default async function LoginPage({ searchParams }: PageProps) {
   };
 
   return (
-    <div className='container flex h-full flex-col items-center justify-center gap-y-5'>
-      <div className='w-1/3'>
-        <SignInForm
-          formFields={data?.formFields}
-          submitBtn={data?.submitBtn}
-          providers={data?.providers}
-        />
+    <PageLayout className='container'>
+      <div className='flex h-full flex-col items-center justify-center gap-y-5'>
+        <div className='w-1/3'>
+          <SignInForm
+            formFields={data?.formFields}
+            submitBtn={data?.submitBtn}
+            providers={data?.providers}
+          />
+        </div>
+        <div className='flex gap-x-5'>{printLinks(data?.additionalLinks)}</div>
       </div>
-      <div className='flex gap-x-5'>{printLinks(data?.additionalLinks)}</div>
-    </div>
+    </PageLayout>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 
 import { FC, useCallback, useEffect, useMemo } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { cn, createQueryString, getUrlParams } from '@/lib';
+import { usePathname, useRouter } from '@/lib/navigation';
 
 interface PaginationProps {
   hasNextPage?: boolean;

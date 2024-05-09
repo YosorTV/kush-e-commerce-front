@@ -5,40 +5,34 @@ import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { getStrapiData } from '@/services/strapi';
 import { generateStrapiQuery } from '@/lib/qs';
 import { PageProps } from '@/types/app/page.types';
+import { PageLayout } from '@/components/layouts';
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = searchParams;
-
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
+  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ ...params }));
   const data = await getStrapiData('home-page', metaQP);
 
   const { seo } = data;
 
-  if (seo) {
-    return {
-      title: {
-        default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
-        template: '%s | KUSH',
-      },
-      description: seo?.metaDescription,
-    };
-  }
-
   return {
     title: {
-      default: `KUSH | HOME`,
+      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
       template: '%s | KUSH',
     },
+    description: seo?.metaDescription,
   };
 }
 
-export default async function Home({ searchParams }: PageProps) {
-  const { locale = 'uk' } = searchParams;
+export default async function Home({ params }: PageProps) {
+  const { locale } = params;
 
   const homeQP = generateStrapiQuery(STRAPI_API_ROUTES.home({ locale }));
   const data = await getStrapiData('home-page', homeQP);
 
-  return <StrapiBlockRender data={data?.blocks} />;
+  return (
+    <PageLayout>
+      <StrapiBlockRender data={data?.blocks} />
+    </PageLayout>
+  );
 }

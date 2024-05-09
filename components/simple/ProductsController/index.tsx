@@ -2,9 +2,10 @@
 
 import { FC, useEffect, useState } from 'react';
 import { Input } from '@/components/elements';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { cn } from '@/lib';
 import { useDebounce } from 'use-debounce';
+import { usePathname, useRouter } from '@/lib/navigation';
 
 export const ProductsController: FC<{
   className?: string;

@@ -6,9 +6,9 @@ import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = searchParams;
+  const { locale } = params;
 
   const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
   const { seo } = await getStrapiData('success-page', metaQP);
@@ -22,8 +22,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function SuccessPage({ searchParams }: PageProps) {
-  const { locale } = searchParams;
+export default async function SuccessPage({ params }: PageProps) {
+  const { locale } = params;
 
   const pageQP = generateStrapiQuery(
     STRAPI_API_ROUTES.auth({ locale }).success

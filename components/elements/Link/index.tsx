@@ -1,5 +1,5 @@
+import { Link } from '@/lib/navigation';
 import { LinkType } from '@/types/components';
-import Link from 'next/link';
 
 export const NextLink: React.FC<LinkType> = ({
   href = '/',
