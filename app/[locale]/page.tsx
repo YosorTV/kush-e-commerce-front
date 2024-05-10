@@ -28,7 +28,7 @@ export default async function Home({ params }: PageProps) {
   const { locale } = params;
 
   const homeQP = generateStrapiQuery(STRAPI_API_ROUTES.home({ locale }));
-  const data = await getStrapiData('home-page', homeQP);
+  const data = await getStrapiData('home', homeQP);
 
   return (
     <PageLayout>
