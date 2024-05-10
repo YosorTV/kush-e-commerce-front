@@ -11,13 +11,13 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ ...params }));
-  const data = await getStrapiData('home-page', metaQP);
+  const data = await getStrapiData('home', metaQP);
 
   const { seo } = data;
 
   return {
     title: {
-      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
+      default: `KUSH | ${seo?.metaTitle}`,
       template: '%s | KUSH',
     },
     description: seo?.metaDescription,
@@ -28,7 +28,7 @@ export default async function Home({ params }: PageProps) {
   const { locale } = params;
 
   const homeQP = generateStrapiQuery(STRAPI_API_ROUTES.home({ locale }));
-  const data = await getStrapiData('home-page', homeQP);
+  const data = await getStrapiData('home', homeQP);
 
   return (
     <PageLayout>

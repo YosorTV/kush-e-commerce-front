@@ -1,32 +1,48 @@
+import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
+
 import { auth } from '@/auth';
 import { BaseLayout } from '@/components/layouts';
+import { ClientSideRender } from '@/components/complex';
+
 import { getStrapiData } from '@/services/strapi';
 import { generateStrapiQuery } from '@/lib/qs';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
+import { LOCALES, STRAPI_API_ROUTES } from '@/helpers/constants';
 
 import { LayoutProps } from '@/types/app/layout.types';
-import { ClientSideRender } from '@/components/complex';
+import { NextIntlClientProvider } from 'next-intl';
+
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
 
 export default async function LocalLayout({
   children,
   params: { locale },
 }: Readonly<LayoutProps>) {
+  unstable_setRequestLocale(locale);
+
   const globalQP = generateStrapiQuery(STRAPI_API_ROUTES.global({ locale }));
 
-  const data = await getStrapiData('global', globalQP);
+  const { header, footer, shoppingCart } = await getStrapiData(
+    'global',
+    globalQP
+  );
 
   const session = await auth();
+
+  const messages = await getMessages();
 
   return (
     <BaseLayout
       locale={locale}
-      header={data?.header}
-      footer={data?.footer}
-      cart={data?.shoppingCart}
+      header={header}
+      footer={footer}
       session={session}
     >
-      {children}
-      <ClientSideRender />
+      <NextIntlClientProvider messages={messages}>
+        {children}
+        <ClientSideRender data={shoppingCart} />
+      </NextIntlClientProvider>
     </BaseLayout>
   );
 }

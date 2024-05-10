@@ -5,9 +5,9 @@ import { useLocale } from 'next-intl';
 
 import { UAIcon, GBIcon } from '@/assets/icons';
 import { useMemo, useTransition } from 'react';
-import { useRouter } from '@/lib/navigation';
 import { animLang } from '@/assets/animations';
 import { createQueryString } from '@/lib';
+import { useRouter } from 'next/navigation';
 
 export const LangChanger = () => {
   const router = useRouter();
@@ -17,7 +17,6 @@ export const LangChanger = () => {
 
   const handleSwitch = () => {
     const { pathname, search } = window.location;
-
     const url = createQueryString(`${pathname}${search}`);
 
     startTransition(() => {
@@ -26,12 +25,12 @@ export const LangChanger = () => {
   };
 
   const printFlagIcon = useMemo(() => {
-    return locale === 'en' && !isPending ? (
+    return locale === 'en' ? (
       <GBIcon className='border-2 border-base-200' />
     ) : (
       <UAIcon className='border-2 border-base-200' />
     );
-  }, [locale, isPending]);
+  }, [locale]);
 
   return (
     <motion.button
