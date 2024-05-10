@@ -11,7 +11,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ ...params }));
-  const data = await getStrapiData('home-page', metaQP);
+  const data = await getStrapiData('home', metaQP);
 
   const { seo } = data;
 
