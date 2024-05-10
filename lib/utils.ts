@@ -72,7 +72,7 @@ export const processChild = (
   state: any
 ): React.ReactNode => {
   // If the child is an input element with a name prop, modify it
-  if (child.props?.name) {
+  if (child?.props?.name) {
     return React.createElement(child.type as React.ComponentType<InputProps>, {
       ...child.props,
       key: `${child.props.name}_${index}`,
@@ -80,7 +80,7 @@ export const processChild = (
     });
   }
   // If the child has its own children, recursively process them
-  if (child.props?.children) {
+  if (child?.props?.children) {
     return React.cloneElement(child, {
       ...child.props,
       children: React.Children.map(

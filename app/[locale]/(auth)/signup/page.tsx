@@ -1,4 +1,5 @@
 import { SignUpForm } from '@/components/forms';
+import { PageLayout } from '@/components/layouts';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
@@ -32,10 +33,10 @@ export default async function SignUpPage({ params }: PageProps) {
   const data = await getStrapiData('registration-page', pageQP);
 
   return (
-    <div className='container flex h-full flex-col items-center justify-center gap-y-5'>
-      <div className='w-1/3'>
+    <PageLayout className='container h-screen'>
+      <div className='mx-auto flex h-full w-1/3 flex-col justify-center gap-y-5'>
         <SignUpForm formFields={data.formFields} cta={data.submitBtn} />
       </div>
-    </div>
+    </PageLayout>
   );
 }

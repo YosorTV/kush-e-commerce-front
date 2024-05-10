@@ -11,7 +11,7 @@ export const NextLink: React.FC<LinkType> = ({
 }) => {
   return (
     <Link
-      href={href}
+      href={`/${href}`}
       replace={replace}
       scroll={scroll}
       prefetch={prefetch}

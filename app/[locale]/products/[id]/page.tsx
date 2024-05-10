@@ -58,7 +58,7 @@ export default async function ProductDetails({
   };
 
   return (
-    <PageLayout>
+    <PageLayout className='py-16'>
       <section className='grid h-full grid-cols-2 gap-x-2'>
         {printImages(data?.product?.images)}
         <div className='relative col-start-2 flex flex-col bg-base-100'>
@@ -70,9 +70,7 @@ export default async function ProductDetails({
               <p className='text-base'>{data.product.description}</p>
               <p className='flex gap-x-2.5 text-lg font-semibold'>
                 {data.product?.price}:
-                <span>
-                  {formatPrice(data.product.unitAmount, data.product.currency)}
-                </span>
+                <span>{formatPrice(data.product.unitAmount)}</span>
               </p>
             </div>
             <AddCart data={cartData} text={data.cta} />
