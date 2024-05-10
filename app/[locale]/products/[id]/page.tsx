@@ -62,8 +62,8 @@ export default async function ProductDetails({
       <section className='grid h-full grid-cols-2 gap-x-2'>
         {printImages(data?.product?.images)}
         <div className='relative col-start-2 flex flex-col bg-base-100'>
-          <div className='fixed flex h-full max-h-[86vh] w-1/2 flex-col justify-between gap-y-5 px-5 pr-10'>
-            <div className='flex flex-col gap-y-5'>
+          <div className='fixed flex h-full max-h-[85vh] w-1/2 flex-col justify-between gap-y-5 px-5 pr-10'>
+            <div className='flex flex-col gap-y-5 pt-1'>
               <Title level='2' className='text-2xl font-bold'>
                 {data.product.title}
               </Title>

@@ -8,11 +8,9 @@ export const ThemeChanger = () => {
   const themeStore = useTheme();
 
   const handleTheme = () => {
-    if (themeStore.theme === 'light') {
-      themeStore.setTheme('sunset');
-    } else {
-      themeStore.setTheme('light');
-    }
+    const theme = themeStore.theme === 'light' ? 'sunset' : 'light';
+
+    themeStore.setTheme(theme);
   };
 
   return (

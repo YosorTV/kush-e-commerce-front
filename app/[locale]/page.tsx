@@ -17,7 +17,7 @@ export async function generateMetadata({
 
   return {
     title: {
-      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
+      default: `KUSH | ${seo?.metaTitle}`,
       template: '%s | KUSH',
     },
     description: seo?.metaDescription,

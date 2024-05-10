@@ -8,13 +8,16 @@ interface Params {
 
 export const createQueryString = (baseUrl: string, params?: Params): string => {
   const url = new URL(baseUrl, process.env.NEXT_PUBLIC_URL);
-  const locale = url.pathname.startsWith('/en') ? '/uk' : '/en';
+  const locale = url.pathname.startsWith('/en') ? 'uk' : 'en';
+  console.log('locale: ', locale);
 
   if (url.pathname.startsWith('/en/') || url.pathname.startsWith('/uk/')) {
     url.pathname = locale + url.pathname.substring(3);
   } else {
-    url.pathname = locale;
+    url.pathname = `/${locale}`;
   }
+
+  console.log(url.pathname);
 
   if (params) {
     for (const key in params) {

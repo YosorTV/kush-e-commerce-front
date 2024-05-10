@@ -5,9 +5,9 @@ import { useLocale } from 'next-intl';
 
 import { UAIcon, GBIcon } from '@/assets/icons';
 import { useMemo, useTransition } from 'react';
-import { useRouter } from '@/lib/navigation';
 import { animLang } from '@/assets/animations';
 import { createQueryString } from '@/lib';
+import { useRouter } from 'next/navigation';
 
 export const LangChanger = () => {
   const router = useRouter();
@@ -36,6 +36,7 @@ export const LangChanger = () => {
   return (
     <motion.button
       defaultValue={locale}
+      defaultChecked={locale === 'uk'}
       disabled={isPending}
       type='button'
       onClick={handleSwitch}

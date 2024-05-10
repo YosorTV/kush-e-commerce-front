@@ -10,7 +10,7 @@ import { HeaderProps } from '@/types/components';
 
 export const Header: FC<HeaderProps> = ({ data, session }) => {
   return (
-    <header className='fixed z-50 flex min-h-14 w-full items-center bg-base-100 px-5'>
+    <header className='fixed z-40 flex min-h-16 w-full items-center bg-base-100 px-5'>
       <nav className='flex w-full items-center justify-between'>
         <Link
           href={data?.logoText?.url}
@@ -23,6 +23,7 @@ export const Header: FC<HeaderProps> = ({ data, session }) => {
           <ThemeChanger />
           <CartIcon />
           <UserSession
+            locale={session.locale}
             session={session?.user}
             sessionLinks={data?.sessionLinks}
             cta={data?.ctaButton}

@@ -1,15 +1,19 @@
-import { NextLink } from '@/components/elements';
-
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import { SignOutButton } from '../../simple/SignOutButton';
+
+import { NextLink } from '@/components/elements';
+import { SignOutButton } from '@/components/simple/SignOutButton';
 import { StripeLinkType } from '@/types/components';
 
-export const UserSession = ({
+export const UserSession = async ({
   authorized = false,
+  locale,
   cta,
   session,
   sessionLinks = [],
 }: any) => {
+  const t = await getTranslations({ locale, namespace: 'auth' });
+
   if (!authorized) {
     return (
       cta && (
@@ -39,13 +43,13 @@ export const UserSession = ({
   return (
     <nav className='flex flex-1 items-center justify-end gap-x-5'>
       <div className='dropdown dropdown-end'>
-        <figure
+        <div
           tabIndex={-1}
           className='flex cursor-pointer items-center justify-center gap-5'
         >
-          <figcaption className='font-semibold uppercase text-base-200'>
+          <span className='font-semibold uppercase text-base-200'>
             {session.name}
-          </figcaption>
+          </span>
           {session.avatar && (
             <Image
               src={session.avatar}
@@ -55,14 +59,14 @@ export const UserSession = ({
               alt='profile-picture'
             />
           )}
-        </figure>
+        </div>
         <ul
           tabIndex={0}
           className='menu dropdown-content top-8 min-w-btn space-y-2.5 rounded-sm bg-base-100 shadow'
         >
           {printMenuLinks(sessionLinks)}
           <li tabIndex={3}>
-            <SignOutButton />
+            <SignOutButton text={t('signOut')} />
           </li>
         </ul>
       </div>
