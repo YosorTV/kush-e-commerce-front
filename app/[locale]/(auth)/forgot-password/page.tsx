@@ -1,5 +1,6 @@
 import { NextLink } from '@/components/elements';
 import { ForgotForm } from '@/components/forms';
+import { PageLayout } from '@/components/layouts';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
@@ -30,15 +31,17 @@ export default async function ForgotPasswordPage({ params }: PageProps) {
   const data = await getStrapiData('forgot-page', pageQP);
 
   return (
-    <div className='container flex h-full flex-col items-center justify-center gap-y-5'>
-      <ForgotForm formFields={data.formFields} submitBtn={data.submitBtn} />
-      <NextLink
-        className='link link-primary'
-        href={data.loginUrl.url}
-        replace={data.loginUrl.isExternal}
-      >
-        {data.loginUrl.text}
-      </NextLink>
-    </div>
+    <PageLayout className='container h-screen'>
+      <div className=' flex h-full flex-col items-center justify-center gap-y-5'>
+        <ForgotForm formFields={data.formFields} submitBtn={data.submitBtn} />
+        <NextLink
+          className='link link-primary'
+          href={data.loginUrl.url}
+          replace={data.loginUrl.isExternal}
+        >
+          {data.loginUrl.text}
+        </NextLink>
+      </div>
+    </PageLayout>
   );
 }

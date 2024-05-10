@@ -17,10 +17,8 @@ export default async function ProfilePage({ params }: PageProps) {
   });
 
   return (
-    <PageLayout>
-      <section className='container h-full pt-10'>
-        <ProfileForm data={data?.formFields} state={session.user} />
-      </section>
+    <PageLayout className='container py-16'>
+      <ProfileForm data={data?.formFields} state={session.user} />
     </PageLayout>
   );
 }

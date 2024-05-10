@@ -47,8 +47,8 @@ export default async function LoginPage({ params }: PageProps) {
   };
 
   return (
-    <PageLayout className='container'>
-      <div className='flex h-full flex-col items-center justify-center gap-y-5'>
+    <PageLayout className='container h-screen'>
+      <section className='flex h-full flex-col items-center justify-center gap-y-5'>
         <div className='w-1/3'>
           <SignInForm
             formFields={data?.formFields}
@@ -57,7 +57,7 @@ export default async function LoginPage({ params }: PageProps) {
           />
         </div>
         <div className='flex gap-x-5'>{printLinks(data?.additionalLinks)}</div>
-      </div>
+      </section>
     </PageLayout>
   );
 }

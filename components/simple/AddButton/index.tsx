@@ -21,7 +21,7 @@ export const AddCart: FC<AddCartProps> = ({ data, text }) => {
   return (
     <button
       onClick={handleAdd}
-      className='btn btn-primary my-3 font-medium text-white'
+      className='btn btn-primary mt-6 font-medium text-white'
       disabled={added}
     >
       {text}

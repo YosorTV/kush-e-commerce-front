@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 
-import { useCart, useTheme } from '@/store';
+import { useCart } from '@/store';
 import { cn } from '@/lib';
 
 import { Title } from '@/components/elements';
@@ -20,7 +20,6 @@ import { ShoppingCartData } from '@/types/components/complex';
 
 export const CartList: FC<ShoppingCartData> = ({ data }) => {
   const cartStore = useCart();
-  const themeStore = useTheme();
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
@@ -41,11 +40,7 @@ export const CartList: FC<ShoppingCartData> = ({ data }) => {
           {data.getBack}
         </button>
 
-        <Lottie
-          text={`${data.emptyList} ☹️`}
-          src={lottieAnim}
-          playerClassName={themeStore.theme === 'sunset' && 'invert'}
-        />
+        <Lottie text={`${data.emptyList} ☹️`} src={lottieAnim} />
       </motion.div>
     );
 

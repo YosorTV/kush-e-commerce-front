@@ -1,16 +1,15 @@
 'use client';
 
-import { useTheme } from '@/store';
-
+import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from '@/assets/icons';
 
 export const ThemeChanger = () => {
-  const themeStore = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   const handleTheme = () => {
-    const theme = themeStore.theme === 'light' ? 'sunset' : 'light';
+    const theme = resolvedTheme === 'light' ? 'sunset' : 'light';
 
-    themeStore.setTheme(theme);
+    setTheme(theme);
   };
 
   return (
@@ -20,7 +19,7 @@ export const ThemeChanger = () => {
         value='synthwave'
         onClick={handleTheme}
         className='theme-controller'
-        defaultChecked={themeStore.theme === 'light'}
+        defaultChecked={resolvedTheme === 'light'}
       />
       <SunIcon className='swap-on fill-base-200' />
       <MoonIcon className='swap-off fill-base-200' />

@@ -41,15 +41,13 @@ export default async function Products({ searchParams, params }: PageProps) {
   const data = await getStrapiData('get-products', productsListQP);
 
   return (
-    <PageLayout>
-      <section className='container mb-5 h-max'>
-        <ProductsSection data={data?.products} message={data?.message} />
-        <Pagination
-          total={data?.total}
-          hasPrevPage={data?.hasPreviousPage}
-          hasNextPage={data?.hasNextPage}
-        />
-      </section>
+    <PageLayout className='container py-16'>
+      <ProductsSection data={data?.products} message={data?.message} />
+      <Pagination
+        total={data.total}
+        hasPrevPage={data.hasPreviousPage}
+        hasNextPage={data.hasNextPage}
+      />
     </PageLayout>
   );
 }

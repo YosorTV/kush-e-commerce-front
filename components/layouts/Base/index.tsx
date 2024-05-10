@@ -1,7 +1,6 @@
-import { cn } from '@/lib';
-
 import { montserrat } from '@/assets/fonts';
 import { Footer, Header } from '@/components/elements';
+import { ThemeProvider } from '@/components/providers';
 import { BaseLayoutProps } from '@/types/components';
 
 export async function BaseLayout({
@@ -12,17 +11,18 @@ export async function BaseLayout({
   session,
 }: BaseLayoutProps) {
   return (
-    <html lang={locale}>
-      <body
-        className={cn(
-          'relative overflow-hidden scroll-auto',
-          montserrat.className
-        )}
-      >
-        <Header data={header} session={{ ...session, locale }} />
-        <main className='z-0 grid h-screen py-14'>{children}</main>
-        <Footer {...footer} />
-        <div id='portal' />
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={montserrat.className}
+    >
+      <body className='relative'>
+        <ThemeProvider>
+          <Header data={header} session={{ ...session, locale }} />
+          <main className='z-0 grid'>{children}</main>
+          <Footer {...footer} />
+          <div id='portal' />
+        </ThemeProvider>
       </body>
     </html>
   );

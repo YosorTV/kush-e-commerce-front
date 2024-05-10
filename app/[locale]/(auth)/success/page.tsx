@@ -1,4 +1,5 @@
 import { NextLink } from '@/components/elements';
+import { PageLayout } from '@/components/layouts';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
@@ -32,12 +33,14 @@ export default async function SuccessPage({ params }: PageProps) {
   const data = await getStrapiData('success-page', pageQP);
 
   return (
-    <div className='container flex h-full flex-col items-center justify-center gap-y-2.5'>
-      <h1 className='text-center text-lg font-semibold'>{data.title}</h1>
-      <p>{data.description}</p>
-      <NextLink href={data?.redirectUrl?.url} className='link link-primary'>
-        {data?.redirectUrl?.text}
-      </NextLink>
-    </div>
+    <PageLayout className='container h-screen'>
+      <div className='flex h-full flex-col items-center justify-center gap-y-2.5'>
+        <h1 className='text-center text-lg font-semibold'>{data.title}</h1>
+        <p>{data.description}</p>
+        <NextLink href={data?.redirectUrl?.url} className='link link-primary'>
+          {data?.redirectUrl?.text}
+        </NextLink>
+      </div>
+    </PageLayout>
   );
 }

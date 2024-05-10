@@ -7,7 +7,7 @@ export const ProductsSection = ({ data, message }: any) => {
   );
 
   return (
-    <>
+    <section>
       <ProductsController
         search={{ placeholder: 'Search' }}
         className='flex flex-1 items-center justify-center pb-10'
@@ -19,6 +19,6 @@ export const ProductsSection = ({ data, message }: any) => {
           <Title level='2'>{message}</Title>
         )}
       </div>
-    </>
+    </section>
   );
 };

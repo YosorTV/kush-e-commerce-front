@@ -17,7 +17,6 @@ export const LangChanger = () => {
 
   const handleSwitch = () => {
     const { pathname, search } = window.location;
-
     const url = createQueryString(`${pathname}${search}`);
 
     startTransition(() => {
@@ -26,17 +25,16 @@ export const LangChanger = () => {
   };
 
   const printFlagIcon = useMemo(() => {
-    return locale === 'en' && !isPending ? (
+    return locale === 'en' ? (
       <GBIcon className='border-2 border-base-200' />
     ) : (
       <UAIcon className='border-2 border-base-200' />
     );
-  }, [locale, isPending]);
+  }, [locale]);
 
   return (
     <motion.button
       defaultValue={locale}
-      defaultChecked={locale === 'uk'}
       disabled={isPending}
       type='button'
       onClick={handleSwitch}
