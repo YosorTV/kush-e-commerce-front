@@ -7,14 +7,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { animCart } from '@/assets/animations';
 import { CartList } from '@/components/simple';
-import { ShoppingCartData } from '@/types/components/complex';
+import { ShoppingCartProps } from '@/types/components/complex';
+import { Checkout } from '../Checkout';
+import { Success } from '../Success';
 
-export const ShoppingCart: FC<ShoppingCartData> = ({ data }) => {
+export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
   const cartStore = useCart();
 
-  // const contentZone = {
-  //   cart: <CartList />,
-  // };
+  const contentZone = {
+    cart: <CartList data={data} />,
+    checkout: <Checkout userId={userId} />,
+    success: <Success />,
+  };
 
   useEffect(() => {
     if (cartStore.isOpen) {
@@ -41,9 +45,7 @@ export const ShoppingCart: FC<ShoppingCartData> = ({ data }) => {
             onClick={(e) => e.stopPropagation()}
             className='absolute right-0 top-0 z-30 h-screen w-full overflow-y-auto bg-base-100 p-8 md:w-[600px]'
           >
-            <div className='flex w-full'>
-              <CartList data={data} />
-            </div>
+            <div className='flex w-full'>{contentZone[cartStore.key]}</div>
           </motion.div>
         </motion.div>
       )}

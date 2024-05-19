@@ -16,9 +16,8 @@ import { animCart } from '@/assets/animations';
 import { roboto } from '@/assets/fonts';
 import lottieAnim from '@/public/LottieEmpty.json';
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
-import { ShoppingCartData } from '@/types/components/complex';
 
-export const CartList: FC<ShoppingCartData> = ({ data }) => {
+export const CartList: FC<any> = ({ data }) => {
   const cartStore = useCart();
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
@@ -76,7 +75,10 @@ export const CartList: FC<ShoppingCartData> = ({ data }) => {
       <p className='font-semibold capitalize'>
         {data.totalPrice}: {formatPrice(totalPrice)}
       </p>
-      <button className='btn btn-primary w-full text-base-100'>
+      <button
+        onClick={() => cartStore.setForm('checkout')}
+        className='btn btn-primary w-full text-base-100'
+      >
         {data.checkout}
       </button>
     </div>

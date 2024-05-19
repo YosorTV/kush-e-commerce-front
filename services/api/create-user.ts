@@ -1,3 +1,4 @@
+import { stripeApi } from '@/lib/stripe';
 import { postStrapiData } from '../strapi';
 
 interface RegisterUserProps {
@@ -8,7 +9,19 @@ interface RegisterUserProps {
 }
 
 export async function createUser(user: RegisterUserProps) {
-  const data = await postStrapiData('auth/local/register', user);
+  const { stripe } = stripeApi();
 
-  return data;
+  const customer = await stripe.customers.create({
+    email: user.email,
+    name: user.username,
+  });
+
+  if (customer) {
+    const data = await postStrapiData('auth/local/register', {
+      ...user,
+      stripeCustomerId: customer.id,
+    });
+
+    return data;
+  }
 }

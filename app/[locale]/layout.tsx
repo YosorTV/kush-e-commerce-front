@@ -41,7 +41,7 @@ export default async function LocalLayout({
     >
       <NextIntlClientProvider messages={messages}>
         {children}
-        <ClientSideRender data={shoppingCart} />
+        <ClientSideRender data={shoppingCart} session={session} />
       </NextIntlClientProvider>
     </BaseLayout>
   );
