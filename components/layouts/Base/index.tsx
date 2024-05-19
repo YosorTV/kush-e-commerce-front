@@ -8,7 +8,6 @@ export async function BaseLayout({
   locale,
   header,
   footer,
-  session,
 }: BaseLayoutProps) {
   return (
     <html
@@ -18,7 +17,7 @@ export async function BaseLayout({
     >
       <body className='relative'>
         <ThemeProvider>
-          <Header data={header} session={{ ...session, locale }} />
+          <Header data={{ ...header, locale }} />
           <main className='z-0 grid'>{children}</main>
           <Footer {...footer} />
           <div id='portal' />

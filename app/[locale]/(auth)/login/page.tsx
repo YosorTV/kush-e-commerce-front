@@ -5,7 +5,7 @@ import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '@/services/strapi';
 import { PageProps } from '@/types/app/page.types';
-import { StripeLinkType } from '@/types/components';
+import { StrapiLinkType } from '@/types/components';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
@@ -31,10 +31,10 @@ export default async function LoginPage({ params }: PageProps) {
   const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).login);
   const data = await getStrapiData('login-page', pageQP);
 
-  const printLinks = (links: StripeLinkType[]) => {
+  const printLinks = (links: StrapiLinkType[]) => {
     if (!links) return;
 
-    return links.map((link: StripeLinkType) => (
+    return links.map((link: StrapiLinkType) => (
       <NextLink
         key={link.id}
         href={link.url}

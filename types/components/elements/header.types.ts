@@ -1,11 +1,13 @@
-import { StripeLinkType } from './link.types';
+import { StrapiLinkType } from './link.types';
 
 export type HeaderProps = {
-  session?: any;
-  data?: {
+  data: {
     id: number | string;
-    logoText: StripeLinkType;
-    ctaButton: StripeLinkType;
-    sessionLinks: StripeLinkType[];
+    locale: string;
+    session?: any;
+    pages: StrapiLinkType[];
+    cta: StrapiLinkType;
+    sessionLinks: StrapiLinkType[];
+    shoppingCart?: any;
   };
 };

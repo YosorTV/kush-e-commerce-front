@@ -1,4 +1,4 @@
-export type StripeLinkType = {
+export type StrapiLinkType = {
   id: number | string;
   url: string;
   text: string;

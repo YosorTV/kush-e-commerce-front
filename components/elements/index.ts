@@ -8,3 +8,4 @@ export * from '@/components/elements/Title';
 export * from '@/components/elements/Card';
 export * from '@/components/elements/Artboard';
 export * from '@/components/elements/Portal';
+export * from '@/components/elements/Logo';

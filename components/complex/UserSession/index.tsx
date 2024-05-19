@@ -3,10 +3,10 @@ import Image from 'next/image';
 
 import { NextLink } from '@/components/elements';
 import { SignOutButton } from '@/components/simple/SignOutButton';
-import { StripeLinkType } from '@/types/components';
+import { StrapiLinkType } from '@/types/components';
+import { SignInLink } from '@/components/simple';
 
 export const UserSession = async ({
-  authorized = false,
   locale,
   cta,
   session,
@@ -14,20 +14,14 @@ export const UserSession = async ({
 }: any) => {
   const t = await getTranslations({ locale, namespace: 'auth' });
 
-  if (!authorized) {
-    return (
-      cta && (
-        <NextLink href={cta.url} className='btn btn-ghost'>
-          {cta.text}
-        </NextLink>
-      )
-    );
+  if (!session) {
+    return <SignInLink url={cta.url} text={cta.text} />;
   }
 
-  const printMenuLinks = (links: StripeLinkType[]) => {
+  const printMenuLinks = (links: StrapiLinkType[]) => {
     return (
       links.length &&
-      links.map((link: StripeLinkType, index) => (
+      links.map((link: StrapiLinkType, index) => (
         <li tabIndex={index + 1} key={link.id}>
           <NextLink
             href={link.url}
