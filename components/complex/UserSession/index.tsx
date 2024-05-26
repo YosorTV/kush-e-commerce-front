@@ -15,7 +15,7 @@ export const UserSession = async ({
   const t = await getTranslations({ locale, namespace: 'auth' });
 
   if (!session) {
-    return <SignInLink url={cta.url} text={cta.text} />;
+    return <SignInLink {...cta} />;
   }
 
   const printMenuLinks = (links: StrapiLinkType[]) => {

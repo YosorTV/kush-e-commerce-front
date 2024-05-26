@@ -1,16 +1,16 @@
 'use client';
 
+import { FC } from 'react';
+
 import { NextLink } from '@/components/elements';
 import { cn } from '@/lib';
 import { usePathname } from '@/lib/navigation';
-import { FC } from 'react';
+import { UserIcon } from '@/assets/icons';
 
-export const SignInLink: FC<{ url: string; text: string }> = ({
-  url,
-  text,
-}) => {
+import { StrapiLinkType } from '@/types/components';
+
+export const SignInLink: FC<StrapiLinkType> = ({ url }) => {
   const pathname = usePathname();
-
   const isActive = pathname.startsWith(url);
 
   return (
@@ -21,7 +21,7 @@ export const SignInLink: FC<{ url: string; text: string }> = ({
         isActive && 'underline underline-offset-8'
       )}
     >
-      {text}
+      <UserIcon />
     </NextLink>
   );
 };

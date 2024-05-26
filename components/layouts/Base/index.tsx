@@ -15,10 +15,10 @@ export async function BaseLayout({
       suppressHydrationWarning
       className={montserrat.className}
     >
-      <body className='relative'>
+      <body className='relative grid'>
         <ThemeProvider>
           <Header data={{ ...header, locale }} />
-          <main className='z-0 grid'>{children}</main>
+          <main className='z-0'>{children}</main>
           <Footer {...footer} />
           <div id='portal' />
         </ThemeProvider>

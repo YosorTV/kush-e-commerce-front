@@ -18,4 +18,24 @@
   .hero-footer {
     @apply absolute bottom-1/2 flex w-full flex-col items-center justify-center;
   }
+
+  .hero-title {
+    @apply text-3xl font-medium text-white xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl;
+  }
+
+  .hero-image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 0 70%;
+  }
+
+  .absolute-center {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform;
+  }
+
+  .absolute-x-center {
+    @apply absolute left-1/2 -translate-x-1/2 transform;
+  }
 }

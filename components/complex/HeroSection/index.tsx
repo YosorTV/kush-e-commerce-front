@@ -1,32 +1,33 @@
+import { cormorant } from '@/assets/fonts';
+
 import { NextLink, Title } from '@/components/elements';
 import { StrapiImage } from '@/components/simple';
+import { cn } from '@/lib';
 import { FC } from 'react';
 
 export const HeroSection: FC<any> = ({ data }) => {
   return (
-    <section className='hero relative min-h-full'>
-      <figure className='hero-content text-center text-white'>
+    <section className='relative flex min-h-full flex-col py-20'>
+      <div className='relative flex justify-center'>
+        <Title level='1' className={cn('hero-title', cormorant.className)}>
+          {data?.title}
+        </Title>
+      </div>
+      <figure className='relative flex h-full w-full flex-col-reverse text-center text-white'>
         <StrapiImage
           height={3000}
           width={3000}
-          className='absolute -z-10 h-full w-full object-cover'
+          className='hero-image'
           src={data?.image?.url}
           alt={data?.image?.alternativeText}
           priority
         />
-        <div className='hero-overlay absolute z-10 bg-black/50' />
-        <figcaption className='relative z-20 flex max-w-md flex-col gap-y-5'>
-          <Title level='1' className='text-5xl font-bold'>
-            {data?.title}
-          </Title>
-          <p className='text-xl font-medium'>{data?.description}</p>
-          <NextLink
-            href='/products?page=1&per_page=5'
-            className='btn btn-ghost z-50'
-          >
-            {data?.link?.text}
-          </NextLink>
-        </figcaption>
+        <NextLink
+          href={`${data.link.url}?page=1&per_page=5`}
+          className='absolute-x-center link-hover link bottom-32 z-10 underline-offset-8'
+        >
+          {data?.link?.text}
+        </NextLink>
       </figure>
     </section>
   );
