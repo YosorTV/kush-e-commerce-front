@@ -4,8 +4,9 @@ import { FooterProps, StripeLinkType } from '@/types/components';
 type HeaderData = {
   id: number | string;
   logoText: StripeLinkType;
-  ctaButton: StripeLinkType;
+  cta: StripeLinkType;
   sessionLinks: StripeLinkType[];
+  pages: StripeLinkType[];
 };
 
 export type BaseLayoutProps = {

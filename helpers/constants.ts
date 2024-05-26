@@ -74,10 +74,11 @@ export const STRAPI_API_ROUTES = {
       locale,
       populate: [
         'header.logoText',
-        'header.ctaButton',
+        'header.pages',
+        'header.cta',
         'header.sessionLinks',
         'footer.logoText',
-        'footer.ctaButton',
+        'footer.cta',
         'shoppingCart',
       ],
     };

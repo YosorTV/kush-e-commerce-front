@@ -5,7 +5,8 @@ export type HeaderProps = {
   data?: {
     id: number | string;
     logoText: StripeLinkType;
-    ctaButton: StripeLinkType;
+    cta: StripeLinkType;
     sessionLinks: StripeLinkType[];
+    pages: StripeLinkType[];
   };
 };
