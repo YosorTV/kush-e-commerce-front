@@ -1,8 +1,8 @@
 export type StrapiLinkType = {
   id: number | string;
   url: string;
-  text: string;
-  isExternal: boolean;
+  text?: string;
+  isExternal?: boolean;
 };
 
 export type LinkType = {

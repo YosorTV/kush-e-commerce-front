@@ -7,7 +7,7 @@ import { FC } from 'react';
 
 export const HeroSection: FC<any> = ({ data }) => {
   return (
-    <section className='relative flex min-h-full flex-col py-20'>
+    <section className='relative flex min-h-full flex-col pt-20'>
       <div className='relative flex justify-center'>
         <Title level='1' className={cn('hero-title', cormorant.className)}>
           {data?.title}
@@ -24,7 +24,7 @@ export const HeroSection: FC<any> = ({ data }) => {
         />
         <NextLink
           href={`${data.link.url}?page=1&per_page=5`}
-          className='absolute-x-center link-hover link bottom-32 z-10 underline-offset-8'
+          className='absolute-x-center link-hover link bottom-10 z-10 underline-offset-8'
         >
           {data?.link?.text}
         </NextLink>

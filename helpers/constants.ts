@@ -72,13 +72,27 @@ export const STRAPI_API_ROUTES = {
   global: ({ locale = 'uk' }) => {
     return {
       locale,
-      populate: [
-        'header.cta',
-        'header.pages',
-        'header.sessionLinks',
-        'footer.ctaButton',
-        'shoppingCart',
-      ],
+      populate: {
+        header: {
+          populate: {
+            cta: true,
+            pages: true,
+            sessionLinks: true,
+          },
+        },
+        footer: {
+          populate: {
+            formField: true,
+            termsLink: true,
+            linksGroupTitle: true,
+            links: true,
+            socialLinks: true,
+          },
+        },
+        shoppingCart: {
+          populate: true,
+        },
+      },
     };
   },
   home: ({ locale = 'uk' }) => {

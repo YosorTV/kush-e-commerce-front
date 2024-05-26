@@ -23,8 +23,10 @@ export const Header: FC<HeaderProps> = ({ data }) => {
             sessionLinks={sessionLinks}
           />
           <ShoppingCart data={shoppingCart} userId={session?.user?.id} />
-          <LangChanger />
-          <ThemeChanger />
+          <div className='hidden md:flex md:gap-x-6'>
+            <LangChanger />
+            <ThemeChanger />
+          </div>
         </div>
       </nav>
     </header>

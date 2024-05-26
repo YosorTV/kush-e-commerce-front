@@ -2,11 +2,12 @@
 
 import { useLocale } from 'next-intl';
 
-import { createQueryString } from '@/lib';
+import { cn, createQueryString } from '@/lib';
 import { useRouter } from 'next/navigation';
 import { LOCALES } from '@/helpers/constants';
+import { FC } from 'react';
 
-export const LangChanger = () => {
+export const LangChanger: FC<{ className?: string }> = ({ className }) => {
   const router = useRouter();
   const locale = useLocale();
 
@@ -18,7 +19,9 @@ export const LangChanger = () => {
   };
 
   return (
-    <div className='dropdown font-medium uppercase text-base-200'>
+    <div
+      className={cn('dropdown font-medium uppercase text-base-200', className)}
+    >
       <span
         tabIndex={0}
         role='button'

@@ -10,12 +10,18 @@ import { ROOT } from '@/helpers/constants';
 
 type ListOFPagesProps = {
   pages: StrapiLinkType[];
+  className?: string;
+  linkStyle?: string;
 };
 
-export const ListOfPages: FC<ListOFPagesProps> = ({ pages }) => {
+export const ListOfPages: FC<ListOFPagesProps> = ({
+  pages,
+  className,
+  linkStyle,
+}) => {
   const pathname = usePathname();
 
-  if (!pages.length) return null;
+  if (!pages?.length) return null;
 
   const printLinks = (data: StrapiLinkType[]) => {
     return data.map((page) => {
@@ -29,7 +35,10 @@ export const ListOfPages: FC<ListOFPagesProps> = ({ pages }) => {
           <NextLink
             href={page.url}
             replace={page.isExternal}
-            className='py-2.5 font-medium text-base-200 group-[.active]:underline group-[.active]:underline-offset-8'
+            className={cn(
+              'py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
+              linkStyle
+            )}
           >
             {page.text}
           </NextLink>
@@ -38,5 +47,5 @@ export const ListOfPages: FC<ListOFPagesProps> = ({ pages }) => {
     });
   };
 
-  return <ul className='flex gap-x-6'>{printLinks(pages)}</ul>;
+  return <ul className={cn('flex gap-x-6', className)}>{printLinks(pages)}</ul>;
 };

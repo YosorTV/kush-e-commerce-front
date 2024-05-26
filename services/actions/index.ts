@@ -3,3 +3,4 @@ export * from '@/services/actions/authUser';
 export * from '@/services/actions/forgotPassword';
 export * from '@/services/actions/resetPassword';
 export * from '@/services/actions/profileUser';
+export * from '@/services/actions/subscribeNewsLetter';
