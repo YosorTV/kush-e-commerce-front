@@ -101,7 +101,25 @@ export const STRAPI_API_ROUTES = {
       populate: {
         blocks: {
           populate: {
+            products: {
+              fields: [
+                'title',
+                'description',
+                'unitAmount',
+                'currency',
+                'code',
+                'locale',
+              ],
+              populate: {
+                cover: {
+                  fields: ['url', 'alternativeText', 'formats'],
+                },
+              },
+            },
             image: {
+              fields: ['url', 'alternativeText'],
+            },
+            sub_image: {
               fields: ['url', 'alternativeText'],
             },
             link: {

@@ -50,18 +50,16 @@ export const Footer = (data: any) => {
             >
               {data.contactGroupTitle}
             </Title>
-            <ul className='grid grid-cols-1 xs:grid-cols-3 lg:grid-cols-1'>
+            <ul className='flex flex-wrap items-center gap-x-6 lg:flex-col lg:flex-nowrap lg:items-start'>
               <li className='py-2.5'>
                 <NextLink href={`tel:${data.primaryPhone}`}>
                   {data.primaryPhone}
                 </NextLink>
               </li>
-              <li className='py-2.5'>
-                <NextLink href={`tel:${data.secondaryPhone}`}>
-                  {data.primaryPhone}
-                </NextLink>
-              </li>
-              <li className='max-w-52 break-words py-2.5'>
+              <NextLink href={`tel:${data.secondaryPhone}`}>
+                {data.primaryPhone}
+              </NextLink>
+              <li className='break-words py-2.5 lg:max-w-56'>
                 <span>{data.address}</span>
               </li>
             </ul>
