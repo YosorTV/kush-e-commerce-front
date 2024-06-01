@@ -8,3 +8,7 @@ export * from '@/components/simple/ThemeChanger';
 export * from '@/components/simple/CartItem';
 export * from '@/components/simple/CartList';
 export * from '@/components/simple/LangChanger';
+export * from '@/components/simple/ListOfPages';
+export * from '@/components/simple/SignInLink';
+export * from '@/components/simple/Menu';
+export * from '@/components/simple/SocialLink';

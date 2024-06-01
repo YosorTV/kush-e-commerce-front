@@ -13,7 +13,7 @@ export const ForgotForm = ({ formFields, submitBtn }: any) => {
   return (
     <Form
       action={forgotPassword}
-      schema={schemas.login}
+      schema={schemas['forgot-password']}
       className='flex w-1/4 flex-col gap-y-5'
     >
       {printInputs(formFields)}

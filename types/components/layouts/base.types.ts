@@ -1,11 +1,12 @@
 import React from 'react';
-import { FooterProps, StripeLinkType } from '@/types/components';
+import { FooterProps, StrapiLinkType } from '@/types/components';
 
 type HeaderData = {
   id: number | string;
-  logoText: StripeLinkType;
-  ctaButton: StripeLinkType;
-  sessionLinks: StripeLinkType[];
+  pages: StrapiLinkType[];
+  cta: StrapiLinkType;
+  sessionLinks: StrapiLinkType[];
+  session?: any;
 };
 
 export type BaseLayoutProps = {
@@ -13,5 +14,4 @@ export type BaseLayoutProps = {
   locale: string;
   header: HeaderData;
   footer: FooterProps;
-  session?: any;
 };

@@ -72,14 +72,27 @@ export const STRAPI_API_ROUTES = {
   global: ({ locale = 'uk' }) => {
     return {
       locale,
-      populate: [
-        'header.logoText',
-        'header.ctaButton',
-        'header.sessionLinks',
-        'footer.logoText',
-        'footer.ctaButton',
-        'shoppingCart',
-      ],
+      populate: {
+        header: {
+          populate: {
+            cta: true,
+            pages: true,
+            sessionLinks: true,
+          },
+        },
+        footer: {
+          populate: {
+            formField: true,
+            termsLink: true,
+            linksGroupTitle: true,
+            links: true,
+            socialLinks: true,
+          },
+        },
+        shoppingCart: {
+          populate: true,
+        },
+      },
     };
   },
   home: ({ locale = 'uk' }) => {
@@ -88,7 +101,25 @@ export const STRAPI_API_ROUTES = {
       populate: {
         blocks: {
           populate: {
+            products: {
+              fields: [
+                'title',
+                'description',
+                'unitAmount',
+                'currency',
+                'code',
+                'locale',
+              ],
+              populate: {
+                cover: {
+                  fields: ['url', 'alternativeText', 'formats'],
+                },
+              },
+            },
             image: {
+              fields: ['url', 'alternativeText'],
+            },
+            sub_image: {
               fields: ['url', 'alternativeText'],
             },
             link: {
@@ -177,4 +208,13 @@ export const PRICE_LOCALE = {
     style: 'currency',
     currency: 'UAH',
   },
+};
+
+export const SCREEEN = {
+  xs: '(max-width: 475px)',
+  sm: '(max-width: 640px)',
+  md: '(max-width: 768px)',
+  lg: '(max-width: 1024px)',
+  xl: '(max-width: 1280px)',
+  '2xl': '(max-width: 1536px)',
 };

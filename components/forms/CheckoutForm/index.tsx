@@ -51,8 +51,6 @@ export const CheckoutForm: FC<any> = ({
       redirect: 'if_required',
     });
 
-    console.log('paymentIntent: ', paymentIntent);
-
     if (!error) {
       setIsLoading(false);
       cartStore.setForm('success');
