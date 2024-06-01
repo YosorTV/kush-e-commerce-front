@@ -31,7 +31,7 @@ export default async function Home({ params }: PageProps) {
   const data = await getStrapiData('home', homeQP);
 
   return (
-    <PageLayout className='h-screen'>
+    <PageLayout>
       <StrapiBlockRender data={data?.blocks} />
     </PageLayout>
   );

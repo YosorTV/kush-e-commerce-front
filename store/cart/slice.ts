@@ -37,8 +37,7 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
 
       return { cart: state.cart.filter((el) => el.id !== item.id) };
     }),
-  onReset: () =>
-    set(() => ({ cart: [], key: 'cart', isOpen: false, paymentIntentId: '' })),
+  onReset: () => set(() => ({ cart: [], paymentIntentId: '' })),
   setPaymentIntentId: (value) => set(() => ({ paymentIntentId: value })),
   setForm: (value) => set(() => ({ key: value })),
 });

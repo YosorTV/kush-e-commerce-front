@@ -8,7 +8,6 @@ export async function BaseLayout({
   locale,
   header,
   footer,
-  session,
 }: BaseLayoutProps) {
   return (
     <html
@@ -16,10 +15,10 @@ export async function BaseLayout({
       suppressHydrationWarning
       className={montserrat.className}
     >
-      <body className='relative'>
+      <body className='relative grid'>
         <ThemeProvider>
-          <Header data={header} session={{ ...session, locale }} />
-          <main className='z-0 grid'>{children}</main>
+          <Header data={{ ...header, locale }} />
+          <main className='z-0'>{children}</main>
           <Footer {...footer} />
           <div id='portal' />
         </ThemeProvider>

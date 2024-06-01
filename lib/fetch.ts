@@ -1,4 +1,4 @@
-import { getParams, postParams } from '@/helpers/constants';
+import { getParams, postParams, putParams } from '@/helpers/constants';
 
 const fetcher = async (url: string, options?: any) => {
   const response = await fetch(url, options);
@@ -24,6 +24,12 @@ export const getData = async (path: string, options?: any) => {
 
 export const postData = async (path: string, data: any, options?: any) => {
   const response = await fetcher(path, postParams({ body: data, ...options }));
+
+  return response;
+};
+
+export const putData = async (path: string, data: any, options?: any) => {
+  const response = await fetcher(path, putParams({ body: data, ...options }));
 
   return response;
 };

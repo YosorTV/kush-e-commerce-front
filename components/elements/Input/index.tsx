@@ -9,11 +9,12 @@ export const Input = ({
   placeholder,
   type,
   label,
+  labelStyle,
   ...rest
 }: InputProps) => {
   return (
-    <div className='relative flex flex-col gap-y-2'>
-      <label htmlFor={name} className='label label-text'>
+    <div className='relative flex w-full flex-col gap-y-2'>
+      <label htmlFor={name} className={cn('label label-text', labelStyle)}>
         {label}
       </label>
       <input

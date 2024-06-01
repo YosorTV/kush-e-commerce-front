@@ -1,4 +1,5 @@
-export type ShoppingCartData = {
+export type ShoppingCartProps = {
+  userId: number;
   data: {
     title: string;
     totalPrice: string;

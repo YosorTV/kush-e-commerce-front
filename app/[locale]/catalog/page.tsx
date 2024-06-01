@@ -25,7 +25,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Products({ searchParams, params }: PageProps) {
+export default async function Catalog({ searchParams, params }: PageProps) {
   const { locale } = params;
 
   const productPageQueryParams = STRAPI_API_ROUTES.products({ locale });
