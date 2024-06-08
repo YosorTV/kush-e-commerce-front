@@ -7,7 +7,6 @@ import { AddCartProps } from '@/types/components';
 
 export const AddCart: FC<AddCartProps> = ({ data, text }) => {
   const cartStore = useCart();
-
   const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
@@ -20,9 +19,9 @@ export const AddCart: FC<AddCartProps> = ({ data, text }) => {
 
   return (
     <button
-      onClick={handleAdd}
-      className='btn btn-primary mt-6 font-medium text-white'
       disabled={added}
+      onClick={handleAdd}
+      className='btn btn-neutral no-animation btn-block mt-6 rounded-none text-xl font-semibold uppercase text-white'
     >
       {text}
     </button>

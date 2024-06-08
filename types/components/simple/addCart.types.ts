@@ -1,13 +1,12 @@
 export type ProductItem = {
-  id: string;
+  id: number;
   name: string;
   image?: {
     url: string;
     alternativeText: string;
   };
   quantity?: number | 1;
-  unit_amount: number | null;
-  price?: string;
+  price: number;
 };
 
 export type CartItemProps = {

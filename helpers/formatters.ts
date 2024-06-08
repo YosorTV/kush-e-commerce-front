@@ -29,3 +29,9 @@ export const formatDate = (date: Date) => {
 
   return `${month}/${day}/${year}`;
 };
+
+export const formatBySlug = (data: any[], slug: string) => {
+  if (!data) return [];
+
+  return data.filter((element) => element?.slug === slug);
+};

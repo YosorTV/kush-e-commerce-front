@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     container: {
-      center: true,
+      padding: '1.5rem',
     },
     screens: {
       xs: '360px',
@@ -56,6 +56,9 @@ module.exports = {
         thumbColor: 'black',
         thumbHoverColor: '#333',
         cornerColor: 'white',
+      },
+      objectPosition: {
+        'center-to-top': '0 75%',
       },
       gridTemplateColumns: {
         hero: 'auto 1fr',

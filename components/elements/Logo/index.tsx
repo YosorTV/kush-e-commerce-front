@@ -3,7 +3,7 @@ import { NextLink } from '@/components/elements/Link';
 import { ROOT } from '@/helpers/constants';
 import { LogoIcon } from '@/assets/icons';
 
-export const Logo: FC<{ className: string }> = ({
+export const Logo: FC<{ className?: string }> = ({
   className = 'absolute-center',
 }) => {
   return (

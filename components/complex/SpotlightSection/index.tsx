@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { Card, Title } from '@/components/elements';
+import { CategoryCard, Title } from '@/components/elements';
 import useMeasure from 'react-use-measure';
 import { animate, motion, useMotionValue } from 'framer-motion';
 import { cn } from '@/lib';
@@ -54,8 +54,8 @@ export const SpotlightSection: FC<any> = ({ data }) => {
     setDuration(AVG_DURATION);
   };
 
-  const printProducts = (product: any, index: number) => (
-    <Card key={index} data={product} />
+  const printCategory = (category: any, index: number) => (
+    <CategoryCard key={index} data={category} />
   );
 
   return (
@@ -76,7 +76,7 @@ export const SpotlightSection: FC<any> = ({ data }) => {
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
       >
-        {[...data.products.data, ...data.products.data].map(printProducts)}
+        {[...data.categories.data, ...data.categories.data].map(printCategory)}
       </motion.div>
     </section>
   );

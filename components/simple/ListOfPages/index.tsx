@@ -20,15 +20,18 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   linkStyle,
 }) => {
   const pathname = usePathname();
+  console.log('pathname: ', pathname);
 
   if (!pages?.length) return null;
 
   const printLinks = (data: StrapiLinkType[]) => {
     return data.map((page) => {
+      const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
+
       const isActive =
-        page.url === ROOT
-          ? pathname === page.url
-          : pathname.startsWith(page.url);
+        urlObj.pathname === ROOT
+          ? pathname === urlObj.pathname
+          : pathname.startsWith(urlObj.pathname);
 
       return (
         <li key={page.id} className={cn('group py-2.5', { active: isActive })}>

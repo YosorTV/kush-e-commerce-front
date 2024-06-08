@@ -2,5 +2,8 @@
   "auth": {
     "signIn": "Авторизуватись",
     "signOut": "Вийти"
+  },
+  "colors": {
+    "availableIn": "Доступно в {number} кольорах"
   }
 }

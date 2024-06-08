@@ -101,19 +101,12 @@ export const STRAPI_API_ROUTES = {
       populate: {
         blocks: {
           populate: {
-            products: {
-              fields: [
-                'title',
-                'description',
-                'unitAmount',
-                'currency',
-                'code',
-                'locale',
-              ],
+            categories: {
               populate: {
-                cover: {
+                image: {
                   fields: ['url', 'alternativeText', 'formats'],
                 },
+                fields: ['title', 'slug'],
               },
             },
             image: {
@@ -130,25 +123,47 @@ export const STRAPI_API_ROUTES = {
       },
     };
   },
-  products: ({ locale = 'uk' }) => {
+  catalog: ({ locale = 'uk' }) => {
     return {
       locale,
-      populate: true,
+      populate: {
+        cover: {
+          fields: ['url', 'alternativeText', 'formats'],
+        },
+        categories: {
+          fields: ['title', 'slug'],
+        },
+      },
     };
   },
   getProducts: ({
-    page,
-    per_page,
+    id,
     name,
     locale,
-    id,
+    category,
+    page,
+    per_page,
   }: PageProps['searchParams']) => {
     return {
       id,
-      locale,
       name,
-      page: page || 1,
-      pageSize: per_page || 5,
+      locale,
+      populate: {
+        images: {
+          populate: {
+            data: {
+              fields: ['url', 'alternativeText', 'formats'],
+            },
+          },
+        },
+      },
+      filters: {
+        ...(category && { category: { $eq: category } }),
+      },
+      pagination: {
+        page: page || 1,
+        pageSize: per_page || 9,
+      },
     };
   },
   getProductDetails: ({ locale = 'uk', code = null }) => ({ locale, code }),
@@ -187,7 +202,7 @@ export const STRAPI_API_ROUTES = {
     locale,
     populate: {
       seo: {
-        fields: ['metaTitle', 'metaDescription'],
+        fields: ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'],
       },
     },
   }),

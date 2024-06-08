@@ -2,5 +2,8 @@
   "auth": {
     "signIn": "Sign In",
     "signOut": "Sign Out"
+  },
+  "colors": {
+    "availableIn": "Available in {number} colors"
   }
 }

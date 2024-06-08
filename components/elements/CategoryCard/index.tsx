@@ -6,10 +6,9 @@ import { MdArrowRightAlt } from 'react-icons/md';
 
 import { StrapiImage } from '@/components/simple';
 import { Title, NextLink } from '@/components/elements';
-import { formatPrice } from '@/helpers/formatters';
 import { cn } from '@/lib';
 
-export const Card: FC<any> = ({ data }) => {
+export const CategoryCard: FC<any> = ({ data }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -34,8 +33,8 @@ export const Card: FC<any> = ({ data }) => {
           >
             <div className='pointer-events-none absolute h-full w-full bg-black/50' />
             <NextLink
-              href={`/catalog/${data.title}?id=${data.id}&code=${data.code}`}
-              className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold'
+              href={`/catalog?category=${data.slug}`}
+              className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold text-base-100'
             >
               <MdArrowRightAlt className='h-6 w-6' /> Explore now
             </NextLink>
@@ -43,20 +42,19 @@ export const Card: FC<any> = ({ data }) => {
         )}
       </AnimatePresence>
       <StrapiImage
-        src={data?.cover?.url}
-        alt={data?.cover?.alternativeText}
+        src={data?.image?.url}
+        alt={data?.image?.alternativeText}
         height={1540}
         width={1100}
         className='h-[500px] w-full object-cover lg:h-[700px]'
       />
-      <div className='card-body absolute bottom-0 z-10 p-5 pt-0 text-white'>
-        <Title level='2' className='card-title'>
+      <div className='card-body absolute bottom-0 z-10 p-5 pt-0'>
+        <Title
+          level='2'
+          className={cn('card-title uppercase', showOverlay && 'text-white')}
+        >
           {data?.title}
         </Title>
-        <p>{data?.description}</p>
-        <p>
-          {data?.price} <span>{formatPrice(data.unitAmount)}</span>
-        </p>
       </div>
     </motion.figure>
   );
