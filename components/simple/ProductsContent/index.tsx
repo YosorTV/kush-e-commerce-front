@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -11,7 +11,6 @@ import { Button, Title } from '@/components/elements';
 import { ProductCard } from '@/components/simple';
 
 import { Product } from '@/types/components';
-import { useScreen } from '@/lib/hooks';
 import { cormorant } from '@/assets/fonts';
 
 export const ProductsContent = ({
@@ -26,12 +25,8 @@ export const ProductsContent = ({
   const params = useSearchParams();
   const t = useTranslations();
 
-  const [cellSizes, setCellSizes] = useState<number[]>([1, 2, 1, 1, 1]);
-
   const category = params.get('category');
   const isLastPage = state.meta.page === state.meta.pageCount;
-
-  const { xxl, xl, lg } = useScreen();
 
   useEffect(() => {
     state.fetchProducts({
@@ -45,16 +40,6 @@ export const ProductsContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, locale]);
 
-  useEffect(() => {
-    if (xxl) setCellSizes([1, 2, 1, 1, 1]);
-    if (xl) setCellSizes([2, 1, 1, 2, 1, 1]);
-    if (lg) setCellSizes([1, 1, 1, 1, 1]);
-  }, [xxl, xl, lg]);
-
-  const gridCol = (index: number) => {
-    return `col-span-${cellSizes[index % cellSizes.length]}`;
-  };
-
   const handleMore = () => {
     state.fetchMoreProducts({
       locale,
@@ -64,15 +49,27 @@ export const ProductsContent = ({
     });
   };
 
-  const printProducts = (product: Product, index: number) => {
+  const gridCols = (index: number) => {
+    if (index % 5 === 0)
+      return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
+    if (index % 5 === 1)
+      return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
+    if (index % 5 === 2)
+      return 'col-span-1 lg:col-span-2 xl:col-span-1 xxl:col-span-2';
+    if (index % 5 === 3) return 'col-span-1 xl:col-span-3 xxl:col-span-1';
+
+    return 'col-span-1';
+  };
+
+  const printProducts = useCallback((product: Product, index: number) => {
     return (
       <ProductCard
         key={product.id}
         product={product}
-        className={gridCol(index)}
+        className={gridCols(index)}
       />
     );
-  };
+  }, []);
 
   return (
     <div
@@ -86,14 +83,14 @@ export const ProductsContent = ({
           level='3'
           className={cn(
             cormorant.className,
-            'text-2xl font-normal  uppercase text-base-200 md:text-3xl lg:text-5xl'
+            'text-center text-5xl font-normal uppercase text-base-200 lg:text-left'
           )}
         >
           {title}
         </Title>
       )}
       <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
-        {state.products.map(printProducts)}
+        {state.products.map((product, index) => printProducts(product, index))}
       </div>
       {state.meta.total > 0 && (
         <div className='flex flex-col items-center justify-center py-6 lg:py-12'>
