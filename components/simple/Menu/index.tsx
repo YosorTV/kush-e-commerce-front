@@ -25,12 +25,12 @@ export const Menu: FC<MenuProps> = ({ pages }) => {
   const handleToggle = () => menu.onToggle();
 
   useEffect(() => {
-    if (pathname) {
+    if (pathname && lg) {
       menu.onClose();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [pathname, lg]);
 
   return !lg ? (
     <ListOfPages pages={pages} />

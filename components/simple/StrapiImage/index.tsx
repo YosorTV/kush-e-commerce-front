@@ -1,15 +1,11 @@
 import { Image } from '@/components/elements';
-import { Artboard } from '@/components/elements/Artboard';
+
 import { cn } from '@/lib';
 import { getStrapiMedia } from '@/lib/utils';
+import { ImageProps } from 'next/image';
 
-interface StrapiImageProps {
-  src: string;
-  alt: string;
-  height: number;
-  width: number;
+interface StrapiImageProps extends ImageProps {
   className?: string;
-  priority?: boolean;
 }
 
 export function StrapiImage({
@@ -20,20 +16,15 @@ export function StrapiImage({
   className,
   priority = false,
 }: Readonly<StrapiImageProps>) {
-  const imageUrl = getStrapiMedia(src);
-
+  const imageUrl = getStrapiMedia(src as string);
   const imageFallback = `https://placehold.co/${width}x${height}`;
-
-  if (!src) {
-    return <Artboard className={className} width={width} height={height} />;
-  }
 
   return (
     <Image
       src={imageUrl ?? imageFallback}
       alt={alt}
-      height={height}
-      width={width}
+      height={height as number}
+      width={width as number}
       priority={priority}
       className={cn(className)}
     />

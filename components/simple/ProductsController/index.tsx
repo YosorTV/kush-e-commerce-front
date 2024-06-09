@@ -1,56 +1,49 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-import { Input } from '@/components/elements';
+import { FC } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { cn } from '@/lib';
-import { useDebounce } from 'use-debounce';
+
 import { usePathname, useRouter } from '@/lib/navigation';
+import { cn, updateUrlParams } from '@/lib';
 
 export const ProductsController: FC<{
+  tabs: any[];
   className?: string;
-  search?: any;
-}> = ({ className, search }) => {
+}> = ({ className, tabs }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const currentTab = searchParams.get('category');
 
-  const searchName = searchParams.get('name');
+  const handleTab = ({ target }: any) => {
+    const url = updateUrlParams(
+      pathname,
+      searchParams,
+      'category',
+      target.value
+    );
 
-  const [searchValue, setSearchValue] = useState<string>(searchName || '');
-  const [query] = useDebounce(searchValue, 500);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+    router.replace(url);
   };
-
-  const handleSearch = () => {
-    const searchQuery = new URLSearchParams(searchParams);
-
-    if (query) {
-      searchQuery.set('name', query);
-    } else {
-      searchQuery.delete('name');
-    }
-
-    router.replace(`${pathname}?${searchQuery.toString()}`);
-  };
-
-  useEffect(() => {
-    handleSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
 
   return (
-    <div className={cn(className)}>
-      <Input
-        type='text'
-        className='w-96'
-        label={search?.label}
-        placeholder={search?.placeholder}
-        value={searchValue}
-        onChange={handleInputChange}
-      />
+    <div className={className}>
+      <ul className='flex gap-6 text-xl text-base-200'>
+        {tabs.map((tab) => {
+          const isActive = tab.slug === currentTab;
+          return (
+            <li key={tab.id} className={cn('group', { active: isActive })}>
+              <button
+                value={tab.slug}
+                onClick={handleTab}
+                className='font-medium uppercase group-[.active]:underline group-[.active]:underline-offset-8'
+              >
+                {tab?.title}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

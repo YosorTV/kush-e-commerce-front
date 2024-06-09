@@ -12,22 +12,13 @@ export default async function ProductDetails({
   searchParams,
   params,
 }: PageProps) {
-  const { locale } = params;
-  const { code } = searchParams;
-
-  const productDetailsQP = generateStrapiQuery(
-    STRAPI_API_ROUTES.getProductDetails({ locale, code })
-  );
-
-  const data = await getStrapiData('get-product', productDetailsQP);
-
-  const cartData = {
-    id: data.product.id,
-    image: data.product.cover,
-    name: data.product.title,
-    unit_amount: data.product.unitAmount,
-    price: data.product.price,
-  };
+  // const cartData = {
+  //   id: data.product.id,
+  //   image: data.product.cover,
+  //   name: data.product.title,
+  //   unit_amount: data.product.unitAmount,
+  //   price: data.product.price,
+  // };
 
   const printImages = (images: any[]) => {
     return (
@@ -59,7 +50,8 @@ export default async function ProductDetails({
 
   return (
     <PageLayout className='py-16'>
-      <section className='grid h-full grid-cols-2 gap-x-2'>
+      <p>Page details</p>
+      {/* <section className='grid h-full grid-cols-2 gap-x-2'>
         {printImages(data?.product?.images)}
         <div className='relative col-start-2 flex flex-col bg-base-100'>
           <div className='fixed flex h-full max-h-[85vh] w-1/2 flex-col justify-between gap-y-5 px-5 pr-10'>
@@ -76,7 +68,7 @@ export default async function ProductDetails({
             <AddCart data={cartData} text={data.cta} />
           </div>
         </div>
-      </section>
+      </section> */}
     </PageLayout>
   );
 }

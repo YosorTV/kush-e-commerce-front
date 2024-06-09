@@ -9,9 +9,11 @@ export const Image: FC<ImageProps> = ({
   className,
   alt,
   priority = false,
+  fill = false,
 }) => {
   return (
     <NextImage
+      fill={fill}
       src={src}
       height={height}
       width={width}
