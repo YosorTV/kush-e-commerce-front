@@ -12,3 +12,4 @@ export * from '@/components/elements/Logo';
 export * from '@/components/elements/Hamburger';
 export * from '@/components/elements/Path';
 export * from '@/components/elements/Sidebar';
+export * from '@/components/elements/Button';

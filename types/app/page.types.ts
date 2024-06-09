@@ -7,7 +7,7 @@ export type PageProps = {
     id?: string;
     category?: string;
     page?: string;
-    per_page?: string;
+    pageSize?: string;
     sortBy?: string;
     locale?: string;
     filterBy?: string;

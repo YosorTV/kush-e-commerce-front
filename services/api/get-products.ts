@@ -1,16 +1,24 @@
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { getStrapiData } from '../strapi';
 import { generateStrapiQuery } from '@/lib';
-import { revalidatePath } from 'next/cache';
 
-export async function getProductsData({ locale, category }: any) {
-  const productsApi = STRAPI_API_ROUTES.getProducts({ locale, category });
+export async function getProductsData({
+  locale,
+  category,
+  page,
+  pageSize,
+}: any) {
+  const productsApi = STRAPI_API_ROUTES.getProducts({
+    locale,
+    category,
+    page,
+    pageSize,
+  });
 
   const response = await getStrapiData(
     'products',
     generateStrapiQuery(productsApi)
   );
 
-  revalidatePath(`${locale}/catalog?category=${category}`, 'page');
   return { ...response };
 }

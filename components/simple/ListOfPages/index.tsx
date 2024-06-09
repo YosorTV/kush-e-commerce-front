@@ -20,7 +20,6 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   linkStyle,
 }) => {
   const pathname = usePathname();
-  console.log('pathname: ', pathname);
 
   if (!pages?.length) return null;
 

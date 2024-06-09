@@ -101,12 +101,11 @@ export const STRAPI_API_ROUTES = {
       populate: {
         blocks: {
           populate: {
-            categories: {
+            products: {
               populate: {
-                image: {
+                images: {
                   fields: ['url', 'alternativeText', 'formats'],
                 },
-                fields: ['title', 'slug'],
               },
             },
             image: {
@@ -142,8 +141,11 @@ export const STRAPI_API_ROUTES = {
     locale,
     category,
     page,
-    per_page,
+    pageSize,
   }: PageProps['searchParams']) => {
+    const filters =
+      category && category !== '*' ? { category: { $eq: category } } : {};
+
     return {
       id,
       name,
@@ -157,12 +159,10 @@ export const STRAPI_API_ROUTES = {
           },
         },
       },
-      filters: {
-        ...(category && { category: { $eq: category } }),
-      },
+      filters,
       pagination: {
         page: page || 1,
-        pageSize: per_page || 9,
+        pageSize: pageSize || 4,
       },
     };
   },
@@ -231,5 +231,5 @@ export const SCREEEN = {
   md: '(max-width: 768px)',
   lg: '(max-width: 1024px)',
   xl: '(max-width: 1280px)',
-  '2xl': '(max-width: 1536px)',
+  xxl: '(max-width: 1920px)',
 };

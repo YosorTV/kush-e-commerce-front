@@ -15,8 +15,8 @@ type ProductCardProps = {
 };
 
 export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
-  const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const t = useTranslations();
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
   const handleHideOverlay = () => setShowOverlay(false);

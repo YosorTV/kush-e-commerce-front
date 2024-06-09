@@ -3,7 +3,7 @@ import { PageLayout } from '@/components/layouts';
 
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
-import { getCatalogData, getProductsData } from '@/services';
+
 import { getStrapiData } from '@/services/strapi';
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
@@ -27,21 +27,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function Catalog({ params, searchParams }: PageProps) {
+export default async function Catalog({ params }: PageProps) {
   const { locale } = params;
-  const { category } = searchParams;
-
-  const { title, categories, img } = await getCatalogData({ locale });
-  const { data } = await getProductsData({ locale, category });
 
   return (
     <PageLayout className='min-h-screen py-16'>
-      <ProductsSection
-        cover={img}
-        title={title}
-        products={data}
-        categories={categories}
-      />
+      <ProductsSection locale={locale} />
     </PageLayout>
   );
 }

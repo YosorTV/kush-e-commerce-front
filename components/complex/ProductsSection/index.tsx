@@ -7,21 +7,19 @@ import {
 } from '@/components/simple';
 
 import { cn } from '@/lib';
+import { getCatalogData } from '@/services';
 
-export const ProductsSection = ({
-  categories,
-  products,
-  title,
-  cover,
-}: any) => {
+export const ProductsSection = async ({ locale }: { locale: string }) => {
+  const { title, categories, img } = await getCatalogData({ locale });
+
   return (
     <section>
       <div className='h-[200px] md:h-[340px] lg:h-[420px]'>
         <StrapiImage
           width={1920}
           height={1080}
-          src={cover?.url}
-          alt={cover?.alternativeText}
+          src={img?.url}
+          alt={img?.alternativeText}
           className='h-full w-full object-cover object-center-to-top'
         />
       </div>
@@ -36,7 +34,7 @@ export const ProductsSection = ({
           {title}
         </Title>
         <ProductsController tabs={categories} className='flex flex-col' />
-        <ProductsContent products={products} />
+        <ProductsContent />
       </div>
     </section>
   );

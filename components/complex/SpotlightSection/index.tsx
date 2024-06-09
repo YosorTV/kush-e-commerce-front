@@ -6,6 +6,7 @@ import useMeasure from 'react-use-measure';
 import { animate, motion, useMotionValue } from 'framer-motion';
 import { cn } from '@/lib';
 import { cormorant } from '@/assets/fonts';
+import { Product } from '@/types/components';
 
 const AVG_DURATION = 75;
 const SLOW_DURATION = 360000;
@@ -54,8 +55,8 @@ export const SpotlightSection: FC<any> = ({ data }) => {
     setDuration(AVG_DURATION);
   };
 
-  const printCategory = (category: any, index: number) => (
-    <CategoryCard key={index} data={category} />
+  const printSpotlightCard = (product: Product, index: number) => (
+    <CategoryCard key={index} data={product} />
   );
 
   return (
@@ -76,7 +77,7 @@ export const SpotlightSection: FC<any> = ({ data }) => {
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
       >
-        {[...data.categories.data, ...data.categories.data].map(printCategory)}
+        {[...data.products.data, ...data.products.data].map(printSpotlightCard)}
       </motion.div>
     </section>
   );

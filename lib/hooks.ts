@@ -2,23 +2,28 @@
 
 import { SCREEEN } from '@/helpers/constants';
 import { useEffect, useState } from 'react';
+import { debounce } from './utils';
 
-export const useMediaQuery = (query: string) => {
+const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia(query);
 
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
+    const updateMatches = () => {
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+    };
 
-    const listener = () => setMatches(media.matches);
+    const debouncedUpdate = debounce(updateMatches, 100);
 
-    window.addEventListener('resize', listener);
+    updateMatches();
+
+    media.addEventListener('change', debouncedUpdate);
 
     return () => {
-      window.removeEventListener('resize', listener);
+      media.addEventListener('change', debouncedUpdate);
     };
   }, [matches, query]);
 
@@ -31,7 +36,7 @@ export const useScreen = () => {
   const md = useMediaQuery(SCREEEN.md);
   const lg = useMediaQuery(SCREEEN.lg);
   const xl = useMediaQuery(SCREEEN.xl);
-  const xxl = useMediaQuery(SCREEEN['2xl']);
+  const xxl = useMediaQuery(SCREEEN.xxl);
 
   return { xs, sm, md, lg, xl, xxl };
 };
