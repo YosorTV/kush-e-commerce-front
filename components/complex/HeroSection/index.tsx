@@ -13,7 +13,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data?.title}
         </Title>
       </div>
-      <figure className='relative flex h-xl w-full flex-col-reverse overflow-hidden text-center text-white'>
+      <figure className='relative flex h-lg w-full flex-col-reverse overflow-hidden text-center text-white'>
         <StrapiImage
           height={3000}
           width={3000}
@@ -23,7 +23,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           priority
         />
         <NextLink
-          href={`${data.link.url}?page=1&per_page=5`}
+          href={`${data.link.url}?category=bracelets`}
           className='absolute-x-center link-hover link bottom-10 z-10 underline-offset-8'
         >
           {data?.link?.text}

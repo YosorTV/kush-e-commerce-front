@@ -2,5 +2,12 @@
   "auth": {
     "signIn": "Авторизуватись",
     "signOut": "Вийти"
+  },
+  "colors": {
+    "availableIn": "Доступно в {number} кольорах"
+  },
+  "system": {
+    "loadMore": "Показати ще",
+    "explore": "Переглянути"
   }
 }

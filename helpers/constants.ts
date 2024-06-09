@@ -102,16 +102,8 @@ export const STRAPI_API_ROUTES = {
         blocks: {
           populate: {
             products: {
-              fields: [
-                'title',
-                'description',
-                'unitAmount',
-                'currency',
-                'code',
-                'locale',
-              ],
               populate: {
-                cover: {
+                images: {
                   fields: ['url', 'alternativeText', 'formats'],
                 },
               },
@@ -130,25 +122,48 @@ export const STRAPI_API_ROUTES = {
       },
     };
   },
-  products: ({ locale = 'uk' }) => {
+  catalog: ({ locale = 'uk' }) => {
     return {
       locale,
-      populate: true,
+      populate: {
+        cover: {
+          fields: ['url', 'alternativeText', 'formats'],
+        },
+        categories: {
+          fields: ['title', 'slug'],
+        },
+      },
     };
   },
   getProducts: ({
-    page,
-    per_page,
+    id,
     name,
     locale,
-    id,
+    category,
+    page,
+    pageSize,
   }: PageProps['searchParams']) => {
+    const filters =
+      category && category !== '*' ? { category: { $eq: category } } : {};
+
     return {
       id,
-      locale,
       name,
-      page: page || 1,
-      pageSize: per_page || 5,
+      locale,
+      populate: {
+        images: {
+          populate: {
+            data: {
+              fields: ['url', 'alternativeText', 'formats'],
+            },
+          },
+        },
+      },
+      filters,
+      pagination: {
+        page: page || 1,
+        pageSize: pageSize || 4,
+      },
     };
   },
   getProductDetails: ({ locale = 'uk', code = null }) => ({ locale, code }),
@@ -187,7 +202,7 @@ export const STRAPI_API_ROUTES = {
     locale,
     populate: {
       seo: {
-        fields: ['metaTitle', 'metaDescription'],
+        fields: ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'],
       },
     },
   }),
@@ -216,5 +231,5 @@ export const SCREEEN = {
   md: '(max-width: 768px)',
   lg: '(max-width: 1024px)',
   xl: '(max-width: 1280px)',
-  '2xl': '(max-width: 1536px)',
+  xxl: '(max-width: 1920px)',
 };

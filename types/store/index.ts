@@ -1,2 +1,3 @@
 export * from '@/types/store/cart.types';
 export * from '@/types/store/menu.types';
+export * from '@/types/store/products.types';

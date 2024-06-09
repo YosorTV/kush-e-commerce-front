@@ -20,15 +20,15 @@
   }
 
   .hero-title {
-    @apply text-3xl font-medium text-base-200 xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl;
+    @apply text-3xl font-medium text-base-200 xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl;
   }
 
   .hero-sub_title {
-    @apply text-3xl font-medium uppercase text-base-200 xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl;
+    @apply break-words text-3xl font-medium uppercase text-base-200 xs:text-4xl sm:text-5xl md:text-6xl;
   }
 
   .hero-image {
-    @apply absolute h-full w-full object-cover lg:h-xl;
+    @apply object-center-to-top h-full w-full object-cover;
   }
 
   .absolute-center {

@@ -12,3 +12,6 @@ export * from '@/components/simple/ListOfPages';
 export * from '@/components/simple/SignInLink';
 export * from '@/components/simple/Menu';
 export * from '@/components/simple/SocialLink';
+export * from '@/components/simple/ProductsContent';
+export * from '@/components/simple/MaterialPicker';
+export * from '@/components/simple/ProductCard';

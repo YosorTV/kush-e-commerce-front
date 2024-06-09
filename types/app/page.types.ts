@@ -5,8 +5,9 @@ export type PageProps = {
   };
   searchParams: {
     id?: string;
+    category?: string;
     page?: string;
-    per_page?: string;
+    pageSize?: string;
     sortBy?: string;
     locale?: string;
     filterBy?: string;

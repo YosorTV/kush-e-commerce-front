@@ -1,15 +1,18 @@
 'use client';
 
 import { FC, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
+
 import { MdArrowRightAlt } from 'react-icons/md';
 
 import { StrapiImage } from '@/components/simple';
 import { Title, NextLink } from '@/components/elements';
-import { formatPrice } from '@/helpers/formatters';
 import { cn } from '@/lib';
+import { formatPrice } from '@/helpers/formatters';
 
-export const Card: FC<any> = ({ data }) => {
+export const CategoryCard: FC<any> = ({ data }) => {
+  const t = useTranslations();
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -34,29 +37,41 @@ export const Card: FC<any> = ({ data }) => {
           >
             <div className='pointer-events-none absolute h-full w-full bg-black/50' />
             <NextLink
-              href={`/catalog/${data.title}?id=${data.id}&code=${data.code}`}
-              className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold'
+              href={`/catalog/${data.id}`}
+              className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold text-black'
             >
-              <MdArrowRightAlt className='h-6 w-6' /> Explore now
+              <MdArrowRightAlt className='h-6 w-6' /> {t('system.explore')}
             </NextLink>
           </motion.div>
         )}
       </AnimatePresence>
       <StrapiImage
-        src={data?.cover?.url}
-        alt={data?.cover?.alternativeText}
+        src={data?.images.data[0]?.url}
+        alt={data?.images.data[0]?.alternativeText}
         height={1540}
         width={1100}
         className='h-[500px] w-full object-cover lg:h-[700px]'
       />
-      <div className='card-body absolute bottom-0 z-10 p-5 pt-0 text-white'>
-        <Title level='2' className='card-title'>
-          {data?.title}
-        </Title>
-        <p>{data?.description}</p>
-        <p>
-          {data?.price} <span>{formatPrice(data.unitAmount)}</span>
-        </p>
+      <div className='card-body absolute bottom-0 z-10 p-5 pt-0'>
+        <span className='text-secondary'>{data.hintText}</span>
+        <div className='flex flex-1 justify-between pt-2'>
+          <Title
+            level='3'
+            className='text-lg font-semibold uppercase text-base-200'
+          >
+            {data.title}
+          </Title>
+        </div>
+        <div className='flex flex-col pt-2'>
+          <p className='text-base font-medium text-base-200'>
+            {data.description}
+          </p>
+          <div className='flex w-full items-center justify-between'>
+            <span className='text-base text-base-200'>
+              {formatPrice(Number(data.price))}
+            </span>
+          </div>
+        </div>
       </div>
     </motion.figure>
   );
