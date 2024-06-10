@@ -8,6 +8,7 @@
   },
   "system": {
     "loadMore": "Показати ще",
-    "explore": "Переглянути"
+    "explore": "Переглянути",
+    "total": "Всього {number}"
   }
 }
