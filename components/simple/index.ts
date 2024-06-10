@@ -15,3 +15,4 @@ export * from '@/components/simple/SocialLink';
 export * from '@/components/simple/ProductsContent';
 export * from '@/components/simple/MaterialPicker';
 export * from '@/components/simple/ProductCard';
+export * from '@/components/simple/Carousel';

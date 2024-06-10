@@ -8,6 +8,7 @@
   },
   "system": {
     "loadMore": "Load more",
-    "explore": "Explore now"
+    "explore": "Explore now",
+    "total": "Total {number}"
   }
 }

@@ -1199,6 +1199,34 @@ electron-to-chromium@^1.4.668:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.719.tgz#22a94ce7a5150511ba88e900836039e159efe22c"
   integrity sha512-FbWy2Q2YgdFzkFUW/W5jBjE9dj+804+98E4Pup78JBPnbdb3pv6IneY2JCPKdeKLh3AOKHQeYf+KwLr7mxGh6Q==
 
+embla-carousel-auto-scroll@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/embla-carousel-auto-scroll/-/embla-carousel-auto-scroll-8.1.3.tgz#dd5b12979b868c86f455b09c9b3013ea976f7f9a"
+  integrity sha512-qpNELuRUnOZIIidQDy6OCqL8JBRgoaoD28ThRP2ojbCwh6N/Xkw6GYxX2QW3Vt7boE0aQ7QNI5+ddUfBkaxq2A==
+
+embla-carousel-autoplay@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/embla-carousel-autoplay/-/embla-carousel-autoplay-8.1.3.tgz#1700a4a8ad78779d5fc08502cf279271879ffe98"
+  integrity sha512-nMPuOZ+f3yp/RzUEYDOWjO7EkhdNHfdxEoRxfwqIvTGdSQ04LAFAnMLiLWSetAXzB1bP30L391mZb9keZXRcWQ==
+
+embla-carousel-react@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-8.1.3.tgz#a07770eee003a56dfe2fa55304b48892cc00c013"
+  integrity sha512-YrezDPgxPDKa+OKMhSrwuPEU2OgF5147vFW473EWT3bx9DETV3W/RyWTxq0/2pf3M4VXkjqFNbS/W1xM8lTaVg==
+  dependencies:
+    embla-carousel "8.1.3"
+    embla-carousel-reactive-utils "8.1.3"
+
+embla-carousel-reactive-utils@8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/embla-carousel-reactive-utils/-/embla-carousel-reactive-utils-8.1.3.tgz#b4e7d439ab6aefb9554b14198e567e919b52f167"
+  integrity sha512-D8tAK6NRQVEubMWb+b/BJ3VvGPsbEeEFOBM6cCCwfiyfLzNlacOAt0q2dtUEA9DbGxeWkB8ExgXzFRxhGV2Hig==
+
+embla-carousel@8.1.3, embla-carousel@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.1.3.tgz#d086738ee529e59815dae4e2ecd9ee37c47ffc1a"
+  integrity sha512-GiRpKtzidV3v50oVMly8S+D7iE1r96ttt7fSlvtyKHoSkzrAnVcu8fX3c4j8Ol2hZSQlVfDqDIqdrFPs0u5TWQ==
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"

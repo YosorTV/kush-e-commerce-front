@@ -5,13 +5,14 @@ import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib';
+import { cormorant } from '@/assets/fonts';
 import { useProducts } from '@/store';
 
+import { ProductCardSkeleton } from '@/components/skeletons';
 import { Button, Title } from '@/components/elements';
 import { ProductCard } from '@/components/simple';
 
 import { Product } from '@/types/components';
-import { cormorant } from '@/assets/fonts';
 
 export const ProductsContent = ({
   className,
@@ -89,13 +90,19 @@ export const ProductsContent = ({
           {title}
         </Title>
       )}
+
       <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
-        {state.products.map((product, index) => printProducts(product, index))}
+        {state.isLoading && !state.products.length && !Boolean(category) ? (
+          <ProductCardSkeleton length={4} />
+        ) : (
+          state.products.map(printProducts)
+        )}
       </div>
+
       {state.meta.total > 0 && (
-        <div className='flex flex-col items-center justify-center py-6 lg:py-12'>
+        <div className='flex flex-col items-center justify-center py-6 pb-10 lg:pt-16'>
           <span className='text-sm font-medium uppercase text-base-200'>
-            {state.meta.total} Total
+            {t('system.total', { number: state.meta.total })}
           </span>
           <Button
             className='btn-link'
