@@ -32,7 +32,7 @@ export const Menu: FC<MenuProps> = ({ pages }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, lg]);
 
-  return !lg ? (
+  return lg ? (
     <ListOfPages pages={pages} />
   ) : (
     <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'}>

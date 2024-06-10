@@ -57,17 +57,15 @@ export const CategoryCard: FC<any> = ({ data }) => {
         <div className='flex flex-1 justify-between pt-2'>
           <Title
             level='3'
-            className='text-lg font-semibold uppercase text-base-200'
+            className='text-lg font-semibold uppercase text-white'
           >
             {data.title}
           </Title>
         </div>
         <div className='flex flex-col pt-2'>
-          <p className='text-base font-medium text-base-200'>
-            {data.description}
-          </p>
+          <p className='text-base font-medium text-white'>{data.description}</p>
           <div className='flex w-full items-center justify-between'>
-            <span className='text-base text-base-200'>
+            <span className='text-base text-white'>
               {formatPrice(Number(data.price))}
             </span>
           </div>

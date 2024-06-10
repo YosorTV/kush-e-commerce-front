@@ -19,3 +19,5 @@ jobs:
           NEXT_PUBLIC_STRAPI_URL: https://dev.kush-test.pp.ua/strapi/
           NEXTAUTH_SECRET: ${{ secrets.PREVIEW_SECRET }}
           ENV_NAME: dev
+          GOOGLE_CLIENT_ID: 86751189471-8dcn81dhp8eorhnr13js6t9dr32ofl5n.apps.googleusercontent.com
+          GOOGLE_CLIENT_SECRET: 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

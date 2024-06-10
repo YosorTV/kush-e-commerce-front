@@ -28,7 +28,7 @@
   }
 
   .hero-image {
-    @apply object-center-to-top h-full w-full object-cover;
+    @apply h-full w-full object-cover object-center-to-top;
   }
 
   .absolute-center {
