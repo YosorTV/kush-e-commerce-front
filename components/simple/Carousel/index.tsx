@@ -15,7 +15,7 @@ import {
 import { Product } from '@/types/components';
 
 import { cn } from '@/lib';
-import { usePrevNextButtons } from '@/lib/hooks';
+import { usePrevNextButtons, useScreen } from '@/lib/hooks';
 
 import { cormorant } from '@/assets/fonts';
 import { Button, CategoryCard, Title } from '@/components/elements';
@@ -32,6 +32,10 @@ export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
   ]);
 
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const { lg } = useScreen();
+
+  const size = !lg ? 24 : 34;
 
   const {
     prevBtnDisabled,
@@ -82,10 +86,13 @@ export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
 
   return (
     <div className='embla'>
-      <div className='emble_header'>
+      <div className='emble_header px-3 py-3 lg:px-6 lg:py-6'>
         <Title
           level='2'
-          className={cn('text-5xl uppercase text-white', cormorant.className)}
+          className={cn(
+            'text-2xl uppercase text-white lg:text-5xl',
+            cormorant.className
+          )}
         >
           {title}
         </Title>
@@ -99,12 +106,17 @@ export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
             >
               <HiOutlineArrowLongLeft
                 fill='current'
-                style={{ width: 34, height: 34, color: 'white' }}
+                style={{ width: size, height: size, color: 'white' }}
               />
             </Button>
 
             <RxDividerVertical
-              style={{ height: 34, width: 34, color: 'white', rotate: '45deg' }}
+              style={{
+                height: size,
+                width: size,
+                color: 'white',
+                rotate: '45deg',
+              }}
             />
 
             <Button
@@ -115,7 +127,7 @@ export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
             >
               <HiOutlineArrowLongRight
                 fill='current'
-                style={{ width: 34, height: 34, color: 'white' }}
+                style={{ width: size, height: size, color: 'white' }}
               />
             </Button>
           </div>

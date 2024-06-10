@@ -61,7 +61,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
           <AnimatePresence initial={false} mode='sync'>
             {showOverlay ? (
               <motion.div
-                key={`${product.id}-${Math.random()}`}
+                key={`${product.id}`}
                 initial='enter'
                 animate='visible'
                 exit='exit'
@@ -78,7 +78,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
               </motion.div>
             ) : (
               <motion.div
-                key={`${product.id}-${Math.random()}`}
+                key={`${product.id}`}
                 initial='enter'
                 animate='visible'
                 exit='exit'
