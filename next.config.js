@@ -38,6 +38,7 @@ const nextConfig = {
         hostname: 'placehold.co',
       },
       {
+        protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
       {

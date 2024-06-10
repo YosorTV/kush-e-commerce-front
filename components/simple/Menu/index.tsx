@@ -25,14 +25,14 @@ export const Menu: FC<MenuProps> = ({ pages }) => {
   const handleToggle = () => menu.onToggle();
 
   useEffect(() => {
-    if (pathname && lg) {
+    if (pathname) {
       menu.onClose();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, lg]);
 
-  return !lg ? (
+  return lg ? (
     <ListOfPages pages={pages} />
   ) : (
     <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'}>

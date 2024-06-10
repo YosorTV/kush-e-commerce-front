@@ -73,19 +73,21 @@ module.exports = {
       {
         light: {
           primary: '#41A139',
-          secondary: '#f6d860',
+          secondary: '#AA0A0A',
           neutral: '#033178',
           'base-100': '#E9E8D5',
           'base-200': '#242424',
+          'base-300': '#FFFFFF',
         },
       },
       {
         sunset: {
           primary: '#41A139',
-          secondary: '#f6d860',
+          secondary: '#F5A81A',
           neutral: '#033178',
           'base-100': '#242424',
           'base-200': '#FFFFFF',
+          'base-300': '#FFFFFF',
         },
       },
     ],

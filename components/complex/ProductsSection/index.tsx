@@ -34,7 +34,7 @@ export const ProductsSection = async ({ locale }: { locale: string }) => {
           {title}
         </Title>
         <ProductsController tabs={categories} className='flex flex-col' />
-        <ProductsContent />
+        <ProductsContent className='pt-6' />
       </div>
     </section>
   );
