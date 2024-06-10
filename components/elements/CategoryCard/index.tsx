@@ -23,7 +23,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
       className={cn(
-        'card relative mx-2.5 w-[350px] overflow-hidden rounded-none border-2 border-transparent lg:w-[550px]',
+        'card relative w-full overflow-hidden rounded-none border-2 border-transparent',
         showOverlay && 'border-white'
       )}
     >
@@ -50,7 +50,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
         alt={data?.images.data[0]?.alternativeText}
         height={1540}
         width={1100}
-        className='h-[500px] w-full object-cover lg:h-[700px]'
+        className='h-[500px] w-full object-cover lg:h-[670px]'
       />
       <div className='card-body absolute bottom-0 z-10 p-5 pt-0'>
         <span className='text-secondary'>{data.hintText}</span>

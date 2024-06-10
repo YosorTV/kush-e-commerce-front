@@ -1,7 +1,10 @@
 'use client';
 
+import { useCallback, useEffect, useState } from 'react';
+import { EmblaCarouselType } from 'embla-carousel';
+
 import { SCREEEN } from '@/helpers/constants';
-import { useEffect, useState } from 'react';
+
 import { debounce } from './utils';
 
 const useMediaQuery = (query: string) => {
@@ -39,4 +42,50 @@ export const useScreen = () => {
   const xxl = useMediaQuery(SCREEEN.xxl);
 
   return { xs, sm, md, lg, xl, xxl };
+};
+
+type UsePrevNextButtonsType = {
+  prevBtnDisabled: boolean;
+  nextBtnDisabled: boolean;
+  onPrevButtonClick: () => void;
+  onNextButtonClick: () => void;
+};
+
+export const usePrevNextButtons = (
+  emblaApi: EmblaCarouselType | undefined,
+  onButtonClick?: (emblaApi: EmblaCarouselType) => void
+): UsePrevNextButtonsType => {
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+
+  const onPrevButtonClick = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+    if (onButtonClick) onButtonClick(emblaApi);
+  }, [emblaApi, onButtonClick]);
+
+  const onNextButtonClick = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+    if (onButtonClick) onButtonClick(emblaApi);
+  }, [emblaApi, onButtonClick]);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setPrevBtnDisabled(!emblaApi.canScrollPrev());
+    setNextBtnDisabled(!emblaApi.canScrollNext());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onSelect).on('select', onSelect);
+  }, [emblaApi, onSelect]);
+
+  return {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  };
 };

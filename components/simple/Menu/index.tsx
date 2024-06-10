@@ -25,7 +25,7 @@ export const Menu: FC<MenuProps> = ({ pages }) => {
   const handleToggle = () => menu.onToggle();
 
   useEffect(() => {
-    if (pathname) {
+    if (pathname && lg) {
       menu.onClose();
     }
 

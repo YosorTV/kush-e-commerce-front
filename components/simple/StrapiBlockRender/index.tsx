@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { HeroSection, SpotlightSection } from '@/components/complex';
 import { notFound } from 'next/navigation';
-import { Input } from '@/components/elements';
+
+import { HeroSection, SpotlightSection } from '@/components/complex';
 import ProductsContent from '../ProductsContent';
 
 function blockRenderer(block: any) {
@@ -12,10 +12,12 @@ function blockRenderer(block: any) {
       return <SpotlightSection key={block.id} data={block} />;
     case 'complex.products':
       return (
-        <ProductsContent key={block.id} title={block.title} className='px-6' />
+        <ProductsContent
+          key={block.id}
+          title={block.title}
+          className='px-6 pt-14'
+        />
       );
-    case 'elements.input':
-      return <Input {...block} />;
     default:
       return null;
   }
