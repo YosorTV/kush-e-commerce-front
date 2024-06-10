@@ -16,8 +16,8 @@ export const Footer = (data: any) => {
   return (
     <footer className='footer relative z-20 flex min-h-16 w-full bg-base-100 px-5 py-6'>
       <div className='grid w-full grid-cols-1 gap-x-20 lg:grid-cols-4'>
-        <div className='col-span-1 row-start-4 h-full w-full items-end gap-y-6 lg:row-start-1 lg:flex-col lg:items-start'>
-          <div className='flex h-full flex-col-reverse justify-between lg:flex-col'>
+        <div className='col-span-1 row-start-1 h-full w-full items-end gap-y-6 lg:row-start-1 lg:flex-col lg:items-start'>
+          <div className='flex h-full flex-col justify-between lg:flex-col'>
             <div className='flex w-full items-center justify-between gap-y-3 lg:flex-col lg:items-start'>
               <Logo className='relative -left-5' />
               <div className='col-start-2 flex gap-x-6'>
@@ -39,7 +39,7 @@ export const Footer = (data: any) => {
           </Title>
           <ListOfPages
             pages={data.links}
-            className='grid grid-cols-1 gap-x-2 xs:grid-cols-4 lg:grid-cols-1'
+            className='grid grid-cols-4 gap-x-2 xs:grid-cols-4 lg:grid-cols-1'
           />
         </nav>
         <nav>
