@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
 type LogoIconProps = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   className?: string;
 };
 
@@ -15,7 +15,7 @@ export const LogoIcon: FC<LogoIconProps> = ({
     <svg
       width={width}
       height={height}
-      viewBox='0 0 150 42'
+      viewBox={`0 0 ${width} ${height}`}
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       className={className}

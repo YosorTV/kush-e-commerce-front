@@ -1,30 +1,30 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib';
-import { cormorant } from '@/assets/fonts';
 import { useProducts } from '@/store';
 
 import { ProductCardSkeleton } from '@/components/skeletons';
 import { Button, Title } from '@/components/elements';
 import { ProductCard } from '@/components/simple';
 
+import { cormorant } from '@/assets/fonts';
+
 import { Product } from '@/types/components';
 
-export const ProductsContent = ({
-  className,
-  title,
-}: {
+interface TProductsContent {
   className?: string;
   title?: string;
-}) => {
+}
+
+export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
+  const t = useTranslations();
+  const params = useSearchParams();
   const locale = useLocale();
   const state = useProducts();
-  const params = useSearchParams();
-  const t = useTranslations();
 
   const category = params.get('category');
   const isLastPage = state.meta.page === state.meta.pageCount;
@@ -62,15 +62,22 @@ export const ProductsContent = ({
     return 'col-span-1';
   };
 
-  const printProducts = useCallback((product: Product, index: number) => {
-    return (
-      <ProductCard
-        key={product.id}
-        product={product}
-        className={gridCols(index)}
-      />
-    );
-  }, []);
+  const printProducts = useCallback(
+    (product: Product, index: number) => {
+      const number = product.available_colors.length;
+      const hintText = t('colors.availableIn', { number });
+
+      return (
+        <ProductCard
+          hintText={hintText}
+          key={product.id}
+          product={product}
+          className={gridCols(index)}
+        />
+      );
+    },
+    [t]
+  );
 
   return (
     <div

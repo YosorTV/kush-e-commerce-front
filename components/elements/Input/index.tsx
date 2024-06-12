@@ -10,13 +10,19 @@ export const Input = ({
   type,
   label,
   labelStyle,
+  containerClass,
+  isLoading,
   ...rest
 }: InputProps) => {
   return (
-    <div className='relative flex w-full flex-col gap-y-2'>
-      <label htmlFor={name} className={cn('label label-text', labelStyle)}>
-        {label}
-      </label>
+    <div
+      className={cn('relative flex w-full flex-col gap-y-2', containerClass)}
+    >
+      {label && (
+        <label htmlFor={name} className={cn('label label-text', labelStyle)}>
+          {label}
+        </label>
+      )}
       <input
         name={name}
         {...rest}
@@ -28,6 +34,9 @@ export const Input = ({
           className
         )}
       />
+      {isLoading && (
+        <span className='loading loading-dots loading-md absolute right-3 top-1/4' />
+      )}
       {error && <span className={`relative text-xs text-error`}>{error}</span>}
     </div>
   );
