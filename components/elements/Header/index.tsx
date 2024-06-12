@@ -12,10 +12,20 @@ export const Header: FC<HeaderProps> = ({ data }) => {
 
   return (
     <header className='fixed z-10 flex min-h-16 w-full items-center bg-base-100 px-5'>
-      <nav className=' flex w-full items-center justify-between'>
-        <Menu pages={pages} />
-        <Logo width={150} height={42} />
-        <div className='flex items-center gap-x-6'>
+      <nav className='flex w-full items-center justify-between'>
+        <div className='flex items-center xl:w-36'>
+          <Menu pages={pages} />
+        </div>
+
+        <div className='flex w-full lg:justify-center'>
+          <Logo
+            width={160}
+            height={48}
+            className='relative top-1.5 hidden xs:block'
+          />
+        </div>
+
+        <div className='flex w-auto items-center gap-x-6'>
           <Search data={{}} />
           <UserSession
             cta={cta}
