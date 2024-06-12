@@ -20,9 +20,9 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        protocol: 'https',
+        hostname: 'dev.kush-test.pp.ua',
+        port: '443',
       },
       {
         protocol: 'https',
