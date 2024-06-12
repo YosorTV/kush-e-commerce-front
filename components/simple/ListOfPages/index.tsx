@@ -38,7 +38,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
             href={page.url}
             replace={page.isExternal}
             className={cn(
-              'py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
+              'whitespace-nowrap py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
               linkStyle
             )}
           >

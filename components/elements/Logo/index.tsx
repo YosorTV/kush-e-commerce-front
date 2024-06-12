@@ -9,11 +9,7 @@ interface TLogo {
   height?: number;
 }
 
-export const Logo: FC<TLogo> = ({
-  className = 'absolute-center',
-  width = 150,
-  height = 42,
-}) => {
+export const Logo: FC<TLogo> = ({ className, width = 150, height = 42 }) => {
   return (
     <NextLink href={ROOT} className={className}>
       <LogoIcon width={width} height={height} className='fill-base-200 p-1.5' />
