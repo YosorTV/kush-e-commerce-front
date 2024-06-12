@@ -35,7 +35,7 @@ export const Input = ({
         )}
       />
       {isLoading && (
-        <span className='loading loading-dots loading-md absolute right-3 top-1/4' />
+        <span className='loading loading-dots loading-md absolute right-3 top-3' />
       )}
       {error && <span className={`relative text-xs text-error`}>{error}</span>}
     </div>
