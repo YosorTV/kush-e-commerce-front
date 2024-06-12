@@ -7,12 +7,14 @@ export async function getProductsData({
   category,
   page,
   pageSize,
+  name,
 }: any) {
   const productsApi = STRAPI_API_ROUTES.getProducts({
     locale,
     category,
     page,
     pageSize,
+    name,
   });
 
   const response = await getStrapiData(

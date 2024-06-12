@@ -10,7 +10,7 @@ import { CartList } from '@/components/simple';
 import { ShoppingCartProps } from '@/types/components/complex';
 import { Checkout } from '../Checkout';
 import { Success } from '../Success';
-import { SlBag } from 'react-icons/sl';
+import { BsFillBagFill } from 'react-icons/bs';
 import { Portal } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 
@@ -42,10 +42,10 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
         className='relative flex cursor-pointer items-center gap-x-2 border-none bg-none text-lg font-medium outline-none'
       >
         {cartStore.cart.length > 0 && <Badge counter={cartStore.cart.length} />}
-        <SlBag style={{ width: 20, height: 20 }} className='fill-base-200' />
+        <BsFillBagFill className='h-6 w-6 fill-base-200' />
       </button>
 
-      <Portal selector='portal' show={cartStore.isOpen}>
+      <Portal selector='portal'>
         <AnimatePresence mode='wait'>
           {cartStore.isOpen && (
             <motion.div

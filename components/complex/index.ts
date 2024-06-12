@@ -5,3 +5,4 @@ export * from '@/components/complex/ClientSideRender';
 export * from '@/components/complex/ProductsSection';
 export * from '@/components/complex/Checkout';
 export * from '@/components/complex/SpotlightSection';
+export * from '@/components/complex/Search';

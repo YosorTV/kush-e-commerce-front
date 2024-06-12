@@ -3,12 +3,20 @@ import { NextLink } from '@/components/elements/Link';
 import { ROOT } from '@/helpers/constants';
 import { LogoIcon } from '@/assets/icons';
 
-export const Logo: FC<{ className?: string }> = ({
+interface TLogo {
+  className?: string;
+  width?: number;
+  height?: number;
+}
+
+export const Logo: FC<TLogo> = ({
   className = 'absolute-center',
+  width = 150,
+  height = 42,
 }) => {
   return (
     <NextLink href={ROOT} className={className}>
-      <LogoIcon width={150} height={42} className='fill-base-200 p-1.5' />
+      <LogoIcon width={width} height={height} className='fill-base-200 p-1.5' />
     </NextLink>
   );
 };
