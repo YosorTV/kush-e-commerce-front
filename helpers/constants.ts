@@ -143,8 +143,15 @@ export const STRAPI_API_ROUTES = {
     page,
     pageSize,
   }: PageProps['searchParams']) => {
-    const filters =
-      category && category !== '*' ? { category: { $eq: category } } : {};
+    const filters: any = {};
+
+    if (name) {
+      filters.title = { $contains: name };
+    }
+
+    if (category && category !== '*') {
+      filters.category = { $eq: category };
+    }
 
     return {
       id,
@@ -162,7 +169,7 @@ export const STRAPI_API_ROUTES = {
       filters,
       pagination: {
         page: page || 1,
-        pageSize: pageSize || 4,
+        pageSize: pageSize || 5,
       },
     };
   },

@@ -1,4 +1,4 @@
-import { Product } from '../components';
+import { Product } from '@/types/components';
 
 type PageProps = {
   locale: string;

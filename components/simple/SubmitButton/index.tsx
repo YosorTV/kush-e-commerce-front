@@ -3,6 +3,7 @@
 import { useFormStatus } from 'react-dom';
 import { cn } from '@/lib';
 import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/elements';
 
 function Loader({ text }: { readonly text: string }) {
   return (
@@ -27,14 +28,15 @@ export function SubmitButton({
   className,
 }: Readonly<SubmitButtonProps>) {
   const status = useFormStatus();
+
   return (
-    <button
+    <Button
       type='submit'
       aria-disabled={status.pending || loading}
       disabled={status.pending || loading}
       className={cn('btn btn-success', className)}
     >
       {status.pending || loading ? <Loader text={loadingText} /> : text}
-    </button>
+    </Button>
   );
 }

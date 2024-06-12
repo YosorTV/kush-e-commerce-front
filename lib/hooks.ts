@@ -89,3 +89,24 @@ export const usePrevNextButtons = (
     onNextButtonClick,
   };
 };
+
+export const useScrollLock = (isLocked: boolean) => {
+  useEffect(() => {
+    const preventScroll = (e: Event) => {
+      e.preventDefault();
+    };
+
+    if (isLocked) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('scroll', preventScroll, { passive: false });
+    } else {
+      document.body.style.overflow = '';
+      window.removeEventListener('scroll', preventScroll);
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('scroll', preventScroll);
+    };
+  }, [isLocked]);
+};
