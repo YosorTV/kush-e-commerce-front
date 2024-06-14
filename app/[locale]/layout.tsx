@@ -2,7 +2,6 @@ import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
 
 import { auth } from '@/auth';
 import { BaseLayout } from '@/components/layouts';
-import { ClientSideRender } from '@/components/complex';
 
 import { LOCALES } from '@/helpers/constants';
 
@@ -34,7 +33,6 @@ export default async function LocalLayout({
     >
       <NextIntlClientProvider messages={messages}>
         {children}
-        <ClientSideRender />
       </NextIntlClientProvider>
     </BaseLayout>
   );

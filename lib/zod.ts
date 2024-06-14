@@ -1,9 +1,20 @@
 import { z } from 'zod';
 
+type Locale = 'en' | 'uk' | string;
+
 const PASSWORD_REG_EX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}[\]\\|;:'",.<>/?-]).{8,}$/;
 
 const emailSchema = z.string().email('Invalid email format');
+
+const getEmailErrorMessage = (locale: Locale) => {
+  const messages: Record<Locale, string> = {
+    en: 'Invalid email format',
+    uk: 'Не вірний формат пошти',
+  };
+
+  return messages[locale] || messages.en;
+};
 
 const passwordSchema = z
   .string()
@@ -60,10 +71,17 @@ export const updatePasswordScema = z.object({
   password: passwordSchema,
 });
 
+export const subscriptionSchema = (locale: Locale) =>
+  z.object({
+    email: z.string().email(getEmailErrorMessage(locale)),
+    locale: z.string().readonly(),
+  });
+
 export const schemas = {
   login: loginSchema,
   signup: signupSchema,
   profile: profileSchema,
+  subscription: subscriptionSchema,
   'reset-password': resetPasswordSchema,
   'update-password': updatePasswordScema,
   'forgot-password': forgotPasswordSchema,
