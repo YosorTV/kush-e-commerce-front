@@ -14,6 +14,7 @@ export interface TSearchState {
     total: number;
   };
   onToggle: () => void;
+  onReset: () => void;
   onSearch: (value: string) => void;
   fetchProducts: ({
     locale,

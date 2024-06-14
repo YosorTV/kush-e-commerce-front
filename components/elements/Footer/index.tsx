@@ -1,4 +1,4 @@
-// import { FooterProps } from '@/types/components';
+import { FC } from 'react';
 import { Title } from '../Title';
 import { cn } from '@/lib';
 import { cormorant } from '@/assets/fonts';
@@ -11,10 +11,11 @@ import {
 import { NextLink } from '../Link';
 import { Logo } from '../Logo';
 import { SubscribeForm } from '@/components/forms/SubscribeForm';
+import { FooterProps } from '@/types/components';
 
-export const Footer = (data: any) => {
+export const Footer: FC<FooterProps> = ({ data, locale }) => {
   return (
-    <footer className='footer relative z-20 flex min-h-16 w-full bg-base-100 px-5 py-6'>
+    <footer className='footer relative flex min-h-16 w-full bg-base-100 px-5 py-6'>
       <div className='grid w-full grid-cols-1 gap-x-20 lg:grid-cols-4'>
         <div className='col-span-1 row-start-1 h-full w-full items-end gap-y-6 lg:row-start-1 lg:flex-col lg:items-start'>
           <div className='flex h-full flex-col justify-between lg:flex-col'>
@@ -27,8 +28,9 @@ export const Footer = (data: any) => {
             </div>
             <div className='divider lg:hidden' />
             <SubscribeForm
-              className='flex w-full min-w-btn'
+              className='w-full'
               formField={data.formField}
+              locale={locale}
             />
             <div className='divider lg:hidden' />
           </div>
