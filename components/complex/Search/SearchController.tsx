@@ -11,7 +11,7 @@ import {
   searchVariants,
 } from '@/assets/animations';
 import { useLocale } from 'next-intl';
-import { debounce } from '@/lib';
+import { useDebounce } from '@/lib/hooks';
 
 interface TSearchController {
   onClose: () => void;
@@ -24,8 +24,14 @@ export const SearchController: FC<TSearchController> = ({
 }) => {
   const state = useSearch();
   const locale = useLocale();
+  const name = useDebounce(state.searchValue, 500);
 
-  const debouncedFetchProducts = debounce(state.fetchProducts, 500);
+  const getProducts = useCallback(
+    () => state.fetchProducts({ locale, name, page: `${state.meta.page}` }),
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [name, locale, state.meta.page]
+  );
 
   const handleSearch = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -35,14 +41,10 @@ export const SearchController: FC<TSearchController> = ({
   );
 
   useEffect(() => {
-    debouncedFetchProducts({
-      locale,
-      name: state.searchValue,
-      page: `${state.meta.page}`,
-    });
+    getProducts();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.searchValue, state.meta.page]);
+  }, [name, locale, state.meta.page]);
 
   return (
     <AnimatePresence mode='wait'>

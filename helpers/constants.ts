@@ -146,11 +146,11 @@ export const STRAPI_API_ROUTES = {
     const filters: any = {};
 
     if (name) {
-      filters.title = { $contains: name };
+      filters.title = { $contains: name.toLowerCase().trim() };
     }
 
     if (category && category !== '*') {
-      filters.category = { $eq: category };
+      filters.category = { $eq: category.toLowerCase().trim() };
     }
 
     return {

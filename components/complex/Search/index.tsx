@@ -20,18 +20,22 @@ export const Search: FC<TSearch> = ({ data }) => {
 
   useScrollLock(state.isOpen);
 
-  const handleToggle = useCallback(() => {
+  const handleOpen = useCallback(() => {
     state.onToggle();
+  }, [state]);
+
+  const handleClose = useCallback(() => {
+    state.onReset();
   }, [state]);
 
   return (
     <>
-      <Button onClick={handleToggle} type='button'>
+      <Button onClick={handleOpen} type='button'>
         <IoSearchSharp className='h-6 w-6 fill-base-200' />
       </Button>
 
       <Portal selector='portal'>
-        <SearchController onClose={handleToggle}>
+        <SearchController onClose={handleClose}>
           <SearchContent />
         </SearchController>
       </Portal>
