@@ -2,12 +2,18 @@
 
 import { cormorant } from '@/assets/fonts';
 import { Form, Input } from '@/components/elements';
-import { cn } from '@/lib';
-import { forgotPassword } from '@/services';
+import { SubmitButton } from '@/components/simple';
+import { cn, schemas } from '@/lib';
+import { subscription } from '@/services';
 
-export const SubscribeForm = ({ formField, className }: any) => {
+import { IoIosSend } from 'react-icons/io';
+
+export const SubscribeForm = ({ formField, className, locale }: any) => {
+  const schema = schemas.subscription(locale);
+
   return (
-    <Form action={forgotPassword} className={className}>
+    <Form action={subscription} schema={schema} className={className}>
+      <Input name='locale' value={locale} hidden />
       <Input
         label={formField.label}
         placeholder={formField.placeholder}
@@ -15,7 +21,12 @@ export const SubscribeForm = ({ formField, className }: any) => {
         name={formField.name}
         className='w-full'
         labelStyle={cn('text-xl', cormorant.className)}
-      />
+      >
+        <SubmitButton
+          className='absolute right-2'
+          icon={<IoIosSend className='h-6 w-6 fill-base-200' />}
+        />
+      </Input>
     </Form>
   );
 };

@@ -76,7 +76,7 @@ export const processChild = (
     return React.createElement(child.type as React.ComponentType<InputProps>, {
       ...child.props,
       key: `${child.props.name}_${index}`,
-      error: state.errors?.[child?.props?.name] || null,
+      error: state?.errors?.[child?.props?.name] || null,
     });
   }
   // If the child has its own children, recursively process them
