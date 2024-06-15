@@ -15,11 +15,13 @@ import { useDebounce } from '@/lib/hooks';
 
 interface TSearchController {
   onClose: () => void;
+  placeholder: string;
   children: ReactNode;
 }
 
 export const SearchController: FC<TSearchController> = ({
   onClose,
+  placeholder = 'Search',
   children,
 }) => {
   const state = useSearch();
@@ -70,7 +72,7 @@ export const SearchController: FC<TSearchController> = ({
               <Logo className='relative top-1.5 col-span-1 col-start-1 row-start-1 cursor-default' />
               <Input
                 name='search'
-                placeholder='Search'
+                placeholder={placeholder}
                 containerClass='col-span-5 md:col-span-3 lg:col-span-2 pt-6 md:pt-0 col-start-1 md:col-start-2 md:row-start-1 md:pr-16 lg:pr-0'
                 value={state.searchValue}
                 isLoading={state.isLoading}

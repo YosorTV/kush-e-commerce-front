@@ -78,6 +78,15 @@ export const STRAPI_API_ROUTES = {
             cta: true,
             pages: true,
             sessionLinks: true,
+            collections: {
+              populate: {
+                cover: true,
+              },
+              fields: ['title', 'slug'],
+            },
+            categories: {
+              fields: ['title', 'slug'],
+            },
           },
         },
         footer: {

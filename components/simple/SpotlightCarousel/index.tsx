@@ -7,10 +7,11 @@ import useEmblaCarousel from 'embla-carousel-react';
 import AutoScroll from 'embla-carousel-auto-scroll';
 
 import { RxDividerVertical } from 'react-icons/rx';
+
 import {
-  HiOutlineArrowLongLeft,
-  HiOutlineArrowLongRight,
-} from 'react-icons/hi2';
+  LiaLongArrowAltLeftSolid,
+  LiaLongArrowAltRightSolid,
+} from 'react-icons/lia';
 
 import { Product } from '@/types/components';
 
@@ -26,7 +27,11 @@ type PropType = {
   options?: EmblaOptionsType;
 };
 
-export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
+export const SpotlightCarousel: FC<PropType> = ({
+  data = [],
+  title,
+  options,
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: false }),
   ]);
@@ -104,9 +109,9 @@ export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
               onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
               disabled={prevBtnDisabled}
             >
-              <HiOutlineArrowLongLeft
-                fill='current'
-                style={{ width: size, height: size, color: 'white' }}
+              <LiaLongArrowAltLeftSolid
+                className='fill-base-300'
+                style={{ width: size, height: size }}
               />
             </Button>
 
@@ -125,9 +130,9 @@ export const Carousel: FC<PropType> = ({ data = [], title, options }) => {
               onClick={() => onButtonAutoplayClick(onNextButtonClick)}
               disabled={nextBtnDisabled}
             >
-              <HiOutlineArrowLongRight
-                fill='current'
-                style={{ width: size, height: size, color: 'white' }}
+              <LiaLongArrowAltRightSolid
+                className='fill-base-300'
+                style={{ width: size, height: size }}
               />
             </Button>
           </div>

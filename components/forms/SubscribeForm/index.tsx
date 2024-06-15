@@ -13,7 +13,7 @@ export const SubscribeForm = ({ formField, className, locale }: any) => {
 
   return (
     <Form action={subscription} schema={schema} className={className}>
-      <Input name='locale' value={locale} hidden />
+      <Input name='locale' defaultValue={locale} hidden />
       <Input
         label={formField.label}
         placeholder={formField.placeholder}

@@ -6,6 +6,14 @@ type HeaderData = {
   pages: StrapiLinkType[];
   cta: StrapiLinkType;
   sessionLinks: StrapiLinkType[];
+  categoryTitle: string;
+  collectionTitle?: string;
+  categories: {
+    data: any[];
+  };
+  collections?: {
+    data: any[];
+  };
   session?: any;
 };
 

@@ -39,7 +39,7 @@ export const MenuItem: FC<StrapiLinkType> = ({ text, id, url, isExternal }) => {
       <NextLink
         href={url}
         replace={isExternal}
-        className='py-2.5 font-medium text-base-200 group-[.active]:underline group-[.active]:underline-offset-8'
+        className='py-2.5 font-medium capitalize text-base-200 group-[.active]:underline group-[.active]:underline-offset-8'
       >
         {text}
       </NextLink>

@@ -1,22 +1,65 @@
-import { FC } from 'react';
+'use client';
 
-import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
+import { FC, useState } from 'react';
+
+import { LangChanger, Menu, SubMenu, ThemeChanger } from '@/components/simple';
 import { Logo } from '@/components/elements';
 import { Search, UserSession } from '@/components/complex';
+import { motion } from 'framer-motion';
 
 import { HeaderProps } from '@/types/components';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
 
 export const Header: FC<HeaderProps> = ({ data }) => {
-  const { locale, pages, sessionLinks, session, cta, shoppingCart } = data;
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
+
+  const handleShowSubMenu = () => setShowOverlay(true);
+  const handleHideSubMenu = () => setShowOverlay(false);
+
+  const {
+    locale,
+    pages,
+    sessionLinks,
+    session,
+    cta,
+    shoppingCart,
+    categories,
+    collections,
+    pagesTitle,
+    categoryTitle,
+    collectionTitle,
+    searchTitle,
+  } = data;
+
+  const collectionsData = {
+    title: collectionTitle,
+    data: collections.data,
+  };
+
+  const categoryData = {
+    title: categoryTitle,
+    data: categories.data,
+  };
+
+  const pagesData = {
+    title: pagesTitle,
+    data: pages,
+  };
 
   return (
-    <header className='fixed z-10 flex min-h-16 w-full items-center bg-base-100 px-5'>
+    <motion.header
+      onHoverStart={handleShowSubMenu}
+      onHoverEnd={handleHideSubMenu}
+      className='fixed z-10 flex min-h-16 w-full cursor-pointer items-center bg-base-100 px-5'
+    >
       <nav className='flex w-full items-center justify-between'>
         <div className='flex items-center xl:w-36'>
-          <Menu pages={pages} />
+          <Menu
+            pages={pagesData}
+            collections={collectionsData}
+            categories={categoryData}
+          />
         </div>
-
         <div className='flex w-full lg:justify-center'>
           <Logo
             width={160}
@@ -24,22 +67,28 @@ export const Header: FC<HeaderProps> = ({ data }) => {
             className='relative top-1.5 hidden xs:block'
           />
         </div>
-
         <div className='flex w-auto items-center gap-x-6'>
-          <Search data={{}} />
+          <Search placeholder={searchTitle} />
+          <ShoppingCart data={shoppingCart} userId={session?.user?.id} />
           <UserSession
             cta={cta}
             locale={locale}
             session={session?.user}
             sessionLinks={sessionLinks}
           />
-          <ShoppingCart data={shoppingCart} userId={session?.user?.id} />
           <div className='hidden lg:flex lg:gap-x-6'>
             <LangChanger />
             <ThemeChanger />
           </div>
         </div>
       </nav>
-    </header>
+      <SubMenu
+        isHovered={showOverlay}
+        categoryTitle={categoryTitle}
+        collectionTitle={collectionTitle}
+        categories={categories.data}
+        collections={collections.data}
+      />
+    </motion.header>
   );
 };
