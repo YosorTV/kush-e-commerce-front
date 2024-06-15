@@ -30,6 +30,7 @@ export default async function Home({ params }: PageProps) {
   const homeQP = generateStrapiQuery(STRAPI_API_ROUTES.home({ locale }));
   const data = await getStrapiData('home', homeQP);
 
+
   return (
     <PageLayout>
       <StrapiBlockRender data={data?.blocks} />

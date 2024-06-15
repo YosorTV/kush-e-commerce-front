@@ -11,11 +11,11 @@ import { Button, Portal } from '@/components/elements';
 import { SearchController } from './SearchController';
 import { SearchContent } from './SearchContent';
 
-interface TSearch {
-  data: any;
-}
+type TSearch = {
+  placeholder: string;
+};
 
-export const Search: FC<TSearch> = ({ data }) => {
+export const Search: FC<TSearch> = ({ placeholder }) => {
   const state = useSearch();
 
   useScrollLock(state.isOpen);
@@ -33,9 +33,8 @@ export const Search: FC<TSearch> = ({ data }) => {
       <Button onClick={handleOpen} type='button'>
         <IoSearchSharp className='h-6 w-6 fill-base-200' />
       </Button>
-
       <Portal selector='portal'>
-        <SearchController onClose={handleClose}>
+        <SearchController onClose={handleClose} placeholder={placeholder}>
           <SearchContent />
         </SearchController>
       </Portal>

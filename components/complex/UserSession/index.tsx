@@ -1,4 +1,3 @@
-import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
 import { NextLink } from '@/components/elements';
@@ -6,14 +5,12 @@ import { SignOutButton } from '@/components/simple/SignOutButton';
 import { StrapiLinkType } from '@/types/components';
 import { SignInLink } from '@/components/simple';
 
-export const UserSession = async ({
+export const UserSession = ({
   locale,
   cta,
   session,
   sessionLinks = [],
 }: any) => {
-  const t = await getTranslations({ locale, namespace: 'auth' });
-
   if (!session) {
     return <SignInLink {...cta} />;
   }
@@ -60,7 +57,7 @@ export const UserSession = async ({
         >
           {printMenuLinks(sessionLinks)}
           <li tabIndex={3}>
-            <SignOutButton text={t('signOut')} />
+            <SignOutButton text={'Sign Out'} />
           </li>
         </ul>
       </div>

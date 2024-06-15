@@ -33,7 +33,10 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
           : pathname.startsWith(urlObj.pathname);
 
       return (
-        <li key={page.id} className={cn('group py-2.5', { active: isActive })}>
+        <li
+          key={page.id}
+          className={cn('group py-2.5 text-base-200', { active: isActive })}
+        >
           <NextLink
             href={page.url}
             replace={page.isExternal}
