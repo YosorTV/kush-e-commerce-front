@@ -12,15 +12,6 @@ import { Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
 
-const variants = {
-  open: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
-  },
-  closed: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 },
-  },
-};
-
 type MenuNavProps = {
   pages: {
     title: string;
@@ -42,7 +33,7 @@ export const MenuNav: FC<MenuNavProps> = ({
   collections,
 }) => {
   return (
-    <motion.div variants={variants}>
+    <>
       <div>
         <Title
           level='5'
@@ -57,12 +48,13 @@ export const MenuNav: FC<MenuNavProps> = ({
               key={item.id}
               text={item.text}
               url={item.url}
+              className='py-2.5'
               isExternal={item.isExternal}
             />
           ))}
         </motion.ul>
       </div>
-      <div className='divider' />
+      <div className='divider pr-5' />
       <div>
         <Title
           level='5'
@@ -76,13 +68,15 @@ export const MenuNav: FC<MenuNavProps> = ({
               id={item.id}
               key={item.id}
               text={item.title}
+              slug={item.slug}
+              className='py-2.5'
               url={`/catalog?category=${item.slug}`}
               isExternal={false}
             />
           ))}
         </motion.ul>
       </div>
-      <div className='divider' />
+      <div className='divider pr-5' />
       <div>
         <Title
           level='5'
@@ -93,6 +87,7 @@ export const MenuNav: FC<MenuNavProps> = ({
         <motion.ul>
           {collections.data.map((item: CollectionLinkType) => (
             <MenuItem
+              className='py-2.5'
               id={item.id}
               key={item.id}
               text={item.title}
@@ -102,6 +97,6 @@ export const MenuNav: FC<MenuNavProps> = ({
           ))}
         </motion.ul>
       </div>
-    </motion.div>
+    </>
   );
 };

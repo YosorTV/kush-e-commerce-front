@@ -1,12 +1,14 @@
 'use client';
 
 import { cormorant } from '@/assets/fonts';
-import { NextLink, Title } from '@/components/elements';
+import { Title } from '@/components/elements';
 import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
 import { FC } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CollectionCarousel } from '../CollectionCarousel';
+import { MenuItem } from '../Menu/MenuItem';
+import { CategoryLinkType, CollectionLinkType } from '@/types/components';
 
 type TSubMenu = {
   categoryTitle: string;
@@ -60,12 +62,15 @@ export const SubMenu: FC<TSubMenu> = ({
               {categoryTitle}
             </Title>
             <ul className='flex flex-col gap-y-4 py-4 capitalize text-base-200'>
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <NextLink href={`/catalog?category=${category.title}`}>
-                    {category.title}
-                  </NextLink>
-                </li>
+              {categories.map((category: CategoryLinkType) => (
+                <MenuItem
+                  id={category.id}
+                  key={category.id}
+                  text={category.title}
+                  slug={category.slug}
+                  url={`/catalog?category=${category.slug}`}
+                  isExternal={false}
+                />
               ))}
             </ul>
           </div>
@@ -82,10 +87,14 @@ export const SubMenu: FC<TSubMenu> = ({
                   {collectionTitle}
                 </Title>
                 <ul className='flex flex-col gap-y-4 py-4 uppercase text-base-200'>
-                  {collections.map((collection) => (
-                    <li key={collection.id}>
-                      <span>{collection.title}</span>
-                    </li>
+                  {collections.map((item: CollectionLinkType) => (
+                    <MenuItem
+                      id={item.id}
+                      key={item.id}
+                      text={item.title}
+                      url={`/collection/${item.slug}`}
+                      isExternal={false}
+                    />
                   ))}
                 </ul>
               </div>

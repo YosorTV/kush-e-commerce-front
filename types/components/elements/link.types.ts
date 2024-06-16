@@ -10,6 +10,7 @@ export interface CategoryLinkType extends StrapiLinkType {
   url: string;
   title?: string;
   slug?: string;
+  className?: string;
 }
 
 export interface CollectionLinkType extends StrapiLinkType {
