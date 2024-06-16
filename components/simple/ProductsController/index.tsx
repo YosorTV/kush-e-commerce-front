@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { usePathname, useRouter } from '@/lib/navigation';
@@ -25,6 +25,11 @@ export const ProductsController: FC<{
 
     router.replace(url);
   };
+
+  useEffect(() => {
+    handleTab({ target: { value: tabs[0].slug } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={className}>

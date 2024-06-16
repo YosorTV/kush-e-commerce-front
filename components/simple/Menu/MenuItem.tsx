@@ -3,38 +3,62 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 
-import { StrapiLinkType } from '@/types/components';
+import { CategoryLinkType } from '@/types/components';
 import { ROOT } from '@/helpers/constants';
 import { NextLink } from '@/components/elements';
 import { cn } from '@/lib';
 import { usePathname } from '@/lib/navigation';
+import { useSearchParams } from 'next/navigation';
 
 const variants = {
-  open: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      y: { stiffness: 1000, velocity: -100 },
-    },
-  },
-  closed: {
-    y: 50,
+  initial: {
     opacity: 0,
     transition: {
-      y: { stiffness: 1000 },
+      type: 'tween',
+      ease: 'easeInOut',
+      duration: 0.3,
+    },
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      ease: 'easeInOut',
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      type: 'tween',
+      ease: 'easeInOut',
+      duration: 0.3,
     },
   },
 };
 
-export const MenuItem: FC<StrapiLinkType> = ({ text, id, url, isExternal }) => {
+export const MenuItem: FC<CategoryLinkType> = ({
+  text,
+  url,
+  slug,
+  isExternal,
+  className,
+}) => {
   const pathname = usePathname();
-  const isActive = url === ROOT ? pathname === url : pathname.startsWith(url);
+  const params = useSearchParams();
+
+  const category = params.get('category');
+
+  const isActive =
+    url === ROOT
+      ? pathname === url
+      : pathname.startsWith(url) || category === slug;
 
   return (
     <motion.li
-      key={id}
+      layout
       variants={variants}
-      className={cn('group py-2.5', { active: isActive })}
+      className={cn('group', { active: isActive }, className)}
     >
       <NextLink
         href={url}

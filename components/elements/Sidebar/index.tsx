@@ -32,12 +32,14 @@ export const Sidebar: FC<SidebarProps> = ({
           <motion.div layout onClick={(e) => e.stopPropagation()}>
             <motion.div
               className={cn(
-                'absolute top-0 h-screen w-full bg-base-100 p-5 xs:w-1/2',
+                'absolute top-0 h-screen w-full bg-base-100 p-5 pr-0 xs:w-1/2',
                 position === 'left' && 'left-0',
                 position === 'right' && 'right-0'
               )}
             >
-              <motion.div className='pt-14'>{children}</motion.div>
+              <motion.div className='my-14 h-full overflow-auto pb-14'>
+                {children}
+              </motion.div>
             </motion.div>
           </motion.div>
         </motion.div>
