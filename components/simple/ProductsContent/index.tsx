@@ -100,7 +100,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
 
       <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
         {state.isLoading && !state.products.length && !Boolean(category) ? (
-          <ProductCardSkeleton length={4} />
+          <ProductCardSkeleton customGrid length={4} />
         ) : (
           state.products.map(printProducts)
         )}

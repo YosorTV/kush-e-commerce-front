@@ -37,7 +37,7 @@ export const Sidebar: FC<SidebarProps> = ({
                 position === 'right' && 'right-0'
               )}
             >
-              <motion.div className='my-14 h-full overflow-auto pb-14'>
+              <motion.div className='my-14 h-full overflow-auto'>
                 {children}
               </motion.div>
             </motion.div>

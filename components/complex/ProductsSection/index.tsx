@@ -14,7 +14,7 @@ export const ProductsSection = async ({ locale }: { locale: string }) => {
 
   return (
     <section>
-      <div className='h-[200px] md:h-[340px] lg:h-[420px]'>
+      <div className='h-[200px] w-full md:h-[340px] lg:h-[420px]'>
         <StrapiImage
           width={1920}
           height={1080}
@@ -27,13 +27,16 @@ export const ProductsSection = async ({ locale }: { locale: string }) => {
         <Title
           level='2'
           className={cn(
-            'py-5 text-5xl uppercase text-base-200',
+            'py-5 text-center text-4xl uppercase text-base-200 lg:text-left lg:text-5xl',
             cormorant.className
           )}
         >
           {title}
         </Title>
-        <ProductsController tabs={categories} className='flex flex-col' />
+        <ProductsController
+          tabs={categories}
+          className='flex w-full items-center justify-between gap-x-6'
+        />
         <ProductsContent className='pt-6' />
       </div>
     </section>
