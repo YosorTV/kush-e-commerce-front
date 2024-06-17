@@ -102,6 +102,11 @@ export const ProductsController: FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    handleTab({ target: { value: tabs[0].slug } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <nav className={className}>
       {printTabs}
