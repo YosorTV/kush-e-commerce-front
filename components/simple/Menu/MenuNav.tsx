@@ -8,7 +8,7 @@ import {
   StrapiLinkType,
 } from '@/types/components';
 import { FC } from 'react';
-import { Title } from '@/components/elements';
+import { Logo, Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
 
@@ -96,6 +96,10 @@ export const MenuNav: FC<MenuNavProps> = ({
             />
           ))}
         </motion.ul>
+        <div className='divider pr-5' />
+        <div className='flex w-full justify-center pr-5'>
+          <Logo height={90} />
+        </div>
       </div>
     </>
   );

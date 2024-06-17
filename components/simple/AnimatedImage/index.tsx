@@ -47,7 +47,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
         onHoverStart={handleShowOverlay}
         onHoverEnd={handleHideOverlay}
         className={cn(
-          'relative min-h-[480px] border border-base-100',
+          'relative h-[400px] border border-base-100',
           showOverlay && 'border-base-200'
         )}
       >
