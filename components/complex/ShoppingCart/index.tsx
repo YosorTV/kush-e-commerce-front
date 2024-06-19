@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 import { useCart } from '@/store';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -22,16 +22,6 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
     checkout: <Checkout userId={userId} />,
     success: <Success />,
   };
-
-  useEffect(() => {
-    if (cartStore.isOpen) {
-      document.body.classList.add('overflow-hidden');
-    }
-
-    return () => {
-      document.body.classList.add('overflow-auto');
-    };
-  }, [cartStore.isOpen]);
 
   const handleToggle = () => cartStore.onToggle();
 

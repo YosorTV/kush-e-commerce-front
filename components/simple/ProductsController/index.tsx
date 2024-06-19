@@ -5,16 +5,19 @@ import { useSearchParams } from 'next/navigation';
 
 import { usePathname, useRouter } from '@/lib/navigation';
 import { cn, updateUrlParams } from '@/lib';
-import { Button } from '@/components/elements';
+import { Button, Sidebar } from '@/components/elements';
 import { useScreen } from '@/lib/hooks';
 
 import { BiSolidArrowToBottom } from 'react-icons/bi';
 import { RiListSettingsLine } from 'react-icons/ri';
+import { useFilters } from '@/store';
 
 export const ProductsController: FC<{
   tabs: any[];
   className?: string;
 }> = ({ className, tabs }) => {
+  const state = useFilters();
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -99,22 +102,26 @@ export const ProductsController: FC<{
 
   useEffect(() => {
     handleTab({ target: { value: tabs[0].slug } });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    handleTab({ target: { value: tabs[0].slug } });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <nav className={className}>
       {printTabs}
       <div className='flex items-center gap-x-3 underline underline-offset-8'>
-        <Button className='text-sm !font-medium md:text-xl'>
+        <Button
+          className='text-sm !font-medium md:text-xl'
+          onClick={state.onToggle}
+        >
           Filtres / Sort
         </Button>
         <RiListSettingsLine className='h-6 w-6 fill-base-200 ' />
+        <Sidebar
+          opened={state.isOpen}
+          onToggle={state.onToggle}
+          position='right'
+        >
+          Form
+        </Sidebar>
       </div>
     </nav>
   );

@@ -14,13 +14,14 @@ export const ProductsSection = async ({ locale }: { locale: string }) => {
 
   return (
     <section>
-      <div className='h-[200px] w-full md:h-[340px] lg:h-[420px]'>
+      <div className='h-60 overflow-hidden lg:h-lg'>
         <StrapiImage
-          width={1920}
-          height={1080}
+          width={1000}
+          height={1000}
           src={img?.url}
           alt={img?.alternativeText}
-          className='h-full w-full object-cover object-center-to-top'
+          className='hero-image'
+          priority
         />
       </div>
       <div className='px-5'>
