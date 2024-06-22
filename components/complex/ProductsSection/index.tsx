@@ -28,7 +28,7 @@ export const ProductsSection = async ({ locale }: { locale: string }) => {
         <Title
           level='2'
           className={cn(
-            'py-5 text-center text-4xl uppercase text-base-200 lg:text-left lg:text-5xl',
+            'py-5 text-left text-4xl uppercase text-base-200 lg:text-5xl',
             cormorant.className
           )}
         >

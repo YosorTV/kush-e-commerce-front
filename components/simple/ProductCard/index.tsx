@@ -1,7 +1,10 @@
+'use client';
+
 import { FC } from 'react';
 
 import { AnimatedImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
+import { motion } from 'framer-motion';
 
 import { cn } from '@/lib';
 import { formatPrice } from '@/helpers/formatters';
@@ -20,7 +23,11 @@ export const ProductCard: FC<ProductCardProps> = ({
   hintText,
 }) => {
   return (
-    <figure
+    <motion.figure
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ ease: 'easeOut', duration: 0.5 }}
       key={product.id}
       className={cn('relative grid cursor-pointer', className)}
     >
@@ -50,6 +57,6 @@ export const ProductCard: FC<ProductCardProps> = ({
           </div>
         </div>
       </figcaption>
-    </figure>
+    </motion.figure>
   );
 };

@@ -20,6 +20,7 @@ interface SubmitButtonProps {
   loadingText?: string;
   className?: string;
   loading?: boolean;
+  disabled?: boolean;
 }
 
 export function SubmitButton({
@@ -27,6 +28,7 @@ export function SubmitButton({
   loadingText,
   loading,
   icon,
+  disabled,
   className,
 }: Readonly<SubmitButtonProps>) {
   const status = useFormStatus();
@@ -38,17 +40,16 @@ export function SubmitButton({
 
     return icon || text;
   }, [icon, loading, loadingText, status.pending, text]);
+
   return (
     <Button
       type='submit'
-      aria-disabled={status.pending || loading}
-      disabled={status.pending || loading}
+      aria-disabled={status.pending || loading || disabled}
+      disabled={status.pending || loading || disabled}
       className={cn(
-        'btn shadow-none',
-        icon
-          ? 'animate-none border-none bg-transparent shadow-none'
-          : 'btn-success',
-        className
+        className,
+        disabled && '!bg-gray-400 !opacity-50',
+        icon !== null && 'animate-none border-none bg-transparent shadow-none'
       )}
     >
       {printButtonContent}

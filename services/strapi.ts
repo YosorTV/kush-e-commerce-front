@@ -9,7 +9,7 @@ export const getStrapiData = async (
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
   url.search = queryParams || null;
 
-  const response = await getData(url.href, { ...options, cache: 'no-store' });
+  const response = await getData(url.href, { ...options });
 
   return flattenAttributes(response);
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { usePathname, useRouter } from '@/lib/navigation';
@@ -11,29 +11,36 @@ import { useScreen } from '@/lib/hooks';
 import { BiSolidArrowToBottom } from 'react-icons/bi';
 import { RiListSettingsLine } from 'react-icons/ri';
 import { useFilters } from '@/store';
+import { FilterForm } from '@/components/forms';
+import { useTranslations } from 'next-intl';
+
+type TActiveTab = {
+  title: string;
+  slug: string;
+};
 
 export const ProductsController: FC<{
   tabs: any[];
   className?: string;
 }> = ({ className, tabs }) => {
   const state = useFilters();
+  const { md } = useScreen();
+  const t = useTranslations('filter');
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentTab = searchParams.get('category');
 
-  const { md } = useScreen();
+  const [activeTab, setActiveTab] = useState<TActiveTab>({
+    title: '',
+    slug: '',
+  });
 
   const handleTab = useCallback(
-    ({ target }: any) => {
-      const url = updateUrlParams(
-        pathname,
-        searchParams,
-        'category',
-        target.value
-      );
+    (tab: any) => {
+      setActiveTab(tab);
 
+      const url = updateUrlParams(pathname, searchParams, 'category', tab.slug);
       router.replace(url);
     },
     [pathname, router, searchParams]
@@ -41,12 +48,13 @@ export const ProductsController: FC<{
 
   const printDesktopTab = useCallback(
     (tab: any) => {
-      const isActive = tab.slug === currentTab;
+      const isActive = tab.slug === activeTab.slug;
       return (
         <li key={tab.id} className={cn('group', { active: isActive })}>
           <Button
+            title={tab.title}
             value={tab.slug}
-            onClick={handleTab}
+            onClick={() => handleTab(tab)}
             className='text-sm !font-medium uppercase group-[.active]:underline group-[.active]:underline-offset-8 md:text-xl'
           >
             {tab?.title}
@@ -54,17 +62,18 @@ export const ProductsController: FC<{
         </li>
       );
     },
-    [currentTab, handleTab]
+    [activeTab.slug, handleTab]
   );
 
   const printMobileTab = useCallback(
     (tab: any) => {
-      const isActive = tab.slug === currentTab;
+      const isActive = tab.slug === activeTab.slug;
       return (
         <li key={tab.id} className={cn('group', { active: isActive })}>
           <Button
+            title={tab.title}
             value={tab.slug}
-            onClick={handleTab}
+            onClick={() => handleTab(tab)}
             className='flex justify-start font-medium uppercase group-[.active]:underline group-[.active]:underline-offset-8'
           >
             {tab?.title}
@@ -72,7 +81,7 @@ export const ProductsController: FC<{
         </li>
       );
     },
-    [currentTab, handleTab]
+    [activeTab.slug, handleTab]
   );
 
   const printTabs = useMemo(() => {
@@ -87,7 +96,7 @@ export const ProductsController: FC<{
           role='button'
           className='flex gap-x-3 font-medium uppercase text-base-200 underline underline-offset-8'
         >
-          {currentTab}
+          {activeTab.title}
           <BiSolidArrowToBottom className='h-6 w-6 fill-base-200' />
         </div>
         <ul
@@ -98,10 +107,11 @@ export const ProductsController: FC<{
         </ul>
       </div>
     );
-  }, [currentTab, md, printDesktopTab, printMobileTab, tabs]);
+  }, [activeTab.title, md, printDesktopTab, printMobileTab, tabs]);
 
   useEffect(() => {
-    handleTab({ target: { value: tabs[0].slug } });
+    handleTab({ title: tabs[0].title, slug: tabs[0].slug });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -112,7 +122,7 @@ export const ProductsController: FC<{
           className='text-sm !font-medium md:text-xl'
           onClick={state.onToggle}
         >
-          Filtres / Sort
+          {t('title')}
         </Button>
         <RiListSettingsLine className='h-6 w-6 fill-base-200 ' />
         <Sidebar
@@ -120,7 +130,7 @@ export const ProductsController: FC<{
           onToggle={state.onToggle}
           position='right'
         >
-          Form
+          <FilterForm />
         </Sidebar>
       </div>
     </nav>

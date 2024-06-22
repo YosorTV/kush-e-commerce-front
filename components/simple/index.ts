@@ -20,3 +20,6 @@ export * from '@/components/simple/AnimatedImage';
 export * from '@/components/simple/SubMenu';
 export * from '@/components/simple/CollectionCarousel';
 export * from '@/components/simple/CollectionCard';
+export * from '@/components/simple/SortFields';
+export * from '@/components/simple/RangeSlider';
+export * from '@/components/simple/MaterialList';

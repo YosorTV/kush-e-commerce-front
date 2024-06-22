@@ -9,11 +9,15 @@ import { motion } from 'framer-motion';
 
 import { HeaderProps } from '@/types/components';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
+import { useFilters } from '@/store';
 
 export const Header: FC<HeaderProps> = ({ data }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
+  const state = useFilters();
 
-  const handleShowSubMenu = () => setShowOverlay(true);
+  const handleShowSubMenu = () =>
+    !state.isOpen ? setShowOverlay(true) : setShowOverlay(false);
+
   const handleHideSubMenu = () => setShowOverlay(false);
 
   const {
