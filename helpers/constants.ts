@@ -249,3 +249,26 @@ export const SCREEEN = {
   xl: '(min-width: 1280px)',
   xxl: '(min-width: 1920px)',
 };
+
+export const SORT_OPTIONS = [
+  {
+    id: 1,
+    label: 'recommended',
+    name: 'recommended',
+  },
+  {
+    id: 2,
+    label: 'bestSeller',
+    name: 'best',
+  },
+  {
+    id: 3,
+    label: 'priceLowToHigh',
+    name: 'low',
+  },
+  {
+    id: 4,
+    label: 'priceHighToLow',
+    name: 'high',
+  },
+];

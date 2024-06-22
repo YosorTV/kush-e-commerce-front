@@ -154,3 +154,12 @@ input:-webkit-autofill:active {
   gap: 0.6rem;
   align-items: center;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

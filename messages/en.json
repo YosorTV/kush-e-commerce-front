@@ -10,5 +10,28 @@
     "loadMore": "Load more",
     "explore": "Explore now",
     "total": "Total {number}"
+  },
+  "sort": {
+    "title": "Sort by",
+    "recommended": "Recommended",
+    "bestSeller": "Best seller",
+    "priceLowToHigh": "Price Low to High",
+    "priceHighToLow": "Price High to Low"
+  },
+  "filter": {
+    "title": "Filter/Sort",
+    "price": "Price",
+    "material": "Material",
+    "color": "Color",
+    "collection": "Collection",
+    "stone": "Stone",
+    "style": "Style",
+    "submit": "See results",
+    "progress": "In process"
+  },
+  "material": {
+    "gold": "Gold",
+    "silver": "Silver",
+    "platinum": "Platinum"
   }
 }

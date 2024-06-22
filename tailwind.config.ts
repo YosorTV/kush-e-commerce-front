@@ -64,6 +64,9 @@ module.exports = {
         hero: 'auto 1fr',
         fluid: 'repeat(auto-fit, minmax(10rem, 1fr))',
       },
+      animation: {
+        fadeInUp: 'fadeInUp 1s ease-out',
+      },
     },
   },
   darkMode: 'class',

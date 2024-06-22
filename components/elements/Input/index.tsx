@@ -1,6 +1,11 @@
 import { cn } from '@/lib';
 import { InputProps } from '@/types/components';
-import React from 'react';
+
+const textInputTypes = (type: HTMLInputElement['type']) => {
+  const customTypesStyles = ['radio', 'checkbox', 'range', 'file', 'date'];
+
+  return !customTypesStyles.includes(type);
+};
 
 export const Input = ({
   name,
@@ -15,12 +20,11 @@ export const Input = ({
   children,
   ...rest
 }: InputProps) => {
+  const isTextType = textInputTypes(type);
+
   return (
     <div
-      className={cn(
-        'relative flex w-full flex-1 flex-col gap-y-2',
-        containerClass
-      )}
+      className={cn('relative flex w-full flex-col gap-y-2', containerClass)}
     >
       {label && (
         <label htmlFor={name} className={cn('label label-text', labelStyle)}>
@@ -34,9 +38,10 @@ export const Input = ({
           type={type}
           placeholder={placeholder}
           className={cn(
-            'autofill:bg-red-600! input w-full cursor-pointer',
-            !error ? 'input input-bordered' : 'input-error',
-            className
+            isTextType
+              ? 'input input-bordered w-full cursor-pointer'
+              : className,
+            error && 'input-error'
           )}
         />
         {children}

@@ -10,5 +10,28 @@
     "loadMore": "Показати ще",
     "explore": "Переглянути",
     "total": "Всього {number}"
+  },
+  "sort": {
+    "title": "Сортувати за",
+    "recommended": "Рекомендовані",
+    "bestSeller": "Лідер продажу",
+    "priceLowToHigh": "Від дешевих до дорогих",
+    "priceHighToLow": "Від дорогих до дешевих"
+  },
+  "filter": {
+    "title": "Фільтр/Сортування",
+    "price": "Ціна",
+    "material": "Матеріал",
+    "color": "Колір",
+    "collection": "Коллекція",
+    "stone": "Камінь",
+    "style": "Стиль",
+    "submit": "Переглянути результат",
+    "progress": "Опрацьовуємо"
+  },
+  "material": {
+    "gold": "Золото",
+    "silver": "Серебро",
+    "platinum": "Платіна"
   }
 }

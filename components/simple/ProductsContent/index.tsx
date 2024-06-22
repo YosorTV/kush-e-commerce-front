@@ -81,10 +81,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
 
   return (
     <div
-      className={cn(
-        'relative flex min-h-[600px] flex-col justify-between',
-        className
-      )}
+      className={cn('relative flex h-max flex-col justify-between', className)}
     >
       {title && (
         <Title

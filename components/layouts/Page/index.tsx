@@ -7,7 +7,7 @@ export const PageLayout: FC<PageLayoutProps> = ({ children, className }) => {
   return (
     <div
       className={cn(
-        'flex min-h-full flex-grow flex-col overflow-x-hidden',
+        'animate-fadeInUp flex min-h-full flex-grow flex-col overflow-x-hidden',
         className
       )}
     >

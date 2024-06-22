@@ -13,10 +13,10 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data?.title}
         </Title>
       </div>
-      <figure className='relative flex h-lg w-full flex-col-reverse overflow-hidden text-center text-white'>
+      <figure className='relative flex h-60 w-full flex-col-reverse overflow-hidden text-center text-white lg:h-lg'>
         <StrapiImage
-          height={3000}
-          width={3000}
+          height={1000}
+          width={1000}
           className='hero-image'
           src={data?.image?.url}
           alt={data?.image?.alternativeText}

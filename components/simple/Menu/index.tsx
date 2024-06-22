@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Hamburger, Sidebar } from '@/components/elements';
 import { MenuNav } from './MenuNav';
 
-import { useScreen, useScrollLock } from '@/lib/hooks';
+import { useScreen } from '@/lib/hooks';
 import { usePathname } from '@/lib/navigation';
 import { ListOfPages } from '../ListOfPages';
 
@@ -38,8 +38,6 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
   const category = params.get('category');
 
   const handleToggle = () => menu.onToggle();
-
-  useScrollLock(menu.isOpen);
 
   useEffect(() => {
     return () => {

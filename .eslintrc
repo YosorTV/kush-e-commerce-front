@@ -58,6 +58,7 @@
   },
   "rules": {
     "no-console": ["warn", { "allow": ["info", "error"] }],
+
     "@next/next/no-head-element": "off",
     "no-param-reassign": [
       2,
@@ -123,7 +124,7 @@
     "default-param-last": "off",
     "react/prop-types": 0,
     "react/no-array-index-key": 0,
-    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/exhaustive-deps": 0,
     "camelcase": "off",
     "no-warning-comments": 1,
     "import/prefer-default-export": "off",

@@ -28,12 +28,9 @@ export const SearchController: FC<TSearchController> = ({
   const locale = useLocale();
   const name = useDebounce(state.searchValue, 500);
 
-  const getProducts = useCallback(
-    () => state.fetchProducts({ locale, name, page: `${state.meta.page}` }),
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [name, locale, state.meta.page]
-  );
+  const getProducts = useCallback(() => {
+    state.fetchProducts({ locale, name, page: `${state.meta.page}` });
+  }, [state, locale, name]);
 
   const handleSearch = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -73,7 +70,9 @@ export const SearchController: FC<TSearchController> = ({
               <Input
                 name='search'
                 placeholder={placeholder}
-                containerClass='col-span-5 md:col-span-3 lg:col-span-2 pt-6 md:pt-0 col-start-1 md:col-start-2 md:row-start-1 md:pr-16 lg:pr-0'
+                className='w-full'
+                type='search'
+                containerClass='col-span-5 md:col-span-3 lg:col-span-2 pt-6 md:pt-0 col-start-1 md:col-start-2 md:row-start-1 md:pr-16 lg:pr-0 w-full'
                 value={state.searchValue}
                 isLoading={state.isLoading}
                 onChange={handleSearch}

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { animCart } from '@/assets/animations';
 import { cn } from '@/lib';
+import { useScrollLock } from '@/lib/hooks';
 
 interface SidebarProps {
   opened: boolean;
@@ -19,6 +20,8 @@ export const Sidebar: FC<SidebarProps> = ({
   children,
   onToggle,
 }) => {
+  useScrollLock(opened);
+
   return (
     <AnimatePresence mode='wait'>
       {opened && (
@@ -32,7 +35,7 @@ export const Sidebar: FC<SidebarProps> = ({
           <motion.div layout onClick={(e) => e.stopPropagation()}>
             <motion.div
               className={cn(
-                'absolute top-0 h-screen w-full bg-base-100 p-5 pr-0 xs:w-1/2',
+                'md:1/2 absolute top-0 h-screen w-full bg-base-100 p-5 pr-0 sm:w-2/3 lg:w-1/3',
                 position === 'left' && 'left-0',
                 position === 'right' && 'right-0'
               )}

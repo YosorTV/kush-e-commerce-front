@@ -1,11 +1,11 @@
 'use client';
 
+import { FC } from 'react';
 import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 import { cn, createQueryString } from '@/lib';
-import { useRouter } from 'next/navigation';
 import { LOCALES } from '@/helpers/constants';
-import { FC } from 'react';
 
 export const LangChanger: FC<{ className?: string }> = ({ className }) => {
   const router = useRouter();
