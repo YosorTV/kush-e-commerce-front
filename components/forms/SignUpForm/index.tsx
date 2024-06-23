@@ -1,10 +1,13 @@
 'use client';
 
 import { FC } from 'react';
+
+import { cn, schemas } from '@/lib';
+import { createUserAction } from '@/services';
+
 import { SubmitButton } from '@/components/simple';
 import { Form, Input, Title } from '@/components/elements';
-import { createUserAction } from '@/services';
-import { cn, schemas } from '@/lib';
+
 import { cormorant } from '@/assets/fonts';
 
 interface ISignUpForm {
@@ -25,9 +28,9 @@ export const SignUpForm: FC<ISignUpForm> = ({
   const schema = schemas.signup(locale);
 
   const printInputs = (data: any) => {
-    return data?.map((input: any) => (
-      <Input key={input.id} containerClass='pb-2 md:pb-4' {...input} />
-    ));
+    return data?.map((input: any) => {
+      return <Input key={input.id} containerClass='pb-2 md:pb-4' {...input} />;
+    });
   };
 
   return (

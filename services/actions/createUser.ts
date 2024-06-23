@@ -5,16 +5,15 @@ import { createUser } from '../api/create-user';
 import { redirect } from '@/lib/navigation';
 
 export async function createUserAction(prevState: any, formData: FormData) {
-  console.log('formData: ', formData);
-
   const fields = {
     locale: formData.get('locale'),
     email: formData.get('email'),
     firstName: formData.get('firstName'),
     lastName: formData.get('lastName'),
-    phone: formData.get('phone'),
+    phoneNumber: formData.get('phoneNumber'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
+    username: `${formData.get('firstName')}${''}${formData.get('lastName')}`,
   };
 
   const validatedData: any = schemas

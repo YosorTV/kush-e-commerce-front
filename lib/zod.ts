@@ -38,10 +38,28 @@ const loginSchema = z.object({
   password: passwordSchema,
 });
 
+const normalizePhoneNumber = (phoneNumber: string) =>
+  phoneNumber.replace(/[^\d]/g, '');
+
 const requiredTextField = (locale: Locale) =>
   z.string().refine((val) => val.trim() !== '', {
     message: requiredErrorMessage(locale),
   });
+
+const requiredPhoneField = (locale: Locale) =>
+  z.string().refine(
+    (val) => {
+      const normalizedPhoneNumber = normalizePhoneNumber(val);
+
+      return (
+        normalizedPhoneNumber.trim() !== '' &&
+        /^\d{6,}$/.test(normalizedPhoneNumber)
+      );
+    },
+    {
+      message: requiredErrorMessage(locale),
+    }
+  );
 
 const profileSchema = z.object({
   firstName: z.string().refine((val) => val.trim() !== '', {
@@ -68,11 +86,11 @@ const signupSchema = (locale: Locale) =>
   z.object({
     firstName: requiredTextField(locale),
     lastName: requiredTextField(locale),
-    phoneNumber: requiredTextField(locale),
+    username: z.string().readonly(),
+    phoneNumber: requiredPhoneField(locale),
     password: passwordSchema,
     confirmPassword: passwordSchema,
     email: z.string().email(getEmailErrorMessage(locale)),
-    locale: z.string().readonly(),
   });
 
 export const forgotPasswordSchema = z.object({

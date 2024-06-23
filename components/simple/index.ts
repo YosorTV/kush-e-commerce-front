@@ -23,3 +23,4 @@ export * from '@/components/simple/CollectionCard';
 export * from '@/components/simple/SortFields';
 export * from '@/components/simple/RangeSlider';
 export * from '@/components/simple/MaterialList';
+export * from '@/components/simple/SizeList';
