@@ -187,7 +187,14 @@ export const STRAPI_API_ROUTES = {
     return {
       registration: {
         locale,
-        populate: ['formFields', 'redirectUrl', 'submitBtn'],
+        populate: {
+          formFields: true,
+          redirectUrl: true,
+          submitBtn: true,
+          cover: {
+            fields: ['url', 'alternativeText', 'formats'],
+          },
+        },
       },
       success: { locale, populate: ['title', 'description', 'redirectUrl'] },
       forgot: {

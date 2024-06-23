@@ -163,3 +163,18 @@ input:-webkit-autofill:active {
     opacity: 1;
   }
 }
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+  @apply !bg-transparent;
+}
+
+.react-tel-input .flag-dropdown .selected-flag:hover {
+  @apply !bg-transparent;
+}
+.react-tel-input .country-list .country:hover {
+  @apply !bg-neutral !text-base-300;
+}
+
+.react-tel-input .country-list .country.highlight {
+  @apply !bg-neutral !text-base-300;
+}
