@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, Children, ReactElement } from 'react';
 import { useFormState } from 'react-dom';
 
 import { FormProps } from '@/types/components';
@@ -39,13 +39,14 @@ export const Form: FC<FormProps<any>> = ({
     }
 
     if (formState.redirectUrl) {
+      ref.current?.reset();
       router.push(formState.redirectUrl);
     }
   }, [formState, router]);
 
   return (
     <form ref={ref} action={formAction} className={className}>
-      {React.Children.map(children as React.ReactElement[], (child, index) =>
+      {Children.map(children as ReactElement[], (child, index) =>
         processChild(child, index, formState)
       )}
     </form>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { IoClose } from 'react-icons/io5';
 
 import { useFilters } from '@/store';
@@ -8,16 +8,19 @@ import { useFilters } from '@/store';
 import {
   MaterialList,
   RangeSlider,
+  SizeList,
   SortFields,
   SubmitButton,
 } from '@/components/simple';
 
-import { Accordion, Button, Form, Title } from '@/components/elements';
+import { Accordion, Button, Form, Input, Title } from '@/components/elements';
 
 import { SORT_OPTIONS } from '@/helpers/constants';
+import { filter } from '@/services';
 
 export const FilterForm = () => {
   const t = useTranslations();
+  const locale = useLocale();
   const state = useFilters();
 
   const FILTER_OPTIONS = [
@@ -31,10 +34,20 @@ export const FilterForm = () => {
       title: 'material',
       component: <MaterialList />,
     },
+    {
+      id: 3,
+      title: 'size',
+      component: <SizeList />,
+    },
   ];
 
   return (
-    <Form method='POST' className='flex h-full flex-1 flex-col pr-5'>
+    <Form
+      method='POST'
+      state={{ data: state.options }}
+      action={filter}
+      className='flex h-full flex-1 flex-col pr-5'
+    >
       <div className='flex w-full items-baseline justify-between pb-10'>
         <Title level='2' className='text-xl font-semibold text-base-200'>
           {t('sort.title')}:
@@ -47,13 +60,13 @@ export const FilterForm = () => {
           <IoClose className='h-6 w-6 fill-base-200' />
         </Button>
       </div>
+      <Input name='locale' defaultValue={locale} hidden />
       <SortFields data={SORT_OPTIONS} />
       <Accordion data={FILTER_OPTIONS} />
       <SubmitButton
-        disabled
-        className='!bg-base-200 !text-base-100'
         text={t('filter.submit')}
         loadingText={t('filter.progress')}
+        className='!bg-base-200 !text-base-100'
       />
     </Form>
   );

@@ -18,6 +18,7 @@ export const Input = ({
   containerClass,
   isLoading,
   children,
+  id,
   ...rest
 }: InputProps) => {
   const isTextType = textInputTypes(type);
@@ -27,14 +28,15 @@ export const Input = ({
       className={cn('relative flex w-full flex-col gap-y-2', containerClass)}
     >
       {label && (
-        <label htmlFor={name} className={cn('label label-text', labelStyle)}>
+        <label htmlFor={id} className={cn('label label-text', labelStyle)}>
           {label}
         </label>
       )}
       <div className='relative flex'>
         <input
-          name={name}
           {...rest}
+          id={id}
+          name={name}
           type={type}
           placeholder={placeholder}
           className={cn(

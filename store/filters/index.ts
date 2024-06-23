@@ -1,12 +1,15 @@
 import { StateCreator } from 'zustand';
 import { TFiltersState } from '@/types/store';
 
+const defaultOptions: TFiltersState['options'] = {
+  sizes: [],
+  materials: [],
+  sortValue: 'recommended',
+  price: 0,
+};
+
 export const filterSlice: StateCreator<TFiltersState> = (set) => ({
-  options: {
-    sortValue: 'recommended',
-    price: 0,
-    materials: [],
-  },
+  options: defaultOptions,
   isOpen: false,
   onToggle: () => set((state) => ({ isOpen: !state.isOpen })),
   onFilter: ({ key, value }) =>
@@ -18,11 +21,7 @@ export const filterSlice: StateCreator<TFiltersState> = (set) => ({
     })),
   onReset: () =>
     set({
-      options: {
-        sortValue: 'recommended',
-        price: 0,
-        materials: [],
-      },
+      options: defaultOptions,
       isOpen: false,
     }),
 });

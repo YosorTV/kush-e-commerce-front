@@ -21,6 +21,7 @@ export const RangeSlider = () => {
     <div className='flex w-full flex-col'>
       <Input
         type='range'
+        name='price'
         min={0}
         max={max}
         value={state.options.price}
