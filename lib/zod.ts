@@ -16,6 +16,15 @@ const getEmailErrorMessage = (locale: Locale) => {
   return messages[locale] || messages.en;
 };
 
+const requiredErrorMessage = (locale: Locale) => {
+  const messages: Record<Locale, string> = {
+    en: 'Required field',
+    uk: 'Обовязкове поле',
+  };
+
+  return messages[locale] || messages.en;
+};
+
 const passwordSchema = z
   .string()
   .min(8, { message: 'Password must be at least 8 characters long' })
@@ -28,6 +37,29 @@ const loginSchema = z.object({
   identifier: emailSchema,
   password: passwordSchema,
 });
+
+const normalizePhoneNumber = (phoneNumber: string) =>
+  phoneNumber.replace(/[^\d]/g, '');
+
+const requiredTextField = (locale: Locale) =>
+  z.string().refine((val) => val.trim() !== '', {
+    message: requiredErrorMessage(locale),
+  });
+
+const requiredPhoneField = (locale: Locale) =>
+  z.string().refine(
+    (val) => {
+      const normalizedPhoneNumber = normalizePhoneNumber(val);
+
+      return (
+        normalizedPhoneNumber.trim() !== '' &&
+        /^\d{6,}$/.test(normalizedPhoneNumber)
+      );
+    },
+    {
+      message: requiredErrorMessage(locale),
+    }
+  );
 
 const profileSchema = z.object({
   firstName: z.string().refine((val) => val.trim() !== '', {
@@ -50,11 +82,16 @@ const profileSchema = z.object({
   userId: z.string().readonly(),
 });
 
-const signupSchema = z.object({
-  username: z.string().trim().min(3, 'Name must be at least 3 characters long'),
-  email: z.string().email('Invalid email format'),
-  password: passwordSchema,
-});
+const signupSchema = (locale: Locale) =>
+  z.object({
+    firstName: requiredTextField(locale),
+    lastName: requiredTextField(locale),
+    username: z.string().readonly(),
+    phoneNumber: requiredPhoneField(locale),
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
+    email: z.string().email(getEmailErrorMessage(locale)),
+  });
 
 export const forgotPasswordSchema = z.object({
   email: emailSchema,

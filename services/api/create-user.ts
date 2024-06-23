@@ -3,7 +3,10 @@ import { postStrapiData } from '../strapi';
 
 interface RegisterUserProps {
   username: string;
+  firstName: string;
+  lastName: string;
   password: string;
+  phoneNumber: string;
   email: string;
   confirmed: boolean;
 }

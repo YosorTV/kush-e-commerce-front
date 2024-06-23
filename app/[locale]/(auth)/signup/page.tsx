@@ -2,6 +2,7 @@ import { SignUpForm } from '@/components/forms';
 import { PageLayout } from '@/components/layouts';
 import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
+import { getSignUpData } from '@/services';
 import { getStrapiData } from '@/services/strapi';
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
@@ -26,17 +27,20 @@ export async function generateMetadata({
 export default async function SignUpPage({ params }: PageProps) {
   const { locale } = params;
 
-  const pageQP = generateStrapiQuery(
-    STRAPI_API_ROUTES.auth({ locale }).registration
-  );
-
-  const data = await getStrapiData('registration-page', pageQP);
+  const { data } = await getSignUpData({ locale });
 
   return (
-    <PageLayout className='container h-screen'>
-      <div className='mx-auto flex h-full w-1/3 flex-col justify-center gap-y-5'>
-        <SignUpForm formFields={data.formFields} cta={data.submitBtn} />
-      </div>
+    <PageLayout
+      className='relative mb-12 mt-8 h-screen md:h-xl'
+      cover={data.cover}
+    >
+      <SignUpForm
+        title='Create account'
+        locale={locale}
+        formFields={data.formFields}
+        cta={data.submitBtn}
+        className='absolute left-1/2 w-[95%] -translate-x-1/2 transform rounded-md p-4 pt-2 shadow-2xl md:w-[680px] md:p-8 md:pt-4'
+      />
     </PageLayout>
   );
 }

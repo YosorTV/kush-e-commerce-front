@@ -27,7 +27,8 @@
     "stone": "Stone",
     "style": "Style",
     "submit": "See results",
-    "progress": "In process"
+    "progress": "In process",
+    "size": "Size"
   },
   "material": {
     "gold": "Gold",
