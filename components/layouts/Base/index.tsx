@@ -19,7 +19,7 @@ export async function BaseLayout({
       <body className='relative grid'>
         <ThemeProvider>
           <Header data={{ ...header, locale }} />
-          <main className='z-0'>{children}</main>
+          <main className='z-0 my-5'>{children}</main>
           <Footer data={footer} locale={locale} />
           <div id='portal' />
           <ClientSideRender />

@@ -37,12 +37,12 @@ export const Header: FC<HeaderProps> = ({ data }) => {
 
   const collectionsData = {
     title: collectionTitle,
-    data: collections.data,
+    data: collections.data ?? [],
   };
 
   const categoryData = {
     title: categoryTitle,
-    data: categories.data,
+    data: categories.data ?? [],
   };
 
   const pagesData = {

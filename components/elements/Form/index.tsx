@@ -1,11 +1,10 @@
 'use client';
 
-import React, { FC, useEffect, useRef } from 'react';
+import { Children, FC, ReactElement, useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 
 import { FormProps } from '@/types/components';
-import { processChild, toaster } from '@/lib';
-import { useRouter } from 'next/navigation';
+import { cn, processChild, toaster } from '@/lib';
 
 export const Form: FC<FormProps<any>> = ({
   children,
@@ -16,16 +15,15 @@ export const Form: FC<FormProps<any>> = ({
     message: null,
     errors: null,
     strapiError: null,
-    redirectUrl: null,
     status: null,
   },
 }) => {
-  const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
+
   const [formState, formAction] = useFormState(action, state);
 
   useEffect(() => {
-    if (formState?.errors || formState.strapiError) {
+    if (formState?.errors || formState?.strapiError) {
       toaster({
         key: 'error',
         message: formState.message,
@@ -33,19 +31,19 @@ export const Form: FC<FormProps<any>> = ({
       });
     }
 
-    if (formState.status === 200) {
-      toaster({ key: 'success', message: formState.message });
-      ref.current?.reset();
+    if (formState?.status === 200) {
+      toaster({ key: 'success', message: formState?.message });
+      ref.current.reset();
     }
+  }, [formState]);
 
-    if (formState.redirectUrl) {
-      router.push(formState.redirectUrl);
-    }
-  }, [formState, router]);
+  const errorClass = formState?.errors
+    ? '!top-10 md:!top-14'
+    : 'top-32 md:top-28';
 
   return (
-    <form ref={ref} action={formAction} className={className}>
-      {React.Children.map(children as React.ReactElement[], (child, index) =>
+    <form ref={ref} action={formAction} className={cn(className, errorClass)}>
+      {Children.map(children as ReactElement[], (child, index) =>
         processChild(child, index, formState)
       )}
     </form>

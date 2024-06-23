@@ -5,13 +5,21 @@ import { createUser } from '../api/create-user';
 import { redirect } from '@/lib/navigation';
 
 export async function createUserAction(prevState: any, formData: FormData) {
+  console.log('formData: ', formData);
+
   const fields = {
-    username: formData.get('username'),
-    password: formData.get('password'),
+    locale: formData.get('locale'),
     email: formData.get('email'),
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
+    phone: formData.get('phone'),
+    password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'),
   };
 
-  const validatedData: any = schemas.signup.safeParse(fields);
+  const validatedData: any = schemas
+    .signup(fields.locale as string)
+    .safeParse(fields);
 
   if (!validatedData.success) {
     const errors = validatedData.error.flatten().fieldErrors;
@@ -21,7 +29,10 @@ export async function createUserAction(prevState: any, formData: FormData) {
       errors,
       strapiError: null,
       status: 400,
-      message: 'Missing Fields. Failed to Register.',
+      message:
+        fields.locale === 'uk'
+          ? 'Валідаційна помилка. Реестрація невдала.'
+          : 'Validation error. Failed to signup.',
     };
   }
 

@@ -27,7 +27,10 @@ export const Input = ({
       className={cn('relative flex w-full flex-col gap-y-2', containerClass)}
     >
       {label && (
-        <label htmlFor={name} className={cn('label label-text', labelStyle)}>
+        <label
+          htmlFor={name}
+          className={cn('label label-text p-0', labelStyle)}
+        >
           {label}
         </label>
       )}
@@ -39,9 +42,9 @@ export const Input = ({
           placeholder={placeholder}
           className={cn(
             isTextType
-              ? 'input input-bordered w-full cursor-pointer'
+              ? 'input input-bordered w-full cursor-pointer placeholder:text-base-200 placeholder:text-opacity-45'
               : className,
-            error && 'input-error'
+            error && 'border-red-600'
           )}
         />
         {children}
@@ -49,7 +52,9 @@ export const Input = ({
       {isLoading && (
         <span className='loading loading-dots loading-md absolute right-3 top-10 md:right-20 md:top-3 lg:right-3' />
       )}
-      {error && <span className={`relative text-xs text-error`}>{error}</span>}
+      {error && (
+        <span className={`relative text-xs text-red-600`}>{error}</span>
+      )}
     </div>
   );
 };
