@@ -1,30 +1,18 @@
 import { ProductsSection } from '@/components/complex';
 import { PageLayout } from '@/components/layouts';
+import { STRAPI_PAGES } from '@/helpers/constants';
 
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
+import { getMetadata } from '@/services';
 
-import { getStrapiData } from '@/services/strapi';
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ ...params }));
-  const data = await getStrapiData('products-page', metaQP);
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
 
-  const { seo } = data;
+  const response = await getMetadata({ path: STRAPI_PAGES.catalog, locale });
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-    robots: seo?.metaRobots,
-    keywords: seo?.keywords,
-  };
+  return response;
 }
 
 export default async function Catalog({ params }: PageProps) {

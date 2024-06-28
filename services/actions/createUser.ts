@@ -12,7 +12,6 @@ export async function createUserAction(prevState: any, formData: FormData) {
     lastName: formData.get('lastName'),
     phoneNumber: formData.get('phoneNumber'),
     password: formData.get('password'),
-    confirmPassword: formData.get('confirmPassword'),
     username: `${formData.get('firstName')}${''}${formData.get('lastName')}`,
   };
 

@@ -29,7 +29,13 @@ export const SignUpForm: FC<ISignUpForm> = ({
 
   const printInputs = (data: any) => {
     return data?.map((input: any) => {
-      return <Input key={input.id} containerClass='pb-2 md:pb-4' {...input} />;
+      return (
+        <Input
+          key={input.id}
+          containerClass='pb-2 md:pb-4 md:last:col-span-2'
+          {...input}
+        />
+      );
     });
   };
 
@@ -47,7 +53,10 @@ export const SignUpForm: FC<ISignUpForm> = ({
       <div className='w-full'>
         <Title
           level='1'
-          className={cn(cormorant.className, 'text-5xl text-base-200')}
+          className={cn(
+            cormorant.className,
+            'text-center text-4xl text-base-200 md:text-5xl'
+          )}
         >
           {title}
         </Title>

@@ -1,11 +1,6 @@
-import { Title } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
 import { StrapiImage } from '@/components/simple';
-import { AddCart } from '@/components/simple/AddButton';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { formatPrice } from '@/helpers/formatters';
-import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '@/services/strapi';
+
 import { PageProps } from '@/types/app/page.types';
 
 export default async function ProductDetails({

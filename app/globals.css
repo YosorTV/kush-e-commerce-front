@@ -178,3 +178,11 @@ input:-webkit-autofill:active {
 .react-tel-input .country-list .country.highlight {
   @apply !bg-neutral !text-base-300;
 }
+
+.auth-page_wrapper {
+  @apply h-3xl md:h-2xl relative mt-8 overflow-hidden;
+}
+
+.auth-page_form {
+  @apply absolute-center w-[95%] rounded-md p-4 pt-2 shadow-2xl md:w-[680px] md:p-8 md:pt-4;
+}

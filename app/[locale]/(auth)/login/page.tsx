@@ -1,35 +1,27 @@
+import { Metadata } from 'next';
+import { getMetadata, getSignInData } from '@/services';
+
 import { NextLink } from '@/components/elements';
 import { SignInForm } from '@/components/forms';
 import { PageLayout } from '@/components/layouts';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '@/services/strapi';
-import { PageProps } from '@/types/app/page.types';
+
+import { STRAPI_PAGES } from '@/helpers/constants';
+
 import { StrapiLinkType } from '@/types/components';
-import { Metadata } from 'next';
+import { PageProps } from '@/types/app/page.types';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
 
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const { seo } = await getStrapiData('login-page', metaQP);
+  const response = await getMetadata({ path: STRAPI_PAGES.signin, locale });
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-  };
+  return response;
 }
 
 export default async function LoginPage({ params }: PageProps) {
   const { locale } = params;
 
-  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).login);
-  const data = await getStrapiData('login-page', pageQP);
+  const { data } = await getSignInData({ locale });
 
   const printLinks = (links: StrapiLinkType[]) => {
     if (!links) return;

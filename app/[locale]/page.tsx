@@ -1,39 +1,29 @@
 import { Metadata } from 'next';
 
+import { getHomeData, getMetadata } from '@/services';
+
 import { StrapiBlockRender } from '@/components/simple';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { getStrapiData } from '@/services/strapi';
-import { generateStrapiQuery } from '@/lib/qs';
-import { PageProps } from '@/types/app/page.types';
 import { PageLayout } from '@/components/layouts';
+import { STRAPI_PAGES } from '@/helpers/constants';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ ...params }));
-  const data = await getStrapiData('home', metaQP);
+import { PageProps } from '@/types/app/page.types';
 
-  const { seo } = data;
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-  };
+  const response = await getMetadata({ path: STRAPI_PAGES.home, locale });
+
+  return response;
 }
 
 export default async function Home({ params }: PageProps) {
   const { locale } = params;
 
-  const homeQP = generateStrapiQuery(STRAPI_API_ROUTES.home({ locale }));
-  const data = await getStrapiData('home', homeQP);
-
+  const { data } = await getHomeData({ locale });
 
   return (
     <PageLayout>
-      <StrapiBlockRender data={data?.blocks} />
+      <StrapiBlockRender data={data.blocks} />
     </PageLayout>
   );
 }

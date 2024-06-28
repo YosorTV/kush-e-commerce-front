@@ -89,7 +89,6 @@ const signupSchema = (locale: Locale) =>
     username: z.string().readonly(),
     phoneNumber: requiredPhoneField(locale),
     password: passwordSchema,
-    confirmPassword: passwordSchema,
     email: z.string().email(getEmailErrorMessage(locale)),
   });
 

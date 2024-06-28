@@ -37,12 +37,8 @@ export const Form: FC<FormProps<any>> = ({
     }
   }, [formState]);
 
-  const errorClass = formState?.errors
-    ? '!top-10 md:!top-14'
-    : 'top-32 md:top-28';
-
   return (
-    <form ref={ref} action={formAction} className={cn(className, errorClass)}>
+    <form ref={ref} action={formAction} className={cn(className)}>
       {Children.map(children as ReactElement[], (child, index) =>
         processChild(child, index, formState)
       )}
