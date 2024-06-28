@@ -1,7 +1,9 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import { FC } from 'react';
+import { signIn } from 'next-auth/react';
+
+import { Button } from '@/components/elements';
 
 export const SignInProviders: FC<{ text: string; identifier: string }> = ({
   text,
@@ -17,13 +19,13 @@ export const SignInProviders: FC<{ text: string; identifier: string }> = ({
 
   return (
     <div className='flex flex-col items-center justify-center gap-5'>
-      <button
+      <Button
         type='button'
-        className='btn btn-ghost w-full'
+        className='w-full rounded-none border-none bg-transparent uppercase text-base-200 outline-none hover:!bg-base-200 hover:text-base-100'
         onClick={actionProvider[identifier]}
       >
         {text}
-      </button>
+      </Button>
     </div>
   );
 };

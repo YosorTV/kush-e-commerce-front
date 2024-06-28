@@ -77,12 +77,18 @@ export const PROFILE_FIELDS = ['general', 'additional', 'actions', 'avatar'];
 export const AUTH_SUCCESS_FIELDS = ['title', 'description', 'redirectUrl'];
 export const AUTH_FORGOT_FIELDS = ['formFields', 'submitBtn', 'loginUrl'];
 export const AUTH_RESET_FIELDS = ['formFields', 'submitBtn'];
-export const AUTH_LOGIN_FIELDS = [
-  'formFields',
-  'additionalLinks',
-  'submitBtn',
-  'providers',
-];
+
+export const AUTH_LOGIN_FIELDS = {
+  formFields: true,
+  additionalLinks: true,
+  submitBtn: true,
+  rememberMe: true,
+  createAccountLink: true,
+  providers: true,
+  cover: {
+    fields: IMAGE_FIELDS,
+  },
+};
 
 export const META_FIELDS = [
   'metaTitle',

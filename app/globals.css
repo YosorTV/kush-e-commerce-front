@@ -180,9 +180,9 @@ input:-webkit-autofill:active {
 }
 
 .auth-page_wrapper {
-  @apply h-3xl md:h-2xl relative mt-8 overflow-hidden;
+  @apply relative mt-8 h-3xl overflow-hidden md:h-2xl;
 }
 
 .auth-page_form {
-  @apply absolute-center w-[95%] rounded-md p-4 pt-2 shadow-2xl md:w-[680px] md:p-8 md:pt-4;
+  @apply absolute-center w-[95%] rounded-md px-5 py-2.5 shadow-2xl md:w-[680px] md:px-10 md:py-5;
 }

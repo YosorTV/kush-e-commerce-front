@@ -1,13 +1,11 @@
 import { Metadata } from 'next';
 import { getMetadata, getSignInData } from '@/services';
 
-import { NextLink } from '@/components/elements';
 import { SignInForm } from '@/components/forms';
 import { PageLayout } from '@/components/layouts';
 
 import { STRAPI_PAGES } from '@/helpers/constants';
 
-import { StrapiLinkType } from '@/types/components';
 import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
@@ -23,33 +21,9 @@ export default async function LoginPage({ params }: PageProps) {
 
   const { data } = await getSignInData({ locale });
 
-  const printLinks = (links: StrapiLinkType[]) => {
-    if (!links) return;
-
-    return links.map((link: StrapiLinkType) => (
-      <NextLink
-        key={link.id}
-        href={link.url}
-        replace={link.isExternal}
-        className='link link-primary'
-      >
-        {link.text}
-      </NextLink>
-    ));
-  };
-
   return (
-    <PageLayout className='container h-screen'>
-      <section className='flex h-full flex-col items-center justify-center gap-y-5'>
-        <div className='w-1/3'>
-          <SignInForm
-            formFields={data?.formFields}
-            submitBtn={data?.submitBtn}
-            providers={data?.providers}
-          />
-        </div>
-        <div className='flex gap-x-5'>{printLinks(data?.additionalLinks)}</div>
-      </section>
+    <PageLayout className='auth-page_wrapper h-screen' cover={data.cover}>
+      <SignInForm data={data} />
     </PageLayout>
   );
 }
