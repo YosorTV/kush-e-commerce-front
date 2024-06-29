@@ -16,8 +16,8 @@ export const ResetForm = ({ data, code, locale }: any) => {
 
   return (
     <Form
-      action={resetPassword}
       schema={schema}
+      action={resetPassword}
       className='auth-page_form !gap-y-5'
     >
       <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
@@ -27,8 +27,8 @@ export const ResetForm = ({ data, code, locale }: any) => {
         <Input
           type='hidden'
           name='locale'
-          containerClass='hidden'
           value={locale}
+          containerClass='hidden'
         />
         <Input type='hidden' name='code' containerClass='hidden' value={code} />
         {printInputs(data.formFields)}

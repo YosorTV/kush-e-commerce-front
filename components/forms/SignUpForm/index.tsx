@@ -9,6 +9,7 @@ import { SubmitButton } from '@/components/simple';
 import { Form, Input, Title } from '@/components/elements';
 
 import { cormorant } from '@/assets/fonts';
+import { InputProps } from '@/types/components';
 
 interface ISignUpForm {
   formFields: any[];
@@ -27,11 +28,12 @@ export const SignUpForm: FC<ISignUpForm> = ({
 }) => {
   const schema = schemas.signup(locale);
 
-  const printInputs = (data: any) => {
-    return data?.map((input: any) => {
+  const printInputs = (data: InputProps[]) => {
+    return data.map((input: InputProps) => {
       return (
         <Input
           key={input.id}
+          validation={input.type === 'password'}
           containerClass='pb-2 md:pb-4 md:last:col-span-2'
           {...input}
         />
@@ -54,8 +56,9 @@ export const SignUpForm: FC<ISignUpForm> = ({
         <Input
           id='locale'
           name='locale'
-          type='text'
           value={locale}
+          containerClass='hidden'
+          type='text'
           hidden
           readOnly
         />
