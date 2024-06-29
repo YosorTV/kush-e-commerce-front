@@ -29,7 +29,6 @@ export default async function SignUpPage({ params }: PageProps) {
         locale={locale}
         formFields={data.formFields}
         cta={data.submitBtn}
-        className='auth-page_form'
       />
     </PageLayout>
   );

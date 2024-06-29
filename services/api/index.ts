@@ -9,3 +9,5 @@ export * from '@/services/api/get-signup';
 export * from '@/services/api/get-metadata';
 export * from '@/services/api/get-profile';
 export * from '@/services/api/get-signin';
+export * from '@/services/api/get-forgot-password';
+export * from '@/services/api/get-reset-password';

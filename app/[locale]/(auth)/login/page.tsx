@@ -22,7 +22,7 @@ export default async function LoginPage({ params }: PageProps) {
   const { data } = await getSignInData({ locale });
 
   return (
-    <PageLayout className='auth-page_wrapper h-screen' cover={data.cover}>
+    <PageLayout className='auth-page_wrapper' cover={data.cover}>
       <SignInForm data={data} />
     </PageLayout>
   );

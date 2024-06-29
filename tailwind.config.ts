@@ -21,10 +21,11 @@ module.exports = {
     },
     extend: {
       height: {
-        '3xl': '120vh',
-        '2xl': '80vh',
-        xl: '70vh',
-        lg: '60vh',
+        '3xl': '130vh',
+        '2xl': '120vh',
+        xl: '90vh',
+        lg: '80vh',
+        '2md': '60vh',
         md: '50vh',
       },
       screens: {

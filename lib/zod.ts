@@ -92,15 +92,17 @@ const signupSchema = (locale: Locale) =>
     email: z.string().email(getEmailErrorMessage(locale)),
   });
 
-export const forgotPasswordSchema = z.object({
-  email: emailSchema,
-});
+export const forgotPasswordSchema = (locale: Locale) =>
+  z.object({
+    email: z.string().email(getEmailErrorMessage(locale)),
+  });
 
-export const resetPasswordSchema = z.object({
-  password: passwordSchema,
-  passwordConfirmation: passwordSchema,
-  code: z.string().readonly(),
-});
+export const resetPasswordSchema = (locale: Locale) =>
+  z.object({
+    password: passwordSchema,
+    passwordConfirmation: passwordSchema,
+    code: z.string().readonly(),
+  });
 
 export const updatePasswordScema = z.object({
   email: emailSchema,

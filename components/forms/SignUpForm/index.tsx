@@ -45,19 +45,10 @@ export const SignUpForm: FC<ISignUpForm> = ({
       id='signup-form'
       schema={schema}
       action={createUserAction}
-      className={cn(
-        className,
-        'flex flex-col items-center justify-center bg-base-100'
-      )}
+      className={cn(className, 'auth-page_form')}
     >
       <div className='w-full'>
-        <Title
-          level='1'
-          className={cn(
-            cormorant.className,
-            'text-center text-4xl text-base-200 md:text-5xl'
-          )}
-        >
+        <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
           {title}
         </Title>
         <Input
@@ -71,10 +62,11 @@ export const SignUpForm: FC<ISignUpForm> = ({
         <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 py-5 md:grid-cols-2'>
           {printInputs(formFields)}
         </div>
+        <div className='divider m-0 mb-5 w-full px-5' />
         <SubmitButton
           text={cta.text}
           loadingText={cta.loadingText}
-          className='w-full !rounded-md !bg-base-200 !text-base-100'
+          className='auth-form_submit'
         />
       </div>
     </Form>

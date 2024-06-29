@@ -57,7 +57,7 @@ export const Header: FC<HeaderProps> = ({ data }) => {
       className='fixed z-10 flex min-h-16 w-full cursor-pointer items-center bg-base-100 px-5'
     >
       <nav className='flex w-full items-center justify-between'>
-        <div className='flex items-center xl:w-36'>
+        <div className='flex items-center'>
           <Menu
             pages={pagesData}
             collections={collectionsData}

@@ -180,9 +180,21 @@ input:-webkit-autofill:active {
 }
 
 .auth-page_wrapper {
-  @apply relative mt-8 h-3xl overflow-hidden md:h-2xl;
+  @apply relative mb-5 mt-10 h-xl overflow-hidden md:mt-5 md:h-[728px];
 }
 
 .auth-page_form {
-  @apply absolute-center w-[95%] rounded-md px-5 py-2.5 shadow-2xl md:w-[680px] md:px-10 md:py-5;
+  @apply absolute-center flex w-[95%] flex-col gap-y-5 rounded-md bg-base-100 p-5 shadow-2xl md:w-[680px] md:gap-y-10 md:p-10;
+}
+
+.auth-form_submit {
+  @apply w-full !bg-base-200 !text-base-100;
+}
+
+.auth-form_title {
+  @apply text-center text-4xl text-base-200 md:text-5xl;
+}
+
+.auth-link {
+  @apply btn w-full rounded-none border-none bg-transparent shadow-none outline-none hover:bg-base-200 hover:text-base-100;
 }

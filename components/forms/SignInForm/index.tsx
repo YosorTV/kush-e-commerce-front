@@ -10,9 +10,8 @@ import { authUserAction } from '@/services';
 import { StrapiLinkType } from '@/types/components';
 
 export const SignInForm = ({ data }: any) => {
-  console.log('data: ', data);
   const printInputs = (data: any) => {
-    if (!data) return null;
+    if (!data) return;
 
     return data.map((input: any) => <Input key={input.id} {...input} />);
   };
@@ -48,21 +47,15 @@ export const SignInForm = ({ data }: any) => {
       id='signin-form'
       action={authUserAction}
       schema={schemas.login}
-      className='auth-page_form !md:w-2/3 !xl:!w-1/3 flex flex-col  gap-y-5 bg-base-100'
+      className='auth-page_form mt-2.5 md:!gap-y-2.5'
     >
-      <Title
-        level='1'
-        className={cn(
-          cormorant.className,
-          'text-center text-4xl text-base-200 md:text-5xl'
-        )}
-      >
+      <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
         {data.title}
       </Title>
       <div className='mx-auto flex w-full flex-col gap-y-5'>
         {printInputs(data.formFields)}
       </div>
-      <div className='flex w-full flex-col justify-between gap-5 xs:flex-row md:gap-10'>
+      <div className='flex w-full flex-col justify-between gap-5 py-2.5 xs:flex-row md:gap-10'>
         <div>
           <Input
             id={data.rememberMe.id}
@@ -78,19 +71,20 @@ export const SignInForm = ({ data }: any) => {
           {printLinks(data?.additionalLinks)}
         </div>
       </div>
-      {printProviders(data.providers)}
       <div className='divider my-0 px-5' />
       <SubmitButton
-        className='w-full !bg-base-200 !text-base-100'
         text={data.submitBtn.text}
         loadingText={data.submitBtn.loadingText}
+        className='auth-form_submit'
       />
+      <div className='divider my-0 px-5' />
+      {printProviders(data.providers)}
       <div className='divider my-0 px-5' />
       <NextLink
         key={data.createAccountLink.id}
         href={data.createAccountLink.url}
         replace={data.createAccountLink.isExternal}
-        className='btn w-full rounded-none border-none bg-transparent uppercase text-base-200 outline-none hover:bg-base-200 hover:text-base-100'
+        className='auth-link'
       >
         {data.createAccountLink.text}
       </NextLink>

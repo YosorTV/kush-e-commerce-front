@@ -1,47 +1,30 @@
-import { NextLink } from '@/components/elements';
-import { ForgotForm } from '@/components/forms';
-import { PageLayout } from '@/components/layouts';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '@/services/strapi';
-import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = params;
+import { getMetadata, getForgotPasswordData } from '@/services';
 
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const { seo } = await getStrapiData('forgot-page', metaQP);
+import { STRAPI_PAGES } from '@/helpers/constants';
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-  };
+import { PageLayout } from '@/components/layouts';
+import { ForgotForm } from '@/components/forms';
+
+import { PageProps } from '@/types/app/page.types';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
+
+  const response = await getMetadata({ path: STRAPI_PAGES.forgot, locale });
+
+  return response;
 }
 
 export default async function ForgotPasswordPage({ params }: PageProps) {
   const { locale } = params;
 
-  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).forgot);
-  const data = await getStrapiData('forgot-page', pageQP);
+  const { data } = await getForgotPasswordData({ locale });
 
   return (
-    <PageLayout className='container h-screen'>
-      <div className=' flex h-full flex-col items-center justify-center gap-y-5'>
-        <ForgotForm formFields={data.formFields} submitBtn={data.submitBtn} />
-        <NextLink
-          className='link link-primary'
-          href={data.loginUrl.url}
-          replace={data.loginUrl.isExternal}
-        >
-          {data.loginUrl.text}
-        </NextLink>
-      </div>
+    <PageLayout className='auth-page_wrapper !h-lg' cover={data.cover}>
+      <ForgotForm data={data} locale={locale} />
     </PageLayout>
   );
 }

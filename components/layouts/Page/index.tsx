@@ -13,7 +13,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
     backgroundAttachment: 'fixed',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    filter: 'blur(4px)',
+    filter: 'blur(2px)',
     position: 'fixed',
     width: '100%',
     height: '100%',
@@ -23,7 +23,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
   return (
     <div
       className={cn(
-        'relative flex min-h-full flex-grow animate-fadeInUp flex-col overflow-hidden overflow-x-hidden',
+        'relative flex min-h-full flex-grow animate-fadeInUp flex-col overflow-hidden',
         className
       )}
     >

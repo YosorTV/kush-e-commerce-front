@@ -1,26 +1,20 @@
-import { ResetForm } from '@/components/forms';
-import { PageLayout } from '@/components/layouts';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '@/services/strapi';
-import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = params;
+import { getMetadata, getResetPasswordData } from '@/services';
 
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const { seo } = await getStrapiData('reset-page', metaQP);
+import { STRAPI_PAGES } from '@/helpers/constants';
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-  };
+import { PageLayout } from '@/components/layouts';
+import { ResetForm } from '@/components/forms';
+
+import { PageProps } from '@/types/app/page.types';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
+
+  const response = await getMetadata({ path: STRAPI_PAGES.reset, locale });
+
+  return response;
 }
 
 export default async function ResetPasswordPage({
@@ -30,18 +24,11 @@ export default async function ResetPasswordPage({
   const { locale } = params;
   const { code } = searchParams;
 
-  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).reset);
-  const data = await getStrapiData('reset-page', pageQP);
+  const { data } = await getResetPasswordData({ locale });
 
   return (
-    <PageLayout className='container h-screen'>
-      <div className='flex h-full flex-col items-center justify-center gap-y-5'>
-        <ResetForm
-          formFields={data.formFields}
-          submitBtn={data.submitBtn}
-          code={code}
-        />
-      </div>
+    <PageLayout className='auth-page_wrapper !h-lg' cover={data.cover}>
+      <ResetForm data={data} code={code} />
     </PageLayout>
   );
 }

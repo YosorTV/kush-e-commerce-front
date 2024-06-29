@@ -32,6 +32,18 @@ export const MenuNav: FC<MenuNavProps> = ({
   categories,
   collections,
 }) => {
+  const printCategory = (item: CategoryLinkType) => (
+    <MenuItem
+      id={item.id}
+      key={item.id}
+      text={item.title}
+      slug={item.slug}
+      className='py-2.5'
+      url={`/catalog?category=${item.slug}`}
+      isExternal={false}
+    />
+  );
+
   return (
     <>
       <div>
@@ -62,19 +74,7 @@ export const MenuNav: FC<MenuNavProps> = ({
         >
           {categories.title}
         </Title>
-        <motion.ul>
-          {categories.data.map((item: CategoryLinkType) => (
-            <MenuItem
-              id={item.id}
-              key={item.id}
-              text={item.title}
-              slug={item.slug}
-              className='py-2.5'
-              url={`/catalog?category=${item.slug}`}
-              isExternal={false}
-            />
-          ))}
-        </motion.ul>
+        <motion.ul>{categories.data.map(printCategory)}</motion.ul>
       </div>
       <div className='divider pr-5' />
       <div>
