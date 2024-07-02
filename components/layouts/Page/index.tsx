@@ -22,6 +22,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
 
   return (
     <div
+      style={cover?.url && coverStyles}
       className={cn(
         'relative flex min-h-full flex-grow animate-fadeInUp flex-col overflow-hidden',
         className
