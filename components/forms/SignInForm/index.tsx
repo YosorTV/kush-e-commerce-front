@@ -8,12 +8,23 @@ import { cn } from '@/lib';
 import { schemas } from '@/lib/zod';
 import { authUserAction } from '@/services';
 import { StrapiLinkType } from '@/types/components';
+import { useState } from 'react';
 
-export const SignInForm = ({ data }: any) => {
+export const SignInForm = ({ data, locale = 'uk' }: any) => {
+  const schema = schemas.login(locale);
+
+  const [rememberMe, setRememberMe] = useState(false);
+
   const printInputs = (data: any) => {
     if (!data) return;
 
-    return data.map((input: any) => <Input key={input.id} {...input} />);
+    return data.map((input: any) => (
+      <Input
+        autoComplete={input.type === 'email' ? 'email' : ''}
+        key={input.id}
+        {...input}
+      />
+    ));
   };
 
   const printProviders = (data: any) => {
@@ -27,8 +38,6 @@ export const SignInForm = ({ data }: any) => {
   };
 
   const printLinks = (links: StrapiLinkType[]) => {
-    if (!links) return;
-
     return links.map((link: StrapiLinkType) => (
       <NextLink
         key={link.id}
@@ -43,16 +52,23 @@ export const SignInForm = ({ data }: any) => {
 
   return (
     <Form
+      schema={schema}
       method='post'
       id='signin-form'
       action={authUserAction}
-      schema={schemas.login}
       className='auth-page_form mt-2.5 md:!gap-y-2.5'
     >
       <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
         {data.title}
       </Title>
       <div className='mx-auto flex w-full flex-col gap-y-5'>
+        <Input
+          hidden
+          readOnly
+          name='locale'
+          value={locale}
+          className='hidden'
+        />
         {printInputs(data.formFields)}
       </div>
       <div className='flex w-full flex-col justify-between gap-5 py-2.5 xs:flex-row md:gap-10'>
@@ -61,7 +77,9 @@ export const SignInForm = ({ data }: any) => {
             id={data.rememberMe.id}
             name={data.rememberMe.name}
             label={data.rememberMe.label}
+            onChange={() => setRememberMe(!rememberMe)}
             type='checkbox'
+            defaultChecked={rememberMe}
             className='checkbox checked:fill-base-200'
             labelStyle='text-base-200 text-sm whitespace-nowrap md:text-lg cursor-pointer'
             containerClass='flex-row flex-row-reverse justify-end items-center gap-x-3'
@@ -71,7 +89,6 @@ export const SignInForm = ({ data }: any) => {
           {printLinks(data?.additionalLinks)}
         </div>
       </div>
-      <div className='divider my-0 px-5' />
       <SubmitButton
         text={data.submitBtn.text}
         loadingText={data.submitBtn.loadingText}
@@ -84,7 +101,7 @@ export const SignInForm = ({ data }: any) => {
         key={data.createAccountLink.id}
         href={data.createAccountLink.url}
         replace={data.createAccountLink.isExternal}
-        className='auth-link'
+        className='auth-link uppercase'
       >
         {data.createAccountLink.text}
       </NextLink>

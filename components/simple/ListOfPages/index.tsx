@@ -1,30 +1,50 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { motion } from 'framer-motion';
 import { usePathname } from '@/lib/navigation';
 import { NextLink } from '@/components/elements';
 
 import { StrapiLinkType } from '@/types/components';
 import { cn } from '@/lib';
 import { ROOT } from '@/helpers/constants';
+import { useFilters } from '@/store';
+import { SubMenu } from '../SubMenu';
 
 type ListOFPagesProps = {
   pages: StrapiLinkType[];
   className?: string;
+  collections: {
+    title: string;
+    data: any[];
+  };
+  categories: {
+    title: string;
+    data: any[];
+  };
   linkStyle?: string;
 };
 
 export const ListOfPages: FC<ListOFPagesProps> = ({
   pages,
   className,
+  categories,
+  collections,
   linkStyle,
 }) => {
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const pathname = usePathname();
+  const state = useFilters();
+
+  const handleShowSubMenu = (index: number) =>
+    !state.isOpen
+      ? setShowOverlay(index === 0 || index === 1)
+      : setShowOverlay(false);
 
   if (!pages?.length) return null;
 
   const printLinks = (data: StrapiLinkType[]) => {
-    return data.map((page) => {
+    return data.map((page, index) => {
       const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
 
       const isActive =
@@ -33,8 +53,9 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
           : pathname.startsWith(urlObj.pathname);
 
       return (
-        <li
+        <motion.li
           key={page.id}
+          onHoverStart={() => handleShowSubMenu(index)}
           className={cn('group py-2.5 text-base-200', { active: isActive })}
         >
           <NextLink
@@ -47,10 +68,21 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
           >
             {page.text}
           </NextLink>
-        </li>
+        </motion.li>
       );
     });
   };
 
-  return <ul className={cn('flex gap-x-6', className)}>{printLinks(pages)}</ul>;
+  return (
+    <>
+      <ul className={cn('flex gap-x-6', className)}>{printLinks(pages)}</ul>
+      <SubMenu
+        isHovered={showOverlay}
+        categoryTitle={categories?.title}
+        collectionTitle={collections?.title}
+        categories={categories?.data}
+        collections={collections?.data}
+      />
+    </>
+  );
 };

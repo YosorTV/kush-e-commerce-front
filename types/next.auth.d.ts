@@ -2,14 +2,20 @@ import NextAuth from 'next-auth';
 
 declare module 'next-auth' {
   interface User {
-    username: string;
+    id: string;
+    name: string;
     email: string;
-    provider: string;
-    confirmed: boolean;
+    avatar: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    deliveryAddress: string;
+    stripeCustomerId: string;
     blocked: boolean;
-    createdAt: string;
-    updatedAt: string;
-    id: number;
+    confirmed: boolean;
+    provider: string;
+    iat: number;
+    exp: number;
   }
 
   interface Session {
@@ -18,7 +24,18 @@ declare module 'next-auth' {
       name: string;
       email: string;
       avatar: string;
+      firstName: string;
+      lastName: string;
+      phoneNumber: string;
+      deliveryAddress: string;
+      stripeCustomerId: string;
+      blocked: boolean;
+      confirmed: boolean;
+      provider: string;
+      iat: number;
+      exp: number;
     };
     accessToken: string;
+    refreshToken: string;
   }
 }

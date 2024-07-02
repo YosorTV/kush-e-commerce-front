@@ -1,45 +1,43 @@
+// import { Metadata } from 'next';
 import { NextLink } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '@/services/strapi';
 import { PageProps } from '@/types/app/page.types';
-import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = params;
+// export async function generateMetadata({
+//   params,
+// }: PageProps): Promise<Metadata> {
+//   const { locale } = params;
 
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const { seo } = await getStrapiData('success-page', metaQP);
+//   const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
+//   const { seo } = await getStrapiData('success-page', metaQP);
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-  };
-}
+//   return {
+//     title: {
+//       default: `KUSH | ${seo?.metaTitle}`,
+//       template: '%s | KUSH',
+//     },
+//     description: seo?.metaDescription,
+//   };
+// }
 
 export default async function SuccessPage({ params }: PageProps) {
   const { locale } = params;
 
-  const pageQP = generateStrapiQuery(
-    STRAPI_API_ROUTES.auth({ locale }).success
-  );
+  // const pageQP = generateStrapiQuery(
+  //   STRAPI_API_ROUTES.auth({ locale }).success
+  // );
 
-  const data = await getStrapiData('success-page', pageQP);
+  // const data = await getStrapiData('success-page', pageQP);
 
   return (
-    <PageLayout className='container h-screen'>
+    <PageLayout className='h-screen'>
       <div className='flex h-full flex-col items-center justify-center gap-y-2.5'>
-        <h1 className='text-center text-lg font-semibold'>{data.title}</h1>
+        asda
+        {/* <h1 className='text-center text-lg font-semibold'>{data.title}</h1>
         <p>{data.description}</p>
         <NextLink href={data?.redirectUrl?.url} className='link link-primary'>
           {data?.redirectUrl?.text}
-        </NextLink>
+        </NextLink> */}
       </div>
     </PageLayout>
   );

@@ -11,3 +11,5 @@ export * from '@/services/api/get-profile';
 export * from '@/services/api/get-signin';
 export * from '@/services/api/get-forgot-password';
 export * from '@/services/api/get-reset-password';
+export * from '@/services/api/provider-login';
+export * from '@/services/api/login';

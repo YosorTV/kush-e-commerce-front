@@ -28,7 +28,7 @@ export default async function ResetPasswordPage({
 
   return (
     <PageLayout className='auth-page_wrapper !h-lg' cover={data.cover}>
-      <ResetForm data={data} code={code} />
+      <ResetForm data={data} code={code} locale={locale} />
     </PageLayout>
   );
 }

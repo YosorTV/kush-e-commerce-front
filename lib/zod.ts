@@ -5,12 +5,13 @@ type Locale = 'en' | 'uk' | string;
 const PASSWORD_REG_EX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}[\]\\|;:'",.<>/?-]).{8,}$/;
 
-const emailSchema = z.string().email('Invalid email format');
+const normalizePhoneNumber = (phoneNumber: string) =>
+  phoneNumber.replace(/[^\d]/g, '');
 
 const getEmailErrorMessage = (locale: Locale) => {
   const messages: Record<Locale, string> = {
-    en: 'Invalid email format',
-    uk: 'Не вірний формат пошти',
+    en: 'Invalid email format. ',
+    uk: 'Не вірний формат пошти. ',
   };
 
   return messages[locale] || messages.en;
@@ -18,28 +19,40 @@ const getEmailErrorMessage = (locale: Locale) => {
 
 const requiredErrorMessage = (locale: Locale) => {
   const messages: Record<Locale, string> = {
-    en: 'Required field',
-    uk: 'Обовязкове поле',
+    en: ' Required field. ',
+    uk: ' Обовязкове поле. ',
   };
 
   return messages[locale] || messages.en;
 };
 
-const passwordSchema = z
-  .string()
-  .min(8, { message: 'Password must be at least 8 characters long' })
-  .regex(PASSWORD_REG_EX, {
-    message:
-      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+const requiredPasswordLengthMessage = (locale: Locale) => {
+  const messages: Record<Locale, string> = {
+    en: 'Password must be at least 8 characters long. ',
+    uk: 'Пароль має містити мінімум 8 символів. ',
+  };
+
+  return messages[locale] || messages.en;
+};
+
+const emailSchema = (locale: Locale) =>
+  z.string().email(getEmailErrorMessage(locale));
+
+const passwordSchema = (locale: Locale) =>
+  z
+    .string()
+    .min(8, { message: requiredPasswordLengthMessage(locale) })
+    .regex(PASSWORD_REG_EX, {
+      message: requiredErrorMessage(locale),
+    });
+
+const loginSchema = (locale: Locale) =>
+  z.object({
+    identifier: emailSchema(locale),
+    password: passwordSchema(locale),
+    remember: z.string(),
+    locale: z.string().readonly(),
   });
-
-const loginSchema = z.object({
-  identifier: emailSchema,
-  password: passwordSchema,
-});
-
-const normalizePhoneNumber = (phoneNumber: string) =>
-  phoneNumber.replace(/[^\d]/g, '');
 
 const requiredTextField = (locale: Locale) =>
   z.string().refine((val) => val.trim() !== '', {
@@ -88,30 +101,41 @@ const signupSchema = (locale: Locale) =>
     lastName: requiredTextField(locale),
     username: z.string().readonly(),
     phoneNumber: requiredPhoneField(locale),
-    password: passwordSchema,
-    email: z.string().email(getEmailErrorMessage(locale)),
+    password: passwordSchema(locale),
+    email: emailSchema(locale),
   });
 
 export const forgotPasswordSchema = (locale: Locale) =>
   z.object({
-    email: z.string().email(getEmailErrorMessage(locale)),
+    email: emailSchema(locale),
   });
 
-export const resetPasswordSchema = (locale: Locale) =>
+export const resetPasswordBaseSchema = (locale: Locale) =>
   z.object({
-    password: passwordSchema,
-    passwordConfirmation: passwordSchema,
+    password: passwordSchema(locale),
+    passwordConfirmation: passwordSchema(locale),
     code: z.string().readonly(),
   });
 
-export const updatePasswordScema = z.object({
-  email: emailSchema,
-  password: passwordSchema,
-});
+export const resetPasswordSchema = (locale: Locale) => {
+  const schema = resetPasswordBaseSchema(locale);
+
+  return schema.refine((data) => data.password === data.passwordConfirmation, {
+    message:
+      locale === 'uk' ? 'Паролі не співпадають.' : "Passwords don't matched",
+    path: ['passwordConfirmation'],
+  });
+};
+
+export const updatePasswordScema = (locale: Locale) =>
+  z.object({
+    email: emailSchema(locale),
+    password: passwordSchema(locale),
+  });
 
 export const subscriptionSchema = (locale: Locale) =>
   z.object({
-    email: z.string().email(getEmailErrorMessage(locale)),
+    email: emailSchema(locale),
     locale: z.string().readonly(),
   });
 
@@ -120,7 +144,7 @@ export const schemas = {
   signup: signupSchema,
   profile: profileSchema,
   subscription: subscriptionSchema,
-  'reset-password': resetPasswordSchema,
+  resetPassword: resetPasswordSchema,
   'update-password': updatePasswordScema,
   'forgot-password': forgotPasswordSchema,
 };

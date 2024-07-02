@@ -2,7 +2,6 @@
 
 import { schemas } from '@/lib/zod';
 import { createUser } from '../api/create-user';
-import { redirect } from '@/lib/navigation';
 
 export async function createUserAction(prevState: any, formData: FormData) {
   const fields = {
@@ -12,7 +11,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
     lastName: formData.get('lastName'),
     phoneNumber: formData.get('phoneNumber'),
     password: formData.get('password'),
-    username: `${formData.get('firstName')}${''}${formData.get('lastName')}`,
+    username: formData.get('firstName') + ' ' + formData.get('lastName'),
   };
 
   const validatedData: any = schemas
@@ -39,15 +38,25 @@ export async function createUserAction(prevState: any, formData: FormData) {
     confirmed: false,
   });
 
-  if (response.error) {
+  if (response?.user) {
     return {
       ...prevState,
+      status: 200,
       errors: null,
-      message: `Bad request! ${response.error}`,
-      status: response.error.status,
-      strapiError: response.error.message,
+      strapiError: null,
+      url: '/login',
+      message:
+        fields.locale === 'uk'
+          ? 'Перевірте пошту для верифікації.'
+          : 'Check your email address for verification.',
+    };
+  } else {
+    return {
+      ...prevState,
+      status: response.status ?? 400,
+      errors: null,
+      strapiError: response?.message ?? '',
+      message: response.error ?? 'Authorization error',
     };
   }
-
-  redirect('/login');
 }

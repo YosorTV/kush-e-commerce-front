@@ -9,6 +9,7 @@ import 'react-phone-input-2/lib/style.css';
 import { InputPhone } from '@/components/elements/Input/InputPhone';
 import { InputDefault } from '@/components/elements/Input/InputDefault';
 import { InputPassword } from '@/components/elements/Input/InputPassword';
+import { useMemo } from 'react';
 
 export const Input = ({
   name,
@@ -25,7 +26,7 @@ export const Input = ({
   id,
   ...rest
 }: InputProps) => {
-  const inputByType = () => {
+  const inputByType = useMemo(() => {
     switch (type) {
       case 'password':
         return (
@@ -46,9 +47,10 @@ export const Input = ({
             id={id}
             key={id}
             name={name}
-            value={rest?.value as string}
             placeholder={placeholder}
+            className={className}
             error={Boolean(error)}
+            {...rest}
           />
         );
 
@@ -65,7 +67,7 @@ export const Input = ({
           />
         );
     }
-  };
+  }, [className, error, id, name, placeholder, rest, type, validation]);
 
   return (
     <div
@@ -77,7 +79,7 @@ export const Input = ({
         </label>
       )}
       <div className='relative flex'>
-        {inputByType()}
+        {inputByType}
         {children}
       </div>
       {isLoading && (

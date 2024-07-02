@@ -4,6 +4,7 @@ import { NextLink } from '@/components/elements';
 import { SignOutButton } from '@/components/simple/SignOutButton';
 import { StrapiLinkType } from '@/types/components';
 import { SignInLink } from '@/components/simple';
+import { cn } from '@/lib';
 
 export const UserSession = ({
   locale,
@@ -16,39 +17,41 @@ export const UserSession = ({
   }
 
   const printMenuLinks = (links: StrapiLinkType[]) => {
-    return (
-      links.length &&
-      links.map((link: StrapiLinkType, index) => (
-        <li tabIndex={index + 1} key={link.id}>
-          <NextLink
-            href={link.url}
-            className='font-semibold capitalize hover:bg-none'
-          >
-            {link.text}
-          </NextLink>
-        </li>
-      ))
-    );
+    return links.map((link: StrapiLinkType, index) => (
+      <li tabIndex={index + 1} key={link.id}>
+        <NextLink
+          href={link.url}
+          className='font-semibold capitalize hover:bg-none'
+        >
+          {link.text}
+        </NextLink>
+      </li>
+    ));
   };
 
   return (
-    <nav className='flex flex-1 items-center justify-end gap-x-5'>
+    <nav className='flex items-center justify-end gap-x-5'>
       <div className='dropdown dropdown-end'>
         <div
           tabIndex={-1}
-          className='flex cursor-pointer items-center justify-center gap-5'
+          className={cn(
+            'flex cursor-pointer items-center justify-center gap-5',
+            session.picture ? 'w-8' : 'w-full'
+          )}
         >
-          <span className='font-semibold uppercase text-base-200'>
-            {session.name}
-          </span>
-          {session.avatar && (
+          {session.picture ? (
             <Image
-              src={session.avatar}
-              height={100}
-              width={100}
+              src={session.picture}
+              title={session.name}
+              height={64}
+              width={64}
               className='h-8 w-8 rounded-full'
-              alt='profile-picture'
+              alt={`avatar-${session.name}`}
             />
+          ) : (
+            <span className='whitespace-nowrap font-semibold uppercase text-base-200'>
+              {session.name}
+            </span>
           )}
         </div>
         <ul

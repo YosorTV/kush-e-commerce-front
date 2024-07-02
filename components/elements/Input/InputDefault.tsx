@@ -28,7 +28,7 @@ export const InputDefault: FC<InputProps> = ({
       placeholder={placeholder}
       className={cn(
         isTextType
-          ? 'input input-bordered w-full cursor-pointer placeholder:text-base-200 placeholder:text-opacity-45'
+          ? 'input input-bordered w-full cursor-pointer placeholder:text-gray-500'
           : className,
         error && 'border-error'
       )}

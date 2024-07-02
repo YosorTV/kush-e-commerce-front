@@ -168,3 +168,19 @@ export const STRAPI_PAGES = {
   success: 'success-page',
   forgot: 'forgot-page',
 };
+
+export const passwordValidationParams = {
+  length: false,
+  uppercase: false,
+  lowercase: false,
+  number: false,
+  special: false,
+};
+
+export const passwordValidationRules = (value: string) => ({
+  length: value.length >= 8,
+  uppercase: /[A-Z]/.test(value),
+  lowercase: /[a-z]/.test(value),
+  number: /\d/.test(value),
+  special: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+});

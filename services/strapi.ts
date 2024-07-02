@@ -21,7 +21,6 @@ export const postStrapiData = async (
 ) => {
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
   url.search = options;
-
   const response = await postData(url.href, data);
 
   return response;
@@ -32,17 +31,6 @@ export const putStrapiData = async (path: string, data: any, options?: any) => {
   url.search = options;
 
   const response = await putData(url.href, data);
-
-  return response;
-};
-
-export const getStrapiAuthData = async ({ provider, token }: any) => {
-  const url = new URL(
-    `api/auth/${provider}/callback?access_token=${token}`,
-    process.env.NEXT_PUBLIC_STRAPI_URL
-  );
-
-  const response = await getData(url.href, { cache: 'no-cache' });
 
   return response;
 };
