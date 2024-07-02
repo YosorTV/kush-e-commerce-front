@@ -3,8 +3,10 @@
 import { Children, FC, ReactElement, useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 
-import { FormProps } from '@/types/components';
 import { cn, processChild, toaster } from '@/lib';
+
+import { FormProps } from '@/types/components';
+import { useRouter } from '@/lib/navigation';
 
 export const Form: FC<FormProps<any>> = ({
   children,
@@ -12,6 +14,7 @@ export const Form: FC<FormProps<any>> = ({
   action,
   state = {
     data: null,
+    url: null,
     message: null,
     errors: null,
     strapiError: null,
@@ -19,11 +22,18 @@ export const Form: FC<FormProps<any>> = ({
   },
 }) => {
   const ref = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   const [formState, formAction] = useFormState(action, state);
 
   useEffect(() => {
-    if (formState?.errors || formState?.strapiError) {
+    if (formState.status === 200) {
+      toaster({ key: 'success', message: formState.message });
+      ref.current.reset();
+      if (formState.url) {
+        router.push(formState.url);
+      }
+    } else if (formState.status === 400) {
       toaster({
         key: 'error',
         message: formState.message,
@@ -31,18 +41,11 @@ export const Form: FC<FormProps<any>> = ({
       });
     }
 
-    if (formState?.status === 200) {
-      toaster({ key: 'success', message: formState?.message });
-      ref.current.reset();
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState]);
 
-  const errorClass = formState?.errors
-    ? '!top-10 md:!top-14'
-    : 'top-32 md:top-28';
-
   return (
-    <form ref={ref} action={formAction} className={cn(className, errorClass)}>
+    <form ref={ref} action={formAction} className={cn(className)}>
       {Children.map(children as ReactElement[], (child, index) =>
         processChild(child, index, formState)
       )}

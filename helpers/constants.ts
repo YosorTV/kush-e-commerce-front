@@ -1,5 +1,3 @@
-import { PageProps } from '@/types/app/page.types';
-
 interface RequestOptions {
   token?: string;
   body?: any;
@@ -68,171 +66,48 @@ const deleteParams = (options: RequestOptions = {}): RequestInit => {
 
 export { getParams, postParams, putParams, deleteParams };
 
-export const STRAPI_API_ROUTES = {
-  global: ({ locale = 'uk' }) => {
-    return {
-      locale,
-      populate: {
-        header: {
-          populate: {
-            cta: true,
-            pages: true,
-            sessionLinks: true,
-            collections: {
-              populate: {
-                cover: true,
-              },
-              fields: ['title', 'slug'],
-            },
-            categories: {
-              fields: ['title', 'slug'],
-            },
-          },
-        },
-        footer: {
-          populate: {
-            formField: true,
-            termsLink: true,
-            linksGroupTitle: true,
-            links: true,
-            socialLinks: true,
-          },
-        },
-        shoppingCart: {
-          populate: true,
-        },
-      },
-    };
-  },
-  home: ({ locale = 'uk' }) => {
-    return {
-      locale,
-      populate: {
-        blocks: {
-          populate: {
-            products: {
-              populate: {
-                images: {
-                  fields: ['url', 'alternativeText', 'formats'],
-                },
-              },
-            },
-            image: {
-              fields: ['url', 'alternativeText'],
-            },
-            sub_image: {
-              fields: ['url', 'alternativeText'],
-            },
-            link: {
-              populate: true,
-            },
-          },
-        },
-      },
-    };
-  },
-  catalog: ({ locale = 'uk' }) => {
-    return {
-      locale,
-      populate: {
-        cover: {
-          fields: ['url', 'alternativeText', 'formats'],
-        },
-        categories: {
-          fields: ['title', 'slug'],
-        },
-      },
-    };
-  },
-  getProducts: ({
-    id,
-    name,
-    locale,
-    category,
-    page,
-    pageSize,
-  }: PageProps['searchParams']) => {
-    const filters: any = {};
-
-    if (name) {
-      filters.title = { $contains: name.toLowerCase().trim() };
-    }
-
-    if (category && category !== '*') {
-      filters.category = { $eq: category.toLowerCase().trim() };
-    }
-
-    return {
-      id,
-      name,
-      locale,
-      populate: {
-        images: {
-          populate: {
-            data: {
-              fields: ['url', 'alternativeText', 'formats'],
-            },
-          },
-        },
-      },
-      filters,
-      pagination: {
-        page: page || 1,
-        pageSize: pageSize || 5,
-      },
-    };
-  },
-  getProductDetails: ({ locale = 'uk', code = null }) => ({ locale, code }),
-  auth: ({ locale = 'uk' }) => {
-    return {
-      registration: {
-        locale,
-        populate: {
-          formFields: true,
-          redirectUrl: true,
-          submitBtn: true,
-          cover: {
-            fields: ['url', 'alternativeText', 'formats'],
-          },
-        },
-      },
-      success: { locale, populate: ['title', 'description', 'redirectUrl'] },
-      forgot: {
-        locale,
-        populate: ['formFields', 'submitBtn', 'loginUrl'],
-      },
-      reset: {
-        locale,
-        populate: ['formFields', 'submitBtn'],
-      },
-      login: {
-        locale,
-        populate: ['formFields', 'additionalLinks', 'submitBtn', 'providers'],
-      },
-    };
-  },
-  me: ({ locale = 'uk' }) => {
-    return {
-      locale,
-      populate: {
-        formFields: {
-          populate: ['general', 'additional', 'actions', 'avatar'],
-        },
-      },
-    };
-  },
-  meta: ({ locale = 'uk' }) => ({
-    locale,
-    populate: {
-      seo: {
-        fields: ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'],
-      },
-    },
-  }),
-};
-
+export const DEFAULT_LOCALE = 'uk';
 export const LOCALES = ['uk', 'en'] as const;
 export const LOCALES_PREFIX = 'always';
+
+export const CATEGORY_FIELDS = ['title', 'slug'];
+export const IMAGE_FIELDS = ['url', 'alternativeText', 'formats'];
+export const PROFILE_FIELDS = ['general', 'additional', 'actions', 'avatar'];
+
+export const AUTH_SUCCESS_FIELDS = ['title', 'description', 'redirectUrl'];
+export const AUTH_FORGOT_FIELDS = [
+  'formFields',
+  'submitBtn',
+  'title',
+  'loginUrl',
+  'cover',
+];
+
+export const AUTH_RESET_FIELDS = {
+  title: true,
+  formFields: true,
+  submitBtn: true,
+  cover: { fields: IMAGE_FIELDS },
+};
+
+export const AUTH_LOGIN_FIELDS = {
+  formFields: true,
+  additionalLinks: true,
+  submitBtn: true,
+  rememberMe: true,
+  createAccountLink: true,
+  providers: true,
+  cover: {
+    fields: IMAGE_FIELDS,
+  },
+};
+
+export const META_FIELDS = [
+  'metaTitle',
+  'metaDescription',
+  'metaRobots',
+  'keywords',
+];
 
 export const ROOT = '/';
 export const PRIVATE_ROUTES = ['/profile', '/orders'];
@@ -279,3 +154,33 @@ export const SORT_OPTIONS = [
     name: 'high',
   },
 ];
+
+export const STRAPI_PAGES = {
+  global: 'global',
+  home: 'home',
+  catalog: 'products-page',
+  contacts: 'contact-us-page',
+  about: 'about-us-page',
+  profile: 'profile-page',
+  signup: 'registration-page',
+  signin: 'login-page',
+  reset: 'reset-page',
+  success: 'success-page',
+  forgot: 'forgot-page',
+};
+
+export const passwordValidationParams = {
+  length: false,
+  uppercase: false,
+  lowercase: false,
+  number: false,
+  special: false,
+};
+
+export const passwordValidationRules = (value: string) => ({
+  length: value.length >= 8,
+  uppercase: /[A-Z]/.test(value),
+  lowercase: /[a-z]/.test(value),
+  number: /\d/.test(value),
+  special: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+});

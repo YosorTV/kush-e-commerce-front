@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { CSSProperties, FC } from 'react';
 
 import { cn } from '@/lib';
 import { PageLayoutProps } from '@/types/components';
@@ -8,21 +8,27 @@ export const PageLayout: FC<PageLayoutProps> = ({
   className,
   cover,
 }) => {
-  const coverStyles = {
+  const coverStyles: CSSProperties = {
     backgroundImage: `url("${cover?.url}")`,
     backgroundAttachment: 'fixed',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+    filter: 'blur(2px)',
+    position: 'fixed',
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
   };
 
   return (
     <div
       style={cover?.url && coverStyles}
       className={cn(
-        'flex min-h-full flex-grow animate-fadeInUp flex-col overflow-x-hidden',
+        'relative flex min-h-full flex-grow animate-fadeInUp flex-col overflow-hidden',
         className
       )}
     >
+      <div style={coverStyles} />
       {children}
     </div>
   );

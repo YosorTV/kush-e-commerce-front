@@ -21,9 +21,12 @@ module.exports = {
     },
     extend: {
       height: {
-        xxl: '80vh',
-        xl: '70vh',
-        lg: '60vh',
+        '3xl': '130vh',
+        '2xl': '120vh',
+        xl: '110vh',
+        '2lg': '90vh',
+        lg: '80vh',
+        '2md': '70vh',
         md: '50vh',
       },
       screens: {
@@ -37,7 +40,6 @@ module.exports = {
       fontSize: {
         xs: '0.75rem', // 12px
         sm: '0.875rem', // 14px
-        tiny: '0.875rem', // 14px
         base: '1rem', // 16px
         lg: '1.125rem', // 18px
         xl: '1.25rem', // 20px
@@ -65,7 +67,7 @@ module.exports = {
         fluid: 'repeat(auto-fit, minmax(10rem, 1fr))',
       },
       animation: {
-        fadeInUp: 'fadeInUp 1s ease-out',
+        fadeInUp: 'fadeInUp 0.5s ease-out',
       },
     },
   },
@@ -75,8 +77,8 @@ module.exports = {
     themes: [
       {
         light: {
-          primary: '#41A139',
-          secondary: '#AA0A0A',
+          success: '#41A139',
+          error: '#AA0A0A',
           neutral: '#033178',
           'base-100': '#E9E8D5',
           'base-200': '#242424',
@@ -85,8 +87,9 @@ module.exports = {
       },
       {
         sunset: {
-          primary: '#41A139',
+          success: '#41A139',
           secondary: '#F5A81A',
+          error: '#AA0A0A',
           neutral: '#033178',
           'base-100': '#242424',
           'base-200': '#FFFFFF',

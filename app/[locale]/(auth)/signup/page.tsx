@@ -1,27 +1,20 @@
-import { SignUpForm } from '@/components/forms';
-import { PageLayout } from '@/components/layouts';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
-import { getSignUpData } from '@/services';
-import { getStrapiData } from '@/services/strapi';
-import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = params;
+import { getMetadata, getSignUpData } from '@/services';
 
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const { seo } = await getStrapiData('registration-page', metaQP);
+import { STRAPI_PAGES } from '@/helpers/constants';
 
-  return {
-    title: {
-      default: `KUSH | ${seo.metaTitle}`,
-      template: '%s | KUSH',
-    },
-    description: seo.metaDescription,
-  };
+import { SignUpForm } from '@/components/forms';
+import { PageLayout } from '@/components/layouts';
+
+import { PageProps } from '@/types/app/page.types';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
+
+  const response = await getMetadata({ path: STRAPI_PAGES.signup, locale });
+
+  return response;
 }
 
 export default async function SignUpPage({ params }: PageProps) {
@@ -30,16 +23,12 @@ export default async function SignUpPage({ params }: PageProps) {
   const { data } = await getSignUpData({ locale });
 
   return (
-    <PageLayout
-      className='relative mb-12 mt-8 h-screen md:h-xl'
-      cover={data.cover}
-    >
+    <PageLayout className='auth-page_wrapper' cover={data.cover}>
       <SignUpForm
-        title='Create account'
         locale={locale}
-        formFields={data.formFields}
         cta={data.submitBtn}
-        className='absolute left-1/2 w-[95%] -translate-x-1/2 transform rounded-md p-4 pt-2 shadow-2xl md:w-[680px] md:p-8 md:pt-4'
+        title={data.title}
+        formFields={data.formFields}
       />
     </PageLayout>
   );

@@ -3,9 +3,15 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialProvider, {
   CredentialInput,
 } from 'next-auth/providers/credentials';
-import { getStrapiAuthData, postStrapiData } from '@/services/strapi';
-import { login } from '@/services/api/login';
-import { sessionAdapter, tokenAdapter } from '@/adapters/auth';
+
+import {
+  googleTokenAdapter,
+  sessionAdapter,
+  tokenAdapter,
+} from '@/adapters/auth';
+
+import { strapiProviderLogin, login } from '@/services';
+import { postStrapiData } from '@/services/strapi';
 
 export const authOptions: NextAuthConfig = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -21,7 +27,7 @@ export const authOptions: NextAuthConfig = {
         const response = await login(credentials);
 
         if (!response?.jwt) {
-          return null;
+          throw new Error(response.error, { cause: 'auth' });
         }
 
         return response;
@@ -38,28 +44,32 @@ export const authOptions: NextAuthConfig = {
         if (account.provider === 'credentials') {
           return tokenAdapter({ token, user });
         }
+
         if (account.provider === 'google') {
-          const userData = await getStrapiAuthData({
+          const response = await strapiProviderLogin({
             provider: account.provider,
-            token: account.access_token,
+            options: { ...token, access_token: account.access_token },
           });
 
-          if (userData.status === 400) {
-            const existingUser = await postStrapiData('user-check', {
+          if (response.status === 400) {
+            const existedUser = await postStrapiData('user-check', {
               email: user.email,
             });
 
-            return tokenAdapter({ token, user: existingUser });
+            return tokenAdapter({ token, user: existedUser });
           }
 
-          return tokenAdapter({ token, user: userData });
+          return googleTokenAdapter({ token, user: response });
         }
       }
 
       return Promise.resolve(token);
     },
     async session({ token, session }: any) {
-      if (token) return sessionAdapter({ token });
+      if (token) {
+        return sessionAdapter({ token });
+      }
+
       return Promise.resolve(session);
     },
   },

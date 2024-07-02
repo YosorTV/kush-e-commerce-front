@@ -1,5 +1,5 @@
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
 import { getStrapiData } from '../strapi';
+import { STRAPI_QUERIES } from '../queries';
 import { generateStrapiQuery } from '@/lib';
 
 export async function getProductsData({
@@ -9,7 +9,7 @@ export async function getProductsData({
   pageSize,
   name,
 }: any) {
-  const productsApi = STRAPI_API_ROUTES.getProducts({
+  const productsApi = STRAPI_QUERIES.PRODUCTS({
     locale,
     category,
     page,

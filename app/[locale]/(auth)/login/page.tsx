@@ -1,63 +1,29 @@
-import { NextLink } from '@/components/elements';
+import { Metadata } from 'next';
+import { getMetadata, getSignInData } from '@/services';
+
 import { SignInForm } from '@/components/forms';
 import { PageLayout } from '@/components/layouts';
-import { STRAPI_API_ROUTES } from '@/helpers/constants';
-import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '@/services/strapi';
+
+import { STRAPI_PAGES } from '@/helpers/constants';
+
 import { PageProps } from '@/types/app/page.types';
-import { StrapiLinkType } from '@/types/components';
-import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = props.params;
 
-  const metaQP = generateStrapiQuery(STRAPI_API_ROUTES.meta({ locale }));
-  const { seo } = await getStrapiData('login-page', metaQP);
+  const response = await getMetadata({ path: STRAPI_PAGES.signin, locale });
 
-  return {
-    title: {
-      default: `KUSH | ${seo?.metaTitle?.toUpperCase()}`,
-      template: '%s | KUSH',
-    },
-    description: seo?.metaDescription,
-  };
+  return response;
 }
 
 export default async function LoginPage({ params }: PageProps) {
   const { locale } = params;
 
-  const pageQP = generateStrapiQuery(STRAPI_API_ROUTES.auth({ locale }).login);
-  const data = await getStrapiData('login-page', pageQP);
-
-  const printLinks = (links: StrapiLinkType[]) => {
-    if (!links) return;
-
-    return links.map((link: StrapiLinkType) => (
-      <NextLink
-        key={link.id}
-        href={link.url}
-        replace={link.isExternal}
-        className='link link-primary'
-      >
-        {link.text}
-      </NextLink>
-    ));
-  };
+  const { data } = await getSignInData({ locale });
 
   return (
-    <PageLayout className='container h-screen'>
-      <section className='flex h-full flex-col items-center justify-center gap-y-5'>
-        <div className='w-1/3'>
-          <SignInForm
-            formFields={data?.formFields}
-            submitBtn={data?.submitBtn}
-            providers={data?.providers}
-          />
-        </div>
-        <div className='flex gap-x-5'>{printLinks(data?.additionalLinks)}</div>
-      </section>
+    <PageLayout className='auth-page_wrapper !h-2lg' cover={data.cover}>
+      <SignInForm data={data} locale={locale} />
     </PageLayout>
   );
 }

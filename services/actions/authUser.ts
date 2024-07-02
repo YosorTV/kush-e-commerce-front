@@ -10,9 +10,13 @@ export async function authUserAction(prevState: any, formData: FormData) {
     const fields = {
       identifier: formData.get('identifier'),
       password: formData.get('password'),
+      remember: formData.get('remember') ?? 'off',
+      locale: formData.get('locale') ?? 'uk',
     };
 
-    const validatedData: any = schemas.login.safeParse(fields);
+    const validatedData: any = schemas
+      .login(fields.locale as string)
+      .safeParse(fields);
 
     if (!validatedData.success) {
       const errors = validatedData.error.flatten().fieldErrors;
@@ -26,18 +30,24 @@ export async function authUserAction(prevState: any, formData: FormData) {
       };
     }
 
-    await signIn('credentials', { ...validatedData.data, redirectTo: ROOT });
+    await signIn('credentials', {
+      ...validatedData.data,
+      redirectTo: ROOT,
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
-        case 'CredentialsSignin':
+        case 'CallbackRouteError':
           return {
             ...prevState,
             data: null,
             errors: null,
             status: 400,
-            message: 'Credentials error',
-            strapiError: 'Invalid credentials or provider authentication',
+            message: '',
+            strapiError:
+              formData.get('locale') === 'uk'
+                ? 'Помилка провайдера.'
+                : 'Invalid provider.',
           };
         default:
           return {
@@ -45,8 +55,9 @@ export async function authUserAction(prevState: any, formData: FormData) {
             data: null,
             errors: null,
             status: 400,
-            message: 'Bad request',
-            strapiError: 'Something went wrong',
+            message: '',
+            strapiError:
+              error.cause['err'].message ?? 'An unexpected error occurred',
           };
       }
     }

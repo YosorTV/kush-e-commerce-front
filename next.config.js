@@ -1,4 +1,5 @@
 const createNextIntlPlugin = require('next-intl/plugin');
+const { hostname } = require('os');
 
 const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
 
@@ -20,6 +21,10 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
         port: '1337',
@@ -36,14 +41,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'placehold.co',
-      },
-      {
-        protocol: 'https',
-        hostname: 'fonts.gstatic.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
       },
       {
         protocol: 'https',
