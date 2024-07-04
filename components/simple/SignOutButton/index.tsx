@@ -2,12 +2,13 @@
 
 import { FC } from 'react';
 import { signOut } from 'next-auth/react';
-import { ROOT } from '@/helpers/constants';
 
-export const SignOutButton: FC<{ text: string }> = ({ text }) => {
-  const handleSignOut = async () => {
-    await signOut({ redirect: true, callbackUrl: ROOT });
-  };
+interface ISignOut {
+  text: string;
+}
+
+export const SignOutButton: FC<ISignOut> = ({ text }) => {
+  const handleSignOut = async () => await signOut();
 
   return (
     <button

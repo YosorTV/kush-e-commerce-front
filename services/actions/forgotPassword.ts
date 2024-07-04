@@ -24,23 +24,22 @@ export async function forgotPassword(prevState: any, formData: FormData) {
   }
 
   const response = await forgotUserPassword(validatedData.data);
-  console.log('response: ', response);
 
-  // if (response.error) {
-  //   return {
-  //     ...prevState,
-  //     errors: null,
-  //     status: 400,
-  //     message: fields.message,
-  //     strapiError: response.error.message,
-  //   };
-  // }
+  if (response.error) {
+    return {
+      ...prevState,
+      errors: null,
+      status: 400,
+      message: response.error.message,
+      strapiError: locale === 'uk' ? 'Помилка в запиті.' : 'Bad request.',
+    };
+  }
 
   return {
     ...prevState,
     errors: null,
     strapiError: null,
-    status: 400,
+    status: 200,
     message:
       locale === 'uk'
         ? 'Повідомлення для поновлення паролю, було надіслано на вашу електронну адресу'

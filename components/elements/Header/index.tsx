@@ -7,9 +7,8 @@ import { Search, UserSession } from '@/components/complex';
 import { HeaderProps } from '@/types/components';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
 
-export const Header: FC<HeaderProps> = ({ data }) => {
+export const Header: FC<HeaderProps> = ({ data, locale }) => {
   const {
-    locale,
     pages,
     sessionLinks,
     session,
@@ -21,6 +20,7 @@ export const Header: FC<HeaderProps> = ({ data }) => {
     categoryTitle,
     collectionTitle,
     searchTitle,
+    signOutTitle,
   } = data;
 
   const collectionsData = {
@@ -61,6 +61,7 @@ export const Header: FC<HeaderProps> = ({ data }) => {
           <UserSession
             cta={cta}
             locale={locale}
+            signOutTitle={signOutTitle}
             session={session?.user}
             sessionLinks={sessionLinks}
           />

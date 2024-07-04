@@ -1,4 +1,7 @@
-import { cormorant } from '@/assets/fonts';
+import { FC } from 'react';
+
+import { getCatalogData } from '@/services';
+
 import { Title } from '@/components/elements';
 import {
   ProductsContent,
@@ -7,14 +10,15 @@ import {
 } from '@/components/simple';
 
 import { cn } from '@/lib';
-import { getCatalogData } from '@/services';
+import { cormorant } from '@/assets/fonts';
 
-export const ProductsSection = async ({ locale }: { locale: string }) => {
+export const ProductsSection: FC<{ locale: string }> = async ({ locale }) => {
   const { title, categories, img } = await getCatalogData({ locale });
+  console.log('categories: ', categories);
 
   return (
     <section>
-      <div className='h-60 overflow-hidden lg:h-lg'>
+      <div className='h-96 overflow-hidden lg:h-full'>
         <StrapiImage
           width={1000}
           height={1000}
@@ -34,10 +38,7 @@ export const ProductsSection = async ({ locale }: { locale: string }) => {
         >
           {title}
         </Title>
-        <ProductsController
-          tabs={categories}
-          className='flex w-full items-center justify-between gap-x-6'
-        />
+        <ProductsController categories={categories} />
         <ProductsContent className='pt-6' />
       </div>
     </section>

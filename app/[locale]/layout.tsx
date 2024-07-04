@@ -24,14 +24,12 @@ export default async function LocalLayout({
   const messages = await getMessages();
   const session = await auth();
 
-  const { header, footer, shoppingCart } = data;
+  const { header: headerData, footer, shoppingCart } = data;
+
+  const header = { ...headerData, shoppingCart, session };
 
   return (
-    <BaseLayout
-      locale={locale}
-      header={{ ...header, shoppingCart, session }}
-      footer={footer}
-    >
+    <BaseLayout locale={locale} header={header} footer={footer}>
       <NextIntlClientProvider messages={messages}>
         <AutoLogoutProvider session={session}>{children}</AutoLogoutProvider>
       </NextIntlClientProvider>

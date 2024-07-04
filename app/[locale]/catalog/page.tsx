@@ -19,7 +19,7 @@ export default async function Catalog({ params }: PageProps) {
   const { locale } = params;
 
   return (
-    <PageLayout className='min-h-screen py-16'>
+    <PageLayout className='min-h-screen py-10'>
       <ProductsSection locale={locale} />
     </PageLayout>
   );

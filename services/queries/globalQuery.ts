@@ -9,6 +9,7 @@ export const globalQuery = ({ locale = DEFAULT_LOCALE }) => ({
         cta: true,
         pages: true,
         sessionLinks: true,
+        signOutTitle: true,
         collections: {
           populate: {
             cover: true,

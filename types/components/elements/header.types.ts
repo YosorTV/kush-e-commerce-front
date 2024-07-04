@@ -1,9 +1,9 @@
 import { StrapiLinkType } from './link.types';
 
 export type HeaderProps = {
+  locale: string;
   data: {
     id: number | string;
-    locale: string;
     session?: any;
     pages: StrapiLinkType[];
     cta: StrapiLinkType;
@@ -11,6 +11,7 @@ export type HeaderProps = {
     collectionTitle?: string;
     searchTitle: string;
     pagesTitle: string;
+    signOutTitle: string;
     categories: {
       data: any[];
     };

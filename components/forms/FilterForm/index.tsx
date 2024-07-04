@@ -1,5 +1,6 @@
 'use client';
 
+import { FC } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { IoClose } from 'react-icons/io5';
 
@@ -18,10 +19,16 @@ import { Accordion, Button, Form, Input, Title } from '@/components/elements';
 import { SORT_OPTIONS } from '@/helpers/constants';
 import { filter } from '@/services';
 
-export const FilterForm = () => {
+interface IFilterForm {
+  categories: any[];
+}
+
+export const FilterForm: FC<IFilterForm> = ({ categories }) => {
   const t = useTranslations();
   const locale = useLocale();
   const state = useFilters();
+
+  console.log(categories);
 
   const FILTER_OPTIONS = [
     {
@@ -61,6 +68,7 @@ export const FilterForm = () => {
         </Button>
       </div>
       <Input name='locale' defaultValue={locale} hidden />
+
       <SortFields data={SORT_OPTIONS} />
       <Accordion data={FILTER_OPTIONS} />
       <SubmitButton

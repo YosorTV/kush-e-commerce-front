@@ -51,12 +51,8 @@ export const authOptions: NextAuthConfig = {
             options: { ...token, access_token: account.access_token },
           });
 
-          if (response.status === 400) {
-            const existedUser = await postStrapiData('user-check', {
-              email: user.email,
-            });
-
-            return tokenAdapter({ token, user: existedUser });
+          if (response?.exist) {
+            return tokenAdapter({ token, user: response });
           }
 
           return googleTokenAdapter({ token, user: response });

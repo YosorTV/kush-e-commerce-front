@@ -7,9 +7,9 @@ import { SignInLink } from '@/components/simple';
 import { cn } from '@/lib';
 
 export const UserSession = ({
-  locale,
   cta,
   session,
+  signOutTitle,
   sessionLinks = [],
 }: any) => {
   if (!session) {
@@ -60,7 +60,7 @@ export const UserSession = ({
         >
           {printMenuLinks(sessionLinks)}
           <li tabIndex={3}>
-            <SignOutButton text={'Sign Out'} />
+            <SignOutButton text={signOutTitle} />
           </li>
         </ul>
       </div>
