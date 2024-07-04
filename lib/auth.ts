@@ -66,9 +66,7 @@ export const authOptions: NextAuthConfig = {
       return Promise.resolve(token);
     },
     async session({ token, session }: any) {
-      if (token) {
-        return sessionAdapter({ token });
-      }
+      session = sessionAdapter({ token });
 
       return Promise.resolve(session);
     },

@@ -8,6 +8,7 @@ import { LOCALES } from '@/helpers/constants';
 import { LayoutProps } from '@/types/app/layout.types';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLayoutData } from '@/services';
+import { AutoLogoutProvider } from '@/components/providers';
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -32,7 +33,7 @@ export default async function LocalLayout({
       footer={footer}
     >
       <NextIntlClientProvider messages={messages}>
-        {children}
+        <AutoLogoutProvider session={session}>{children}</AutoLogoutProvider>
       </NextIntlClientProvider>
     </BaseLayout>
   );

@@ -2,14 +2,18 @@
 
 import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
+
+import { useFilters } from '@/store';
+
+import { cn } from '@/lib';
 import { usePathname } from '@/lib/navigation';
+
+import { ROOT } from '@/helpers/constants';
+
 import { NextLink } from '@/components/elements';
+import { SubMenu } from '../SubMenu';
 
 import { StrapiLinkType } from '@/types/components';
-import { cn } from '@/lib';
-import { ROOT } from '@/helpers/constants';
-import { useFilters } from '@/store';
-import { SubMenu } from '../SubMenu';
 
 type ListOFPagesProps = {
   pages: StrapiLinkType[];
@@ -33,15 +37,13 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   linkStyle,
 }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
-  const pathname = usePathname();
+
   const state = useFilters();
+  const pathname = usePathname();
 
-  const handleShowSubMenu = (index: number) =>
-    !state.isOpen
-      ? setShowOverlay(index === 0 || index === 1)
-      : setShowOverlay(false);
-
-  if (!pages?.length) return null;
+  const handleShowSubMenu = (index: number) => {
+    !state.isOpen && index <= 1 ? setShowOverlay(true) : setShowOverlay(false);
+  };
 
   const printLinks = (data: StrapiLinkType[]) => {
     return data.map((page, index) => {
@@ -73,11 +75,14 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
     });
   };
 
+  if (!pages?.length) return null;
+
   return (
     <>
       <ul className={cn('flex gap-x-6', className)}>{printLinks(pages)}</ul>
       <SubMenu
         isHovered={showOverlay}
+        onHoverEnd={() => setShowOverlay(false)}
         categoryTitle={categories?.title}
         collectionTitle={collections?.title}
         categories={categories?.data}

@@ -10,8 +10,8 @@ export async function authUserAction(prevState: any, formData: FormData) {
     const fields = {
       identifier: formData.get('identifier'),
       password: formData.get('password'),
-      remember: formData.get('remember') ?? 'off',
-      locale: formData.get('locale') ?? 'uk',
+      remember: formData.get('remember') || 'off',
+      locale: formData.get('locale') || 'uk',
     };
 
     const validatedData: any = schemas
@@ -26,7 +26,8 @@ export async function authUserAction(prevState: any, formData: FormData) {
         errors,
         strapiError: null,
         status: 400,
-        message: 'Missing Fields. Failed to Login.',
+        message:
+          fields.locale === 'uk' ? 'Валідаційна помилка.' : 'Validation error.',
       };
     }
 
@@ -43,11 +44,11 @@ export async function authUserAction(prevState: any, formData: FormData) {
             data: null,
             errors: null,
             status: 400,
-            message: '',
-            strapiError:
+            message:
               formData.get('locale') === 'uk'
-                ? 'Помилка провайдера.'
-                : 'Invalid provider.',
+                ? 'Помилка запиту.'
+                : 'Bad Request.',
+            strapiError: error.cause['err'].message,
           };
         default:
           return {
@@ -55,7 +56,10 @@ export async function authUserAction(prevState: any, formData: FormData) {
             data: null,
             errors: null,
             status: 400,
-            message: '',
+            message:
+              formData.get('locale') === 'uk'
+                ? 'Помилка запиту.'
+                : 'Bad Request.',
             strapiError:
               error.cause['err'].message ?? 'An unexpected error occurred',
           };

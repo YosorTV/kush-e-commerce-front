@@ -31,7 +31,7 @@ export const CollectionCard: FC<TCollectioCard> = ({
 
   return (
     <motion.figure
-      className={cn(className, 'relative mx-4')}
+      className={cn(className, 'relative mx-4 my-2')}
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
     >

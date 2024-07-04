@@ -199,10 +199,12 @@ input:-webkit-autofill:active {
   }
 }
 
-.flag-dropdown {
+.flag-dropdown,
+.selected-flag {
   background: transparent !important;
 }
 
-.flag-dropdown:hover {
+.flag-dropdown:hover,
+.selected-flag:hover {
   background: transparent !important;
 }

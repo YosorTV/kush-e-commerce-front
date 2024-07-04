@@ -1,8 +1,6 @@
 'use server';
 
 export async function filter(prevState: any, formData: FormData) {
-  console.log('formData: ', formData);
-
   return {
     ...prevState,
     errors: null,

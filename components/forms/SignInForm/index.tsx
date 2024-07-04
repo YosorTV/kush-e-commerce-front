@@ -52,9 +52,9 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
 
   return (
     <Form
-      schema={schema}
-      method='post'
       id='signin-form'
+      method='post'
+      schema={schema}
       action={authUserAction}
       className='auth-page_form mt-2.5 md:!gap-y-2.5'
     >
@@ -72,19 +72,21 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
         {printInputs(data.formFields)}
       </div>
       <div className='flex w-full flex-col justify-between gap-5 py-2.5 xs:flex-row md:gap-10'>
-        <div>
-          <Input
-            id={data.rememberMe.id}
-            name={data.rememberMe.name}
-            label={data.rememberMe.label}
-            onChange={() => setRememberMe(!rememberMe)}
-            type='checkbox'
-            defaultChecked={rememberMe}
-            className='checkbox checked:fill-base-200'
-            labelStyle='text-base-200 text-sm whitespace-nowrap md:text-lg cursor-pointer'
-            containerClass='flex-row flex-row-reverse justify-end items-center gap-x-3'
-          />
-        </div>
+        {data.rememberMe && (
+          <div>
+            <Input
+              id={data?.rememberMe?.id}
+              name={data.rememberMe.name}
+              label={data.rememberMe.label}
+              onChange={() => setRememberMe(!rememberMe)}
+              type='checkbox'
+              defaultChecked={rememberMe}
+              className='checkbox checked:fill-base-200'
+              labelStyle='text-base-200 text-sm whitespace-nowrap md:text-lg cursor-pointer'
+              containerClass='flex-row flex-row-reverse justify-end items-center gap-x-3'
+            />
+          </div>
+        )}
         <div className='flex flex-col text-base md:text-lg'>
           {printLinks(data?.additionalLinks)}
         </div>
@@ -97,14 +99,16 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
       <div className='divider my-0 px-5' />
       {printProviders(data.providers)}
       <div className='divider my-0 px-5' />
-      <NextLink
-        key={data.createAccountLink.id}
-        href={data.createAccountLink.url}
-        replace={data.createAccountLink.isExternal}
-        className='auth-link uppercase'
-      >
-        {data.createAccountLink.text}
-      </NextLink>
+      {data.createAccountLink && (
+        <NextLink
+          key={data.createAccountLink.id}
+          href={data.createAccountLink.url}
+          replace={data.createAccountLink.isExternal}
+          className='auth-link uppercase'
+        >
+          {data.createAccountLink.text}
+        </NextLink>
+      )}
     </Form>
   );
 };

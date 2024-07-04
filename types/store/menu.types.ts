@@ -3,3 +3,9 @@ export type MenuState = {
   onToggle: () => void;
   onClose: () => void;
 };
+
+export type TSubMenuState = {
+  isOpen: boolean;
+  showSubmenu: () => void;
+  hideSubmenu: () => void;
+};

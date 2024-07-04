@@ -46,13 +46,14 @@ const passwordSchema = (locale: Locale) =>
       message: requiredErrorMessage(locale),
     });
 
-const loginSchema = (locale: Locale) =>
-  z.object({
+const loginSchema = (locale: Locale) => {
+  return z.object({
     identifier: emailSchema(locale),
     password: passwordSchema(locale),
     remember: z.string(),
     locale: z.string().readonly(),
   });
+};
 
 const requiredTextField = (locale: Locale) =>
   z.string().refine((val) => val.trim() !== '', {
@@ -106,9 +107,7 @@ const signupSchema = (locale: Locale) =>
   });
 
 export const forgotPasswordSchema = (locale: Locale) =>
-  z.object({
-    email: emailSchema(locale),
-  });
+  z.object({ email: emailSchema(locale) });
 
 export const resetPasswordBaseSchema = (locale: Locale) =>
   z.object({
@@ -146,5 +145,5 @@ export const schemas = {
   subscription: subscriptionSchema,
   resetPassword: resetPasswordSchema,
   'update-password': updatePasswordScema,
-  'forgot-password': forgotPasswordSchema,
+  forgotUserPassword: forgotPasswordSchema,
 };

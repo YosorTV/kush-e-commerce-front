@@ -2,10 +2,11 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import { cartSlice } from './cart';
-import { menuSlice } from './menu';
-import { productsSlice } from './products';
 import { searchSlice } from './search';
 import { filterSlice } from './filters';
+import { activitySlice } from './activity';
+import { productsSlice } from './products';
+import { menuSlice, subMenuSlice } from './menu';
 
 import {
   CartState,
@@ -13,6 +14,8 @@ import {
   ProductsState,
   TSearchState,
   TFiltersState,
+  TSubMenuState,
+  TActivityState,
 } from '@/types/store';
 
 export const useCart = create<CartState>()(
@@ -27,5 +30,10 @@ export const useFilters = create<TFiltersState>()(
   persist(filterSlice, { name: 'client-filters' })
 );
 
+export const useActivity = create<TActivityState>()(
+  persist(activitySlice, { name: 'client-activity' })
+);
+
 export const useMenu = create<MenuState>()(menuSlice);
+export const useSubMenu = create<TSubMenuState>()(subMenuSlice);
 export const useProducts = create<ProductsState>()(productsSlice);

@@ -35,6 +35,7 @@ declare module 'next-auth' {
       iat: number;
       exp: number;
     };
+    exp: number;
     accessToken: string;
     refreshToken: string;
   }

@@ -15,6 +15,7 @@ type TSubMenu = {
   categories: any[];
   collectionTitle?: string;
   collections?: any[];
+  onHoverEnd: () => void;
   isHovered: boolean;
 };
 
@@ -24,6 +25,7 @@ export const SubMenu: FC<TSubMenu> = ({
   collections,
   collectionTitle,
   isHovered,
+  onHoverEnd,
 }) => {
   const { lg } = useScreen();
 
@@ -32,6 +34,7 @@ export const SubMenu: FC<TSubMenu> = ({
       {isHovered && lg && (
         <motion.nav
           layout
+          onHoverEnd={onHoverEnd}
           transition={{
             type: 'tween',
             ease: 'easeInOut',

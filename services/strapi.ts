@@ -7,7 +7,10 @@ export const getStrapiData = async (
   options?: any
 ) => {
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
-  url.search = queryParams || null;
+
+  if (queryParams) {
+    url.search = queryParams;
+  }
 
   const response = await getData(url.href, { ...options });
 
@@ -20,7 +23,11 @@ export const postStrapiData = async (
   options?: any
 ) => {
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
-  url.search = options;
+
+  if (options) {
+    url.search = options;
+  }
+
   const response = await postData(url.href, data);
 
   return response;

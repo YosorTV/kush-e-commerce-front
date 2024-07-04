@@ -27,7 +27,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
       strapiError: null,
       status: 400,
       message:
-        fields.locale === 'uk'
+        formData.get('locale') === 'uk'
           ? 'Валідаційна помилка. Реестрація невдала.'
           : 'Validation error. Failed to signup.',
     };
@@ -46,7 +46,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
       strapiError: null,
       url: '/login',
       message:
-        fields.locale === 'uk'
+        formData.get('locale') === 'uk'
           ? 'Перевірте пошту для верифікації.'
           : 'Check your email address for verification.',
     };

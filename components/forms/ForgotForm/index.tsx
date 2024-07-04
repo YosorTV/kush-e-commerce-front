@@ -11,16 +11,16 @@ import { Form, Input, NextLink, Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 
 export const ForgotForm = ({ data, locale }: any) => {
-  const schema = schemas['forgot-password'](locale);
+  const schema = schemas.forgotUserPassword(locale);
 
-  const printInputs = (inputs: any) => {
-    return inputs?.map((input: any) => <Input key={input.id} {...input} />);
-  };
+  const printInput = (input: any) => <Input key={input.id} {...input} />;
 
   return (
     <Form
-      action={forgotPassword}
+      id='forgot-password-form'
+      method='post'
       schema={schema}
+      action={forgotPassword}
       className='auth-page_form !gap-y-5'
     >
       <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
@@ -28,14 +28,13 @@ export const ForgotForm = ({ data, locale }: any) => {
       </Title>
       <div className='flex flex-col pb-5'>
         <Input
-          id='locale'
-          name='locale'
-          type='text'
-          value={data.locale}
           hidden
           readOnly
+          name='locale'
+          value={locale}
+          className='hidden'
         />
-        {printInputs(data.formFields)}
+        {data.formFields.map(printInput)}
       </div>
       <SubmitButton
         text={data.submitBtn.text}
