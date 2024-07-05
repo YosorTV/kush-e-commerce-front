@@ -6,6 +6,7 @@ import { IoClose } from 'react-icons/io5';
 import { useFilters } from '@/store';
 
 import {
+  CategorylList,
   MaterialList,
   RangeSlider,
   SizeList,
@@ -26,8 +27,8 @@ export const FilterForm = () => {
   const FILTER_OPTIONS = [
     {
       id: 1,
-      title: 'price',
-      component: <RangeSlider />,
+      title: 'category',
+      component: <CategorylList />,
     },
     {
       id: 2,
@@ -38,6 +39,11 @@ export const FilterForm = () => {
       id: 3,
       title: 'size',
       component: <SizeList />,
+    },
+    {
+      id: 4,
+      title: 'price',
+      component: <RangeSlider />,
     },
   ];
 

@@ -46,5 +46,7 @@ export const SizeList = () => {
     />
   );
 
-  return <div className='form-control'>{sizes.map(printSizeList)}</div>;
+  return (
+    <div className='form-control gap-y-2.5'>{sizes.map(printSizeList)}</div>
+  );
 };

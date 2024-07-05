@@ -35,11 +35,19 @@
     "style": "Style",
     "submit": "See results",
     "progress": "In process",
-    "size": "Size"
+    "size": "Size",
+    "category": "Category",
+    "products": "Products"
   },
   "material": {
     "gold": "Gold",
     "silver": "Silver",
     "platinum": "Platinum"
+  },
+  "category": {
+    "rings": "Rings",
+    "bracelets": "Bracelets",
+    "necklaces": "Necklaces",
+    "earrings": "Earrings"
   }
 }

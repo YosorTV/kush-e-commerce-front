@@ -35,11 +35,19 @@
     "style": "Стиль",
     "submit": "Переглянути результат",
     "progress": "Опрацьовуємо",
-    "size": "Розмір"
+    "size": "Розмір",
+    "category": "Категорія",
+    "products": "Товари"
   },
   "material": {
     "gold": "Золото",
     "silver": "Серебро",
     "platinum": "Платіна"
+  },
+  "category": {
+    "rings": "Кільця",
+    "bracelets": "Браслети",
+    "necklaces": "Намиста",
+    "earrings": "Сережки"
   }
 }

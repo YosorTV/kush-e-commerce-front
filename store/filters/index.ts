@@ -4,6 +4,7 @@ import { TFiltersState } from '@/types/store';
 const defaultOptions: TFiltersState['options'] = {
   sizes: [],
   materials: [],
+  categories: [],
   sortValue: 'recommended',
   price: 0,
 };

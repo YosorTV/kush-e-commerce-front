@@ -4,19 +4,21 @@ import { useFilters } from '@/store';
 
 import { Input } from '@/components/elements';
 
-type TMaterial = {
+type TCategory = {
   id: string;
   text: string;
 };
 
-export const MaterialList = () => {
-  const t = useTranslations('material');
+export const CategorylList = () => {
   const state = useFilters();
 
-  const materials: TMaterial[] = [
-    { id: `material-${1}`, text: 'gold' },
-    { id: `material-${2}`, text: 'silver' },
-    { id: `material-${3}`, text: 'platinum' },
+  const t = useTranslations('category');
+
+  const categories: TCategory[] = [
+    { id: `category-${1}`, text: 'rings' },
+    { id: `category-${2}`, text: 'bracelets' },
+    { id: `category-${3}`, text: 'necklaces' },
+    { id: `category-${4}`, text: 'earrings' },
   ];
 
   const handleMaterialChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -27,18 +29,18 @@ export const MaterialList = () => {
       ? [...materials, value]
       : materials.filter((material) => material !== value);
 
-    state.onFilter({ key: 'materials', value: newMaterials });
+    state.onFilter({ key: 'categories', value: newMaterials });
   };
 
-  const printMaterialList = (el: TMaterial) => (
+  const printCategoryList = (el: TCategory) => (
     <Input
       key={el.id}
       id={el.id}
-      name='material'
+      name='category'
       label={t(el.text)}
       type='checkbox'
       value={el.text}
-      checked={state.options?.materials?.includes(el.text)}
+      checked={state.options?.categories?.includes(el.text)}
       onChange={handleMaterialChange}
       className='checkbox checked:fill-base-200'
       labelStyle='text-base-200 font-medium text-lg cursor-pointer'
@@ -48,7 +50,7 @@ export const MaterialList = () => {
 
   return (
     <div className='form-control gap-y-2.5'>
-      {materials.map(printMaterialList)}
+      {categories.map(printCategoryList)}
     </div>
   );
 };

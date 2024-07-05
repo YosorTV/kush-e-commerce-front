@@ -4,6 +4,7 @@ export type TFiltersState = {
     price: number;
     sortValue: string;
     materials: string[];
+    categories: string[];
     sizes: string[];
   };
   onToggle: () => void;
