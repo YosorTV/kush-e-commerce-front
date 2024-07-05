@@ -56,7 +56,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
       method='post'
       schema={schema}
       action={authUserAction}
-      className='auth-page_form mt-2.5 md:!gap-y-2.5'
+      className='auth-page_form mt-5 md:!gap-y-2.5'
     >
       <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
         {data.title}

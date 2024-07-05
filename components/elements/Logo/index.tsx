@@ -12,7 +12,11 @@ interface TLogo {
 export const Logo: FC<TLogo> = ({ className, width = 150, height = 42 }) => {
   return (
     <NextLink href={ROOT} className={className}>
-      <LogoIcon width={width} height={height} className='fill-base-200 p-1.5' />
+      <LogoIcon
+        width={width}
+        height={height}
+        className='relative top-1 fill-base-200 p-2'
+      />
     </NextLink>
   );
 };

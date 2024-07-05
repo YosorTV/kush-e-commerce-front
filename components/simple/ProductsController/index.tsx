@@ -8,7 +8,7 @@ import { useFilters } from '@/store';
 import { FilterForm } from '@/components/forms';
 import { Button, Sidebar } from '@/components/elements';
 
-export const ProductsController = ({ categories }: any) => {
+export const ProductsController = () => {
   const t = useTranslations('filter');
   const state = useFilters();
 
@@ -27,7 +27,7 @@ export const ProductsController = ({ categories }: any) => {
           onToggle={state.onToggle}
           position='right'
         >
-          <FilterForm categories={categories} />
+          <FilterForm />
         </Sidebar>
       </div>
     </nav>

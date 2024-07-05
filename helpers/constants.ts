@@ -74,7 +74,6 @@ export const CATEGORY_FIELDS = ['title', 'slug'];
 export const IMAGE_FIELDS = ['url', 'alternativeText', 'formats'];
 export const PROFILE_FIELDS = ['general', 'additional', 'actions', 'avatar'];
 
-export const AUTH_SUCCESS_FIELDS = ['title', 'description', 'redirectUrl'];
 export const AUTH_FORGOT_FIELDS = [
   'formFields',
   'submitBtn',
@@ -82,6 +81,13 @@ export const AUTH_FORGOT_FIELDS = [
   'loginUrl',
   'cover',
 ];
+
+export const AUTH_SUCCESS_FIELDS = {
+  title: true,
+  description: true,
+  redirect: true,
+  cover: { fields: IMAGE_FIELDS },
+};
 
 export const AUTH_RESET_FIELDS = {
   title: true,

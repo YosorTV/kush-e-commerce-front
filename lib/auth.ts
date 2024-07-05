@@ -11,7 +11,6 @@ import {
 } from '@/adapters/auth';
 
 import { strapiProviderLogin, login } from '@/services';
-import { postStrapiData } from '@/services/strapi';
 
 export const authOptions: NextAuthConfig = {
   secret: process.env.NEXTAUTH_SECRET,

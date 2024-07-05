@@ -1,7 +1,11 @@
+import { ReactNode } from 'react';
+
 import './globals.css';
 
-export default async function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+type TRootLayout = {
+  children: ReactNode;
+};
+
+export default async function RootLayout({ children }: Readonly<TRootLayout>) {
   return children;
 }

@@ -112,7 +112,7 @@ export const forgotPasswordSchema = (locale: Locale) =>
 export const resetPasswordBaseSchema = (locale: Locale) =>
   z.object({
     password: passwordSchema(locale),
-    passwordConfirmation: passwordSchema(locale),
+    passwordConfirmation: requiredTextField(locale),
     code: z.string().readonly(),
   });
 

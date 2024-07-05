@@ -13,8 +13,7 @@ import { cn } from '@/lib';
 import { cormorant } from '@/assets/fonts';
 
 export const ProductsSection: FC<{ locale: string }> = async ({ locale }) => {
-  const { title, categories, img } = await getCatalogData({ locale });
-  console.log('categories: ', categories);
+  const { title, img } = await getCatalogData({ locale });
 
   return (
     <section>
@@ -38,7 +37,7 @@ export const ProductsSection: FC<{ locale: string }> = async ({ locale }) => {
         >
           {title}
         </Title>
-        <ProductsController categories={categories} />
+        <ProductsController />
         <ProductsContent className='pt-6' />
       </div>
     </section>

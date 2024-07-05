@@ -27,7 +27,7 @@ export default async function ResetPasswordPage({
   const { data } = await getResetPasswordData({ locale });
 
   return (
-    <PageLayout className='auth-page_wrapper !h-lg' cover={data.cover}>
+    <PageLayout className='auth-page_wrapper' cover={data.cover}>
       <ResetForm data={data} code={code} locale={locale} />
     </PageLayout>
   );

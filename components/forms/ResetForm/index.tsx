@@ -22,7 +22,7 @@ export const ResetForm = ({ data, code, locale }: any) => {
       method='post'
       id='reset-password'
       action={resetPassword}
-      className='auth-page_form !gap-y-5'
+      className='auth-page_form mt-5 !gap-y-5'
     >
       <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
         {data.title}

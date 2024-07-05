@@ -1,6 +1,5 @@
 'use client';
 
-import { FC } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { IoClose } from 'react-icons/io5';
 
@@ -19,16 +18,10 @@ import { Accordion, Button, Form, Input, Title } from '@/components/elements';
 import { SORT_OPTIONS } from '@/helpers/constants';
 import { filter } from '@/services';
 
-interface IFilterForm {
-  categories: any[];
-}
-
-export const FilterForm: FC<IFilterForm> = ({ categories }) => {
+export const FilterForm = () => {
   const t = useTranslations();
   const locale = useLocale();
   const state = useFilters();
-
-  console.log(categories);
 
   const FILTER_OPTIONS = [
     {
@@ -53,9 +46,9 @@ export const FilterForm: FC<IFilterForm> = ({ categories }) => {
       method='POST'
       state={{ data: state.options }}
       action={filter}
-      className='flex h-full flex-1 flex-col pr-5'
+      className='flex h-full flex-1 flex-col gap-y-2.5 pr-5'
     >
-      <div className='flex w-full items-baseline justify-between pb-10'>
+      <div className='flex w-full items-baseline justify-between'>
         <Title level='2' className='text-xl font-semibold text-base-200'>
           {t('sort.title')}:
         </Title>
@@ -67,8 +60,7 @@ export const FilterForm: FC<IFilterForm> = ({ categories }) => {
           <IoClose className='h-6 w-6 fill-base-200' />
         </Button>
       </div>
-      <Input name='locale' defaultValue={locale} hidden />
-
+      <Input name='locale' value={locale} hidden className='hidden' />
       <SortFields data={SORT_OPTIONS} />
       <Accordion data={FILTER_OPTIONS} />
       <SubmitButton

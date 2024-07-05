@@ -55,7 +55,7 @@
   }
 
   .auth-page_wrapper {
-    @apply relative my-5 h-screen overflow-hidden md:h-[784px];
+    @apply relative h-screen overflow-hidden md:h-[784px];
   }
 
   .auth-page_form {

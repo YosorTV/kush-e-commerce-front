@@ -52,7 +52,7 @@ export const Header: FC<HeaderProps> = ({ data, locale }) => {
           <Logo
             width={160}
             height={48}
-            className='absolute-center hidden xs:block'
+            className='!md:absolute-center hidden xs:left-36 xs:block'
           />
         </div>
         <div className='flex items-center gap-x-6'>
