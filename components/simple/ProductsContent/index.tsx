@@ -64,8 +64,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
 
   const printProducts = useCallback(
     (product: Product, index: number) => {
-      const number = product.available_colors.length;
-      const hintText = t('colors.availableIn', { number });
+      const hintText = t('colors.availableIn', { number: 1 });
 
       return (
         <ProductCard

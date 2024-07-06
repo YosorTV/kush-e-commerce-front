@@ -8,13 +8,15 @@ export async function getProductsData({
   page,
   pageSize,
   name,
+  ...rest
 }: any) {
   const productsApi = STRAPI_QUERIES.PRODUCTS({
     locale,
-    category,
+    name,
     page,
     pageSize,
-    name,
+    category,
+    ...rest,
   });
 
   const response = await getStrapiData(

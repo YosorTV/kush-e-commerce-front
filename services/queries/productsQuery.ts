@@ -9,6 +9,7 @@ export const productsQuery = ({
   category,
   page = '1',
   pageSize = '5',
+  ...options
 }: PageProps['searchParams']) => {
   const filters: Record<string, any> = {};
 
@@ -16,8 +17,26 @@ export const productsQuery = ({
     filters.title = { $contains: name.toLowerCase().trim() };
   }
 
-  if (category && category !== '*') {
-    filters.category = { $eq: category.toLowerCase().trim() };
+  if (category !== '*') {
+    filters.category = { $eq: category };
+  }
+
+  if (options.sizes?.length) {
+    filters.sizes = { size: { $eq: options.sizes } };
+  }
+
+  if (options?.materials?.length > 0) {
+    filters.materials = {
+      materials: { $eq: options.materials },
+    };
+  }
+
+  if (options?.categories?.length > 0) {
+    filters.category = { $eq: options.categories };
+  }
+
+  if (options.price) {
+    filters.price = { $eq: options.price };
   }
 
   return {
@@ -25,6 +44,10 @@ export const productsQuery = ({
     name,
     locale,
     populate: {
+      colors: true,
+      sizes: true,
+      materials: true,
+      collections: true,
       images: {
         populate: {
           data: {

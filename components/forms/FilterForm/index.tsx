@@ -4,7 +4,7 @@ import { FormEvent } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { useFilters } from '@/store';
+import { useFilters, useProducts } from '@/store';
 
 import {
   CategoryList,
@@ -23,6 +23,7 @@ export const FilterForm = () => {
   const t = useTranslations();
   const locale = useLocale();
   const state = useFilters();
+  const products = useProducts();
 
   const FILTER_OPTIONS = [
     {
@@ -50,7 +51,12 @@ export const FilterForm = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(state.options);
+    products.fetchProducts({
+      locale,
+      page: 1,
+      pageSize: 5,
+      ...state.options,
+    });
   };
 
   return (

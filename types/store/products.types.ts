@@ -2,9 +2,9 @@ import { Product } from '@/types/components';
 
 type PageProps = {
   locale: string;
-  category: string;
   page: number;
   pageSize: number;
+  category?: string | string[];
 };
 
 export type ProductsState = {
@@ -23,6 +23,7 @@ export type ProductsState = {
     category,
     page,
     pageSize,
+    ...rest
   }: PageProps) => Promise<void>;
   fetchMoreProducts: ({
     locale,

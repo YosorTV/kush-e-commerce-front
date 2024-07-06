@@ -8,15 +8,16 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
   error: null,
   products: [],
   meta: { page: 1, pageCount: 0, pageSize: 0, total: 0 },
-  fetchProducts: async ({ locale, category, page, pageSize }) => {
+  fetchProducts: async ({ locale, category, page, pageSize, ...rest }) => {
     set({ isLoading: true, error: null });
 
     try {
       const { data, meta } = await getProductsData({
         locale,
-        category,
         page,
         pageSize,
+        category,
+        ...rest,
       });
 
       set({

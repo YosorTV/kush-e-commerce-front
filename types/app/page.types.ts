@@ -6,6 +6,7 @@ export type PageProps = {
   searchParams: {
     id?: string;
     category?: string;
+    categories?: string[];
     page?: string;
     pageSize?: string;
     sortBy?: string;
@@ -13,5 +14,9 @@ export type PageProps = {
     filterBy?: string;
     name?: string;
     code?: string;
+    price?: string;
+    sizes?: string | string[];
+    materials?: string | string[];
+    color?: string | string[];
   };
 };
