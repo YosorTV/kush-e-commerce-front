@@ -48,11 +48,11 @@ export const Header: FC<HeaderProps> = ({ data, locale }) => {
             categories={categoryData}
           />
         </div>
-        <div className='flex w-full lg:justify-center'>
+        <div className='flex w-full lg:mr-32 lg:justify-center'>
           <Logo
             width={160}
             height={48}
-            className='!md:absolute-center hidden xs:left-36 xs:block'
+            className='!lg:absolute-center hidden xs:left-36 xs:block'
           />
         </div>
         <div className='flex items-center gap-x-6'>

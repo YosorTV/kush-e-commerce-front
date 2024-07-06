@@ -1,10 +1,15 @@
 'use client';
 
-import { FormEvent } from 'react';
-import { IoClose } from 'react-icons/io5';
-import { useLocale, useTranslations } from 'next-intl';
+import qs from 'qs';
 
-import { useFilters, useProducts } from '@/store';
+import { FormEvent, useCallback } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { IoClose } from 'react-icons/io5';
+
+import { useFilters } from '@/store';
+import { usePathname, useRouter } from '@/lib/navigation';
+
+import { Accordion, Button, Input, Title } from '@/components/elements';
 
 import {
   CategoryList,
@@ -15,15 +20,14 @@ import {
   SubmitButton,
 } from '@/components/simple';
 
-import { Accordion, Button, Input, Title } from '@/components/elements';
-
 import { SORT_OPTIONS } from '@/helpers/constants';
 
 export const FilterForm = () => {
   const t = useTranslations();
   const locale = useLocale();
   const state = useFilters();
-  const products = useProducts();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const FILTER_OPTIONS = [
     {
@@ -48,15 +52,24 @@ export const FilterForm = () => {
     },
   ];
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    products.fetchProducts({
-      locale,
-      page: 1,
-      pageSize: 5,
-      ...state.options,
-    });
+      const queryString = qs.stringify(state.options, {
+        arrayFormat: 'repeat',
+        encodeValuesOnly: true,
+        skipNulls: true,
+      });
+
+      router.replace(`${pathname}?${queryString}`);
+    },
+    [pathname, router, state.options]
+  );
+
+  const handleClose = () => {
+    state.onReset();
+    router.replace(pathname);
   };
 
   return (
@@ -70,7 +83,7 @@ export const FilterForm = () => {
         </Title>
         <Button
           type='button'
-          onClick={state.onReset}
+          onClick={handleClose}
           className='col-span-1 col-start-5 row-start-1 md:col-start-6'
         >
           <IoClose className='h-6 w-6 fill-base-200' />

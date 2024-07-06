@@ -66,7 +66,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
           hidden
           readOnly
           name='locale'
-          value={locale}
+          defaultValue={locale}
           className='hidden'
         />
         {printInputs(data.formFields)}

@@ -11,7 +11,16 @@ export const productsQuery = ({
   pageSize = '5',
   ...options
 }: PageProps['searchParams']) => {
+  let sort;
   const filters: Record<string, any> = {};
+
+  if (options?.sortBy === 'low') {
+    sort = ['price:asc'];
+  } else if (options?.sortBy === 'high') {
+    sort = ['price:desc'];
+  } else {
+    sort = '';
+  }
 
   if (name) {
     filters.title = { $contains: name.toLowerCase().trim() };
@@ -56,6 +65,7 @@ export const productsQuery = ({
         },
       },
     },
+    sort,
     filters,
     pagination: {
       page,

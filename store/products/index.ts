@@ -30,7 +30,7 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
     }
   },
 
-  fetchMoreProducts: async ({ locale, category, page, pageSize }) => {
+  fetchMoreProducts: async ({ locale, category, page, pageSize, ...rest }) => {
     set({ isLoading: true, error: null });
 
     try {
@@ -39,6 +39,7 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
         category,
         page,
         pageSize,
+        ...rest,
       });
 
       set((state) => ({

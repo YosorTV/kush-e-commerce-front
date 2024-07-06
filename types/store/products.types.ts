@@ -30,5 +30,6 @@ export type ProductsState = {
     category,
     page,
     pageSize,
+    ...rest
   }: PageProps) => Promise<void>;
 };

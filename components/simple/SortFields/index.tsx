@@ -13,7 +13,7 @@ export const SortFields: FC<ISortFields> = ({ data }) => {
   const state = useFilters();
 
   const handleChange = (name: string) => {
-    state.onFilter({ key: 'sortValue', value: name });
+    state.onFilter({ key: 'sortBy', value: name });
   };
 
   const printSortField = (field: TSortField) => (
@@ -24,7 +24,7 @@ export const SortFields: FC<ISortFields> = ({ data }) => {
       name='sort'
       value={field.name}
       label={t(field.label)}
-      checked={state.options.sortValue === field.name}
+      checked={state.options.sortBy === field.name}
       onChange={() => handleChange(field.name)}
       className='radio checked:bg-base-200'
       labelStyle='text-base-200 font-medium text-lg cursor-pointer'

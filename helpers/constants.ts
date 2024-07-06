@@ -146,16 +146,11 @@ export const SORT_OPTIONS = [
   },
   {
     id: 2,
-    label: 'bestSeller',
-    name: 'best',
-  },
-  {
-    id: 3,
     label: 'priceLowToHigh',
     name: 'low',
   },
   {
-    id: 4,
+    id: 3,
     label: 'priceHighToLow',
     name: 'high',
   },

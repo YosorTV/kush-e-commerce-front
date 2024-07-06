@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -22,31 +22,40 @@ interface TProductsContent {
 
 export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
   const t = useTranslations();
-  const params = useSearchParams();
   const locale = useLocale();
   const state = useProducts();
+  const params = useSearchParams();
 
-  const category = params.get('category');
   const isLastPage = state.meta.page === state.meta.pageCount;
+
+  const options = useMemo(
+    () => ({
+      sizes: params.getAll('sizes'),
+      categories: params.getAll('categories'),
+      materials: params.getAll('materials'),
+      sortBy: params.get('sortBy') ?? 'recommended',
+    }),
+    [params]
+  );
 
   useEffect(() => {
     state.fetchProducts({
       locale,
       page: 1,
-      pageSize: Boolean(category) ? 5 : 4,
-      category: category ?? '*',
+      pageSize: 5,
+      ...options,
     });
 
     return () => state.reset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, locale]);
+  }, [locale, options]);
 
   const handleMore = () => {
     state.fetchMoreProducts({
       locale,
-      category,
-      pageSize: Boolean(category) ? 5 : 4,
+      pageSize: 5,
       page: state.meta.page + 1,
+      ...options,
     });
   };
 
@@ -95,7 +104,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
       )}
 
       <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
-        {state.isLoading && !state.products.length && !Boolean(category) ? (
+        {state.isLoading && !state.products.length ? (
           <ProductCardSkeleton customGrid length={4} />
         ) : (
           state.products.map(printProducts)
