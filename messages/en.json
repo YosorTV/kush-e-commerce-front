@@ -37,7 +37,8 @@
     "progress": "In process",
     "size": "Size",
     "category": "Category",
-    "products": "Products"
+    "products": "Products",
+    "reset": "Reset"
   },
   "material": {
     "gold": "Gold",

@@ -35,7 +35,7 @@ export const Sidebar: FC<SidebarProps> = ({
           <motion.div layout onClick={(e) => e.stopPropagation()}>
             <motion.div
               className={cn(
-                'md:1/2 absolute top-0 h-screen w-full bg-base-100 p-5 pr-0 sm:w-2/3 lg:w-1/3',
+                'md:1/2 fixed top-0 h-screen w-full bg-base-100 p-5 pr-0 sm:w-2/3 lg:w-1/3',
                 position === 'left' && 'left-0',
                 position === 'right' && 'right-0'
               )}

@@ -37,7 +37,8 @@
     "progress": "Опрацьовуємо",
     "size": "Розмір",
     "category": "Категорія",
-    "products": "Товари"
+    "products": "Товари",
+    "reset": "Скинути"
   },
   "material": {
     "gold": "Золото",

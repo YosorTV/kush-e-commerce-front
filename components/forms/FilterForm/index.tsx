@@ -62,15 +62,16 @@ export const FilterForm = () => {
         skipNulls: true,
       });
 
+      state.onToggle();
       router.replace(`${pathname}?${queryString}`);
     },
-    [pathname, router, state.options]
+    [pathname, router, state]
   );
 
-  const handleClose = () => {
+  const handleReset = useCallback(() => {
     state.onReset();
     router.replace(pathname);
-  };
+  }, [pathname, router, state]);
 
   return (
     <form
@@ -83,7 +84,7 @@ export const FilterForm = () => {
         </Title>
         <Button
           type='button'
-          onClick={handleClose}
+          onClick={state.onToggle}
           className='col-span-1 col-start-5 row-start-1 md:col-start-6'
         >
           <IoClose className='h-6 w-6 fill-base-200' />
@@ -97,6 +98,14 @@ export const FilterForm = () => {
         loadingText={t('filter.progress')}
         className='!bg-base-200 !text-base-100'
       />
+      <div className='divider px-4' />
+      <Button
+        type='button'
+        className='text-base-200 hover:!bg-base-200 hover:!text-base-100'
+        onClick={handleReset}
+      >
+        {t('filter.reset')}
+      </Button>
     </form>
   );
 };
