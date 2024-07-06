@@ -31,7 +31,9 @@ export default async function LocalLayout({
   return (
     <BaseLayout locale={locale} header={header} footer={footer}>
       <NextIntlClientProvider messages={messages}>
-        <AutoLogoutProvider session={session}>{children}</AutoLogoutProvider>
+        <AutoLogoutProvider session={session ? session : null}>
+          {children}
+        </AutoLogoutProvider>
       </NextIntlClientProvider>
     </BaseLayout>
   );

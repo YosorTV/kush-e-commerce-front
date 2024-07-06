@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { notFound } from 'next/navigation';
 
 import { HeroSection, SpotlightSection } from '@/components/complex';
 import ProductsContent from '../ProductsContent';
@@ -23,8 +22,6 @@ function blockRenderer(block: any) {
   }
 }
 
-export const StrapiBlockRender: FC<any> = ({ data }) => {
-  if (!data) return notFound();
-
+export const StrapiBlockRender: FC<any> = ({ data = [] }) => {
   return data.map(blockRenderer);
 };
