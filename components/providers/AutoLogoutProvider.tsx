@@ -41,7 +41,7 @@ export const AutoLogoutProvider: FC<
       }
     }
 
-    if (lastActivity + timeoutMs < now) {
+    if (session && lastActivity + timeoutMs < now) {
       await logout();
     }
     return false;
@@ -63,8 +63,9 @@ export const AutoLogoutProvider: FC<
       });
       window.clearInterval(intervalId);
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastActivity, session, timeoutCheckMs]);
+  }, [lastActivity, timeoutCheckMs]);
 
   return children;
 };

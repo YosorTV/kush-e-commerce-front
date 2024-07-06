@@ -15,8 +15,8 @@ export const HeroSection: FC<any> = ({ data }) => {
       </div>
       <figure className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white lg:h-full'>
         <StrapiImage
-          height={1000}
-          width={1000}
+          height={2000}
+          width={2000}
           className='hero-image'
           src={data?.image?.url}
           alt={data?.image?.alternativeText}

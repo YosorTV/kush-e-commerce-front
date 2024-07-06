@@ -9,7 +9,7 @@ type TCategory = {
   text: string;
 };
 
-export const CategorylList = () => {
+export const CategoryList = () => {
   const state = useFilters();
 
   const t = useTranslations('category');
@@ -23,13 +23,13 @@ export const CategorylList = () => {
 
   const handleMaterialChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = target;
-    const { materials } = state.options;
+    const { categories } = state.options;
 
-    const newMaterials = checked
-      ? [...materials, value]
-      : materials.filter((material) => material !== value);
+    const newCategories = checked
+      ? [...categories, value]
+      : categories.filter((category) => category !== value);
 
-    state.onFilter({ key: 'categories', value: newMaterials });
+    state.onFilter({ key: 'categories', value: newCategories });
   };
 
   const printCategoryList = (el: TCategory) => (

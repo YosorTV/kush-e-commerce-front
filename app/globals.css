@@ -190,15 +190,6 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .flag-dropdown,
 .selected-flag {
   background: transparent !important;

@@ -1,12 +1,13 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { FormEvent } from 'react';
 import { IoClose } from 'react-icons/io5';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { useFilters } from '@/store';
 
 import {
-  CategorylList,
+  CategoryList,
   MaterialList,
   RangeSlider,
   SizeList,
@@ -14,10 +15,9 @@ import {
   SubmitButton,
 } from '@/components/simple';
 
-import { Accordion, Button, Form, Input, Title } from '@/components/elements';
+import { Accordion, Button, Input, Title } from '@/components/elements';
 
 import { SORT_OPTIONS } from '@/helpers/constants';
-import { filter } from '@/services';
 
 export const FilterForm = () => {
   const t = useTranslations();
@@ -28,7 +28,7 @@ export const FilterForm = () => {
     {
       id: 1,
       title: 'category',
-      component: <CategorylList />,
+      component: <CategoryList />,
     },
     {
       id: 2,
@@ -47,11 +47,15 @@ export const FilterForm = () => {
     },
   ];
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log(state.options);
+  };
+
   return (
-    <Form
-      method='POST'
-      state={{ data: state.options }}
-      action={filter}
+    <form
+      onSubmit={handleSubmit}
       className='flex h-full flex-1 flex-col gap-y-2.5 pr-5'
     >
       <div className='flex w-full items-baseline justify-between'>
@@ -66,7 +70,7 @@ export const FilterForm = () => {
           <IoClose className='h-6 w-6 fill-base-200' />
         </Button>
       </div>
-      <Input name='locale' value={locale} hidden className='hidden' />
+      <Input name='locale' defaultValue={locale} hidden className='hidden' />
       <SortFields data={SORT_OPTIONS} />
       <Accordion data={FILTER_OPTIONS} />
       <SubmitButton
@@ -74,6 +78,6 @@ export const FilterForm = () => {
         loadingText={t('filter.progress')}
         className='!bg-base-200 !text-base-100'
       />
-    </Form>
+    </form>
   );
 };

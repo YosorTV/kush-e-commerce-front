@@ -40,6 +40,8 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
             {data.linksGroupTitle}
           </Title>
           <ListOfPages
+            categories={null}
+            collections={null}
             pages={data.links}
             className='grid grid-cols-4 gap-x-2 xs:grid-cols-4 lg:grid-cols-1'
           />

@@ -28,11 +28,11 @@ export const Form: FC<FormProps<any>> = ({
 
   useEffect(() => {
     if (formState.status === 200) {
-      toaster({ key: 'success', message: formState.message });
       ref.current.reset();
       if (formState.url) {
         router.push(formState.url);
       }
+      toaster({ key: 'success', message: formState.message });
     } else if (formState.status === 400) {
       toaster({
         key: 'error',

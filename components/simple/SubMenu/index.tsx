@@ -33,11 +33,10 @@ export const SubMenu: FC<TSubMenu> = ({
     <AnimatePresence mode='popLayout'>
       {isHovered && lg && (
         <motion.nav
-          layout
           onHoverEnd={onHoverEnd}
           transition={{
             type: 'tween',
-            ease: 'easeInOut',
+            ease: 'easeOut',
             duration: 0.3,
           }}
           initial={{
@@ -52,30 +51,34 @@ export const SubMenu: FC<TSubMenu> = ({
             display: 'none',
             opacity: 0,
           }}
-          className='absolute left-0 top-16 z-0 w-full gap-x-16 bg-base-100 px-5 pt-7'
+          className='fixed left-0 top-16 z-0 w-full gap-x-16 bg-base-100 px-5 pt-7'
         >
           <div>
-            <Title
-              level='5'
-              className={cn(
-                'text-xl uppercase text-base-200',
-                cormorant.className
-              )}
-            >
-              {categoryTitle}
-            </Title>
-            <ul className='flex flex-col gap-y-4 py-4 capitalize text-base-200'>
-              {categories.map((category: CategoryLinkType) => (
-                <MenuItem
-                  id={category.id}
-                  key={category.id}
-                  text={category.title}
-                  slug={category.slug}
-                  url={`/catalog?category=${category.slug}`}
-                  isExternal={false}
-                />
-              ))}
-            </ul>
+            {categoryTitle && (
+              <Title
+                level='5'
+                className={cn(
+                  'text-xl uppercase text-base-200',
+                  cormorant.className
+                )}
+              >
+                {categoryTitle}
+              </Title>
+            )}
+            {categories.length > 0 && (
+              <ul className='flex flex-col gap-y-4 py-4 capitalize text-base-200'>
+                {categories.map((category: CategoryLinkType) => (
+                  <MenuItem
+                    id={category.id}
+                    key={category.id}
+                    text={category.title}
+                    slug={category.slug}
+                    url={`/catalog?category=${category.slug}`}
+                    isExternal={false}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
           {collections.length > 0 && (
             <div className='flex w-full justify-between gap-x-6'>

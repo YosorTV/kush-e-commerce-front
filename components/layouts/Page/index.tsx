@@ -23,7 +23,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
   return (
     <div
       className={cn(
-        'relative flex flex-grow animate-fadeInUp flex-col overflow-hidden',
+        'relative flex flex-grow flex-col overflow-hidden',
         className
       )}
     >
