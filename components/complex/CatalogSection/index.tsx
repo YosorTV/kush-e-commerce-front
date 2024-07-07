@@ -1,12 +1,16 @@
 import { ProductsContent, ProductsController } from '@/components/simple';
+import { FC } from 'react';
 
-export const CatalogSection = () => {
+interface ICatalogSection {
+  title?: string;
+  filterForm?: any;
+}
+
+export const CatalogSection: FC<ICatalogSection> = ({ title, ...rest }) => {
   return (
-    <section className='px-5'>
-      <div>
-        <ProductsController />
-        <ProductsContent className='pt-6' />
-      </div>
+    <section className='p-5'>
+      <ProductsController title={title} />
+      <ProductsContent className='pt-5' />
     </section>
   );
 };

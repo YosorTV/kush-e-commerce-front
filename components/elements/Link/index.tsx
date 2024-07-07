@@ -1,13 +1,17 @@
+import { FC } from 'react';
+
 import { Link } from '@/lib/navigation';
+
 import { LinkType } from '@/types/components';
 
-export const NextLink: React.FC<LinkType> = ({
+export const NextLink: FC<LinkType> = ({
   href = '/',
   children,
   className,
   replace,
   scroll,
   prefetch,
+  title,
 }) => {
   return (
     <Link
@@ -16,6 +20,7 @@ export const NextLink: React.FC<LinkType> = ({
       scroll={scroll}
       prefetch={prefetch}
       className={className}
+      title={title}
     >
       {children}
     </Link>

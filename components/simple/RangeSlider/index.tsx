@@ -29,7 +29,7 @@ export const RangeSlider = () => {
         className='range range-xs'
       />
       <div className='flex w-full justify-between'>
-        <span>{state.options.price} $</span>
+        <span>{state.options.price ?? 0} $</span>
         <span>{max} $</span>
       </div>
     </div>

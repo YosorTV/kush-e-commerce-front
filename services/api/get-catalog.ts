@@ -1,18 +1,15 @@
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
+import { STRAPI_PAGES } from '@/helpers/constants';
 
 export async function getCatalogData({ locale }: { locale: string }) {
-  const catalogApi = STRAPI_QUERIES.CATALOG({ locale });
+  const catalogQP = STRAPI_QUERIES.CATALOG({ locale });
 
   const response = await getStrapiData(
-    'products-page',
-    generateStrapiQuery(catalogApi)
+    STRAPI_PAGES.catalog,
+    generateStrapiQuery(catalogQP)
   );
 
-  return {
-    title: response?.title,
-    img: response?.cover,
-    categories: response?.categories?.data,
-  };
+  return { data: response };
 }

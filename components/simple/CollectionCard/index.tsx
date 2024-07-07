@@ -1,17 +1,20 @@
 'use client';
 
 import { FC, useState } from 'react';
-
-import { AnimatePresence, motion } from 'framer-motion';
-import { StrapiImage } from '../StrapiImage';
-import { NextLink, Title } from '@/components/elements';
 import { IoNavigateCircleSharp } from 'react-icons/io5';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { cn } from '@/lib';
+
+import { StrapiImage } from '@/components/simple';
+import { NextLink, Title } from '@/components/elements';
 
 type TCollectioCard = {
   title: string;
+  hintText?: string;
   slug: string;
   className?: string;
+  textClassName?: string;
   img: {
     alternativeText?: string;
     url: string;
@@ -21,7 +24,9 @@ type TCollectioCard = {
 export const CollectionCard: FC<TCollectioCard> = ({
   img,
   className,
+  textClassName = 'text-base-200',
   title,
+  hintText = 'Explore now',
   slug,
 }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
@@ -31,7 +36,7 @@ export const CollectionCard: FC<TCollectioCard> = ({
 
   return (
     <motion.figure
-      className={cn(className, 'relative mx-4 my-2')}
+      className={cn(className, 'relative')}
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
     >
@@ -46,7 +51,7 @@ export const CollectionCard: FC<TCollectioCard> = ({
             <div className='pointer-events-none absolute h-full w-full bg-black/50' />
             <NextLink
               href={`/collection/${slug}`}
-              className='z-20 flex items-center p-2.5 font-semibold'
+              className='z-20 flex items-center gap-x-2.5 p-5 font-semibold text-base-200'
             >
               <IoNavigateCircleSharp
                 style={{
@@ -55,6 +60,7 @@ export const CollectionCard: FC<TCollectioCard> = ({
                   height: 24,
                 }}
               />
+              {hintText}
             </NextLink>
           </motion.div>
         )}
@@ -62,11 +68,11 @@ export const CollectionCard: FC<TCollectioCard> = ({
       <StrapiImage
         alt={img.alternativeText}
         src={img.url}
-        height={500}
-        width={500}
-        className='h-full w-full object-cover object-bottom'
+        height={1200}
+        width={1200}
+        className='h-full w-full object-cover object-center-to-top'
       />
-      <Title level='5' className='text-xl font-medium text-base-200'>
+      <Title level='5' className={cn('text-xl font-medium', textClassName)}>
         {title}
       </Title>
     </motion.figure>

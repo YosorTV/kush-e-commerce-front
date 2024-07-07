@@ -65,7 +65,7 @@ export const SubMenu: FC<TSubMenu> = ({
                 {categoryTitle}
               </Title>
             )}
-            {categories.length > 0 && (
+            {categories && categories?.length > 0 && (
               <ul className='flex flex-col gap-y-4 py-4 capitalize text-base-200'>
                 {categories.map((category: CategoryLinkType) => (
                   <MenuItem
@@ -80,8 +80,8 @@ export const SubMenu: FC<TSubMenu> = ({
               </ul>
             )}
           </div>
-          {collections.length > 0 && (
-            <div className='flex w-full justify-between gap-x-6'>
+          {collections && collections.length > 0 && (
+            <div className='flex w-full justify-between gap-x-6 pb-6'>
               <div>
                 <Title
                   level='5'
@@ -106,6 +106,7 @@ export const SubMenu: FC<TSubMenu> = ({
               </div>
               <div>
                 <CollectionCarousel
+                  mini
                   data={collections}
                   options={{ slidesToScroll: 'auto', loop: true }}
                 />

@@ -19,9 +19,9 @@ export const SortFields: FC<ISortFields> = ({ data }) => {
   const printSortField = (field: TSortField) => (
     <Input
       type='radio'
+      name='sort'
       key={field.id}
       id={field.id as string}
-      name='sort'
       value={field.name}
       label={t(field.label)}
       checked={state.options.sortBy === field.name}

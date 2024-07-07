@@ -23,6 +23,7 @@ export interface CollectionLinkType extends StrapiLinkType {
 
 export type LinkType = {
   href: string;
+  title?: string;
   children: React.ReactNode;
   className?: string;
   replace?: boolean;
