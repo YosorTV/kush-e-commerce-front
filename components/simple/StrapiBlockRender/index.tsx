@@ -20,7 +20,7 @@ function blockRenderer(block: any) {
         <ProductsContent
           key={block.id}
           title={block.title}
-          className='px-6 pt-0 lg:pt-14'
+          className='px-6 pt-0 lg:pt-5'
         />
       );
     case 'complex.collection-group':

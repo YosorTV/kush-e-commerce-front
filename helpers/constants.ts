@@ -123,10 +123,6 @@ export const PRICE_LOCALE = {
     style: 'currency',
     currency: 'USD',
   },
-  UAH: {
-    style: 'currency',
-    currency: 'UAH',
-  },
 };
 
 export const SCREEEN = {
@@ -168,6 +164,7 @@ export const STRAPI_PAGES = {
   reset: 'reset-page',
   success: 'success-page',
   forgot: 'forgot-page',
+  currency: 'currency-change',
 };
 
 export const passwordValidationParams = {

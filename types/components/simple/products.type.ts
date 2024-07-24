@@ -1,14 +1,44 @@
+interface TextNode {
+  type: 'text';
+  text: string;
+}
+
+interface ParagraphNode {
+  type: 'paragraph';
+  children: TextNode[];
+}
+
+interface DescriptionNode extends ParagraphNode {}
+
+interface CollectionItem {
+  id: number;
+  title: string;
+  description: DescriptionNode[];
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string;
+  slug: string;
+  hintText: string;
+}
+
 export interface Product {
   id: number;
   title: string;
   available: boolean;
-  available_colors: string[];
+  color: string;
+  colors: {
+    data: string[];
+  };
   code: string;
+  collections: {
+    data: CollectionItem[];
+  };
   category: string;
-  material: string;
+  materials: string[];
   description: string;
   locale: string;
-  price: number;
+  price: string;
   priceText: string;
   saleValue: number;
   hintText: string;

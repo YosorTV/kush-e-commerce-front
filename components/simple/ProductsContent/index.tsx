@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -24,8 +24,8 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
   const t = useTranslations();
   const locale = useLocale();
   const state = useProducts();
-  const params = useSearchParams();
 
+  const params = useSearchParams();
   const isLastPage = state.meta.page === state.meta.pageCount;
 
   const options = useMemo(
@@ -71,21 +71,37 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
     return 'col-span-1';
   };
 
-  const printProducts = useCallback(
-    (product: Product, index: number) => {
-      const hintText = t('colors.availableIn', { number: 1 });
+  const printProducts = () => {
+    if (state.isLoading && !state.products.length) {
+      return <ProductCardSkeleton customGrid length={4} />;
+    }
 
-      return (
-        <ProductCard
-          hintText={hintText}
-          key={product.id}
-          product={product}
-          className={gridCols(index)}
-        />
-      );
-    },
-    [t]
-  );
+    if (state.products.length > 0) {
+      return state.products.map((product: Product, index: number) => {
+        const hintText = t('colors.availableIn', {
+          number: product.colors?.data?.length,
+        });
+
+        const collectionText = t('collection.title');
+
+        return (
+          <ProductCard
+            hintText={hintText}
+            collectionTitle={collectionText}
+            key={product.id}
+            product={product}
+            className={gridCols(index)}
+          />
+        );
+      });
+    }
+
+    return (
+      <div>
+        <p>Empty list</p>
+      </div>
+    );
+  };
 
   return (
     <div
@@ -103,12 +119,8 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
         </Title>
       )}
 
-      <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
-        {state.isLoading && !state.products.length ? (
-          <ProductCardSkeleton customGrid length={4} />
-        ) : (
-          state.products.map(printProducts)
-        )}
+      <div className='grid min-h-96 grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
+        {printProducts()}
       </div>
 
       {state.meta.total > 0 && (

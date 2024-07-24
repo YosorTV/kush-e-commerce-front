@@ -1,4 +1,5 @@
 import { ProductsContent, ProductsController } from '@/components/simple';
+
 import { FC } from 'react';
 
 interface ICatalogSection {
@@ -6,7 +7,7 @@ interface ICatalogSection {
   filterForm?: any;
 }
 
-export const CatalogSection: FC<ICatalogSection> = ({ title, ...rest }) => {
+export const CatalogSection: FC<ICatalogSection> = async ({ title }) => {
   return (
     <section className='p-5'>
       <ProductsController title={title} />

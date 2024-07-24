@@ -46,8 +46,8 @@ export const CategoryCard: FC<any> = ({ data }) => {
         )}
       </AnimatePresence>
       <StrapiImage
-        src={data?.images.data[0]?.url}
-        alt={data?.images.data[0]?.alternativeText}
+        src={data?.images?.data?.[0]?.url}
+        alt={data?.images?.data?.[0]?.alternativeText}
         height={1540}
         width={1100}
         className='h-[500px] w-full object-cover lg:h-[670px]'

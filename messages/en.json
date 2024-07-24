@@ -50,5 +50,8 @@
     "bracelets": "Bracelets",
     "necklaces": "Necklaces",
     "earrings": "Earrings"
+  },
+  "collection": {
+    "title": "Collection"
   }
 }

@@ -2,6 +2,8 @@ import { StateCreator } from 'zustand';
 
 import { getProductsData } from '@/services';
 import { ProductsState } from '@/types/store';
+import { productDataAdapter } from '@/adapters/product';
+import { getCurrency } from '@/services/api/get-currency';
 
 export const productsSlice: StateCreator<ProductsState> = (set) => ({
   isLoading: true,
@@ -12,17 +14,22 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const { data, meta } = await getProductsData({
-        locale,
-        page,
-        pageSize,
-        category,
-        ...rest,
-      });
+      const [productsResponse, currency] = await Promise.all([
+        getProductsData({
+          locale,
+          page,
+          pageSize,
+          category,
+          ...rest,
+        }),
+        getCurrency(),
+      ]);
+
+      const { data, meta } = productsResponse;
 
       set({
         isLoading: false,
-        products: data,
+        products: productDataAdapter(data, currency),
         meta: meta.pagination,
       });
     } catch (error) {
@@ -34,19 +41,24 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const { data, meta } = await getProductsData({
-        locale,
-        category,
-        page,
-        pageSize,
-        ...rest,
-      });
+      const [productsResponse, currency] = await Promise.all([
+        getProductsData({
+          locale,
+          page,
+          pageSize,
+          category,
+          ...rest,
+        }),
+        getCurrency(),
+      ]);
+
+      const { data, meta } = productsResponse;
 
       set((state) => ({
         ...state,
         meta: meta.pagination,
         isLoading: false,
-        products: [...state.products, ...data],
+        products: [...state.products, ...productDataAdapter(data, currency)],
       }));
     } catch (error) {
       set({ error, isLoading: false });

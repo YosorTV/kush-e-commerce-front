@@ -139,7 +139,9 @@ export const SpotlightCarousel: FC<PropType> = ({
         </div>
       </div>
       <div className='embla__viewport' ref={emblaRef}>
-        <div className='embla__container'>{data.map(printSpotlightCard)}</div>
+        <div className='embla__container'>
+          {[...data, ...data].map(printSpotlightCard)}
+        </div>
       </div>
     </div>
   );

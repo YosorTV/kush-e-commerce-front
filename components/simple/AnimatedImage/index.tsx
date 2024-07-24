@@ -46,10 +46,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       <motion.div
         onHoverStart={handleShowOverlay}
         onHoverEnd={handleHideOverlay}
-        className={cn(
-          'relative h-[400px] border border-base-100',
-          showOverlay && 'border-base-200'
-        )}
+        className={cn('relative h-[400px] shadow-xl')}
       >
         {showOverlay ? (
           <motion.div

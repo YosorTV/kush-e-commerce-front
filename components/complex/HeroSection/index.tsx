@@ -23,7 +23,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           priority
         />
         <NextLink
-          href={`${data.link.url}?category=bracelets`}
+          href={data.link.url}
           className='absolute-x-center link-hover link bottom-10 z-10 underline-offset-8'
         >
           {data?.link?.text}

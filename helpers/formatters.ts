@@ -1,10 +1,16 @@
-import { PRICE_LOCALE } from './constants';
-
-export const formatPrice = (amount: number) => {
+export const formatPrice = (
+  amount: number,
+  locale: string,
+  currency: number
+) => {
   const formattedAmount = new Intl.NumberFormat(
-    'en-US',
-    PRICE_LOCALE.USD
-  ).format(amount / 100);
+    locale === 'uk' ? 'uk-UA' : 'en-US',
+    {
+      style: 'currency',
+      currency: locale === 'uk' ? 'UAH' : 'USD',
+    }
+  ).format(locale === 'uk' ? Number(currency) * amount : amount);
+
   const [integerPart, fractionalPart] = formattedAmount.split('.');
 
   return fractionalPart === '00' ? integerPart : formattedAmount;
