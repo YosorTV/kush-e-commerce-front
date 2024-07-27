@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { cn } from '@/lib';
 import { PageLayoutProps } from '@/types/components';
-import { Image } from '@/components/elements';
+import { StrapiImage } from '@/components/simple';
 
 export const PageLayout: FC<PageLayoutProps> = ({
   children,
@@ -12,16 +12,12 @@ export const PageLayout: FC<PageLayoutProps> = ({
   return (
     <div className={cn('flex flex-grow flex-col overflow-hidden', className)}>
       {cover && cover.url && (
-        <Image
-          alt='Mountains'
+        <StrapiImage
+          alt={cover.alternativeText}
           src={cover?.url}
-          placeholder='blur'
-          quality={100}
+          formats={cover.formats}
+          className='object-cover'
           fill
-          sizes='100vw'
-          style={{
-            objectFit: 'cover',
-          }}
         />
       )}
       {children}

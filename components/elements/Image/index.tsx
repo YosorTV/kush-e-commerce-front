@@ -32,7 +32,7 @@ export const Image: FC<IImageProps> = ({
         blurDataURL={blurDataURL}
         alt={alt ?? 'image'}
         className={cn(className, 'image-blur', { 'image-loaded': isLoaded })}
-        onLoadingComplete={() => setIsLoaded(true)}
+        onLoad={() => setIsLoaded(true)}
       />
     );
   }
@@ -45,7 +45,7 @@ export const Image: FC<IImageProps> = ({
       placeholder='blur'
       blurDataURL={blurDataURL}
       className={cn(className, 'image-blur', { 'image-loaded': isLoaded })}
-      onLoadingComplete={() => setIsLoaded(true)}
+      onLoad={() => setIsLoaded(true)}
       alt={alt ?? 'image'}
       priority={priority}
       quality={75}

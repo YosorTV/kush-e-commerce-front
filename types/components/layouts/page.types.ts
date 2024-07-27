@@ -1,3 +1,5 @@
+import { IImageFormats } from '../elements';
+
 export type PageLayoutProps = {
   children: React.ReactNode;
   className?: string;
@@ -5,5 +7,6 @@ export type PageLayoutProps = {
     id?: number | string | undefined;
     url?: string | undefined;
     alternativeText?: string | undefined;
+    formats: IImageFormats;
   };
 };
