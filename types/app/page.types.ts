@@ -2,6 +2,7 @@ export type PageProps = {
   params: {
     id?: string;
     locale: string;
+    slug?: string;
   };
   searchParams: {
     id?: string;

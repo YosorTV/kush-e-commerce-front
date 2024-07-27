@@ -7,20 +7,20 @@ import { FC } from 'react';
 
 export const HeroSection: FC<any> = ({ data }) => {
   return (
-    <section className='relative flex flex-col pt-20'>
+    <section className='relative flex flex-col'>
       <div className='relative flex justify-center'>
         <Title level='1' className={cn('hero-title', cormorant.className)}>
           {data?.title}
         </Title>
       </div>
-      <figure className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white lg:h-full'>
+      <div className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white md:h-md lg:h-lg'>
         <StrapiImage
-          height={2000}
-          width={2000}
+          priority
+          fill
           className='hero-image'
+          formats={data?.image?.formats}
           src={data?.image?.url}
           alt={data?.image?.alternativeText}
-          priority
         />
         <NextLink
           href={data.link.url}
@@ -28,7 +28,7 @@ export const HeroSection: FC<any> = ({ data }) => {
         >
           {data?.link?.text}
         </NextLink>
-      </figure>
+      </div>
       <div className='relative py-10 text-center leading-tight'>
         <Title
           level='3'

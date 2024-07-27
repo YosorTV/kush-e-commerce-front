@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { MdArrowRightAlt } from 'react-icons/md';
@@ -13,6 +13,7 @@ import { formatPrice } from '@/helpers/formatters';
 
 export const CategoryCard: FC<any> = ({ data }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -46,6 +47,8 @@ export const CategoryCard: FC<any> = ({ data }) => {
         )}
       </AnimatePresence>
       <StrapiImage
+        loading='lazy'
+        formats={data?.images?.data?.[0]?.formats}
         src={data?.images?.data?.[0]?.url}
         alt={data?.images?.data?.[0]?.alternativeText}
         height={1540}
@@ -66,7 +69,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
           <p className='text-base font-medium text-white'>{data.description}</p>
           <div className='flex w-full items-center justify-between'>
             <span className='text-base text-white'>
-              {formatPrice(Number(data.price))}
+              {formatPrice(data.price, locale, 41)}
             </span>
           </div>
         </div>

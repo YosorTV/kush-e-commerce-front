@@ -23,7 +23,7 @@ export default async function ForgotPasswordPage({ params }: PageProps) {
   const { data } = await getForgotPasswordData({ locale });
 
   return (
-    <PageLayout className='auth-page_wrapper !h-lg' cover={data.cover}>
+    <PageLayout className='auth-page_wrapper' cover={data.cover}>
       <ForgotForm data={data} locale={locale} />
     </PageLayout>
   );

@@ -22,14 +22,14 @@ export default async function Catalog({ params }: PageProps) {
 
   return (
     <PageLayout className='min-h-screen'>
-      <div className='h-96 overflow-hidden lg:h-full'>
+      <div className='relative flex h-96 w-full overflow-hidden md:h-md lg:h-lg'>
         <StrapiImage
-          width={1500}
-          height={1500}
-          src={data.cover?.url}
-          alt={data.cover?.alternativeText}
-          className='hero-image'
+          fill
           priority
+          className='hero-image'
+          formats={data.cover.formats}
+          src={data.cover.url}
+          alt={data.cover.alternativeText}
         />
       </div>
       <StrapiBlockRender data={data.blocks} />

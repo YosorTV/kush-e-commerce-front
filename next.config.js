@@ -18,6 +18,8 @@ const nextConfig = {
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
   },
   images: {
+    loader: 'custom',
+    loaderFile: './lib/strapi.ts',
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {

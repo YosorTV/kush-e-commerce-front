@@ -3,7 +3,11 @@ import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
 import { STRAPI_PAGES } from '@/helpers/constants';
 
-export async function getCatalogData({ locale }: { locale: string }) {
+interface IGetCatalogData {
+  locale: string;
+}
+
+export async function getCatalogData({ locale }: IGetCatalogData) {
   const catalogQP = STRAPI_QUERIES.CATALOG({ locale });
 
   const response = await getStrapiData(

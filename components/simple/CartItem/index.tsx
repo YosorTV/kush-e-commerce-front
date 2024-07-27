@@ -7,13 +7,17 @@ import { CartItemProps } from '@/types/components';
 import { StrapiImage } from '../StrapiImage';
 import { Title } from '@/components/elements';
 import { formatPrice } from '@/helpers/formatters';
+import { useLocale } from 'next-intl';
 
 export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
+  const locale = useLocale();
+
   return (
     <>
       <StrapiImage
         src={data.image.url}
         alt={data.image.alternativeText}
+        formats={data.image.formats}
         width={600}
         height={600}
         className='w-20 rounded-md'
@@ -36,7 +40,7 @@ export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
           </div>
         </div>
         <p className='text-sm font-semibold capitalize'>
-          {data.price}: <span>{formatPrice(data.unit_amount)}</span>
+          {data.price}: <span>{formatPrice(data.unit_amount, locale, 41)}</span>
         </p>
       </div>
     </>

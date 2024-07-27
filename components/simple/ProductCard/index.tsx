@@ -1,10 +1,7 @@
-'use client';
-
 import { FC } from 'react';
 
 import { AnimatedImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
-import { motion } from 'framer-motion';
 
 import { cn } from '@/lib';
 
@@ -24,17 +21,12 @@ export const ProductCard: FC<ProductCardProps> = ({
   hintText,
   collectionTitle,
 }) => {
-  console.log(product);
   return (
-    <motion.figure
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ ease: 'easeOut', duration: 0.5 }}
+    <figure
       key={product.id}
       className={cn('relative grid cursor-pointer', className)}
     >
-      <NextLink className='relative' href={`/catalog/${product.id}`}>
+      <NextLink className='relative' href={`/catalog/${product.slug}`}>
         <AnimatedImage product={product} />
         <span className='absolute left-0 top-0 z-10 bg-neutral p-2 text-base-300'>
           {product.hintText}
@@ -72,6 +64,6 @@ export const ProductCard: FC<ProductCardProps> = ({
           </div>
         </div>
       </figcaption>
-    </motion.figure>
+    </figure>
   );
 };

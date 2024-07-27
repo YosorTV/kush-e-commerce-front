@@ -18,7 +18,7 @@ export default async function SuccessPage({ params }: PageProps) {
   const { data } = await getSuccessData({ locale });
 
   return (
-    <PageLayout className='auth-page_wrapper h-lg' cover={data.cover}>
+    <PageLayout className='auth-page_wrapper' cover={data.cover}>
       <div className='flex h-full w-1/2 flex-col items-center justify-center gap-y-2.5 bg-base-100 pl-5 pr-14'>
         <h1 className='text-sm font-semibold xs:text-lg'>{data.title}</h1>
         <p className='whitespace-pre-line break-words text-sm xs:text-lg'>

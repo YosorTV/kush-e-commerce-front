@@ -41,6 +41,17 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
   const handleShowOverlay = () => setShowOverlay(true);
   const handleHideOverlay = () => setShowOverlay(false);
 
+  const getImage = ({ idx = 0 }: { idx: number }) => {
+    return (
+      product?.images &&
+      product?.images.data.length > 0 &&
+      product?.images.data?.[idx]
+    );
+  };
+
+  const img1 = getImage({ idx: 0 });
+  const img2 = getImage({ idx: 1 });
+
   return (
     <AnimatePresence initial={false} mode='sync'>
       <motion.div
@@ -50,7 +61,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       >
         {showOverlay ? (
           <motion.div
-            key={`overlay-${product.id}-${product?.images.data?.[0]?.url}`}
+            key={`overlay-${product.id}-${img1.url}`}
             initial='enter'
             animate='visible'
             exit='exit'
@@ -58,16 +69,18 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
             className='absolute left-0 top-0 h-full w-full'
           >
             <StrapiImage
-              height={800}
-              width={800}
-              src={product?.images.data?.[1]?.url}
-              alt={product?.images.data?.[1]?.alternativeText}
+              loading='lazy'
+              height={img2.formats.medium.height}
+              width={img2.formats.medium.width}
+              src={img2?.url}
+              alt={img2?.alternativeText}
+              formats={img2.formats}
               className='h-full w-full object-cover'
             />
           </motion.div>
         ) : (
           <motion.div
-            key={`main-${product.id}-${product?.images.data?.[1]?.url}`}
+            key={`main-${product.id}-${img2.url}`}
             initial='enter'
             animate='visible'
             exit='exit'
@@ -75,10 +88,12 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
             className='absolute left-0 top-0 h-full w-full'
           >
             <StrapiImage
-              height={800}
-              width={800}
-              src={product?.images.data?.[0]?.url}
-              alt={product?.images.data?.[0]?.alternativeText}
+              loading='lazy'
+              formats={img1.formats}
+              height={img1.formats.medium.height}
+              width={img1.formats.medium.width}
+              src={img1?.url}
+              alt={img1?.alternativeText}
               className='h-full w-full object-cover'
             />
           </motion.div>

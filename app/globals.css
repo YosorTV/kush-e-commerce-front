@@ -15,6 +15,18 @@
     @apply rounded-full bg-base-200;
   }
 
+  .image-container {
+    @apply relative;
+  }
+
+  .image-blur {
+    @apply blur-md filter transition-all duration-500 ease-linear;
+  }
+
+  .image-loaded {
+    @apply filter-none;
+  }
+
   .hero-footer {
     @apply absolute bottom-1/2 flex w-full flex-col items-center justify-center;
   }
@@ -28,7 +40,7 @@
   }
 
   .hero-image {
-    @apply h-md w-full object-cover object-center-to-top lg:h-2md;
+    @apply h-full w-full object-cover object-center sm:object-center-to-top;
   }
 
   .absolute-center {
@@ -55,11 +67,11 @@
   }
 
   .auth-page_wrapper {
-    @apply relative h-screen overflow-hidden md:h-[784px];
+    @apply relative h-screen items-center justify-center overflow-hidden;
   }
 
   .auth-page_form {
-    @apply absolute-center flex w-[95%] flex-col gap-y-5 rounded-md bg-base-100 p-5 pt-2.5 shadow-2xl md:w-[680px] md:gap-y-10 md:p-10 md:pt-5;
+    @apply absolute flex w-11/12 flex-col gap-y-5 rounded-md bg-base-100 p-5 shadow-2xl sm:w-3/4 md:w-2/3 md:gap-y-10  md:p-10 xl:w-3/5 2xl:w-1/2;
   }
 
   .auth-form_submit {

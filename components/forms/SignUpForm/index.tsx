@@ -62,7 +62,7 @@ export const SignUpForm: FC<ISignUpForm> = ({
           hidden
           readOnly
         />
-        <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 pt-5 md:grid-cols-2'>
+        <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 pt-5 md:grid-cols-2 md:pt-10'>
           {printInputs(formFields)}
         </div>
         <div className='divider m-0 mb-5 w-full px-5' />

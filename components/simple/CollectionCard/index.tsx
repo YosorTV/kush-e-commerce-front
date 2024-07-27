@@ -8,6 +8,7 @@ import { cn } from '@/lib';
 
 import { StrapiImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
+import { IImageFormats } from '@/types/components';
 
 type TCollectioCard = {
   title: string;
@@ -18,6 +19,7 @@ type TCollectioCard = {
   img: {
     alternativeText?: string;
     url: string;
+    formats: IImageFormats;
   };
 };
 
@@ -68,8 +70,10 @@ export const CollectionCard: FC<TCollectioCard> = ({
       <StrapiImage
         alt={img.alternativeText}
         src={img.url}
-        height={1200}
-        width={1200}
+        formats={img.formats}
+        height={img.formats.medium.height}
+        width={img.formats.medium.width}
+        loading='lazy'
         className='h-full w-full object-cover object-center-to-top'
       />
       <Title level='5' className={cn('text-xl font-medium', textClassName)}>

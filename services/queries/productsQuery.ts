@@ -53,6 +53,7 @@ export const productsQuery = ({
     name,
     locale,
     populate: {
+      slug: true,
       colors: true,
       sizes: true,
       materials: true,
