@@ -37,7 +37,7 @@ export function StrapiImage({
       loading={loading}
       height={height as number}
       width={width as number}
-      formats={formats}
+      formats={formats && formats}
       priority={priority}
       className={cn(className)}
     />

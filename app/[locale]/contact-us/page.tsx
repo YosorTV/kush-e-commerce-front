@@ -15,7 +15,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function ContactUs() {
   return (
-    <PageLayout className='h-screen py-20'>
+    <PageLayout className='mt-16'>
       <Title level='1'>Contact Us</Title>
     </PageLayout>
   );

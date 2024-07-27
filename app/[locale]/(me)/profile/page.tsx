@@ -23,7 +23,7 @@ export default async function ProfilePage({ params }: PageProps) {
   const { data } = await getProfileData({ locale, token });
 
   return (
-    <PageLayout className='container py-16'>
+    <PageLayout className='mt-16'>
       <ProfileForm data={data.formFields} state={user} />
     </PageLayout>
   );

@@ -21,7 +21,7 @@ export default async function Catalog({ params }: PageProps) {
   const { data } = await getCatalogData({ locale });
 
   return (
-    <PageLayout className='min-h-screen'>
+    <PageLayout className='mt-16'>
       <div className='relative flex h-96 w-full overflow-hidden md:h-md lg:h-lg'>
         <StrapiImage
           fill

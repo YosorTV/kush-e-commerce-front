@@ -42,8 +42,8 @@ export const Image: FC<IImageProps> = ({
       src={src}
       height={height}
       width={width}
-      placeholder='blur'
-      blurDataURL={blurDataURL}
+      placeholder={blurDataURL ? 'blur' : 'empty'}
+      blurDataURL={formats && blurDataURL}
       className={cn(className, 'image-blur', { 'image-loaded': isLoaded })}
       onLoad={() => setIsLoaded(true)}
       alt={alt ?? 'image'}

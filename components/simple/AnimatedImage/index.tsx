@@ -70,11 +70,11 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
           >
             <StrapiImage
               loading='lazy'
-              height={img2.formats.medium.height}
-              width={img2.formats.medium.width}
+              height={img2?.formats?.medium?.height ?? 500}
+              width={img2?.formats?.medium?.width ?? 500}
               src={img2?.url}
               alt={img2?.alternativeText}
-              formats={img2.formats}
+              formats={img2?.formats}
               className='h-full w-full object-cover'
             />
           </motion.div>
@@ -90,8 +90,8 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
             <StrapiImage
               loading='lazy'
               formats={img1.formats}
-              height={img1.formats.medium.height}
-              width={img1.formats.medium.width}
+              height={img1?.formats?.medium?.height ?? 500}
+              width={img1?.formats?.medium?.width ?? 500}
               src={img1?.url}
               alt={img1?.alternativeText}
               className='h-full w-full object-cover'

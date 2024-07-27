@@ -18,7 +18,7 @@ export default async function ProductDetails({ params }: PageProps) {
   // };
 
   return (
-    <PageLayout>
+    <PageLayout className='mt-16'>
       <div className='flex w-full justify-between'>
         <ProductContent images={data?.images?.data} />
         {data.title}

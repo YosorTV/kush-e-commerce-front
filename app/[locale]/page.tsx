@@ -22,7 +22,7 @@ export default async function Home({ params }: PageProps) {
   const { data } = await getHomeData({ locale });
 
   return (
-    <PageLayout>
+    <PageLayout className='mt-16'>
       <StrapiBlockRender data={data.blocks} />
     </PageLayout>
   );
