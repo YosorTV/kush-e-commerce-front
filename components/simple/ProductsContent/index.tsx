@@ -86,6 +86,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
 
         return (
           <ProductCard
+            locale={locale}
             hintText={hintText}
             collectionTitle={collectionText}
             key={product.id}

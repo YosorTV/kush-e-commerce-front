@@ -10,7 +10,7 @@ export async function getProductData({ locale, slug }: any) {
     generateStrapiQuery(productApi)
   );
 
-  if (response.data && response.data.length > 0) {
+  if (response?.data && response?.data?.length > 0) {
     return { data: { ...response.data[0] } };
   }
 

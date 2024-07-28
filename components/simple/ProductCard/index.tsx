@@ -7,16 +7,19 @@ import { cn } from '@/lib';
 
 import { Product } from '@/types/components';
 import { Link } from '@/lib/navigation';
+import { Price } from '../Price';
 
 type ProductCardProps = {
   product: Product;
   className: string;
   hintText?: string;
   collectionTitle?: string;
+  locale: string;
 };
 
-export const ProductCard: FC<ProductCardProps> = ({
+export const ProductCard: FC<ProductCardProps> = async ({
   product,
+  locale,
   className,
   hintText,
   collectionTitle,
@@ -60,7 +63,11 @@ export const ProductCard: FC<ProductCardProps> = ({
           </p>
           <div className='flex w-full items-center justify-between'>
             {hintText && <span className='text-sm'>{hintText}</span>}
-            <span className='text-base text-base-200'>{product.price}</span>
+            <Price
+              price={product?.price}
+              sale={product?.saleValue}
+              locale={locale}
+            />
           </div>
         </div>
       </figcaption>

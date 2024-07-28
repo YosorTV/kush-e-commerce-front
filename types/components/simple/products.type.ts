@@ -39,7 +39,7 @@ export interface Product {
   materials: string[];
   description: string;
   locale: string;
-  price: string;
+  price: number;
   priceText: string;
   saleValue: number;
   hintText: string;

@@ -2,8 +2,6 @@ import { StateCreator } from 'zustand';
 
 import { getProductsData } from '@/services';
 import { ProductsState } from '@/types/store';
-import { productDataAdapter } from '@/adapters/product';
-import { getCurrency } from '@/services/api/get-currency';
 
 export const productsSlice: StateCreator<ProductsState> = (set) => ({
   isLoading: true,
@@ -14,22 +12,19 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const [productsResponse, currency] = await Promise.all([
-        getProductsData({
-          locale,
-          page,
-          pageSize,
-          category,
-          ...rest,
-        }),
-        getCurrency(),
-      ]);
+      const productsResponse = await getProductsData({
+        locale,
+        page,
+        pageSize,
+        category,
+        ...rest,
+      });
 
       const { data, meta } = productsResponse;
 
       set({
         isLoading: false,
-        products: productDataAdapter(data, currency),
+        products: data,
         meta: meta.pagination,
       });
     } catch (error) {
@@ -41,24 +36,21 @@ export const productsSlice: StateCreator<ProductsState> = (set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const [productsResponse, currency] = await Promise.all([
-        getProductsData({
-          locale,
-          page,
-          pageSize,
-          category,
-          ...rest,
-        }),
-        getCurrency(),
-      ]);
+      const productsResponse = await getProductsData({
+        locale,
+        page,
+        pageSize,
+        category,
+        ...rest,
+      });
 
-      const { data, meta } = productsResponse;
+      const { meta } = productsResponse;
 
       set((state) => ({
         ...state,
         meta: meta.pagination,
         isLoading: false,
-        products: [...state.products, ...productDataAdapter(data, currency)],
+        products: state.products,
       }));
     } catch (error) {
       set({ error, isLoading: false });
