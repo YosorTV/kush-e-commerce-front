@@ -16,6 +16,7 @@ export type ProductsState = {
   };
   error: any;
   products: Product[];
+  currency: any;
   isLoading: boolean;
   reset: () => void;
   fetchProducts: ({

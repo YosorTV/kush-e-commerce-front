@@ -6,7 +6,7 @@ import { ColorOptions } from '@/components/simple/ColorOptions';
 import { MaterialOptions } from '@/components/simple/MaterialOptions';
 import { Price } from '@/components/simple/Price';
 import { SizeOptions } from '@/components/simple/SizeOptions';
-import { getProductData, getSizetData } from '@/services';
+import { getCurrency, getProductData, getSizetData } from '@/services';
 
 import { PageProps } from '@/types/app/page.types';
 import { CartItemType } from '@/types/store';
@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation';
 export default async function ProductDetails({ params }: PageProps) {
   const { locale, slug } = params;
 
+  const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
   const { data: allSizes } = await getSizetData({ locale });
 
@@ -47,7 +48,12 @@ export default async function ProductDetails({ params }: PageProps) {
             </span>
           </section>
           <section className='flex items-baseline justify-between'>
-            <Price locale={locale} price={data?.price} sale={data?.saleValue} />
+            <Price
+              locale={locale}
+              currency={currency}
+              price={data?.price}
+              sale={data?.saleValue}
+            />
             <NextLink
               href={`/catalog?categories=${data?.category}`}
               className='capitalize text-base-200 underline underline-offset-8'

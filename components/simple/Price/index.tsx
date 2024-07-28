@@ -1,21 +1,20 @@
 import { formatPrice } from '@/helpers/formatters';
 import { cn } from '@/lib';
-import { getCurrency } from '@/services/api/get-currency';
 import { FC } from 'react';
 
 interface IPrice {
   price: number;
   sale?: number;
   locale: string;
+  currency: any;
 }
 
-export const Price: FC<Readonly<IPrice>> = async ({
+export const Price: FC<Readonly<IPrice>> = ({
   price,
   sale = 0,
   locale = 'uk',
+  currency,
 }) => {
-  const currency = await getCurrency();
-
   const discountAmount = price * (sale / 100);
   const originalPrice = formatPrice(price, locale, currency);
   const salePrice = formatPrice(price - discountAmount, locale, currency);

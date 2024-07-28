@@ -81,8 +81,8 @@ export const SpotlightCarousel: FC<PropType> = ({
     }
   }, [emblaApi, isPlaying]);
 
-  const printSpotlightCard = (product: Product, index: number) => (
-    <div className='embla__slide' key={index}>
+  const printSpotlightCard = (product: Product) => (
+    <div className='embla__slide' key={product.id}>
       <div className='embla__slide__number'>
         <CategoryCard data={product} />
       </div>
@@ -139,9 +139,7 @@ export const SpotlightCarousel: FC<PropType> = ({
         </div>
       </div>
       <div className='embla__viewport' ref={emblaRef}>
-        <div className='embla__container'>
-          {[...data, ...data].map(printSpotlightCard)}
-        </div>
+        <div className='embla__container'>{data.map(printSpotlightCard)}</div>
       </div>
     </div>
   );

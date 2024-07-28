@@ -15,14 +15,16 @@ type ProductCardProps = {
   hintText?: string;
   collectionTitle?: string;
   locale: string;
+  currency: any;
 };
 
-export const ProductCard: FC<ProductCardProps> = async ({
+export const ProductCard: FC<ProductCardProps> = ({
   product,
   locale,
   className,
   hintText,
   collectionTitle,
+  currency,
 }) => {
   return (
     <figure
@@ -64,6 +66,7 @@ export const ProductCard: FC<ProductCardProps> = async ({
           <div className='flex w-full items-center justify-between'>
             {hintText && <span className='text-sm'>{hintText}</span>}
             <Price
+              currency={currency}
               price={product?.price}
               sale={product?.saleValue}
               locale={locale}
