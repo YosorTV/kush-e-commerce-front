@@ -2,6 +2,7 @@ import { IImageFormats } from '../elements';
 
 export interface IStrapiImageProps {
   loading?: 'lazy' | 'eager';
+  id?: string;
   src: string;
   alt: string;
   height?: number;

@@ -17,13 +17,13 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
   return (
     <section
       key={id}
-      className='relative flex h-full flex-col bg-neutral p-2.5 !pt-0 lg:p-5'
+      className='relative flex flex-col bg-neutral p-2.5 !pt-0 hover:cursor-grab active:cursor-grabbing lg:p-5'
     >
       <CollectionCarousel
         mini={false}
         title={title}
         data={collections.data}
-        options={{ loop: false }}
+        options={{ loop: true }}
       />
     </section>
   );

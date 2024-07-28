@@ -9,20 +9,28 @@ interface Params {
 
 export const createQueryString = (baseUrl: string, params?: Params): string => {
   const url = new URL(baseUrl, process.env.NEXT_PUBLIC_URL);
-  const locale = url.pathname.startsWith('/en') ? '/uk' : '/en';
 
-  if (url.pathname.startsWith('/en/') || url.pathname.startsWith('/uk/')) {
-    url.pathname = locale + url.pathname.substring(3);
-  } else {
-    url.pathname = locale;
+  const pathParts = url.pathname.split('/');
+  const currentLocale = pathParts[1] === 'en' ? 'en' : 'uk';
+  const newLocale = currentLocale === 'en' ? 'uk' : 'en';
+
+  pathParts[1] = newLocale;
+
+  const lastPart = pathParts[pathParts.length - 1];
+  if (lastPart.endsWith(`-${currentLocale}`)) {
+    pathParts[pathParts.length - 1] = lastPart.replace(
+      `-${currentLocale}`,
+      `-${newLocale}`
+    );
   }
+  url.pathname = pathParts.join('/');
 
   if (params) {
-    for (const key in params) {
-      if (params[key]) {
+    Object.keys(params).forEach((key) => {
+      if (params[key] !== null && params[key] !== undefined) {
         url.searchParams.set(key, String(params[key]));
       }
-    }
+    });
   }
 
   return url.toString();

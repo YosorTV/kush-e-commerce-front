@@ -74,10 +74,7 @@ export const FilterForm = () => {
   }, [pathname, router, state]);
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='flex h-full flex-1 flex-col gap-y-2.5 pr-5'
-    >
+    <form onSubmit={handleSubmit} className='flex flex-col gap-y-2.5 pr-5'>
       <div className='flex w-full items-baseline justify-between'>
         <Title level='2' className='text-xl font-semibold text-base-200'>
           {t('sort.title')}:

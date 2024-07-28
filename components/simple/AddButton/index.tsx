@@ -6,11 +6,11 @@ import { useCart } from '@/store';
 import { AddCartProps } from '@/types/components';
 
 export const AddCart: FC<AddCartProps> = ({ data, text }) => {
-  const cartStore = useCart();
+  const state = useCart();
   const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
-    cartStore.onAdd(data);
+    state.onSubmit({ ...state.formState, ...data });
     setAdded(true);
     setTimeout(() => {
       setAdded(false);

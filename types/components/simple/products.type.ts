@@ -1,5 +1,3 @@
-import { IImageFormats } from '../elements';
-
 interface TextNode {
   type: 'text';
   text: string;
@@ -59,11 +57,7 @@ export interface ProductsContentProps {
 export type ProductItem = {
   id: string;
   name: string;
-  image?: {
-    url: string;
-    alternativeText: string;
-    formats: IImageFormats;
-  };
+  images?: any | any[];
   quantity?: number | 1;
   unit_amount: number | null;
   price?: string;

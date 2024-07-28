@@ -14,3 +14,6 @@ export * from '@/services/api/get-reset-password';
 export * from '@/services/api/provider-login';
 export * from '@/services/api/login';
 export * from '@/services/api/get-success';
+export * from '@/services/api/get-sizes';
+export * from '@/services/api/get-currency';
+export * from '@/services/api/get-product';

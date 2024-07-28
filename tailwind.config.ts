@@ -62,6 +62,10 @@ module.exports = {
       objectPosition: {
         'center-to-top': '0 75%',
       },
+      boxShadow: {
+        'to-top':
+          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 -4px 50px -2px rgb(0 0 0 / 0.1)',
+      },
       gridTemplateColumns: {
         hero: 'auto 1fr',
         fluid: 'repeat(auto-fit, minmax(10rem, 1fr))',

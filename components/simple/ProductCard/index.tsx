@@ -28,7 +28,7 @@ export const ProductCard: FC<ProductCardProps> = ({
     >
       <NextLink className='relative' href={`/catalog/${product.slug}`}>
         <AnimatedImage product={product} />
-        <span className='absolute left-0 top-0 z-10 bg-neutral p-2 text-base-300'>
+        <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>
           {product.hintText}
         </span>
       </NextLink>

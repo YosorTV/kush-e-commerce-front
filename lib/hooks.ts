@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
-
 import { SCREEEN } from '@/helpers/constants';
 
 import { debounce } from './utils';

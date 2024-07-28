@@ -15,7 +15,7 @@ import { FooterProps } from '@/types/components';
 
 export const Footer: FC<FooterProps> = ({ data, locale }) => {
   return (
-    <footer className='footer relative flex min-h-16 w-full bg-base-100 px-5 py-6'>
+    <footer className='footer relative flex min-h-16 w-full bg-base-100 px-5 py-6 shadow-lg drop-shadow-2xl'>
       <div className='grid w-full grid-cols-1 gap-x-20 lg:grid-cols-4'>
         <div className='col-span-1 row-start-1 h-full w-full items-end gap-y-6 lg:row-start-1 lg:flex-col lg:items-start'>
           <div className='flex h-full flex-col justify-between lg:flex-col'>
@@ -43,7 +43,7 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
             categories={null}
             collections={null}
             pages={data.links}
-            className='grid grid-cols-4 gap-x-2 xs:grid-cols-4 lg:grid-cols-1'
+            className='grid grid-cols-6 gap-x-2 xs:grid-cols-4 lg:grid-cols-1'
           />
         </nav>
         <nav>

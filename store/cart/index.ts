@@ -2,12 +2,23 @@ import { CartState } from '@/types/store';
 import { StateCreator } from 'zustand';
 
 export const cartSlice: StateCreator<CartState> = (set) => ({
+  formState: {
+    color: null,
+    id: null,
+    material: null,
+    name: null,
+    size: null,
+    unit_amount: 0,
+    description: null,
+    images: [],
+    quantity: 0,
+  },
   cart: [],
   key: 'cart',
   isOpen: false,
   paymentIntentId: '',
   onToggle: () => set((state) => ({ isOpen: !state.isOpen })),
-  onAdd: (item) =>
+  onSubmit: (item) =>
     set((state) => {
       const existedItem = state.cart.find(({ id }) => item.id === id);
 
@@ -37,7 +48,29 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
 
       return { cart: state.cart.filter((el) => el.id !== item.id) };
     }),
-  onReset: () => set(() => ({ cart: [], paymentIntentId: '' })),
+  onAdd: ({ key, value }) =>
+    set((state) => ({
+      formState: {
+        ...state.formState,
+        [key]: value,
+      },
+    })),
+  onReset: () =>
+    set(() => ({
+      cart: [],
+      paymentIntentId: '',
+      formState: {
+        color: null,
+        id: null,
+        material: null,
+        name: null,
+        size: null,
+        unit_amount: 0,
+        description: null,
+        images: [],
+        quantity: 0,
+      },
+    })),
   setPaymentIntentId: (value) => set(() => ({ paymentIntentId: value })),
   setForm: (value) => set(() => ({ key: value })),
 });

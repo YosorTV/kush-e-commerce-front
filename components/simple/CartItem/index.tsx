@@ -15,9 +15,10 @@ export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
   return (
     <>
       <StrapiImage
-        src={data.image.url}
-        alt={data.image.alternativeText}
-        formats={data.image.formats}
+        src={data?.images?.url}
+        alt={data?.images?.alternativeText}
+        formats={data?.images?.formats}
+        loading='lazy'
         width={600}
         height={600}
         className='w-20 rounded-md'
@@ -25,10 +26,10 @@ export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
       <div className='flex flex-col'>
         <div className='flex flex-col'>
           <Title level='2' className='text-lg font-semibold'>
-            {data.name}
+            {data?.name}
           </Title>
           <div className='flex items-center gap-x-2'>
-            <p className='text-md font-semibold'>Quantity: {data.quantity}</p>
+            <p className='text-md font-semibold'>Quantity: {data?.quantity}</p>
             <div className='flex items-center gap-x-1.5'>
               <button className='btn-circle w-auto' onClick={onRemove}>
                 <IoRemoveCircle />
@@ -40,7 +41,8 @@ export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
           </div>
         </div>
         <p className='text-sm font-semibold capitalize'>
-          {data.price}: <span>{formatPrice(data.unit_amount, locale, 41)}</span>
+          {data?.price}:{' '}
+          <span>{formatPrice(data?.unit_amount, locale, 41)}</span>
         </p>
       </div>
     </>

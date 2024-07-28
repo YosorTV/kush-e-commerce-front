@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputProps } from '@/types/components';
+import { v4 as uuidv4 } from 'uuid';
 
 export function getStrapiURL() {
   return process.env.NEXT_PUBLIC_STRAPI_URL ?? 'http://localhost:1337';
@@ -85,4 +86,21 @@ export const processChild = (
   }
   // If it's not an input or container, return the child unchanged
   return child;
+};
+
+export const getImgGrid = ({ images }: { images: any }) => {
+  if (images.length < 6) {
+    const additionalImages = Array.from({ length: 6 - images.length }, () => ({
+      id: uuidv4(),
+      url: null,
+      width: 600,
+      height: 600,
+      formats: null,
+      alternativeText: 'Placeholder image',
+    }));
+
+    return [...images, ...additionalImages];
+  }
+
+  return images;
 };

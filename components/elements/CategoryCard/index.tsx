@@ -38,7 +38,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
           >
             <div className='pointer-events-none absolute h-full w-full bg-black/50' />
             <NextLink
-              href={`/catalog/${data.id}`}
+              href={`/catalog/${data.slug}`}
               className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold text-black'
             >
               <MdArrowRightAlt className='h-6 w-6' /> {t('system.explore')}

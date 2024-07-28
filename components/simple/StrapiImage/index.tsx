@@ -6,19 +6,21 @@ import { IStrapiImageProps } from '@/types/components/simple/strapiImage.types';
 export function StrapiImage({
   src,
   alt,
-  height,
-  width,
+  height = 600,
+  width = 600,
   className,
   formats,
   fill,
   loading,
   priority = false,
+  id,
 }: Readonly<IStrapiImageProps>) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
   if (fill) {
     return (
       <Image
+        id={id}
         src={src ?? imageFallback}
         alt={alt}
         formats={formats}
@@ -32,6 +34,7 @@ export function StrapiImage({
 
   return (
     <Image
+      id={id}
       src={src ?? imageFallback}
       alt={alt}
       loading={loading}
