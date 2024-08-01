@@ -125,3 +125,38 @@ export const useDebounce = (value: any, delay = 500) => {
 
   return debouncedValue;
 };
+
+export const useAutoScroll = (
+  emblaApi: EmblaCarouselType,
+  autoScroll: boolean
+) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!emblaApi || !autoScroll) return;
+
+    const onAutoScroll = emblaApi?.plugins()?.autoScroll;
+
+    setIsPlaying(onAutoScroll.isPlaying());
+
+    const handlePlay = () => setIsPlaying(true);
+    const handleStop = () => setIsPlaying(false);
+    const handleReInit = () => setIsPlaying(onAutoScroll.isPlaying());
+
+    emblaApi
+      .on('autoScroll:play', handlePlay)
+      .on('autoScroll:stop', handleStop)
+      .on('reInit', handleReInit);
+
+    if (!isPlaying) {
+      onAutoScroll.play();
+    }
+
+    return () => {
+      emblaApi
+        .off('autoScroll:play', handlePlay)
+        .off('autoScroll:stop', handleStop)
+        .off('reInit', handleReInit);
+    };
+  }, [autoScroll, emblaApi, isPlaying]);
+};

@@ -47,7 +47,7 @@ export const SignUpForm: FC<ISignUpForm> = ({
       id='signup-form'
       schema={schema}
       action={createUserAction}
-      className={cn(className, 'auth-page_form')}
+      className={cn(className, 'auth-page_form !top-[70px]')}
     >
       <div className='w-full'>
         <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
@@ -62,7 +62,7 @@ export const SignUpForm: FC<ISignUpForm> = ({
           hidden
           readOnly
         />
-        <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 pt-5 md:grid-cols-2 md:pt-10'>
+        <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 pt-2.5 md:grid-cols-2 md:pt-10'>
           {printInputs(formFields)}
         </div>
         <div className='divider m-0 mb-5 w-full px-5' />

@@ -7,24 +7,34 @@ interface IPrice {
   sale?: number;
   locale: string;
   currency: any;
+  className?: string;
 }
 
 export const Price: FC<Readonly<IPrice>> = ({
-  price,
+  price = 0,
   sale = 0,
   locale = 'uk',
   currency,
+  className,
 }) => {
   const discountAmount = price * (sale / 100);
   const originalPrice = formatPrice(price, locale, currency);
+
   const salePrice = formatPrice(price - discountAmount, locale, currency);
 
   return (
-    <p className='flex gap-x-3'>
-      {sale > 0 && <span className='text-2xl text-base-200'>{salePrice}</span>}
+    <p
+      className={cn(
+        'flex flex-col-reverse items-end gap-x-3 xs:flex-row',
+        className
+      )}
+    >
+      {sale > 0 && <span className='text-xl text-base-200'>{salePrice}</span>}
       <span
         className={cn(
-          sale > 0 ? 'text-xl line-through' : 'text-2xl text-base-200'
+          sale > 0
+            ? 'text-sm line-through md:text-base'
+            : 'text-base text-base-200 md:text-xl'
         )}
       >
         {originalPrice}

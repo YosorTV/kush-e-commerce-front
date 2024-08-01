@@ -35,11 +35,11 @@ export default async function ProductDetails({ params }: PageProps) {
   return (
     <PageLayout className='mt-16 min-h-screen'>
       <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
-        <div className='sticky z-10 flex h-full flex-col gap-6 bg-base-100 p-6 drop-shadow-2xl lg:fixed lg:w-1/2'>
+        <div className='sticky z-10 flex h-full flex-col gap-3 bg-base-100 p-3 drop-shadow-2xl xs:gap-6 xs:p-6 lg:fixed lg:w-1/2'>
           <section className='flex w-full justify-between'>
             <Title
               level='1'
-              className='text-2xl font-semibold leading-10 text-base-200 md:text-3xl lg:text-4xl'
+              className='text-xl font-semibold leading-10 text-base-200 md:text-3xl lg:text-4xl'
             >
               {data?.title}
             </Title>
@@ -63,17 +63,17 @@ export default async function ProductDetails({ params }: PageProps) {
           </section>
           <p>{data?.description}</p>
           {data?.colors?.data && (
-            <section className='flex gap-x-3'>
+            <section className='flex flex-col gap-3'>
               <ColorOptions data={data.colors.data} title='Colors' />
             </section>
           )}
           {data?.materials?.data && (
-            <section className='flex gap-x-3'>
+            <section className='flex gap-3'>
               <MaterialOptions data={data.materials.data} title='Materials' />
             </section>
           )}
           {data?.sizes?.data && (
-            <section className='flex gap-x-3'>
+            <section className='flex gap-3'>
               <SizeOptions data={allSizes} sizes={data.sizes.data} />
             </section>
           )}

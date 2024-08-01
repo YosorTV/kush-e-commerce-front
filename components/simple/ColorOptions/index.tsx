@@ -17,7 +17,7 @@ export const ColorOptions: FC<IColorOptions> = ({ data, title }) => {
       <label
         key={el.id}
         htmlFor={el.id}
-        className='flex cursor-pointer items-center justify-center gap-x-3 underline-offset-8 hover:underline'
+        className='flex  cursor-pointer items-center justify-start gap-3 underline-offset-8 hover:underline'
       >
         <input
           id={el.id}
@@ -25,7 +25,7 @@ export const ColorOptions: FC<IColorOptions> = ({ data, title }) => {
           name='color'
           value={el.colors}
           onChange={() => state.onAdd({ key: 'color', value: el.colors })}
-          className={cn('radio', el.colors === 'yellow' && 'radio-warning')}
+          className={cn('radio')}
         />
         <span className='font-semibold text-base-200'>{el.title}</span>
       </label>
@@ -33,11 +33,13 @@ export const ColorOptions: FC<IColorOptions> = ({ data, title }) => {
   };
 
   return (
-    <div>
+    <>
       {title && <p className='mb-2 text-lg font-semibold'>{title}</p>}
       {data.length > 0 && (
-        <div className='flex gap-x-3'>{data.map(printElement)}</div>
+        <div className='flex flex-col gap-3 sm:flex-row'>
+          {data.map(printElement)}
+        </div>
       )}
-    </div>
+    </>
   );
 };

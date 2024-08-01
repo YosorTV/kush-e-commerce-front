@@ -8,15 +8,15 @@ import { FC } from 'react';
 export const HeroSection: FC<any> = ({ data }) => {
   return (
     <section className='relative flex flex-col'>
-      <div className='relative flex justify-center'>
+      <div className='relative flex justify-center py-5'>
         <Title level='1' className={cn('hero-title', cormorant.className)}>
           {data?.title}
         </Title>
       </div>
       <div className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white md:h-md lg:h-lg'>
         <StrapiImage
-          priority
           fill
+          priority
           className='hero-image'
           formats={data?.image?.formats}
           src={data?.image?.url}
@@ -29,7 +29,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data?.link?.text}
         </NextLink>
       </div>
-      <div className='relative py-10 text-center leading-tight'>
+      <div className='relative px-2.5 py-5  text-center leading-tight md:py-10'>
         <Title
           level='3'
           className={cn('hero-sub_title uppercase ', cormorant.className)}

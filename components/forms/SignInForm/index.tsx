@@ -71,7 +71,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
         />
         {printInputs(data.formFields)}
       </div>
-      <div className='flex w-full flex-col justify-between gap-5 py-2.5 xs:flex-row md:gap-10'>
+      <div className='flex w-full justify-between gap-5 py-2.5 md:gap-10'>
         {data.rememberMe && (
           <div>
             <Input

@@ -57,7 +57,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
         animate={menu.isOpen ? 'open' : 'closed'}
         className='w-full lg:hidden'
       >
-        <Hamburger toggle={handleToggle} />
+        <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
         <Sidebar opened={menu.isOpen} position='left' onToggle={handleToggle}>
           <MenuNav
             pages={pages}

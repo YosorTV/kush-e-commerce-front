@@ -114,7 +114,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
           level='3'
           className={cn(
             cormorant.className,
-            'text-center text-5xl font-normal uppercase text-base-200 lg:text-left'
+            'py-5 text-2xl uppercase text-base-200 xs:text-4xl lg:text-5xl'
           )}
         >
           {title}

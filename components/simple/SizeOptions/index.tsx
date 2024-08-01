@@ -16,7 +16,7 @@ export const SizeOptions: FC<ISizeOptions> = ({ sizes, data }) => {
 
   const printSize = ({ size, id }: any) => {
     return (
-      <label key={id} className='flex items-center justify-center'>
+      <label key={id} className='w-min'>
         <input
           type='radio'
           name='size'

@@ -7,11 +7,11 @@
     "availableIn": "Available in {number} colors"
   },
   "validation": {
-    "length": "Password must be at least {number} characters long",
-    "special": "Password must contain {number} special character",
-    "uppercase": "Password must contain {number} uppercase letter",
-    "number": "Password must contain {number} number",
-    "lowercase": "Password must contain {number} lowercase letter"
+    "length": "Min {number} characters long",
+    "special": "Min {number} special character",
+    "uppercase": "Min {number} uppercase letter",
+    "number": "Minimum {number} number",
+    "lowercase": "Minimum {number} lowercase letter"
   },
   "system": {
     "loadMore": "Load more",

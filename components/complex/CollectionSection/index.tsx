@@ -19,12 +19,7 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
       key={id}
       className='relative flex flex-col bg-neutral p-2.5 !pt-0 hover:cursor-grab active:cursor-grabbing lg:p-5'
     >
-      <CollectionCarousel
-        mini={false}
-        title={title}
-        data={collections.data}
-        options={{ loop: true }}
-      />
+      <CollectionCarousel title={title} data={collections.data} />
     </section>
   );
 };

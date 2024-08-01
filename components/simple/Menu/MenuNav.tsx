@@ -45,7 +45,7 @@ export const MenuNav: FC<MenuNavProps> = ({
   );
 
   return (
-    <>
+    <div className='pt-10'>
       <div>
         <Title
           level='5'
@@ -101,6 +101,6 @@ export const MenuNav: FC<MenuNavProps> = ({
           <Logo height={90} />
         </div>
       </div>
-    </>
+    </div>
   );
 };

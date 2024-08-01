@@ -42,7 +42,9 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   const pathname = usePathname();
 
   const handleShowSubMenu = (index: number) => {
-    !state.isOpen && index <= 1 ? setShowOverlay(true) : setShowOverlay(false);
+    return !state.isOpen && index <= 1
+      ? setShowOverlay(true)
+      : setShowOverlay(false);
   };
 
   const printLinks = (data: StrapiLinkType[]) => {

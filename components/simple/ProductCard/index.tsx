@@ -63,7 +63,7 @@ export const ProductCard: FC<ProductCardProps> = ({
           <p className='text-base font-medium text-base-200'>
             {product.description}
           </p>
-          <div className='flex w-full items-center justify-between'>
+          <div className='flex w-full items-baseline justify-between'>
             {hintText && <span className='text-sm'>{hintText}</span>}
             <Price
               currency={currency}

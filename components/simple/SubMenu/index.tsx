@@ -104,13 +104,11 @@ export const SubMenu: FC<TSubMenu> = ({
                   ))}
                 </ul>
               </div>
-              <div>
-                <CollectionCarousel
-                  mini
-                  data={collections}
-                  options={{ slidesToScroll: 'auto', loop: true }}
-                />
-              </div>
+              <CollectionCarousel
+                data={collections}
+                className='slides-2 w-1/2'
+                slideClass='h-60'
+              />
             </div>
           )}
         </motion.nav>

@@ -6,14 +6,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { MdArrowRightAlt } from 'react-icons/md';
 
-import { StrapiImage } from '@/components/simple';
+import { Hydrate, StrapiImage } from '@/components/simple';
 import { Title, NextLink } from '@/components/elements';
 import { cn } from '@/lib';
-import { formatPrice } from '@/helpers/formatters';
+import { Price } from '@/components/simple/Price';
+import { useProducts } from '@/store';
 
 export const CategoryCard: FC<any> = ({ data }) => {
-  const t = useTranslations();
   const locale = useLocale();
+
+  const t = useTranslations();
+  const state = useProducts();
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -28,52 +31,61 @@ export const CategoryCard: FC<any> = ({ data }) => {
         showOverlay && 'border-white'
       )}
     >
-      <AnimatePresence mode='sync'>
-        {showOverlay && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className='absolute inset-0 z-10 flex items-center justify-center'
-          >
-            <div className='pointer-events-none absolute h-full w-full bg-black/50' />
-            <NextLink
-              href={`/catalog/${data.slug}`}
-              className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold text-black'
+      <NextLink
+        href={`/catalog/${data.slug}`}
+        className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold text-black'
+      >
+        <AnimatePresence mode='sync'>
+          {showOverlay && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className='absolute inset-0 z-10 flex items-center justify-center'
             >
-              <MdArrowRightAlt className='h-6 w-6' /> {t('system.explore')}
-            </NextLink>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <StrapiImage
-        loading='lazy'
-        formats={data?.images?.data?.[0]?.formats}
-        src={data?.images?.data?.[0]?.url}
-        alt={data?.images?.data?.[0]?.alternativeText}
-        height={1540}
-        width={1100}
-        className='h-[500px] w-full object-cover lg:h-[670px]'
-      />
-      <div className='card-body absolute bottom-0 z-10 p-5 pt-0'>
-        <span className='text-secondary'>{data.hintText}</span>
-        <div className='flex flex-1 justify-between pt-2'>
-          <Title
-            level='3'
-            className='text-lg font-semibold uppercase text-white'
-          >
-            {data.title}
-          </Title>
+              <div className='pointer-events-none absolute h-full w-full bg-black/50' />
+              <span className='z-10 flex bg-white p-1.5 text-black'>
+                <MdArrowRightAlt className='h-6 w-6' /> {t('system.explore')}
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div className='h-[468px] w-full lg:h-[672px]'>
+          <StrapiImage
+            fill
+            formats={data?.images?.data?.[0]?.formats}
+            src={data?.images?.data?.[0]?.url}
+            alt={data?.images?.data?.[0]?.alternativeText}
+            className='h-full w-full object-cover'
+          />
         </div>
-        <div className='flex flex-col pt-2'>
-          <p className='text-base font-medium text-white'>{data.description}</p>
-          <div className='flex w-full items-center justify-between'>
-            <span className='text-base text-white'>
-              {formatPrice(data.price, locale, 41)}
-            </span>
+        <div className='absolute bottom-0 left-0 z-10 w-full bg-black/50 p-5'>
+          <div className='flex flex-1 justify-between pt-2'>
+            <Title
+              level='3'
+              className='text-lg font-medium uppercase text-white'
+            >
+              {data.title}
+            </Title>
+          </div>
+          <div className='flex flex-col'>
+            <p className='text-base font-medium text-white'>
+              {data.description}
+            </p>
+            <div className='flex w-full items-center justify-between'>
+              <Hydrate>
+                <Price
+                  className='!flex-row font-medium'
+                  locale={locale}
+                  price={data?.price}
+                  sale={data?.sale}
+                  currency={state.currency}
+                />
+              </Hydrate>
+            </div>
           </div>
         </div>
-      </div>
+      </NextLink>
     </motion.figure>
   );
 };

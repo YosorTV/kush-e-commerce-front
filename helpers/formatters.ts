@@ -3,13 +3,17 @@ export const formatPrice = (
   locale: string,
   currency: number
 ) => {
-  const formattedAmount = new Intl.NumberFormat(
+  let formattedAmount = new Intl.NumberFormat(
     locale === 'uk' ? 'uk-UA' : 'en-US',
     {
       style: 'currency',
       currency: locale === 'uk' ? 'UAH' : 'USD',
     }
   ).format(locale === 'uk' ? Number(currency) * amount : amount);
+
+  if (locale === 'uk') {
+    formattedAmount = formattedAmount.replace('грн', '₴');
+  }
 
   const [integerPart, fractionalPart] = formattedAmount.split('.');
 
@@ -29,8 +33,8 @@ export const formatTotalAmount = (data: any[]) => {
 export const formatDate = (date: Date) => {
   const fullDate = new Date(date);
 
-  const day = String(fullDate.getDate()).padStart(2, '0'); // Get the day and pad with leading zeros if necessary
-  const month = String(fullDate.getMonth() + 1).padStart(2, '0'); // Get the month (0-based) and pad with leading zeros if necessary
+  const day = String(fullDate.getDate()).padStart(2, '0');
+  const month = String(fullDate.getMonth() + 1).padStart(2, '0');
   const year = fullDate.getFullYear();
 
   return `${month}/${day}/${year}`;
