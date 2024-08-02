@@ -28,7 +28,7 @@ export const ProductGallery = ({
   };
 
   return (
-    <section className={className}>
+    <section className={className} aria-label='Product gallery'>
       <ul className='hidden gap-3 lg:grid lg:grid-cols-1 xl:grid-cols-2'>
         {gallery.map(printImage)}
       </ul>

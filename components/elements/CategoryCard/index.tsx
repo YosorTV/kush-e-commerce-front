@@ -50,7 +50,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className='h-[468px] w-full lg:h-[672px]'>
+        <div className='h-[420px] w-full lg:h-[512px]'>
           <StrapiImage
             fill
             formats={data?.images?.data?.[0]?.formats}

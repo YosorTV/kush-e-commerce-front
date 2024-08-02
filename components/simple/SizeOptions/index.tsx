@@ -7,9 +7,10 @@ import { useCart } from '@/store';
 interface ISizeOptions {
   sizes: any[];
   data: any[];
+  title: string;
 }
 
-export const SizeOptions: FC<ISizeOptions> = ({ sizes, data }) => {
+export const SizeOptions: FC<ISizeOptions> = ({ sizes, title, data }) => {
   const state = useCart();
 
   const availableSizes = sizes.map((size) => size.size);
@@ -43,10 +44,10 @@ export const SizeOptions: FC<ISizeOptions> = ({ sizes, data }) => {
   };
 
   return (
-    <div>
-      <p className='mb-2 text-lg font-semibold'>Size</p>
+    <div className='flex flex-col gap-y-5'>
+      <p className='text-lg font-semibold'>{title}</p>
       {data.length > 0 && (
-        <div className='grid grid-cols-3 gap-4'>{data.map(printSize)}</div>
+        <div className='flex flex-wrap gap-3'>{data.map(printSize)}</div>
       )}
     </div>
   );

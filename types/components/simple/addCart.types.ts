@@ -8,5 +8,4 @@ export type CartItemProps = {
 
 export type AddCartProps = {
   data: ProductItem;
-  text: string;
 };

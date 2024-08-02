@@ -78,7 +78,7 @@ export const ProductsContent: FC<TProductsContent> = ({ className, title }) => {
 
     if (state.products.length > 0) {
       return state.products.map((product: Product, index: number) => {
-        const hintText = t('colors.availableIn', {
+        const hintText = t('color.availableIn', {
           number: product.colors?.data?.length,
         });
 

@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, IMAGE_FIELDS } from '@/helpers/constants';
+import { DEFAULT_LOCALE, IMAGE_FIELDS, META_FIELDS } from '@/helpers/constants';
 
 type TProductQuery = {
   locale: string;
@@ -43,6 +43,23 @@ export const productQuery = ({
           fields: IMAGE_FIELDS,
         },
       },
+    },
+  },
+});
+
+export const productMetaQuery = ({
+  slug,
+  locale = DEFAULT_LOCALE,
+}: TProductQuery) => ({
+  locale,
+  filters: {
+    slug: {
+      $eq: slug,
+    },
+  },
+  populate: {
+    seo: {
+      fields: META_FIELDS,
     },
   },
 });

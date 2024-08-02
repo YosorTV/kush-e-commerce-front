@@ -1,12 +1,22 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-import { TitleProps } from '@/types/components';
+import { ITitleProps } from '@/types/components';
 
-export const Title: FC<TitleProps> = ({ level, className, children }) => {
+export const Title: FC<PropsWithChildren<ITitleProps>> = ({
+  level,
+  className,
+  children,
+  ...rest
+}) => {
   const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
 
   return (
-    <HeadingTag className={className} title={children as string}>
+    <HeadingTag
+      id={rest.id}
+      className={className}
+      title={children as string}
+      aria-label={rest['aria-label']}
+    >
       {children}
     </HeadingTag>
   );

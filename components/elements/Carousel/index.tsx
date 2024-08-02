@@ -10,23 +10,23 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useAutoScroll } from '@/lib/hooks';
 import useEmblaCarousel from 'embla-carousel-react';
 import { CarouselTitle } from '@/elements/Carousel/CarouselTitle';
-import { CarouselControllers } from './CarouselControllers';
+import { CarouselControllers } from '@/elements/Carousel/CarouselControllers';
 
 interface EmblaCarouselProps {
+  title?: string;
   options?: EmblaOptionsType;
+  className?: string;
   autoScroll?: boolean;
   autoplay?: boolean;
-  className?: string;
-  title?: string;
 }
 
 const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
-  children,
+  title,
   options,
+  children,
   className,
   autoScroll = false,
   autoplay = false,
-  title,
 }) => {
   const plugins = [
     autoScroll && AutoScroll({ playOnInit: false, stopOnMouseEnter: true }),
@@ -41,14 +41,14 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
     <div className={cn('embla', className)}>
       <div
         className={cn(
-          'flex w-full items-center',
+          'flex w-full items-baseline',
           title ? 'justify-between' : 'justify-end'
         )}
       >
         {title && <CarouselTitle title={title} />}
         <CarouselControllers emblaApi={emblaApi} />
       </div>
-      <div className='embla__viewport py-3 lg:py-6' ref={emblaRef}>
+      <div className='embla__viewport' ref={emblaRef}>
         <div className='embla__container'>
           {Children.map(children, (child, index) => (
             <div

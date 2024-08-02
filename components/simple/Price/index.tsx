@@ -24,6 +24,7 @@ export const Price: FC<Readonly<IPrice>> = ({
 
   return (
     <p
+      aria-label={`Price: ${price}`}
       className={cn(
         'flex flex-col-reverse items-end gap-x-3 xs:flex-row',
         className

@@ -17,7 +17,7 @@ interface ICarouseControllers {
 export const CarouselControllers: FC<ICarouseControllers> = ({ emblaApi }) => {
   const { lg } = useScreen();
 
-  const size = lg ? 34 : 24;
+  const size = lg ? 28 : 24;
 
   const {
     prevBtnDisabled,

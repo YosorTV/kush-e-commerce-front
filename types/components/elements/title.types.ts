@@ -1,9 +1,7 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes } from 'react';
 
 type HeadingLevel = '1' | '2' | '3' | '4' | '5' | '6';
 
-export type TitleProps = {
-  className?: string;
-  children: ReactNode;
+export interface ITitleProps extends HTMLAttributes<HTMLHeadingElement> {
   level: HeadingLevel;
-};
+}

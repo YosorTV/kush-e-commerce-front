@@ -13,7 +13,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data?.title}
         </Title>
       </div>
-      <div className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white md:h-md lg:h-lg'>
+      <div className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white md:h-md lg:h-2md'>
         <StrapiImage
           fill
           priority

@@ -3,13 +3,14 @@
     "signIn": "Авторизуватись",
     "signOut": "Вийти"
   },
-  "colors": {
-    "availableIn": "Доступно в {number} кольорах"
-  },
   "system": {
     "loadMore": "Показати ще",
     "explore": "Переглянути",
     "total": "Всього {number}"
+  },
+  "cart": {
+    "added": "У кошику",
+    "add": "Додати у кошик"
   },
   "validation": {
     "length": "Мінімум {number} символів",
@@ -41,15 +42,35 @@
     "reset": "Скинути"
   },
   "material": {
+    "title": "Матеріал",
     "gold": "Золото",
-    "silver": "Серебро",
-    "platinum": "Платіна"
+    "silver": "Срібло",
+    "platinum": "Платина",
+    "brass": "Латунь",
+    "bronze": "Бронза",
+    "palladium": "Паладій",
+    "stainless": "Нержавіюча сталь",
+    "titanium": "Титан",
+    "tungsten": "Вольфрам"
+  },
+  "color": {
+    "title": "Колір",
+    "yellow": "Жовтий",
+    "white": "Білий",
+    "green": "Зелений",
+    "gray": "Сірий",
+    "purple": "Фіолетовий",
+    "black": "Чорний",
+    "availableIn": "Доступно в {number} кольорах"
   },
   "category": {
     "rings": "Кільця",
     "bracelets": "Браслети",
     "necklaces": "Намиста",
     "earrings": "Сережки"
+  },
+  "size": {
+    "title": "Розміри"
   },
   "collection": {
     "title": "Коллекція"

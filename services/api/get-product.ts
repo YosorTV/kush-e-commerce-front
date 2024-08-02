@@ -16,3 +16,22 @@ export async function getProductData({ locale, slug }: any) {
 
   return { data: null };
 }
+
+export async function getProductMeta({ locale, slug }: any) {
+  const productMetaApi = STRAPI_QUERIES.META_PRODUCT({ locale, slug });
+
+  const { data } = await getStrapiData(
+    'products',
+    generateStrapiQuery(productMetaApi)
+  );
+
+  return {
+    title: {
+      default: `KUSH | ${data[0]?.seo?.metaTitle.toUpperCase()}`,
+      template: '%s | KUSH',
+    },
+    description: data[0]?.seo?.metaDescription ?? '',
+    robots: data[0]?.seo?.metaRobots ?? '',
+    keywords: data[0]?.seo?.keywords ?? '',
+  };
+}

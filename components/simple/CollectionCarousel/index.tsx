@@ -14,7 +14,7 @@ export const CollectionCarousel: FC<PropType> = ({
   data,
   title,
   className = 'slides-2 w-full',
-  slideClass = 'h-[468px]',
+  slideClass = 'h-[420px]',
 }) => {
   const printCollectionCard = ({ cover, slug, title, hintText }: any) => {
     return (

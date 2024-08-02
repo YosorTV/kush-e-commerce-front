@@ -3,8 +3,9 @@
     "signIn": "Sign In",
     "signOut": "Sign Out"
   },
-  "colors": {
-    "availableIn": "Available in {number} colors"
+  "cart": {
+    "added": "Already in cart",
+    "add": "Add to cart"
   },
   "validation": {
     "length": "Min {number} characters long",
@@ -41,15 +42,35 @@
     "reset": "Reset"
   },
   "material": {
+    "title": "Material",
     "gold": "Gold",
     "silver": "Silver",
-    "platinum": "Platinum"
+    "platinum": "Platinum",
+    "brass": "Brass",
+    "bronze": "Bronze",
+    "palladium": "Palladium",
+    "stainless": "Stainless Steel",
+    "titanium": "Titanium",
+    "tungsten": "Tungsten"
+  },
+  "color": {
+    "title": "Color",
+    "yellow": "Yellow",
+    "white": "White",
+    "green": "Green",
+    "gray": "Gray",
+    "purple": "Purple",
+    "black": "Black",
+    "availableIn": "Available in {number} colors"
   },
   "category": {
     "rings": "Rings",
     "bracelets": "Bracelets",
     "necklaces": "Necklaces",
     "earrings": "Earrings"
+  },
+  "size": {
+    "title": "Size"
   },
   "collection": {
     "title": "Collection"
