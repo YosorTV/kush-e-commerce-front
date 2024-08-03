@@ -10,7 +10,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
   cover,
 }) => {
   return (
-    <div className={cn('flex flex-grow flex-col', className)}>
+    <div className={cn('mt-16 flex flex-grow flex-col', className)}>
       {cover && cover.url && (
         <StrapiImage
           alt={cover.alternativeText}

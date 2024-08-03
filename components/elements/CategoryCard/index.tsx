@@ -59,7 +59,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
             className='h-full w-full object-cover'
           />
         </div>
-        <div className='absolute bottom-0 left-0 z-10 w-full bg-black/50 p-5'>
+        <div className='group absolute bottom-0 left-0 z-10 w-full bg-black/50 p-5'>
           <div className='flex flex-1 justify-between pt-2'>
             <Title
               level='3'
@@ -69,13 +69,18 @@ export const CategoryCard: FC<any> = ({ data }) => {
             </Title>
           </div>
           <div className='flex flex-col'>
-            <p className='text-base font-medium text-white'>
+            <p
+              className={cn(
+                'line-clamp-1 w-1/2 text-base font-medium text-white transition-all duration-300',
+                showOverlay && 'w-full'
+              )}
+            >
               {data.description}
             </p>
             <div className='flex w-full items-center justify-between'>
               <Hydrate>
                 <Price
-                  className='!flex-row font-medium'
+                  className='!flex-row font-medium text-base-300'
                   locale={locale}
                   price={data?.price}
                   sale={data?.sale}

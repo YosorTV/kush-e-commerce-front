@@ -6,7 +6,9 @@
   "system": {
     "loadMore": "Показати ще",
     "explore": "Переглянути",
-    "total": "Всього {number}"
+    "total": "Всього {number}",
+    "stepBack": "Повернутись",
+    "look": "Зберіть свій образ"
   },
   "cart": {
     "added": "У кошику",
@@ -58,7 +60,7 @@
     "yellow": "Жовтий",
     "white": "Білий",
     "green": "Зелений",
-    "gray": "Сірий",
+    "grey": "Сірий",
     "purple": "Фіолетовий",
     "black": "Чорний",
     "availableIn": "Доступно в {number} кольорах"
@@ -70,7 +72,7 @@
     "earrings": "Сережки"
   },
   "size": {
-    "title": "Розміри"
+    "title": "Розмір"
   },
   "collection": {
     "title": "Коллекція"

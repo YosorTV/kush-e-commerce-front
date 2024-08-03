@@ -165,6 +165,7 @@ export const STRAPI_PAGES = {
   success: 'success-page',
   forgot: 'forgot-page',
   currency: 'currency-change',
+  delivery: 'delivery',
 };
 
 export const passwordValidationParams = {

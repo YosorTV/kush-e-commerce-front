@@ -10,6 +10,7 @@ import { Form, Input, Title } from '@/components/elements';
 
 import { cormorant } from '@/assets/fonts';
 import { InputProps } from '@/types/components';
+import { StepBack } from '@/components/simple/StepBack';
 
 interface ISignUpForm {
   formFields: any[];
@@ -47,9 +48,10 @@ export const SignUpForm: FC<ISignUpForm> = ({
       id='signup-form'
       schema={schema}
       action={createUserAction}
-      className={cn(className, 'auth-page_form !top-[70px]')}
+      className={cn(className, 'auth-page_form')}
     >
-      <div className='w-full'>
+      <StepBack className='absolute left-5 top-2 z-10' />
+      <div className='relative mt-10 w-full md:mt-2.5'>
         <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
           {title}
         </Title>
@@ -62,7 +64,7 @@ export const SignUpForm: FC<ISignUpForm> = ({
           hidden
           readOnly
         />
-        <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 pt-2.5 md:grid-cols-2 md:pt-10'>
+        <div className='grid grid-cols-1 gap-x-10 gap-y-2.5 pt-2.5 md:grid-cols-2 md:pt-5'>
           {printInputs(formFields)}
         </div>
         <div className='divider m-0 mb-5 w-full px-5' />

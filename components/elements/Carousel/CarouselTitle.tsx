@@ -5,15 +5,17 @@ import { FC } from 'react';
 
 interface ICarouselTitle {
   title?: string;
+  className?: string;
 }
 
-export const CarouselTitle: FC<ICarouselTitle> = ({ title }) => {
+export const CarouselTitle: FC<ICarouselTitle> = ({ title, className }) => {
   return (
-    <div className='emble_header pt-3 lg:pt-6'>
+    <div className='emble_header'>
       <Title
         level='2'
         className={cn(
-          'pt- text-2xl uppercase text-white xs:text-4xl lg:text-5xl',
+          'text-2xl uppercase xs:text-4xl lg:text-5xl',
+          className,
           cormorant.className
         )}
       >

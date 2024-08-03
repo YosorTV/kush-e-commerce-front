@@ -18,6 +18,8 @@ interface EmblaCarouselProps {
   className?: string;
   autoScroll?: boolean;
   autoplay?: boolean;
+  titleClass?: string;
+  slideClass?: string;
 }
 
 const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
@@ -27,6 +29,8 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   className,
   autoScroll = false,
   autoplay = false,
+  slideClass,
+  titleClass = 'text-base-300',
 }) => {
   const plugins = [
     autoScroll && AutoScroll({ playOnInit: false, stopOnMouseEnter: true }),
@@ -45,14 +49,17 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
           title ? 'justify-between' : 'justify-end'
         )}
       >
-        {title && <CarouselTitle title={title} />}
+        {title && <CarouselTitle title={title} className={titleClass} />}
         <CarouselControllers emblaApi={emblaApi} />
       </div>
       <div className='embla__viewport' ref={emblaRef}>
         <div className='embla__container'>
           {Children.map(children, (child, index) => (
             <div
-              className='embla__slide cursor-grab active:cursor-grabbing'
+              className={cn(
+                'embla__slide cursor-grab active:cursor-grabbing',
+                slideClass
+              )}
               key={index}
             >
               {child}

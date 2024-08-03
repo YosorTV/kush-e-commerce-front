@@ -29,7 +29,7 @@ export const ProductGallery = ({
 
   return (
     <section className={className} aria-label='Product gallery'>
-      <ul className='hidden gap-3 lg:grid lg:grid-cols-1 xl:grid-cols-2'>
+      <ul className='hidden gap-3 md:grid-cols-1 lg:grid lg:grid-cols-2'>
         {gallery.map(printImage)}
       </ul>
       <ProductCarousel data={images} options={{ loop: true }} />

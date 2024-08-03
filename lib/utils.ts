@@ -89,8 +89,8 @@ export const processChild = (
 };
 
 export const getImgGrid = ({ images }: { images: any }) => {
-  if (images.length < 6) {
-    const additionalImages = Array.from({ length: 6 - images.length }, () => ({
+  if (images.length < 4) {
+    const additionalImages = Array.from({ length: 4 - images.length }, () => ({
       id: uuidv4(),
       url: null,
       width: 600,

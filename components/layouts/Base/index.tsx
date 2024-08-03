@@ -16,7 +16,7 @@ export async function BaseLayout({
       suppressHydrationWarning
       className={montserrat.className}
     >
-      <body className='relative grid'>
+      <body className='relative grid overflow-x-clip'>
         <ThemeProvider>
           <Header data={header} locale={locale} />
           <main className='flex flex-grow flex-col overflow-hidden'>

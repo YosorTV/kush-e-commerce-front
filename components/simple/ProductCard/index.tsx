@@ -11,7 +11,7 @@ import { Price } from '../Price';
 
 type ProductCardProps = {
   product: Product;
-  className: string;
+  className?: string;
   hintText?: string;
   collectionTitle?: string;
   locale: string;
@@ -60,7 +60,10 @@ export const ProductCard: FC<ProductCardProps> = ({
             ))}
         </div>
         <div className='flex flex-col pt-2'>
-          <p className='text-base font-medium text-base-200'>
+          <p
+            className='line-clamp-1 w-1/2 text-base font-medium text-base-200'
+            title={product.description}
+          >
             {product.description}
           </p>
           <div className='flex w-full items-baseline justify-between'>

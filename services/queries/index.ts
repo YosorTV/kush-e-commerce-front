@@ -1,5 +1,6 @@
 import { authQuery } from './authQuery';
 import { catalogQuery } from './catalogQuery';
+import { deliveryQuery } from './deliveryQuery';
 import { globalQuery } from './globalQuery';
 import { homeQuery } from './homeQuery';
 import { metaQuery } from './metaQuery';
@@ -19,4 +20,5 @@ export const STRAPI_QUERIES = {
   PROFILE: profileQuery,
   META: metaQuery,
   SIZE: sizeQuery,
+  DELIVERY: deliveryQuery,
 };

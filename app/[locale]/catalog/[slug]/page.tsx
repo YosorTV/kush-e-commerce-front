@@ -1,7 +1,10 @@
+import { CompleteLook } from '@/components/complex/CompleteLook';
+import { DeliveryRules } from '@/components/complex/DeliveryRules';
 import { ProductGallery } from '@/components/complex/ProductGallery';
 import { ProductParams } from '@/components/complex/ProductParams';
 import { NextLink, Title } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
+import { DeliveryBlock } from '@/components/simple/DeliveryBlock';
 import { Price } from '@/components/simple/Price';
 import { StepBack } from '@/components/simple/StepBack';
 
@@ -15,6 +18,7 @@ import {
 import { PageProps } from '@/types/app/page.types';
 import { CartItemType } from '@/types/store';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { notFound } from 'next/navigation';
 
@@ -28,6 +32,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function ProductDetails({ params }: PageProps) {
   const { locale, slug } = params;
+
+  const t = await getTranslations();
 
   const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
@@ -48,16 +54,8 @@ export default async function ProductDetails({ params }: PageProps) {
 
   return (
     <PageLayout className='mt-16 min-h-screen'>
-      <article
-        className='relative flex flex-col-reverse lg:flex-row-reverse'
-        role='article'
-        aria-labelledby='product-title'
-      >
-        <div
-          className='sticky z-10 flex h-full flex-col gap-3 bg-base-100 p-3 drop-shadow-2xl xs:gap-6 xs:p-6 lg:fixed lg:w-1/2'
-          role='complementary'
-        >
-          <StepBack />
+      <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
+        <section className='z-10 flex h-full w-full flex-col gap-3 bg-base-100 p-3 xs:gap-6 xs:p-6'>
           <header className='flex w-full justify-between' role='product-name'>
             <Title
               level='1'
@@ -83,10 +81,10 @@ export default async function ProductDetails({ params }: PageProps) {
               className='capitalize text-base-200 underline underline-offset-8'
               aria-label={`Category: ${data?.category}`}
             >
-              {data?.category}
+              {t(`category.${data?.category}`)}
             </NextLink>
           </div>
-          <p>{data?.description}</p>
+          <p className='whitespace-pre-line text-pretty'>{data?.description}</p>
           <ProductParams
             sizes={allSizes}
             cartData={cartData}
@@ -94,12 +92,23 @@ export default async function ProductDetails({ params }: PageProps) {
             materials={data.materials.data}
             availableSizes={data.sizes.data}
           />
+          <DeliveryBlock locale={locale} />
+        </section>
+        <div className='relative w-full'>
+          <StepBack className='absolute left-6 lg:relative' />
+          <ProductGallery
+            images={data?.images?.data.slice(0, 4)}
+            className='w-full'
+          />
         </div>
-        <ProductGallery
-          images={data?.images?.data}
-          className='lg:mr-auto lg:w-1/2'
-        />
       </article>
+      <div className='divider mx-6 mb-0 mt-5' />
+      <CompleteLook
+        locale={locale}
+        currency={currency}
+        category={data.category}
+      />
+      <DeliveryRules locale={locale} />
     </PageLayout>
   );
 }

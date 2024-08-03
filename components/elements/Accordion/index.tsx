@@ -1,7 +1,6 @@
 'use client';
 
 import { FC, useCallback, useState } from 'react';
-import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Title } from '../Title';
@@ -11,7 +10,6 @@ import { IAccordion, TAccordionItem } from '@/types/components';
 import { BiPlus, BiMinus } from 'react-icons/bi';
 
 export const Accordion: FC<IAccordion> = ({ data }) => {
-  const t = useTranslations('filter');
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const handleToggle = useCallback(
@@ -30,7 +28,7 @@ export const Accordion: FC<IAccordion> = ({ data }) => {
             onClick={() => handleToggle(index)}
           >
             <Title level='2' className='text-xl font-semibold text-base-200'>
-              {t(item.title)}
+              {item.title}
             </Title>
             <AnimatePresence mode='wait' initial={false}>
               {expandedIndex === index ? (
@@ -57,7 +55,7 @@ export const Accordion: FC<IAccordion> = ({ data }) => {
         </div>
       );
     },
-    [expandedIndex, handleToggle, t]
+    [expandedIndex, handleToggle]
   );
 
   return <div className='overflow-hidden py-5'>{data.map(printAccordion)}</div>;

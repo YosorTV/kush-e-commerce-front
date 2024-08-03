@@ -17,7 +17,9 @@
   "system": {
     "loadMore": "Load more",
     "explore": "Explore now",
-    "total": "Total {number}"
+    "total": "Total {number}",
+    "stepBack": "Back",
+    "look": "Complete your look"
   },
   "sort": {
     "title": "Sort by",
@@ -58,7 +60,7 @@
     "yellow": "Yellow",
     "white": "White",
     "green": "Green",
-    "gray": "Gray",
+    "grey": "Gray",
     "purple": "Purple",
     "black": "Black",
     "availableIn": "Available in {number} colors"

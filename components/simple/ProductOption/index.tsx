@@ -29,7 +29,9 @@ export const ProductOption = ({
         onChange={onChange}
         className='radio'
       />
-      <span className='font-semibold text-base-200'>{title}</span>
+      <span className='whitespace-nowrap font-semibold text-base-200'>
+        {title}
+      </span>
     </label>
   );
 };

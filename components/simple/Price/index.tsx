@@ -35,7 +35,7 @@ export const Price: FC<Readonly<IPrice>> = ({
         className={cn(
           sale > 0
             ? 'text-sm line-through md:text-base'
-            : 'text-base text-base-200 md:text-xl'
+            : 'text-base md:text-xl'
         )}
       >
         {originalPrice}

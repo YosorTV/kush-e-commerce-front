@@ -15,14 +15,12 @@ interface IPasswordValidation {
   password: string;
   rules: TValidationRule[];
   error: boolean | string;
-  validation: boolean;
 }
 
 export const PasswordValidation: FC<IPasswordValidation> = ({
   error,
   rules,
   password,
-  validation,
 }) => {
   const t = useTranslations('validation');
 
@@ -42,14 +40,16 @@ export const PasswordValidation: FC<IPasswordValidation> = ({
     }
   };
 
+  const printRule = ({ condition, key, number }: TValidationRule) => (
+    <li key={key} className={cn(ruleStatusClassName(condition, error))}>
+      <sup>*</sup>
+      {t(key, { number })}
+    </li>
+  );
+
   return (
     <ul className='mt-5 flex list-inside flex-col gap-y-1 text-xs'>
-      {rules.map(({ condition, key, number }) => (
-        <li key={key} className={cn(ruleStatusClassName(condition, error))}>
-          <sup>*</sup>
-          {t(key, { number })}
-        </li>
-      ))}
+      {rules.map(printRule)}
     </ul>
   );
 };

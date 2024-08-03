@@ -38,10 +38,10 @@ export const InputPassword: FC<InputProps> = ({
   const [isValid, setIsValid] = useState(passwordValidationParams);
 
   const rules = [
-    { condition: isValid.length, key: 'length', number: 8 },
     { condition: isValid.uppercase, key: 'uppercase', number: 1 },
     { condition: isValid.lowercase, key: 'lowercase', number: 1 },
     { condition: isValid.number, key: 'number', number: 1 },
+    { condition: isValid.length, key: 'length', number: 8 },
     { condition: isValid.special, key: 'special', number: 1 },
   ];
 
@@ -98,7 +98,6 @@ export const InputPassword: FC<InputProps> = ({
           error={error}
           rules={rules}
           password={state.value}
-          validation={validation}
         />
       )}
     </div>

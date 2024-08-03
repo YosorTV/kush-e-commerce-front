@@ -19,14 +19,14 @@ export default async function SuccessPage({ params }: PageProps) {
 
   return (
     <PageLayout className='auth-page_wrapper' cover={data.cover}>
-      <div className='flex h-full w-1/2 flex-col items-center justify-center gap-y-2.5 bg-base-100 pl-5 pr-14'>
+      <div className='z-10 flex h-1/2 w-11/12 flex-col items-center justify-center gap-y-2.5 rounded-md bg-base-100 p-5 shadow-2xl lg:w-1/2'>
         <h1 className='text-sm font-semibold xs:text-lg'>{data.title}</h1>
-        <p className='whitespace-pre-line break-words text-sm xs:text-lg'>
+        <p className='whitespace-pre-line break-words pb-5 text-sm xs:text-lg'>
           {data.description}
         </p>
         <NextLink
           href={data?.redirect.url}
-          className='btn mx-auto mt-5 rounded-none text-xs text-base-100 xs:mt-10 xs:text-base'
+          className='btn mx-auto rounded-md text-xs text-base-100 xs:text-base'
         >
           {data?.redirect.text}
         </NextLink>

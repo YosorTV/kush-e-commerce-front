@@ -106,7 +106,7 @@ export const SubMenu: FC<TSubMenu> = ({
               </div>
               <CollectionCarousel
                 data={collections}
-                className='slides-2 w-1/2'
+                className='!w-3/4 lg:!w-1/2'
                 slideClass='h-60'
               />
             </div>
