@@ -34,7 +34,6 @@ export const CollectionCarousel: FC<PropType> = ({
     <Carousel
       title={title}
       className={className}
-      slideClass='!flex-1'
       options={{ slidesToScroll: 'auto', loop: true }}
     >
       {data.map(printCollectionCard)}

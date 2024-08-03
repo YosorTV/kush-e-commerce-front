@@ -4,11 +4,12 @@ import { cormorant } from '@/assets/fonts';
 import { Title } from '@/components/elements';
 import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CollectionCarousel } from '../CollectionCarousel';
 import { MenuItem } from '../Menu/MenuItem';
 import { CategoryLinkType, CollectionLinkType } from '@/types/components';
+import { usePathname } from '@/lib/navigation';
 
 type TSubMenu = {
   categoryTitle: string;
@@ -28,6 +29,13 @@ export const SubMenu: FC<TSubMenu> = ({
   onHoverEnd,
 }) => {
   const { lg } = useScreen();
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    return () => onHoverEnd();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   return (
     <AnimatePresence mode='popLayout'>

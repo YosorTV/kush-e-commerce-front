@@ -46,9 +46,9 @@ export const CompleteLook: FC<ICompleteLook> = async ({
       title={t('system.look')}
       titleClass='text-base-200'
       className={cn('mx-5 pb-6', className)}
-      options={{ align: 'start', loop: true }}
+      options={{ loop: true }}
     >
-      <div className='pt-2.5'>{data.map(printProduct)}</div>
+      {data.map(printProduct)}
     </Carousel>
   );
 };
