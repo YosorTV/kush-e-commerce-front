@@ -5,7 +5,6 @@ import { revalidateTag } from 'next/cache';
 
 export async function getProductsData({
   locale,
-  category,
   page = 1,
   pageSize = 4,
   name,
@@ -16,7 +15,6 @@ export async function getProductsData({
     name,
     page,
     pageSize,
-    category,
     ...rest,
   });
 

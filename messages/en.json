@@ -19,7 +19,9 @@
     "explore": "Explore now",
     "total": "Total {number}",
     "stepBack": "Back",
-    "look": "Complete your look"
+    "look": "Complete your look",
+    "availableIn": "In stock {number}",
+    "emptyList": "Empty list"
   },
   "sort": {
     "title": "Sort by",
@@ -62,10 +64,10 @@
     "green": "Green",
     "grey": "Gray",
     "purple": "Purple",
-    "black": "Black",
-    "availableIn": "Available in {number} colors"
+    "black": "Black"
   },
   "category": {
+    "title": "Category",
     "rings": "Rings",
     "bracelets": "Bracelets",
     "necklaces": "Necklaces",
@@ -73,6 +75,9 @@
   },
   "size": {
     "title": "Size"
+  },
+  "price": {
+    "title": "Price"
   },
   "collection": {
     "title": "Collection"

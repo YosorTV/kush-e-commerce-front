@@ -32,7 +32,7 @@ export const ProductListController: FC<IProductListController> = ({
 
     const url = updateUrlParams(pathname, params, 'pageSize', String(pageSize));
 
-    router.push(url, { scroll: false });
+    router.replace(url, { scroll: false });
   };
 
   return (

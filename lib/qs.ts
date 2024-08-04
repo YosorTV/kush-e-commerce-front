@@ -23,6 +23,7 @@ export const createQueryString = (baseUrl: string, params?: Params): string => {
       `-${newLocale}`
     );
   }
+
   url.pathname = pathParts.join('/');
 
   if (params) {
@@ -34,20 +35,6 @@ export const createQueryString = (baseUrl: string, params?: Params): string => {
   }
 
   return url.toString();
-};
-
-export const getUrlParams = ({
-  searchParams,
-}: {
-  searchParams: URLSearchParams;
-}) => {
-  const params: Record<string, string | null> = {};
-
-  searchParams.forEach((value, key) => {
-    params[key] = value || null;
-  });
-
-  return params;
 };
 
 export const updateUrlParams = (

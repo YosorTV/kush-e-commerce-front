@@ -8,24 +8,21 @@ import { cn } from '@/lib';
 import { Product } from '@/types/components';
 import { Link } from '@/lib/navigation';
 import { Price } from '../Price';
+import { getTranslations } from 'next-intl/server';
+import { getCurrency } from '@/services';
 
 type ProductCardProps = {
   product: Product;
   className?: string;
-  hintText?: string;
-  collectionTitle?: string;
-  locale: string;
-  currency: any;
 };
 
-export const ProductCard: FC<ProductCardProps> = ({
+export const ProductCard: FC<ProductCardProps> = async ({
   product,
-  locale,
   className,
-  hintText,
-  collectionTitle,
-  currency,
 }) => {
+  const t = await getTranslations();
+  const currency = await getCurrency();
+
   return (
     <figure
       key={product.id}
@@ -55,24 +52,26 @@ export const ProductCard: FC<ProductCardProps> = ({
                 key={collection.slug}
                 href={`/collection/${collection.slug}`}
               >
-                {collectionTitle} {collection.title}
+                {t('collection.title')} {collection.title}
               </Link>
             ))}
         </div>
         <div className='flex flex-col pt-2'>
           <p
-            className='line-clamp-1 w-1/2 text-base font-medium text-base-200'
+            className='line-clamp-1 w-3/4 text-base font-medium text-base-200'
             title={product.description}
           >
             {product.description}
           </p>
           <div className='flex w-full items-baseline justify-between'>
-            {hintText && <span className='text-sm'>{hintText}</span>}
+            <span className='text-sm'>
+              {t('system.availableIn', { number: product.quantity })}
+            </span>
             <Price
               currency={currency}
               price={product?.price}
               sale={product?.saleValue}
-              locale={locale}
+              locale={product.locale}
             />
           </div>
         </div>

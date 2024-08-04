@@ -3097,6 +3097,11 @@ react-phone-input-2@^2.15.1:
     lodash.startswith "^4.2.1"
     prop-types "^15.7.2"
 
+react-range@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/react-range/-/react-range-1.9.2.tgz#0cef6177a8912bcceff0d28d0274f94752c90e8a"
+  integrity sha512-MS8Pp3YKmn1Kheg7UVHU5ajxnoXnp166M7nmw4cq6ayd7Ee9ENIWkRPjINhHUUfnVme8KpMkJYobDaG9JoinlA==
+
 react-universal-interface@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"

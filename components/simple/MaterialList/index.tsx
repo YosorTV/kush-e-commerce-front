@@ -17,6 +17,9 @@ export const MaterialList = () => {
     { id: `material-${1}`, text: 'gold' },
     { id: `material-${2}`, text: 'silver' },
     { id: `material-${3}`, text: 'platinum' },
+    { id: `material-${4}`, text: 'brass' },
+    { id: `material-${5}`, text: 'palladium' },
+    { id: `material-${6}`, text: 'titanium' },
   ];
 
   const handleMaterialChange = ({ target }: ChangeEvent<HTMLInputElement>) => {

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { MdArrowRightAlt } from 'react-icons/md';
 
-import { Hydrate, StrapiImage } from '@/components/simple';
+import { StrapiImage } from '@/components/simple';
 import { Title, NextLink } from '@/components/elements';
 import { cn } from '@/lib';
 import { Price } from '@/components/simple/Price';
@@ -25,7 +25,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
       className={cn(
-        'card relative w-full overflow-hidden rounded-none border-2 border-transparent',
+        'embla__slide card relative w-full cursor-grab overflow-hidden rounded-none border-2 border-transparent active:cursor-grabbing',
         showOverlay && 'border-white'
       )}
     >
@@ -76,15 +76,13 @@ export const CategoryCard: FC<any> = ({ data }) => {
               {data.description}
             </p>
             <div className='flex w-full items-center justify-between'>
-              <Hydrate>
-                <Price
-                  className='!flex-row font-medium text-base-300'
-                  locale={locale}
-                  price={data?.price}
-                  sale={data?.sale}
-                  currency={41}
-                />
-              </Hydrate>
+              <Price
+                className='!flex-row font-medium text-base-300'
+                locale={locale}
+                price={data?.price}
+                sale={data?.sale}
+                currency={41}
+              />
             </div>
           </div>
         </div>

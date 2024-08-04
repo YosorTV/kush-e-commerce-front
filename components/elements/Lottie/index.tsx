@@ -6,7 +6,7 @@ import { cn } from '@/lib';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { motion } from 'framer-motion';
 
-import { roboto } from '@/assets/fonts';
+import { cormorant } from '@/assets/fonts';
 import { LottieProps } from '@/types/components';
 
 export const Lottie: FC<LottieProps> = ({
@@ -23,7 +23,7 @@ export const Lottie: FC<LottieProps> = ({
       )}
     >
       <motion.h1
-        className={cn('text-2xl underline', roboto.className)}
+        className={cn('text-5xl uppercase', cormorant.className)}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}

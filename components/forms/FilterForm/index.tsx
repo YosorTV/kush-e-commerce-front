@@ -17,37 +17,36 @@ import {
   RangeSlider,
   SizeList,
   SortFields,
-  SubmitButton,
 } from '@/components/simple';
 
 import { SORT_OPTIONS } from '@/helpers/constants';
 
 export const FilterForm = () => {
-  const t = useTranslations();
+  const router = useRouter();
   const locale = useLocale();
   const state = useFilters();
+  const t = useTranslations();
   const pathname = usePathname();
-  const router = useRouter();
 
   const FILTER_OPTIONS = [
     {
       id: 1,
-      title: 'category',
+      title: t('category.title'),
       component: <CategoryList />,
     },
     {
       id: 2,
-      title: 'material',
+      title: t('material.title'),
       component: <MaterialList />,
     },
     {
       id: 3,
-      title: 'size',
+      title: t('size.title'),
       component: <SizeList />,
     },
     {
       id: 4,
-      title: 'price',
+      title: t('price.title'),
       component: <RangeSlider />,
     },
   ];
@@ -63,7 +62,7 @@ export const FilterForm = () => {
       });
 
       state.onToggle();
-      router.replace(`${pathname}?${queryString}`);
+      router.replace(`${pathname}?${queryString}`, { scroll: false });
     },
     [pathname, router, state]
   );
@@ -90,19 +89,22 @@ export const FilterForm = () => {
       <Input name='locale' defaultValue={locale} hidden className='hidden' />
       <SortFields data={SORT_OPTIONS} />
       <Accordion data={FILTER_OPTIONS} />
-      <SubmitButton
-        text={t('filter.submit')}
-        loadingText={t('filter.progress')}
-        className='!bg-base-200 !text-base-100'
-      />
-      <div className='divider px-4' />
-      <Button
-        type='button'
-        className='text-base-200 hover:!bg-base-200 hover:!text-base-100'
-        onClick={handleReset}
-      >
-        {t('filter.reset')}
-      </Button>
+      <div className='my-4 flex w-full flex-col justify-between'>
+        <Button
+          type='submit'
+          className='bg-transparent text-base-200 hover:!bg-base-200 hover:!text-base-100'
+        >
+          {t('filter.submit')}
+        </Button>
+        <div className='divider px-4' />
+        <Button
+          type='button'
+          className='bg-transparent text-base-200 hover:!bg-base-200 hover:!text-base-100'
+          onClick={handleReset}
+        >
+          {t('filter.reset')}
+        </Button>
+      </div>
     </form>
   );
 };

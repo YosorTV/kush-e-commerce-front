@@ -38,7 +38,10 @@ export const CollectionCard: FC<TCollectioCard> = ({
 
   return (
     <motion.figure
-      className={cn(className, 'relative')}
+      className={cn(
+        className,
+        'embla__slide relative cursor-grab active:cursor-grabbing'
+      )}
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
     >

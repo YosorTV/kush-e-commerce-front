@@ -45,7 +45,14 @@ export const productsQuery = ({
   }
 
   if (options.price) {
-    filters.price = { $eq: options.price };
+    const [minPrice, maxPrice] = Array.isArray(options.price)
+      ? options.price
+      : [0, 3000];
+
+    filters.price = {
+      $gte: minPrice,
+      $lte: maxPrice,
+    };
   }
 
   return {

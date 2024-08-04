@@ -1,6 +1,6 @@
 'use client';
 
-import { Children, FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { cn } from '@/lib';
 import { EmblaOptionsType } from 'embla-carousel';
@@ -29,7 +29,6 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   className,
   autoScroll = false,
   autoplay = false,
-  slideClass,
   titleClass = 'text-base-300',
 }) => {
   const plugins = [
@@ -53,19 +52,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
         <CarouselControllers emblaApi={emblaApi} />
       </div>
       <div className='embla__viewport' ref={emblaRef}>
-        <div className='embla__container'>
-          {Children.map(children, (child, index) => (
-            <div
-              className={cn(
-                'embla__slide cursor-grab active:cursor-grabbing',
-                slideClass
-              )}
-              key={index}
-            >
-              {child}
-            </div>
-          ))}
-        </div>
+        <div className='embla__container'>{children}</div>
       </div>
     </div>
   );

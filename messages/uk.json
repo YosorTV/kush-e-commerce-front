@@ -8,7 +8,8 @@
     "explore": "Переглянути",
     "total": "Всього {number}",
     "stepBack": "Повернутись",
-    "look": "Зберіть свій образ"
+    "look": "Зберіть свій образ",
+    "availableIn": "В наявності {number}"
   },
   "cart": {
     "added": "У кошику",
@@ -26,7 +27,8 @@
     "recommended": "Рекомендовані",
     "bestSeller": "Лідер продажу",
     "priceLowToHigh": "Від дешевих до дорогих",
-    "priceHighToLow": "Від дорогих до дешевих"
+    "priceHighToLow": "Від дорогих до дешевих",
+    "emptyList": "Порожній список"
   },
   "filter": {
     "title": "Фільтр/Сортування",
@@ -62,10 +64,10 @@
     "green": "Зелений",
     "grey": "Сірий",
     "purple": "Фіолетовий",
-    "black": "Чорний",
-    "availableIn": "Доступно в {number} кольорах"
+    "black": "Чорний"
   },
   "category": {
+    "title": "Категорія",
     "rings": "Кільця",
     "bracelets": "Браслети",
     "necklaces": "Намиста",
@@ -73,6 +75,9 @@
   },
   "size": {
     "title": "Розмір"
+  },
+  "price": {
+    "title": "Вартість"
   },
   "collection": {
     "title": "Коллекція"

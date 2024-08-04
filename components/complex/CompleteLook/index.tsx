@@ -16,7 +16,6 @@ interface ICompleteLook {
 
 export const CompleteLook: FC<ICompleteLook> = async ({
   locale,
-  currency,
   category,
   className,
 }) => {
@@ -26,17 +25,11 @@ export const CompleteLook: FC<ICompleteLook> = async ({
   const data = completeLookAdapter({ products, category });
 
   const printProduct = (product: Product) => {
-    const hintText = t('color.availableIn', {
-      number: product.colors?.data?.length,
-    });
-
     return (
       <ProductCard
-        currency={currency}
-        locale={locale}
-        hintText={hintText}
         key={product.id}
         product={product}
+        className='embla__slide cursor-grab active:cursor-grabbing'
       />
     );
   };
