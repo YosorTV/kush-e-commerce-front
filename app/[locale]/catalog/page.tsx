@@ -15,7 +15,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return response;
 }
 
-export default async function Catalog({ params }: PageProps) {
+export default async function Catalog({ params, searchParams }: PageProps) {
   const { locale } = params;
 
   const { data } = await getCatalogData({ locale });
@@ -32,7 +32,7 @@ export default async function Catalog({ params }: PageProps) {
           alt={data.cover.alternativeText}
         />
       </div>
-      <StrapiBlockRender data={data.blocks} />
+      <StrapiBlockRender data={data.blocks} {...searchParams} />
     </PageLayout>
   );
 }

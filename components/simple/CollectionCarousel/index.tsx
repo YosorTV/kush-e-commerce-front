@@ -34,7 +34,8 @@ export const CollectionCarousel: FC<PropType> = ({
     <Carousel
       title={title}
       className={className}
-      options={{ slidesToScroll: 'auto', loop: true }}
+      options={{ loop: true }}
+      titleClass='py-3 xs:py-6 text-white'
     >
       {data.map(printCollectionCard)}
     </Carousel>

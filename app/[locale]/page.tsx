@@ -16,14 +16,14 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return response;
 }
 
-export default async function Home({ params }: PageProps) {
+export default async function Home({ params, searchParams }: PageProps) {
   const { locale } = params;
 
   const { data } = await getHomeData({ locale });
 
   return (
     <PageLayout className='mt-16'>
-      <StrapiBlockRender data={data.blocks} />
+      <StrapiBlockRender data={data.blocks} {...searchParams} />
     </PageLayout>
   );
 }

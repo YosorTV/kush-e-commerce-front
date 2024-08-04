@@ -12,7 +12,7 @@ import { LottieProps } from '@/types/components';
 export const Lottie: FC<LottieProps> = ({
   src,
   text,
-  className = 'mt-24',
+  className,
   playerClassName,
 }) => {
   return (

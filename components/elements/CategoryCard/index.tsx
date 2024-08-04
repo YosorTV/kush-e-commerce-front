@@ -10,13 +10,11 @@ import { Hydrate, StrapiImage } from '@/components/simple';
 import { Title, NextLink } from '@/components/elements';
 import { cn } from '@/lib';
 import { Price } from '@/components/simple/Price';
-import { useProducts } from '@/store';
 
 export const CategoryCard: FC<any> = ({ data }) => {
   const locale = useLocale();
 
   const t = useTranslations();
-  const state = useProducts();
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -84,7 +82,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
                   locale={locale}
                   price={data?.price}
                   sale={data?.sale}
-                  currency={state.currency}
+                  currency={41}
                 />
               </Hydrate>
             </div>

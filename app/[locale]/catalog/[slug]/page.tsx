@@ -55,7 +55,7 @@ export default async function ProductDetails({ params }: PageProps) {
   return (
     <PageLayout className='mt-16 min-h-screen'>
       <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
-        <section className='z-10 flex h-full w-full flex-col gap-3 bg-base-100 p-3 xs:gap-6 xs:p-6'>
+        <section className='z-10 flex h-full w-full flex-col gap-3 bg-base-100 p-3 !pb-0 xs:gap-6 xs:p-6'>
           <header className='flex w-full justify-between' role='product-name'>
             <Title
               level='1'
@@ -102,7 +102,6 @@ export default async function ProductDetails({ params }: PageProps) {
           />
         </div>
       </article>
-      <div className='divider mx-6 mb-0 mt-5' />
       <CompleteLook
         locale={locale}
         currency={currency}

@@ -1,12 +1,13 @@
 import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
 import { generateStrapiQuery } from '@/lib';
+import { revalidateTag } from 'next/cache';
 
 export async function getProductsData({
   locale,
   category,
-  page,
-  pageSize,
+  page = 1,
+  pageSize = 4,
   name,
   ...rest
 }: any) {
@@ -21,8 +22,11 @@ export async function getProductsData({
 
   const response = await getStrapiData(
     'products',
-    generateStrapiQuery(productsApi)
+    generateStrapiQuery(productsApi),
+    { next: { tags: ['products'] } }
   );
+
+  revalidateTag('products');
 
   return { ...response };
 }

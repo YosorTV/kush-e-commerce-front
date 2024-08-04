@@ -45,3 +45,15 @@ export const formatBySlug = (data: any[], slug: string) => {
 
   return data.filter((element) => element?.slug === slug);
 };
+
+export const gridCols = (index: number) => {
+  if (index % 5 === 0)
+    return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
+  if (index % 5 === 1)
+    return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
+  if (index % 5 === 2)
+    return 'col-span-1 lg:col-span-2 xl:col-span-1 xxl:col-span-2';
+  if (index % 5 === 3) return 'col-span-1 xl:col-span-3 xxl:col-span-1';
+
+  return 'col-span-1';
+};

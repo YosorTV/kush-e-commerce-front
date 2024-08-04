@@ -44,7 +44,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({
   return (
     <Carousel
       title={t('system.look')}
-      titleClass='text-base-200'
+      titleClass='text-base-200 py-6 xs:py-3'
       className={cn('mx-5 pb-6', className)}
       options={{ loop: true }}
     >

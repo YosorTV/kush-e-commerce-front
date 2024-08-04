@@ -58,5 +58,5 @@ export const Accordion: FC<IAccordion> = ({ data }) => {
     [expandedIndex, handleToggle]
   );
 
-  return <div className='overflow-hidden py-5'>{data.map(printAccordion)}</div>;
+  return <div className='overflow-hidden'>{data.map(printAccordion)}</div>;
 };

@@ -14,13 +14,13 @@ type IIconType = { [key in IRuleCard['icon']]: JSX.Element };
 export const RuleCard: FC<IRuleCard> = ({ icon, title, description }) => {
   const Icon: IIconType = {
     clock: (
-      <FaRegClock className='h-10 w-10 fill-base-200 md:absolute md:top-2 xl:top-4' />
+      <FaRegClock className='h-10 w-10 fill-white md:absolute md:top-2 xl:top-4' />
     ),
     protect: (
-      <IoShieldCheckmarkOutline className='h-10 w-10 stroke-base-200 md:absolute md:top-2 xl:top-4' />
+      <IoShieldCheckmarkOutline className='h-10 w-10 stroke-white md:absolute md:top-2 xl:top-4' />
     ),
     delivery: (
-      <FaShippingFast className='h-10 w-10 fill-base-200 md:absolute md:top-2 xl:top-4' />
+      <FaShippingFast className='h-10 w-10 fill-white md:absolute md:top-2 xl:top-4' />
     ),
   };
 
@@ -31,13 +31,13 @@ export const RuleCard: FC<IRuleCard> = ({ icon, title, description }) => {
         {title && (
           <Title
             level='3'
-            className='!text-lg font-semibold text-base-200 md:text-2xl'
+            className='!text-lg font-semibold text-white md:text-2xl'
           >
             {title}
           </Title>
         )}
         {description && (
-          <p className='hidden w-96 text-sm font-medium text-base-200 xl:flex'>
+          <p className='hidden w-96 text-sm font-medium text-white xl:flex'>
             {description}
           </p>
         )}

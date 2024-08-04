@@ -5,13 +5,11 @@ import { cartSlice } from './cart';
 import { searchSlice } from './search';
 import { filterSlice } from './filters';
 import { activitySlice } from './activity';
-import { productsSlice } from './products';
 import { menuSlice, subMenuSlice } from './menu';
 
 import {
   CartState,
   MenuState,
-  ProductsState,
   TSearchState,
   TFiltersState,
   TSubMenuState,
@@ -36,4 +34,3 @@ export const useActivity = create<TActivityState>()(
 
 export const useMenu = create<MenuState>()(menuSlice);
 export const useSubMenu = create<TSubMenuState>()(subMenuSlice);
-export const useProducts = create<ProductsState>()(productsSlice);
