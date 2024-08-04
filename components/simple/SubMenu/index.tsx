@@ -114,8 +114,8 @@ export const SubMenu: FC<TSubMenu> = ({
               </div>
               <CollectionCarousel
                 data={collections}
-                className='!w-3/4 lg:!w-1/2'
                 slideClass='h-60'
+                fill='fill-base-200'
               />
             </div>
           )}

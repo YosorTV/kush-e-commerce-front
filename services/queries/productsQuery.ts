@@ -23,10 +23,14 @@ export const productsQuery = ({
   }
 
   if (name) {
-    filters.title = { $contains: name.toLowerCase().trim() };
+    filters.$or = [
+      { title: { $containsi: name } },
+      { category: { $containsi: name } },
+      { collections: { title: { $containsi: name } } },
+    ];
   }
 
-  if (category !== '*') {
+  if (category !== '*' && !name) {
     filters.category = { $eq: category };
   }
 
@@ -57,7 +61,6 @@ export const productsQuery = ({
 
   return {
     id,
-    name,
     locale,
     populate: {
       slug: true,

@@ -1,20 +1,18 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
-
-import { MdArrowRightAlt } from 'react-icons/md';
+import { IoNavigateCircleSharp } from 'react-icons/io5';
 
 import { StrapiImage } from '@/components/simple';
 import { Title, NextLink } from '@/components/elements';
 import { cn } from '@/lib';
 import { Price } from '@/components/simple/Price';
 
-export const CategoryCard: FC<any> = ({ data }) => {
-  const locale = useLocale();
-
+export const CategoryCard: FC<any> = ({ data, currency, locale = 'uk' }) => {
   const t = useTranslations();
+
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -25,7 +23,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
       className={cn(
-        'embla__slide card relative w-full cursor-grab overflow-hidden rounded-none border-2 border-transparent active:cursor-grabbing',
+        'embla__slide relative w-full cursor-grab overflow-hidden rounded-none border-2 border-transparent active:cursor-grabbing',
         showOverlay && 'border-white'
       )}
     >
@@ -42,9 +40,8 @@ export const CategoryCard: FC<any> = ({ data }) => {
               className='absolute inset-0 z-10 flex items-center justify-center'
             >
               <div className='pointer-events-none absolute h-full w-full bg-black/50' />
-              <span className='z-10 flex bg-white p-1.5 text-black'>
-                <MdArrowRightAlt className='h-6 w-6' /> {t('system.explore')}
-              </span>
+              <IoNavigateCircleSharp className='z-20 mr-2 h-6 w-6 fill-base-300' />
+              <span className='z-20 text-base-300'>{t('system.explore')}</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -81,7 +78,7 @@ export const CategoryCard: FC<any> = ({ data }) => {
                 locale={locale}
                 price={data?.price}
                 sale={data?.sale}
-                currency={41}
+                currency={currency}
               />
             </div>
           </div>

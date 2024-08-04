@@ -66,7 +66,7 @@ export const ProductList: FC<IProductsList> = async ({
 
       {data.length > 0 ? (
         <div className='grid min-h-96 grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-5'>
-          {data.map(printProduct)}{' '}
+          {data.map(printProduct)}
         </div>
       ) : (
         <Lottie

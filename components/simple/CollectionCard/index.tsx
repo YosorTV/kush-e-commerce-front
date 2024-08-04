@@ -56,15 +56,9 @@ export const CollectionCard: FC<TCollectioCard> = ({
             <div className='pointer-events-none absolute h-full w-full bg-black/50' />
             <NextLink
               href={`/collection/${slug}`}
-              className='z-20 flex items-center gap-x-2.5 p-5 font-semibold text-base-200'
+              className='z-20 flex items-center gap-x-2.5 p-5 font-semibold text-base-300'
             >
-              <IoNavigateCircleSharp
-                style={{
-                  fill: 'white',
-                  width: 24,
-                  height: 24,
-                }}
-              />
+              <IoNavigateCircleSharp className='h-6 w-6 fill-base-300' />
               {hintText}
             </NextLink>
           </motion.div>
@@ -77,7 +71,7 @@ export const CollectionCard: FC<TCollectioCard> = ({
         height={img.formats.medium.height}
         width={img.formats.medium.width}
         loading='lazy'
-        className='h-full w-full object-cover object-center-to-top'
+        className='h-full w-full object-cover'
       />
       <Title level='5' className={cn('text-xl font-medium', textClassName)}>
         {title}

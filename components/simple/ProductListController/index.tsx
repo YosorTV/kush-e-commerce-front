@@ -41,7 +41,7 @@ export const ProductListController: FC<IProductListController> = ({
         {t('total', { number: total })}
       </span>
       <Button className='btn-link' disabled={disabled} onClick={handleMore}>
-        <span>{t('loadMore')}</span>
+        {t('loadMore')}
       </Button>
     </div>
   );

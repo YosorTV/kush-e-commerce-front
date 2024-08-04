@@ -21,7 +21,7 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
           <div className='flex h-full flex-col justify-between lg:flex-col'>
             <div className='flex w-full items-center justify-between gap-y-3 lg:flex-col lg:items-start'>
               <Logo className='relative -left-5' />
-              <div className='col-start-2 flex gap-x-6'>
+              <div className='col-start-2 flex gap-x-6 md:hidden'>
                 <LangChanger className='dropdown-top lg:dropdown-bottom' />
                 <ThemeChanger />
               </div>

@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, ReactNode, useCallback, useEffect } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoClose } from 'react-icons/io5';
 
@@ -11,6 +18,7 @@ import {
   searchVariants,
 } from '@/assets/animations';
 import { useLocale } from 'next-intl';
+
 import { useDebounce } from '@/lib/hooks';
 
 interface TSearchController {
@@ -21,15 +29,22 @@ interface TSearchController {
 
 export const SearchController: FC<TSearchController> = ({
   onClose,
-  placeholder = 'Search',
   children,
+  placeholder = 'Search',
 }) => {
   const state = useSearch();
+
   const locale = useLocale();
+
   const name = useDebounce(state.searchValue, 500);
 
   const getProducts = useCallback(() => {
-    state.fetchProducts({ locale, name, page: `${state.meta.page}` });
+    state.fetchProducts({
+      name,
+      locale,
+      page: '1',
+      pageSize: '4',
+    });
   }, [state, locale, name]);
 
   const handleSearch = useCallback(
@@ -39,11 +54,33 @@ export const SearchController: FC<TSearchController> = ({
     [state]
   );
 
-  useEffect(() => {
-    getProducts();
+  const handleMore = useCallback(
+    (perPage = 8) => {
+      state.fetchProducts({
+        name,
+        locale,
+        page: '1',
+        pageSize: String(perPage),
+      });
+    },
+    [state]
+  );
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name, locale, state.meta.page]);
+  useEffect(() => {
+    if (state.isOpen) {
+      getProducts();
+    }
+  }, [name, locale, state.isOpen]);
+
+  const cta = useMemo(() => {
+    return {
+      title: locale === 'uk' ? 'Показати ще' : 'Load more',
+      total: locale === 'uk' ? 'Всього' : 'Total',
+    };
+  }, [locale]);
+
+  const isLastPage =
+    state.meta.page === state.meta.pageCount || !state.searchResult.length;
 
   return (
     <AnimatePresence mode='wait'>
@@ -93,6 +130,20 @@ export const SearchController: FC<TSearchController> = ({
               variants={childrenVariants}
             >
               {children}
+              {state.meta.total > 0 && (
+                <div className='flex flex-col items-center justify-center py-6 pb-10 lg:pt-16'>
+                  <span className='text-sm font-medium uppercase text-base-200'>
+                    {cta.total} {state.meta.total}
+                  </span>
+                  <Button
+                    className='btn-link'
+                    disabled={isLastPage}
+                    onClick={() => handleMore(state.meta.pageSize * 2)}
+                  >
+                    {cta.title}
+                  </Button>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         </motion.div>

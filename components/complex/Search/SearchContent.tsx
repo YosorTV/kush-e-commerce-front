@@ -1,6 +1,7 @@
 'use client';
 
-import { ProductCard } from '@/components/simple';
+import { SearchCard } from '@/components/simple';
+import { gridCols } from '@/helpers/formatters';
 
 import { useSearch } from '@/store';
 import { Product } from '@/types/components';
@@ -8,9 +9,13 @@ import { Product } from '@/types/components';
 export const SearchContent = () => {
   const state = useSearch();
 
-  const printProducts = (product: Product) => {
+  const printProducts = (product: Product, index: number) => {
     return (
-      <ProductCard key={product.id} product={product} className='col-span-1' />
+      <SearchCard
+        key={product.id}
+        product={product}
+        className={gridCols(index)}
+      />
     );
   };
 

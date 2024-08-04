@@ -1,23 +1,28 @@
 'use client';
 
-import { FC } from 'react';
-import { Button } from '../Button';
+import { FC, useCallback } from 'react';
 import { RxDividerVertical } from 'react-icons/rx';
+import { EmblaCarouselType } from 'embla-carousel';
 import {
   LiaLongArrowAltLeftSolid,
   LiaLongArrowAltRightSolid,
 } from 'react-icons/lia';
-import { usePrevNextButtons, useScreen } from '@/lib/hooks';
-import { EmblaCarouselType } from 'embla-carousel';
 
+import { usePrevNextButtons, useScreen } from '@/lib/hooks';
+import { Button } from '../Button';
+import { cn } from '@/lib';
 interface ICarouseControllers {
   emblaApi: EmblaCarouselType;
+  autoplay?: boolean;
+  fill?: string;
 }
 
-export const CarouselControllers: FC<ICarouseControllers> = ({ emblaApi }) => {
+export const CarouselControllers: FC<ICarouseControllers> = ({
+  emblaApi,
+  autoplay = false,
+  fill = 'fill-base-200',
+}) => {
   const { lg } = useScreen();
-
-  const size = lg ? 28 : 24;
 
   const {
     prevBtnDisabled,
@@ -26,20 +31,25 @@ export const CarouselControllers: FC<ICarouseControllers> = ({ emblaApi }) => {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
 
-  // const handleButtonAutoplayClick = useCallback(
-  //   (callback: () => void) => {
-  //     const autoScroll = emblaApi?.plugins()?.autoScroll;
+  const handleButtonAutoplayClick = useCallback(
+    (callback: () => void) => {
+      const autoScroll = emblaApi?.plugins()?.autoScroll;
 
-  //     const resetOrStop =
-  //       autoScroll.options.stopOnInteraction === false
-  //         ? autoScroll.reset
-  //         : autoScroll.stop;
+      if (autoplay) {
+        const resetOrStop =
+          autoScroll.options.stopOnInteraction === false
+            ? autoScroll.reset
+            : autoScroll.stop;
+        resetOrStop();
+        callback();
+      } else {
+        callback();
+      }
+    },
+    [emblaApi]
+  );
 
-  //     resetOrStop();
-  //     callback();
-  //   },
-  //   [emblaApi]
-  // );
+  const size = lg ? 28 : 24;
 
   return (
     <div className='embla__controls'>
@@ -47,30 +57,26 @@ export const CarouselControllers: FC<ICarouseControllers> = ({ emblaApi }) => {
         <Button
           className='embla__button embla__button--prev'
           type='button'
-          onClick={onPrevButtonClick}
+          onClick={() => handleButtonAutoplayClick(onPrevButtonClick)}
           disabled={prevBtnDisabled}
         >
           <LiaLongArrowAltLeftSolid
-            className='fill-base-300'
+            className={fill}
             style={{ width: size, height: size }}
           />
         </Button>
         <RxDividerVertical
-          style={{
-            height: size,
-            width: size,
-            color: 'white',
-            transform: 'rotate(45deg)',
-          }}
+          className={cn('rotate-45', fill === 'fill-white' && 'text-white')}
+          style={{ height: size, width: size }}
         />
         <Button
           className='embla__button embla__button--next'
           type='button'
-          onClick={onNextButtonClick}
+          onClick={() => handleButtonAutoplayClick(onNextButtonClick)}
           disabled={nextBtnDisabled}
         >
           <LiaLongArrowAltRightSolid
-            className='fill-base-300'
+            className={fill}
             style={{ width: size, height: size }}
           />
         </Button>

@@ -48,7 +48,7 @@ export const RangeSlider = () => {
             className='relative h-2 w-full rounded-3xl bg-gray-500'
           >
             <div
-              className='absolute h-2 bg-base-200'
+              className='absolute h-2 bg-base-300'
               style={{
                 left: `${(state.options.price[0] / 3000) * 100}%`,
                 width: `${((state.options.price[1] - state.options.price[0]) / 3000) * 100}%`,
