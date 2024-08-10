@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { CollectionCard } from '../CollectionCard';
 import Carousel from '@/components/elements/Carousel';
+import { cn } from '@/lib';
 
 type PropType = {
   data: any[];
@@ -9,13 +10,15 @@ type PropType = {
   slideClass?: string;
   className?: string;
   fill?: string;
+  titleClass?: string;
 };
 
 export const CollectionCarousel: FC<PropType> = ({
   data,
   title,
-  className = 'slides-2 w-full',
-  slideClass = 'h-[420px]',
+  titleClass,
+  className = 'w-full',
+  slideClass = 'h-96',
   fill = 'fill-white',
 }) => {
   const printCollectionCard = ({ cover, slug, title, hintText }: any) => {
@@ -37,7 +40,7 @@ export const CollectionCarousel: FC<PropType> = ({
       title={title}
       className={className}
       options={{ loop: true }}
-      titleClass='py-3 xs:py-6 text-white'
+      titleClass={cn('text-base-200', titleClass)}
       fill={fill}
     >
       {data.map(printCollectionCard)}

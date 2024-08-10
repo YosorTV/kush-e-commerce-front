@@ -23,14 +23,7 @@ type TCollectioCard = {
   };
 };
 
-export const CollectionCard: FC<TCollectioCard> = ({
-  img,
-  className,
-  textClassName = 'text-base-200',
-  title,
-  hintText = 'Explore now',
-  slug,
-}) => {
+export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hintText = 'Explore now', slug }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -42,37 +35,37 @@ export const CollectionCard: FC<TCollectioCard> = ({
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
     >
-      <AnimatePresence mode='sync'>
-        {showOverlay && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className='absolute inset-0 z-10 flex items-center justify-center'
-          >
-            <div className='pointer-events-none absolute h-full w-full bg-black/50' />
-            <NextLink
-              href={`/collection/${slug}`}
-              className='z-20 flex items-center gap-x-2.5 p-5 font-semibold text-base-300'
+      <NextLink
+        href={`/collection/${slug}`}
+        className='z-20 flex flex-col items-center gap-x-2.5 font-semibold text-base-300'
+      >
+        <AnimatePresence mode='sync'>
+          {showOverlay && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className='absolute inset-0 z-10 flex items-center justify-center border-2 border-white'
             >
-              <IoNavigateCircleSharp className='h-6 w-6 fill-base-300' />
+              <IoNavigateCircleSharp className='mr-2.5 h-6 w-6 fill-base-300' />
               {hintText}
-            </NextLink>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <StrapiImage
-        src={img.url}
-        alt={img?.alternativeText}
-        formats={img.formats}
-        height={img.formats.medium.height}
-        width={img.formats.medium.width}
-        loading='lazy'
-        className='h-full w-full object-cover'
-      />
-      <Title level='5' className={cn('text-xl font-medium', textClassName)}>
-        {title}
-      </Title>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <StrapiImage
+          overlay
+          src={img.url}
+          alt={img?.alternativeText}
+          formats={img.formats}
+          height={img.formats.medium.height}
+          width={img.formats.medium.width}
+          loading='lazy'
+          className='aspect-square h-full w-full object-cover'
+        />
+        <Title level='4' variant='subheading' className='absolute bottom-3 !text-2xl lg:bottom-1'>
+          {title}
+        </Title>
+      </NextLink>
     </motion.figure>
   );
 };

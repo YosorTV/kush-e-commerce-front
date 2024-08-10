@@ -70,17 +70,11 @@ export const DEFAULT_LOCALE = 'uk';
 export const LOCALES = ['uk', 'en'] as const;
 export const LOCALES_PREFIX = 'always';
 
-export const CATEGORY_FIELDS = ['title', 'slug'];
+export const CATEGORY_FIELDS = ['title', 'slug', 'hintText'];
 export const IMAGE_FIELDS = ['url', 'alternativeText', 'formats'];
 export const PROFILE_FIELDS = ['general', 'additional', 'actions', 'avatar'];
 
-export const AUTH_FORGOT_FIELDS = [
-  'formFields',
-  'submitBtn',
-  'title',
-  'loginUrl',
-  'cover',
-];
+export const AUTH_FORGOT_FIELDS = ['formFields', 'submitBtn', 'title', 'loginUrl', 'cover'];
 
 export const AUTH_SUCCESS_FIELDS = {
   title: true,
@@ -108,12 +102,7 @@ export const AUTH_LOGIN_FIELDS = {
   },
 };
 
-export const META_FIELDS = [
-  'metaTitle',
-  'metaDescription',
-  'metaRobots',
-  'keywords',
-];
+export const META_FIELDS = ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'];
 
 export const ROOT = '/';
 export const PRIVATE_ROUTES = ['/profile', '/orders'];

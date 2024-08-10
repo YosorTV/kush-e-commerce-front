@@ -1,15 +1,8 @@
-export const formatPrice = (
-  amount: number,
-  locale: string,
-  currency: number
-) => {
-  let formattedAmount = new Intl.NumberFormat(
-    locale === 'uk' ? 'uk-UA' : 'en-US',
-    {
-      style: 'currency',
-      currency: locale === 'uk' ? 'UAH' : 'USD',
-    }
-  ).format(locale === 'uk' ? Number(currency) * amount : amount);
+export const formatPrice = (amount: number, locale: string, currency: number) => {
+  let formattedAmount = new Intl.NumberFormat(locale === 'uk' ? 'uk-UA' : 'en-US', {
+    style: 'currency',
+    currency: locale === 'uk' ? 'UAH' : 'USD',
+  }).format(locale === 'uk' ? Number(currency) * amount : amount);
 
   if (locale === 'uk') {
     formattedAmount = formattedAmount.replace('грн', '₴');
@@ -47,13 +40,10 @@ export const formatBySlug = (data: any[], slug: string) => {
 };
 
 export const gridCols = (index: number) => {
-  if (index % 5 === 0)
-    return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
-  if (index % 5 === 1)
-    return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
-  if (index % 5 === 2)
-    return 'col-span-1 lg:col-span-2 xl:col-span-1 xxl:col-span-2';
-  if (index % 5 === 3) return 'col-span-1 xl:col-span-3 xxl:col-span-1';
+  if (index % 5 === 0) return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
+  if (index % 5 === 1) return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
+  if (index % 5 === 2) return 'col-span-1 lg:col-span-2 xl:col-span-1 xxl:col-span-2';
+  if (index % 5 === 3) return 'col-span-1 xl:col-span-2 xxl:col-span-1';
 
   return 'col-span-1';
 };

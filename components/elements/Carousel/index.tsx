@@ -43,12 +43,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
 
   return (
     <div className={cn('embla', className)}>
-      <div
-        className={cn(
-          'flex w-full items-baseline',
-          title ? 'justify-between' : 'justify-end'
-        )}
-      >
+      <div className={cn('flex w-full items-baseline pt-2.5', title ? 'justify-between' : 'justify-end')}>
         {title && <CarouselTitle title={title} className={titleClass} />}
         <CarouselControllers emblaApi={emblaApi} fill={fill} />
       </div>

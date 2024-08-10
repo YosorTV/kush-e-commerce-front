@@ -8,7 +8,7 @@ import { FC, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CollectionCarousel } from '../CollectionCarousel';
 import { MenuItem } from '../Menu/MenuItem';
-import { CategoryLinkType, CollectionLinkType } from '@/types/components';
+import { CategoryLinkType } from '@/types/components';
 import { usePathname } from '@/lib/navigation';
 
 type TSubMenu = {
@@ -63,13 +63,7 @@ export const SubMenu: FC<TSubMenu> = ({
         >
           <div>
             {categoryTitle && (
-              <Title
-                level='5'
-                className={cn(
-                  'text-xl uppercase text-base-200',
-                  cormorant.className
-                )}
-              >
+              <Title level='5' className={cn('text-xl uppercase text-base-200', cormorant.className)}>
                 {categoryTitle}
               </Title>
             )}
@@ -89,32 +83,13 @@ export const SubMenu: FC<TSubMenu> = ({
             )}
           </div>
           {collections && collections.length > 0 && (
-            <div className='flex w-full justify-between gap-x-6 pb-6'>
-              <div>
-                <Title
-                  level='5'
-                  className={cn(
-                    'text-xl uppercase text-base-200',
-                    cormorant.className
-                  )}
-                >
-                  {collectionTitle}
-                </Title>
-                <ul className='flex flex-col gap-y-4 py-4 uppercase text-base-200'>
-                  {collections.map((item: CollectionLinkType) => (
-                    <MenuItem
-                      id={item.id}
-                      key={item.id}
-                      text={item.title}
-                      url={`/collection/${item.slug}`}
-                      isExternal={false}
-                    />
-                  ))}
-                </ul>
-              </div>
+            <div className='relative bottom-8 flex w-full justify-between gap-x-6'>
               <CollectionCarousel
+                title={collectionTitle}
+                titleClass='!text-xl mb-2'
                 data={collections}
-                slideClass='h-60'
+                slideClass='h-60 p-0'
+                className='ml-auto w-10/12'
                 fill='fill-base-200'
               />
             </div>

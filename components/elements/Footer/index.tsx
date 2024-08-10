@@ -2,12 +2,7 @@ import { FC } from 'react';
 import { Title } from '../Title';
 import { cn } from '@/lib';
 import { cormorant } from '@/assets/fonts';
-import {
-  LangChanger,
-  ListOfPages,
-  SocialLink,
-  ThemeChanger,
-} from '@/components/simple';
+import { LangChanger, ListOfPages, SocialLink, ThemeChanger } from '@/components/simple';
 import { NextLink } from '../Link';
 import { Logo } from '../Logo';
 import { SubscribeForm } from '@/components/forms/SubscribeForm';
@@ -27,11 +22,7 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
               </div>
             </div>
             <div className='divider lg:hidden' />
-            <SubscribeForm
-              className='w-full'
-              formField={data.formField}
-              locale={locale}
-            />
+            <SubscribeForm className='w-full' formField={data.formField} locale={locale} />
             <div className='divider lg:hidden' />
           </div>
         </div>
@@ -48,21 +39,14 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
         </nav>
         <nav>
           <address className='flex flex-col not-italic'>
-            <Title
-              level='6'
-              className={cn('footer-title', cormorant.className)}
-            >
+            <Title level='6' className={cn('footer-title', cormorant.className)}>
               {data.contactGroupTitle}
             </Title>
             <ul className='flex flex-wrap items-center gap-x-6 lg:flex-col lg:flex-nowrap lg:items-start'>
               <li className='py-2.5'>
-                <NextLink href={`tel:${data.primaryPhone}`}>
-                  {data.primaryPhone}
-                </NextLink>
+                <NextLink href={`tel:${data.primaryPhone}`}>{data.primaryPhone}</NextLink>
               </li>
-              <NextLink href={`tel:${data.secondaryPhone}`}>
-                {data.primaryPhone}
-              </NextLink>
+              <NextLink href={`tel:${data.secondaryPhone}`}>{data.primaryPhone}</NextLink>
               <li className='break-words py-2.5 lg:max-w-56'>
                 <span>{data.address}</span>
               </li>
@@ -76,12 +60,7 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
           <ul className='flex gap-x-6'>
             {data.socialLinks.map((link: any) => (
               <li key={link.id} className='py-2.5'>
-                <SocialLink
-                  id={link.id}
-                  format={link.format}
-                  url={link.url}
-                  isExternal={link.isExternal}
-                />
+                <SocialLink id={link.id} format={link.format} url={link.url} isExternal={link.isExternal} />
               </li>
             ))}
           </ul>

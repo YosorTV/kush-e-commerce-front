@@ -29,7 +29,7 @@ export const CategoryCard: FC<any> = ({ data, currency, locale = 'uk' }) => {
     >
       <NextLink
         href={`/catalog/${data.slug}`}
-        className='z-20 flex items-center gap-x-2.5 bg-white p-2.5 font-semibold text-black'
+        className='relative z-20 flex items-center gap-x-2.5 bg-white font-semibold text-black'
       >
         <AnimatePresence mode='sync'>
           {showOverlay && (
@@ -39,27 +39,25 @@ export const CategoryCard: FC<any> = ({ data, currency, locale = 'uk' }) => {
               exit={{ opacity: 0 }}
               className='absolute inset-0 z-10 flex items-center justify-center'
             >
-              <div className='pointer-events-none absolute h-full w-full bg-black/50' />
               <IoNavigateCircleSharp className='z-20 mr-2 h-6 w-6 fill-base-300' />
               <span className='z-20 text-base-300'>{t('system.explore')}</span>
             </motion.div>
           )}
         </AnimatePresence>
-        <div className='h-[420px] w-full lg:h-[512px]'>
+        <div className='h-96 w-full lg:h-[512px]'>
           <StrapiImage
             fill
+            loading='lazy'
+            overlay={showOverlay}
             formats={data?.images?.data?.[0]?.formats}
             src={data?.images?.data?.[0]?.url}
             alt={data?.images?.data?.[0]?.alternativeText}
-            className='h-full w-full object-cover'
+            className='aspect-square h-full w-full object-cover'
           />
         </div>
         <div className='group absolute bottom-0 left-0 z-10 w-full bg-black/50 p-5'>
           <div className='flex flex-1 justify-between pt-2'>
-            <Title
-              level='3'
-              className='text-lg font-medium uppercase text-white'
-            >
+            <Title level='3' className='text-lg font-medium uppercase text-white'>
               {data.title}
             </Title>
           </div>

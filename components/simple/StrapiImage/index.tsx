@@ -18,7 +18,7 @@ export function StrapiImage({
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
   return (
-    <div className='relative h-full w-full'>
+    <div className='relative h-full w-full transition-all duration-300 ease-linear'>
       {fill ? (
         <Image
           id={id}
@@ -44,7 +44,9 @@ export function StrapiImage({
           className={className}
         />
       )}
-      {overlay && <div className='pointer-events-none absolute inset-0 z-0 bg-black/50' />}
+      {overlay && (
+        <div className='pointer-events-none absolute inset-0 z-0 bg-black/50 transition-all duration-300 ease-linear' />
+      )}
     </div>
   );
 }

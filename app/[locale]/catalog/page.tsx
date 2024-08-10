@@ -22,7 +22,7 @@ export default async function Catalog({ params, searchParams }: PageProps) {
 
   return (
     <PageLayout className='mt-16'>
-      <div className='relative flex h-96 w-full overflow-hidden md:h-md lg:h-lg'>
+      <div className='h-112 relative flex w-full overflow-hidden md:h-2md'>
         <StrapiImage
           fill
           priority
@@ -30,6 +30,7 @@ export default async function Catalog({ params, searchParams }: PageProps) {
           formats={data.cover.formats}
           src={data.cover.url}
           alt={data.cover.alternativeText}
+          overlay
         />
       </div>
       <StrapiBlockRender data={data.blocks} {...searchParams} />

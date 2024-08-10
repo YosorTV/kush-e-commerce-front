@@ -29,32 +29,21 @@ type ListOFPagesProps = {
   linkStyle?: string;
 };
 
-export const ListOfPages: FC<ListOFPagesProps> = ({
-  pages,
-  className,
-  categories,
-  collections,
-  linkStyle,
-}) => {
+export const ListOfPages: FC<ListOFPagesProps> = ({ pages, className, categories, collections, linkStyle }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const state = useFilters();
   const pathname = usePathname();
 
   const handleShowSubMenu = (index: number) => {
-    return !state.isOpen && index <= 1
-      ? setShowOverlay(true)
-      : setShowOverlay(false);
+    return !state.isOpen && index <= 1 ? setShowOverlay(true) : setShowOverlay(false);
   };
 
   const printLinks = (data: StrapiLinkType[]) => {
     return data.map((page, index) => {
       const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
 
-      const isActive =
-        urlObj.pathname === ROOT
-          ? pathname === urlObj.pathname
-          : pathname.startsWith(urlObj.pathname);
+      const isActive = urlObj.pathname === ROOT ? pathname === urlObj.pathname : pathname.startsWith(urlObj.pathname);
 
       return (
         <motion.li
