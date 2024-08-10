@@ -16,7 +16,7 @@
   }
 
   .image-blur {
-    @apply blur-md filter transition-all duration-500 ease-linear;
+    @apply blur-md filter transition-all duration-300 ease-linear;
   }
 
   .image-loaded {
@@ -25,14 +25,6 @@
 
   .hero-footer {
     @apply absolute bottom-1/2 flex w-full flex-col items-center justify-center;
-  }
-
-  .hero-title {
-    @apply text-3xl font-medium text-base-200 xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl;
-  }
-
-  .hero-sub_title {
-    @apply break-words text-2xl font-medium uppercase text-base-200 xs:text-4xl md:text-4xl lg:text-5xl;
   }
 
   .hero-image {

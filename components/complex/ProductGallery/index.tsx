@@ -1,19 +1,18 @@
+'use client';
+
 import { StrapiImage } from '@/components/simple';
 import { ProductCarousel } from '@/components/simple/ProductCarousel';
 import { getImgGrid } from '@/lib';
+import { useScreen } from '@/lib/hooks';
 
-export const ProductGallery = ({
-  images = [],
-  className,
-}: {
-  images: any[];
-  className?: string;
-}) => {
+export const ProductGallery = ({ images = [], className }: { images: any[]; className?: string }) => {
   const gallery = getImgGrid({ images });
+
+  const { lg } = useScreen();
 
   const printImage = (image: any) => {
     return (
-      <li key={image.id} id={image.id} className='overflow-hidden'>
+      <li key={image.id} id={image.id} className='h-96 overflow-hidden'>
         <StrapiImage
           priority
           src={image.url}
@@ -29,9 +28,7 @@ export const ProductGallery = ({
 
   return (
     <section className={className} aria-label='Product gallery'>
-      <ul className='hidden gap-3 md:grid-cols-1 lg:grid lg:grid-cols-2'>
-        {gallery.map(printImage)}
-      </ul>
+      {lg && <ul className='grid gap-3 lg:grid-cols-1 xl:grid-cols-2'>{gallery.map(printImage)}</ul>}
       <ProductCarousel data={images} options={{ loop: true }} />
     </section>
   );

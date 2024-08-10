@@ -26,3 +26,5 @@ export * from '@/components/simple/SizeList';
 export * from '@/components/simple/PasswordValidation';
 export * from '@/components/simple/CategoryList';
 export * from '@/components/simple/SearchCard';
+export * from '@/components/simple/StrapiBlockRender';
+export * from '@/components/simple/StrapiContentBlock';

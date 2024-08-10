@@ -12,35 +12,20 @@ interface IRuleCard {
 type IIconType = { [key in IRuleCard['icon']]: JSX.Element };
 
 export const RuleCard: FC<IRuleCard> = ({ icon, title, description }) => {
+  const iconClasses = 'absolute top-0 h-6 w-6 md:h-8 md:w-8 stroke-white fill-white xl:top-1/4';
+
   const Icon: IIconType = {
-    clock: (
-      <FaRegClock className='h-10 w-10 fill-white md:absolute md:top-2 xl:top-4' />
-    ),
-    protect: (
-      <IoShieldCheckmarkOutline className='h-10 w-10 stroke-white md:absolute md:top-2 xl:top-4' />
-    ),
-    delivery: (
-      <FaShippingFast className='h-10 w-10 fill-white md:absolute md:top-2 xl:top-4' />
-    ),
+    clock: <FaRegClock className={iconClasses} />,
+    protect: <IoShieldCheckmarkOutline className={iconClasses} />,
+    delivery: <FaShippingFast className={iconClasses} />,
   };
 
   return (
-    <figure className='relative flex w-full items-center md:items-start'>
+    <figure className='relative flex w-full  items-center md:items-start'>
       {Icon[icon]}
-      <figcaption className='ml-8 flex w-3/4 flex-col md:ml-16 md:w-full md:gap-y-2.5'>
-        {title && (
-          <Title
-            level='3'
-            className='!text-lg font-semibold text-white md:text-2xl'
-          >
-            {title}
-          </Title>
-        )}
-        {description && (
-          <p className='hidden w-96 text-sm font-medium text-white xl:flex'>
-            {description}
-          </p>
-        )}
+      <figcaption className='mx-4 flex w-full flex-col md:ml-16 md:gap-y-2.5'>
+        {title && <Title level='5'>{title}</Title>}
+        {description && <p className='hidden w-96 text-sm font-medium text-white xl:flex'>{description}</p>}
       </figcaption>
     </figure>
   );

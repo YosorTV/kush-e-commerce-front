@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -9,12 +10,12 @@ module.exports = {
       padding: '1.5rem',
     },
     screens: {
-      xs: '360px',
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      xxl: '1536px',
+      xs: '475px', // extra small screen
+      sm: '640px', // small screen
+      md: '768px', // medium screen
+      lg: '1024px', // large screen
+      xl: '1280px', // extra large screen
+      '2xl': '1536px', // 2X extra large screen
     },
     minWidth: {
       btn: 240,
@@ -28,6 +29,7 @@ module.exports = {
         lg: '80vh',
         '2md': '70vh',
         md: '50vh',
+        sm: '25vh',
       },
       screens: {
         xs: '475px', // extra small screen
@@ -63,12 +65,11 @@ module.exports = {
         'center-to-top': '0 75%',
       },
       boxShadow: {
-        'to-top':
-          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 -4px 50px -2px rgb(0 0 0 / 0.1)',
+        'to-top': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 -4px 50px -2px rgb(0 0 0 / 0.1)',
       },
       gridTemplateColumns: {
         hero: 'auto 1fr',
-        fluid: 'repeat(auto-fit, minmax(10rem, 1fr))',
+        fluid: 'repeat(auto-fit, minmax(15rem, 1fr))',
       },
     },
   },

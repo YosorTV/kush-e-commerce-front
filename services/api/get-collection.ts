@@ -1,15 +1,12 @@
+import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
-import { generateStrapiQuery } from '@/lib';
 import { ISlugQuery } from '@/types/services/quries';
 
-export async function getProductData({ locale, slug }: ISlugQuery) {
-  const productApi = STRAPI_QUERIES.PRODUCT({ locale, slug });
+export async function getCollectionData({ locale, slug }: ISlugQuery) {
+  const collectionApi = STRAPI_QUERIES.COLLECTION({ locale, slug });
 
-  const response = await getStrapiData(
-    'products',
-    generateStrapiQuery(productApi)
-  );
+  const response = await getStrapiData('collections', generateStrapiQuery(collectionApi));
 
   if (response?.data && response?.data?.length > 0) {
     return { data: { ...response.data[0] } };
@@ -18,13 +15,10 @@ export async function getProductData({ locale, slug }: ISlugQuery) {
   return { data: null };
 }
 
-export async function getProductMeta({ locale, slug }: any) {
-  const productMetaApi = STRAPI_QUERIES.META_PRODUCT({ locale, slug });
+export async function getCollectionMeta({ locale, slug }: any) {
+  const collectionMetaApi = STRAPI_QUERIES.META_COLLECTION({ locale, slug });
 
-  const { data } = await getStrapiData(
-    'products',
-    generateStrapiQuery(productMetaApi)
-  );
+  const { data } = await getStrapiData('collections', generateStrapiQuery(collectionMetaApi));
 
   return {
     title: {

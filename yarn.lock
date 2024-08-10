@@ -430,6 +430,11 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.9.0.tgz#6a3b23e6702de1480557f75b7f450d1d0f496519"
   integrity sha512-AAWymnpvHbGty1BmgbdfbqQDboXs6xN6h2yAacO4yKVyyUUBnpYkp+P9jjPrV9zrAGw7JVVriRtGOHPInnfjZQ==
 
+"@strapi/blocks-react-renderer@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@strapi/blocks-react-renderer/-/blocks-react-renderer-1.0.1.tgz#51b17b094203c5d820bba2a330b32a8d5f80de2f"
+  integrity sha512-oHQNYstM/361oJIKrj6wDFZhDWHg8M8sF7SszqWr8zH2EaoL36ccLq7F2XFWShYQshuKgY+V6axurDaxWo4jQA==
+
 "@stripe/react-stripe-js@^2.7.1":
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-2.7.1.tgz#2be66166318fcb898c67a19e5b342364a2714d57"
@@ -3002,10 +3007,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-tailwindcss@^0.5.13:
-  version "0.5.13"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.5.13.tgz#ee3c1e07848c90abdd1edde36a09366327e31e26"
-  integrity sha512-2tPWHCFNC+WRjAC4SIWQNSOdcL1NNkydXim8w7TDqlZi+/ulZYz2OouAI6qMtkggnPt7lGamboj6LcTMwcCvoQ==
+prettier-plugin-tailwindcss@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.6.6.tgz#93e524d3c30f3fb45dc9e99de985b2a584ff063f"
+  integrity sha512-OPva5S7WAsPLEsOuOWXATi13QrCKACCiIonFgIR6V4lYv4QLp++UXVhZSzRbZxXGimkQtQT86CC6fQqTOybGng==
 
 prettier@^3.2.5:
   version "3.2.5"
@@ -3553,6 +3558,11 @@ synckit@^0.8.6:
     "@pkgr/core" "^0.1.0"
     tslib "^2.6.2"
 
+tailwind-merge@^2.2.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-2.4.0.tgz#1345209dc1f484f15159c9180610130587703042"
+  integrity sha512-49AwoOQNKdqKPd9CViyH5wJoSKsCDjUlzL8DxuGp3P1FsGY36NJDAa18jLZcaHAUUuTj+JB8IAo8zWgBNvBF7A==
+
 tailwind-merge@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-2.2.2.tgz#87341e7604f0e20499939e152cd2841f41f7a3df"
@@ -3564,6 +3574,13 @@ tailwind-scrollbar@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/tailwind-scrollbar/-/tailwind-scrollbar-3.1.0.tgz#ff7596407b6da5209261d8ff03860ab9206a59e3"
   integrity sha512-pmrtDIZeHyu2idTejfV59SbaJyvp1VRjYxAjZBH0jnyrPRo6HL1kD5Glz8VPagasqr6oAx6M05+Tuw429Z8jxg==
+
+tailwind-variants@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tailwind-variants/-/tailwind-variants-0.2.1.tgz#132f2537b0150819036f6c4f47d5c50b929b758d"
+  integrity sha512-2xmhAf4UIc3PijOUcJPA1LP4AbxhpcHuHM2C26xM0k81r0maAO6uoUSHl3APmvHZcY5cZCY/bYuJdfFa4eGoaw==
+  dependencies:
+    tailwind-merge "^2.2.0"
 
 tailwindcss@^3.3.0:
   version "3.4.3"

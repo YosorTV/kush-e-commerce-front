@@ -1,15 +1,12 @@
-import { cormorant } from '@/assets/fonts';
-
-import { NextLink, Title } from '@/components/elements';
-import { StrapiImage } from '@/components/simple';
-import { cn } from '@/lib';
 import { FC } from 'react';
+import { StrapiImage } from '@/components/simple';
+import { NextLink, Title } from '@/components/elements';
 
 export const HeroSection: FC<any> = ({ data }) => {
   return (
     <section className='relative flex flex-col'>
       <div className='relative flex justify-center py-5'>
-        <Title level='1' className={cn('hero-title', cormorant.className)}>
+        <Title level='1' variant='heading'>
           {data?.title}
         </Title>
       </div>
@@ -22,18 +19,12 @@ export const HeroSection: FC<any> = ({ data }) => {
           src={data?.image?.url}
           alt={data?.image?.alternativeText}
         />
-        <NextLink
-          href={data.link.url}
-          className='absolute-x-center link-hover link bottom-10 z-10 underline-offset-8'
-        >
+        <NextLink href={data.link.url} className='absolute-x-center link-hover link bottom-10 z-10 underline-offset-8'>
           {data?.link?.text}
         </NextLink>
       </div>
       <div className='relative px-2.5 py-5  text-center leading-tight md:py-10'>
-        <Title
-          level='3'
-          className={cn('hero-sub_title uppercase ', cormorant.className)}
-        >
+        <Title level='3' variant='subheading'>
           {data.description}
         </Title>
       </div>

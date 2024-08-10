@@ -8,12 +8,7 @@ import { DeliveryBlock } from '@/components/simple/DeliveryBlock';
 import { Price } from '@/components/simple/Price';
 import { StepBack } from '@/components/simple/StepBack';
 
-import {
-  getCurrency,
-  getProductData,
-  getProductMeta,
-  getSizesData,
-} from '@/services';
+import { getCurrency, getProductData, getProductMeta, getSizesData } from '@/services';
 
 import { PageProps } from '@/types/app/page.types';
 import { CartItemType } from '@/types/store';
@@ -65,17 +60,10 @@ export default async function ProductDetails({ params }: PageProps) {
             >
               {data?.title}
             </Title>
-            <span className='bg-neutral p-2 text-base-300'>
-              {data?.hintText}
-            </span>
+            <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
           <div className='flex items-baseline justify-between'>
-            <Price
-              locale={locale}
-              currency={currency}
-              price={data?.price}
-              sale={data?.saleValue}
-            />
+            <Price locale={locale} currency={currency} price={data?.price} sale={data?.saleValue} />
             <NextLink
               href={`/catalog?categories=${data?.category}`}
               className='capitalize text-base-200 underline underline-offset-8'
@@ -96,18 +84,11 @@ export default async function ProductDetails({ params }: PageProps) {
         </section>
         <div className='relative w-full'>
           <StepBack className='absolute left-6 lg:relative' />
-          <ProductGallery
-            images={data?.images?.data.slice(0, 4)}
-            className='w-full'
-          />
+          <ProductGallery images={data?.images?.data.slice(0, 4)} className='w-full' />
         </div>
       </article>
-      <CompleteLook
-        locale={locale}
-        currency={currency}
-        category={data.category}
-      />
       <DeliveryRules locale={locale} />
+      <CompleteLook locale={locale} currency={currency} category={data.category} />
     </PageLayout>
   );
 }

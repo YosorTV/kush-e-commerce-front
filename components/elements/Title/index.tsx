@@ -1,21 +1,32 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { ITitleProps } from '@/types/components';
+import { cn } from '@/lib';
+import { title } from '@/lib/tailwind/variants';
 
-export const Title: FC<PropsWithChildren<ITitleProps>> = ({
-  level,
-  className,
-  children,
-  ...rest
-}) => {
-  const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
+import { ITitle, ITitleSizes, THeadingTag } from '@/types/components';
+
+export const Title: FC<PropsWithChildren<ITitle>> = ({ level, className, children, variant, size, ...rest }) => {
+  if (!children) return null;
+
+  const HeadingTag = `h${level}` as THeadingTag;
+
+  const levelSize = new Map<string, ITitleSizes>([
+    ['1', '2xl'], // h1
+    ['2', 'xl'], // h2
+    ['3', 'lg'], // h3
+    ['4', 'md'], // h4
+    ['5', 'sm'], // h5
+    ['6', 'xs'], // h6
+  ]);
+
+  const titleAttribute = typeof children === 'string' ? children : undefined;
 
   return (
     <HeadingTag
       id={rest.id}
-      className={className}
-      title={children as string}
-      aria-label={rest['aria-label']}
+      title={titleAttribute}
+      className={cn(title({ size: size || levelSize.get(level), variant }), className)}
+      {...rest}
     >
       {children}
     </HeadingTag>

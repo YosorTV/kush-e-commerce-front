@@ -42,11 +42,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
   const handleHideOverlay = () => setShowOverlay(false);
 
   const getImage = ({ idx = 0 }: { idx: number }) => {
-    return (
-      product?.images &&
-      product?.images.data.length > 0 &&
-      product?.images.data?.[idx]
-    );
+    return product?.images && product?.images.data.length > 0 && product?.images.data?.[idx];
   };
 
   const img1 = getImage({ idx: 0 });
@@ -57,7 +53,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       <motion.div
         onHoverStart={handleShowOverlay}
         onHoverEnd={handleHideOverlay}
-        className={cn('relative h-[400px] shadow-xl')}
+        className={cn('relative h-full min-h-96 shadow-xl')}
       >
         {showOverlay ? (
           <motion.div
@@ -70,12 +66,12 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
           >
             <StrapiImage
               loading='lazy'
-              height={img2?.formats?.medium?.height ?? 500}
-              width={img2?.formats?.medium?.width ?? 500}
+              height={img2?.formats?.large?.height ?? 500}
+              width={img2?.formats?.large?.width ?? 500}
               src={img2?.url}
               alt={img2?.alternativeText}
               formats={img2?.formats}
-              className='h-full w-full object-cover'
+              className='aspect-square h-full w-full object-cover'
             />
           </motion.div>
         ) : (
@@ -90,11 +86,11 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
             <StrapiImage
               loading='lazy'
               formats={img1.formats}
-              height={img1?.formats?.medium?.height ?? 500}
-              width={img1?.formats?.medium?.width ?? 500}
+              height={img1?.formats?.large?.height ?? 500}
+              width={img1?.formats?.large?.width ?? 500}
               src={img1?.url}
               alt={img1?.alternativeText}
-              className='h-full w-full object-cover'
+              className='aspect-square h-full w-full object-cover'
             />
           </motion.div>
         )}

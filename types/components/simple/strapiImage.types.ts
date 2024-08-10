@@ -11,4 +11,5 @@ export interface IStrapiImageProps {
   priority?: boolean;
   formats?: IImageFormats;
   fill?: boolean;
+  overlay?: boolean;
 }

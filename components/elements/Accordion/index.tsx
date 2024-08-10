@@ -23,11 +23,8 @@ export const Accordion: FC<IAccordion> = ({ data }) => {
     (item: TAccordionItem, index: number) => {
       return (
         <div key={index} className='border-b border-base-200 pt-4 first:pt-0'>
-          <div
-            className='flex w-full cursor-pointer justify-between py-2'
-            onClick={() => handleToggle(index)}
-          >
-            <Title level='2' className='text-xl font-semibold text-base-200'>
+          <div className='flex w-full cursor-pointer justify-between py-2' onClick={() => handleToggle(index)}>
+            <Title level='2' size='xl'>
               {item.title}
             </Title>
             <AnimatePresence mode='wait' initial={false}>

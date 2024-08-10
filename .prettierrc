@@ -1,8 +1,13 @@
 {
-  "trailingComma": "es5",
   "semi": true,
   "tabWidth": 2,
   "singleQuote": true,
+  "printWidth": 120,
+  "endOfLine": "auto",
   "jsxSingleQuote": true,
+  "trailingComma": "es5",
+  "tailwindPreserveDuplicates": true,
+  "tailwindConfig": "./tailwind.config.ts",
+  "tailwindFunctions": ["clsx"],
   "plugins": ["prettier-plugin-tailwindcss"]
 }

@@ -38,10 +38,7 @@ export const CollectionCard: FC<TCollectioCard> = ({
 
   return (
     <motion.figure
-      className={cn(
-        className,
-        'embla__slide relative cursor-grab active:cursor-grabbing'
-      )}
+      className={cn(className, 'embla__slide relative cursor-grab active:cursor-grabbing')}
       onHoverStart={handleShowOverlay}
       onHoverEnd={handleHideOverlay}
     >
@@ -65,8 +62,8 @@ export const CollectionCard: FC<TCollectioCard> = ({
         )}
       </AnimatePresence>
       <StrapiImage
-        alt={img.alternativeText}
         src={img.url}
+        alt={img?.alternativeText}
         formats={img.formats}
         height={img.formats.medium.height}
         width={img.formats.medium.width}

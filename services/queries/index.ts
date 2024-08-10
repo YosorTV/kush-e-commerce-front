@@ -1,5 +1,6 @@
 import { authQuery } from './authQuery';
 import { catalogQuery } from './catalogQuery';
+import { collectionMetaQuery, collectionQuery } from './collectionQuery';
 import { deliveryQuery } from './deliveryQuery';
 import { globalQuery } from './globalQuery';
 import { homeQuery } from './homeQuery';
@@ -15,6 +16,8 @@ export const STRAPI_QUERIES = {
   CATALOG: catalogQuery,
   PRODUCTS: productsQuery,
   PRODUCT: productQuery,
+  COLLECTION: collectionQuery,
+  META_COLLECTION: collectionMetaQuery,
   META_PRODUCT: productMetaQuery,
   AUTH: authQuery,
   PROFILE: profileQuery,
