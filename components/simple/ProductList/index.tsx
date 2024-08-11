@@ -49,13 +49,17 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
       )}
 
       {data.length > 0 ? (
-        <div className={cn('grid min-h-96 gap-5', data.length > 3 ? 'grid-cols-fluid' : 'grid-cols-3')}>
+        <div
+          className={cn(
+            'grid min-h-96 gap-5',
+            data.length >= 4 ? 'grid-cols-fluid' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+          )}
+        >
           {data.map(printProduct)}
         </div>
       ) : (
         <Lottie text={t('system.emptyList')} src={lottieAnim} playerClassName='h-96 w-96' />
       )}
-
       <ProductListController
         disabled={isLastPage}
         total={meta.pagination.total}
