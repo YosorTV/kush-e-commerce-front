@@ -12,4 +12,5 @@ export interface IStrapiImageProps {
   formats?: IImageFormats;
   fill?: boolean;
   overlay?: boolean;
+  containerClass?: string;
 }

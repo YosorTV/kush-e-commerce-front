@@ -21,10 +21,14 @@ export const RuleCard: FC<IRuleCard> = ({ icon, title, description }) => {
   };
 
   return (
-    <figure className='relative flex w-full  items-center md:items-start'>
+    <figure className='relative flex w-full items-center md:items-start'>
       {Icon[icon]}
-      <figcaption className='mx-4 flex w-full flex-col md:ml-16 md:gap-y-2.5'>
-        {title && <Title level='5'>{title}</Title>}
+      <figcaption className='mx-10 flex w-full flex-col md:mx-16 md:gap-y-2.5'>
+        {title && (
+          <Title level='4' className='uppercase !text-white'>
+            {title}
+          </Title>
+        )}
         {description && <p className='hidden w-96 text-sm font-medium text-white xl:flex'>{description}</p>}
       </figcaption>
     </figure>

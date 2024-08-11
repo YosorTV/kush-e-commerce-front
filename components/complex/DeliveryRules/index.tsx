@@ -14,6 +14,6 @@ export const DeliveryRules: FC<IDeliveryRules> = async ({ locale = 'uk' }) => {
   );
 
   return (
-    <section className='mt-6 flex flex-col gap-y-6 bg-neutral p-6 md:flex-row'>{data.rules.map(printRule)}</section>
+    <section className='mt-6 flex flex-col gap-y-6 bg-neutral p-6 xl:flex-row'>{data.rules.map(printRule)}</section>
   );
 };

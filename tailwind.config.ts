@@ -70,7 +70,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         hero: 'auto 1fr',
-        fluid: 'repeat(auto-fit, minmax(15rem, 1fr))',
+        fluid: 'repeat(auto-fit, minmax(19rem, 1fr))',
       },
     },
   },

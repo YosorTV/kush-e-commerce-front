@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { useCart } from '@/store';
 import { useTranslations } from 'next-intl';
 import { ProductOption } from '../ProductOption';
+import { cn } from '@/lib';
 
 interface IColorOptions {
   data?: any[];
@@ -32,7 +33,7 @@ export const ColorOptions: FC<IColorOptions> = ({ data, title }) => {
     <div className='flex flex-col gap-y-5'>
       {title && <p className='text-lg font-semibold'>{title}</p>}
       {data.length > 0 && (
-        <div className='flex flex-col gap-5 sm:flex-row'>
+        <div className={cn('flex gap-5 sm:flex-row', data.length >= 4 ? 'flex-col' : 'flex-row')}>
           {data.map(printElement)}
         </div>
       )}

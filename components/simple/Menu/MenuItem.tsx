@@ -12,22 +12,13 @@ import { NextLink } from '@/components/elements';
 
 import { CategoryLinkType } from '@/types/components';
 
-export const MenuItem: FC<CategoryLinkType> = ({
-  text,
-  url,
-  slug,
-  isExternal,
-  className,
-}) => {
+export const MenuItem: FC<CategoryLinkType> = ({ text, url, slug, isExternal, className }) => {
   const pathname = usePathname();
   const params = useSearchParams();
 
   const category = params.get('category');
 
-  const isActive =
-    url === ROOT
-      ? pathname === url
-      : pathname.startsWith(url) || category === slug;
+  const isActive = url === ROOT ? pathname === url : pathname.startsWith(url) || category === slug;
 
   return (
     <li className={cn('group', { active: isActive }, className)}>

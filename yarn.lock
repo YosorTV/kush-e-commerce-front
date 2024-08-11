@@ -3090,6 +3090,11 @@ react-is@^16.13.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-medium-image-zoom@^5.2.8:
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-5.2.8.tgz#20c56d7592f83ea5b67a2c650b4fda040b75cf53"
+  integrity sha512-ivnubZi/2GQcMTneQy5gjLxEQLenKu081844qqZ7/JvLxSh5YPF1TLq7s+5rc54dKa0jjPT8Zm2tiC0Sda6eIA==
+
 react-phone-input-2@^2.15.1:
   version "2.15.1"
   resolved "https://registry.yarnpkg.com/react-phone-input-2/-/react-phone-input-2-2.15.1.tgz#31edf2adb03cbc990b5432e0567d8a5303f3de49"

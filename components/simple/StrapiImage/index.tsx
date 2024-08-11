@@ -1,3 +1,4 @@
+import { cn } from '@/lib';
 import { Image } from '@/components/elements';
 
 import { IStrapiImageProps } from '@/types/components/simple/strapiImage.types';
@@ -9,6 +10,7 @@ export function StrapiImage({
   formats,
   loading,
   className,
+  containerClass,
   fill = false,
   height = 600,
   width = 600,
@@ -18,7 +20,7 @@ export function StrapiImage({
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
   return (
-    <div className='relative h-full w-full transition-all duration-300 ease-linear'>
+    <div className={cn('relative h-full w-full transition-all duration-300 ease-linear', containerClass)}>
       {fill ? (
         <Image
           id={id}

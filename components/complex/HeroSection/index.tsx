@@ -10,7 +10,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data?.title}
         </Title>
       </div>
-      <div className='relative flex h-96 w-full flex-col-reverse overflow-hidden text-center text-white md:h-md lg:h-2md'>
+      <div className='relative flex h-80 w-full flex-col-reverse overflow-hidden text-center text-white md:h-2md'>
         <StrapiImage
           fill
           priority
@@ -23,7 +23,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data?.link?.text}
         </NextLink>
       </div>
-      <div className='relative px-2.5 py-5  text-center leading-tight md:py-10'>
+      <div className='relative px-2.5 py-5 text-center leading-tight md:py-10'>
         <Title level='3' variant='subheading'>
           {data.description}
         </Title>

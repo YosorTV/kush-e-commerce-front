@@ -43,7 +43,10 @@ export const ListOfPages: FC<ListOFPagesProps> = ({ pages, className, categories
     return data.map((page, index) => {
       const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
 
-      const isActive = urlObj.pathname === ROOT ? pathname === urlObj.pathname : pathname.startsWith(urlObj.pathname);
+      const isActive =
+        urlObj.pathname === ROOT
+          ? pathname === urlObj.pathname
+          : pathname.startsWith(urlObj.pathname) || pathname.startsWith('collection');
 
       return (
         <motion.li

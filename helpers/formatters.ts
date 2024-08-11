@@ -40,10 +40,10 @@ export const formatBySlug = (data: any[], slug: string) => {
 };
 
 export const gridCols = (index: number) => {
-  if (index % 5 === 0) return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
-  if (index % 5 === 1) return 'col-span-1 lg:col-span-1 xl:col-span-1 xxl:col-span-1';
-  if (index % 5 === 2) return 'col-span-1 lg:col-span-2 xl:col-span-1 xxl:col-span-2';
-  if (index % 5 === 3) return 'col-span-1 xl:col-span-2 xxl:col-span-1';
+  if (index % 5 === 0 && index > 4) return 'col-span-2 lg:col-span-2 xl:col-span-3';
+  if (index % 5 === 1) return 'col-span-1 lg:col-span-2 xl:col-span-2';
+  if (index % 5 === 2) return 'col-span-1 lg:col-span-2 xl:col-span-1';
+  if (index % 5 === 3) return 'col-span-1 xl:col-span-2';
 
   return 'col-span-1';
 };

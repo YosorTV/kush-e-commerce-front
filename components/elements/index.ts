@@ -15,3 +15,4 @@ export * from '@/components/elements/Path';
 export * from '@/components/elements/Sidebar';
 export * from '@/components/elements/Button';
 export * from '@/components/elements/Blockquote';
+export * from '@/components/elements/Zoom';

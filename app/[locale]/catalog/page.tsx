@@ -1,3 +1,4 @@
+import { Title } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
 import { StrapiBlockRender, StrapiImage } from '@/components/simple';
 import { STRAPI_PAGES } from '@/helpers/constants';
@@ -22,7 +23,7 @@ export default async function Catalog({ params, searchParams }: PageProps) {
 
   return (
     <PageLayout className='mt-16'>
-      <div className='h-112 relative flex w-full overflow-hidden md:h-2md'>
+      <div className='relative flex h-80 w-full overflow-hidden md:h-2md'>
         <StrapiImage
           fill
           priority
@@ -32,6 +33,13 @@ export default async function Catalog({ params, searchParams }: PageProps) {
           alt={data.cover.alternativeText}
           overlay
         />
+        <Title
+          level='1'
+          variant='subheading'
+          className='absolute flex h-full w-full items-center justify-center text-center'
+        >
+          {data.title}
+        </Title>
       </div>
       <StrapiBlockRender data={data.blocks} {...searchParams} />
     </PageLayout>

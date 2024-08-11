@@ -5,19 +5,21 @@ import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 
 import { usePrevNextButtons } from '@/lib/hooks';
-import { Button } from '@/components/elements';
+import { Button, Zoom } from '@/components/elements';
 
 import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from 'react-icons/lia';
 
 import { RxDividerVertical } from 'react-icons/rx';
 import { StrapiImage } from '../StrapiImage';
+import { cn } from '@/lib';
 
 type PropType = {
   data: any[];
   options?: EmblaOptionsType;
+  containerClass: string;
 };
 
-export const ProductCarousel: FC<PropType> = ({ data, options }) => {
+export const ProductCarousel: FC<PropType> = ({ data, options, containerClass }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
@@ -25,20 +27,22 @@ export const ProductCarousel: FC<PropType> = ({ data, options }) => {
   const printProductSlide = (image: any) => {
     return (
       <li key={image.id} className='embla__slide hover:cursor-grab active:cursor-grabbing'>
-        <StrapiImage
-          formats={image.formats}
-          alt={image.alternativeText}
-          src={image.url}
-          height={image.height}
-          width={image.width}
-          className='h-96 object-cover'
-        />
+        <Zoom>
+          <StrapiImage
+            formats={image.formats}
+            alt={image.alternativeText}
+            src={image.url}
+            height={image.height}
+            width={image.width}
+            className='h-112 object-cover'
+          />
+        </Zoom>
       </li>
     );
   };
 
   return (
-    <div className='embla lg:hidden'>
+    <div className={cn('embla', containerClass)}>
       <div className='embla__controls justify-end px-6'>
         <div className='embla__buttons'>
           <Button type='button' onClick={onPrevButtonClick} disabled={prevBtnDisabled}>
