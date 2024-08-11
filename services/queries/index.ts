@@ -1,3 +1,4 @@
+import { aboutUsQuery } from './aboutUsQuery';
 import { authQuery } from './authQuery';
 import { catalogQuery } from './catalogQuery';
 import { collectionMetaQuery, collectionQuery } from './collectionQuery';
@@ -20,6 +21,7 @@ export const STRAPI_QUERIES = {
   META_COLLECTION: collectionMetaQuery,
   META_PRODUCT: productMetaQuery,
   AUTH: authQuery,
+  ABOUT_US: aboutUsQuery,
   PROFILE: profileQuery,
   META: metaQuery,
   SIZE: sizeQuery,

@@ -12,7 +12,6 @@ import { ListOfPages } from '../ListOfPages';
 import { useMenu } from '@/store';
 import { StrapiLinkType } from '@/types/components';
 import { useSearchParams } from 'next/navigation';
-import { useScreen } from '@/lib/hooks';
 
 type MenuProps = {
   pages: {
@@ -34,8 +33,6 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
   const pathname = usePathname();
   const params = useSearchParams();
 
-  const { md } = useScreen();
-
   const category = params.get('category');
 
   const handleToggle = () => menu.onToggle();
@@ -49,7 +46,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
 
   return (
     <>
-      {md && <ListOfPages pages={pages.data} categories={categories} collections={collections} className='flex' />}
+      <ListOfPages pages={pages.data} categories={categories} collections={collections} className='hidden lg:flex' />
       <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'} className='w-full lg:hidden'>
         <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
         <Sidebar opened={menu.isOpen} position='left' onToggle={handleToggle}>

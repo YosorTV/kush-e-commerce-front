@@ -9,3 +9,4 @@ export * from '@/components/complex/Search';
 export * from '@/components/complex/CatalogSection';
 export * from '@/components/complex/CollectionSection';
 export * from '@/components/complex/CollectionDetails';
+export * from '@/components/complex/AboutSection';

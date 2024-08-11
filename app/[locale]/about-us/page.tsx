@@ -1,10 +1,11 @@
 import React from 'react';
 import { PageLayout } from '@/components/layouts';
-import { Title } from '@/components/elements';
 import { getMetadata } from '@/services';
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
 import { STRAPI_PAGES } from '@/helpers/constants';
+import { getAboutUsData } from '@/services/api/get-about-us';
+import { AboutSection } from '@/components/complex';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -14,10 +15,14 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return response;
 }
 
-export default async function AboutUs() {
+export default async function AboutUs({ params }: PageProps) {
+  const { locale } = params;
+
+  const { data } = await getAboutUsData({ locale });
+
   return (
     <PageLayout className='mt-16'>
-      <Title level='1'>About Us</Title>
+      <AboutSection cover={data?.cover} title={data?.title} content={data?.story} subImage={data?.subImage} />
     </PageLayout>
   );
 }

@@ -1,11 +1,11 @@
 'use client';
 
+import { FC } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { useTranslations } from 'use-intl';
 import { useRouter } from '@/lib/navigation';
 
 import { Button } from '@/components/elements';
-import { FC } from 'react';
 
 interface IStepBack {
   className?: string;
@@ -19,6 +19,7 @@ export const StepBack: FC<IStepBack> = ({ className }) => {
 
   return (
     <Button
+      type='button'
       onClick={handleBack}
       className={className}
       icon={{ before: <IoArrowBack className='h-6 w-6 fill-base-200' /> }}

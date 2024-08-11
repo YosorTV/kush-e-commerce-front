@@ -17,22 +17,15 @@ export const SpotlightCarousel: FC<PropType> = async ({ data = [], title }) => {
   const locale = await getLocale();
 
   const printSpotlightCard = (product: Product) => {
-    return (
-      <CategoryCard
-        data={product}
-        key={product.id}
-        currency={currency}
-        locale={locale}
-      />
-    );
+    return <CategoryCard data={product} key={product.id} currency={currency} locale={locale} />;
   };
 
   return (
     <Carousel
       title={title}
       options={{ loop: true }}
-      titleClass='py-3 xs:py-6 text-white'
-      className='px-3 pb-10 lg:px-6'
+      titleClass='py-3 xs:py-5 text-white'
+      className='px-3 pb-5 lg:px-6'
       fill='fill-white'
     >
       {data.map(printSpotlightCard)}

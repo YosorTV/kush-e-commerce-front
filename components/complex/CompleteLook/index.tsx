@@ -14,11 +14,7 @@ interface ICompleteLook {
   className?: string;
 }
 
-export const CompleteLook: FC<ICompleteLook> = async ({
-  locale,
-  category,
-  className,
-}) => {
+export const CompleteLook: FC<ICompleteLook> = async ({ locale, category, className }) => {
   const { data: products } = await getProductsData({ locale });
   const t = await getTranslations();
 
@@ -26,11 +22,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({
 
   const printProduct = (product: Product) => {
     return (
-      <ProductCard
-        key={product.id}
-        product={product}
-        className='embla__slide cursor-grab active:cursor-grabbing'
-      />
+      <ProductCard key={product.id} product={product} className='embla__slide cursor-grab active:cursor-grabbing' />
     );
   };
 
@@ -38,7 +30,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({
     <Carousel
       title={t('system.look')}
       titleClass='text-base-200 py-6 xs:py-3'
-      className={cn('mx-5 pb-6', className)}
+      className={cn('mx-2.5 pb-6 md:mx-5', className)}
       options={{ loop: true }}
     >
       {data.map(printProduct)}

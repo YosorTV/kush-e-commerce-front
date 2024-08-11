@@ -46,10 +46,8 @@ export const ProductCard: FC<ProductCardProps> = async ({ product, className }) 
             ))}
         </div>
         <div className='flex flex-col pt-2'>
-          <p className='line-clamp-1 w-3/4 text-base font-medium text-base-200' title={product.description}>
-            {product.description}
-          </p>
-          <div className='flex w-full items-baseline justify-between'>
+          <p className='line-clamp-1 w-3/4 text-base font-medium text-base-200'>{product.description}</p>
+          <div className='flex w-full items-end justify-between'>
             <span className='text-sm'>{t('system.availableIn', { number: product.quantity })}</span>
             <Price currency={currency} price={product?.price} sale={product?.saleValue} locale={product.locale} />
           </div>

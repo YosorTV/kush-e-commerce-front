@@ -13,4 +13,5 @@ export interface IStrapiImageProps {
   fill?: boolean;
   overlay?: boolean;
   containerClass?: string;
+  previewUrl?: string;
 }

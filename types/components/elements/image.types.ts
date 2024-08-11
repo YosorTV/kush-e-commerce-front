@@ -7,10 +7,10 @@ export interface IImageFormat {
 }
 
 export interface IImageFormats {
-  thumbnail: IImageFormat;
-  small: IImageFormat;
-  medium: IImageFormat;
-  large: IImageFormat;
+  thumbnail?: IImageFormat;
+  small?: IImageFormat;
+  medium?: IImageFormat;
+  large?: IImageFormat;
 }
 
 export interface IImageProps extends ImageProps {

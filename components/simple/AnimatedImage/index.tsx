@@ -53,7 +53,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       <motion.div
         onHoverStart={handleShowOverlay}
         onHoverEnd={handleHideOverlay}
-        className={cn('md:h-112 relative h-96 shadow-xl')}
+        className={cn('relative h-96 drop-shadow-xl md:h-112')}
       >
         {showOverlay ? (
           <motion.div
@@ -70,6 +70,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
               width={img2?.formats?.large?.width ?? 500}
               src={img2?.url}
               alt={img2?.alternativeText}
+              previewUrl={img2?.previewUrl}
               formats={img2?.formats}
               className='aspect-square h-full w-full object-cover'
             />
@@ -88,6 +89,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
               formats={img1.formats}
               height={img1?.formats?.large?.height ?? 500}
               width={img1?.formats?.large?.width ?? 500}
+              previewUrl={img1?.previewUrl}
               src={img1?.url}
               alt={img1?.alternativeText}
               className='aspect-square h-full w-full object-cover'

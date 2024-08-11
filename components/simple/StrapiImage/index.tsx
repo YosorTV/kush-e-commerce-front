@@ -11,6 +11,7 @@ export function StrapiImage({
   loading,
   className,
   containerClass,
+  previewUrl,
   fill = false,
   height = 600,
   width = 600,
@@ -29,6 +30,7 @@ export function StrapiImage({
           formats={formats}
           fill={fill}
           priority
+          blurDataURL={previewUrl}
           sizes='100vw'
           fetchPriority='high'
           className={className}
@@ -42,6 +44,7 @@ export function StrapiImage({
           height={height as number}
           width={width as number}
           formats={formats && formats}
+          blurDataURL={previewUrl}
           priority={priority}
           className={className}
         />
