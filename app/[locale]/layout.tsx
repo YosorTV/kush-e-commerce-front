@@ -14,26 +14,18 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default async function LocalLayout({
-  children,
-  params: { locale },
-}: Readonly<LayoutProps>) {
+export default async function LocalLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
   unstable_setRequestLocale(locale);
 
-  const data = await getLayoutData({ locale });
+  const { header: headerData, footer, shoppingCart } = await getLayoutData({ locale });
+
   const messages = await getMessages();
   const session = await auth();
 
-  const { header: headerData, footer, shoppingCart } = data;
-
-  const header = { ...headerData, shoppingCart, session };
-
   return (
-    <BaseLayout locale={locale} header={header} footer={footer}>
+    <BaseLayout locale={locale} header={{ ...headerData, shoppingCart, session }} footer={footer}>
       <NextIntlClientProvider messages={messages}>
-        <AutoLogoutProvider session={session ? session : null}>
-          {children}
-        </AutoLogoutProvider>
+        <AutoLogoutProvider session={session ? session : null}>{children}</AutoLogoutProvider>
       </NextIntlClientProvider>
     </BaseLayout>
   );

@@ -1,22 +1,11 @@
-import {
-  ChangeEvent,
-  FC,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-} from 'react';
+import { ChangeEvent, FC, ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoClose } from 'react-icons/io5';
 
 import { useSearch } from '@/store';
 
 import { Button, Input, Logo } from '@/components/elements';
-import {
-  childrenVariants,
-  fadeVariants,
-  searchVariants,
-} from '@/assets/animations';
+import { childrenVariants, fadeVariants, searchVariants } from '@/assets/animations';
 import { useLocale } from 'next-intl';
 
 import { useDebounce } from '@/lib/hooks';
@@ -27,11 +16,7 @@ interface TSearchController {
   children: ReactNode;
 }
 
-export const SearchController: FC<TSearchController> = ({
-  onClose,
-  children,
-  placeholder = 'Search',
-}) => {
+export const SearchController: FC<TSearchController> = ({ onClose, children, placeholder = 'Search' }) => {
   const state = useSearch();
 
   const locale = useLocale();
@@ -63,7 +48,7 @@ export const SearchController: FC<TSearchController> = ({
         pageSize: String(perPage),
       });
     },
-    [state]
+    [state, locale, name]
   );
 
   useEffect(() => {
@@ -79,8 +64,7 @@ export const SearchController: FC<TSearchController> = ({
     };
   }, [locale]);
 
-  const isLastPage =
-    state.meta.page === state.meta.pageCount || !state.searchResult.length;
+  const isLastPage = state.meta.page === state.meta.pageCount || !state.searchResult.length;
 
   return (
     <AnimatePresence mode='wait'>
@@ -92,10 +76,7 @@ export const SearchController: FC<TSearchController> = ({
           variants={searchVariants}
           className='fixed left-0 top-0 z-20 h-screen w-full'
         >
-          <motion.div
-            layout
-            className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-base-100 p-8'
-          >
+          <motion.div layout className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-base-100 p-8'>
             <motion.div
               initial='hidden'
               animate='visible'
@@ -115,20 +96,11 @@ export const SearchController: FC<TSearchController> = ({
                 onChange={handleSearch}
               />
 
-              <Button
-                onClick={onClose}
-                type='button'
-                className='col-span-1 col-start-5 row-start-1 md:col-start-6'
-              >
+              <Button onClick={onClose} type='button' className='col-span-1 col-start-5 row-start-1 md:col-start-6'>
                 <IoClose className='h-6 w-6 fill-base-200' />
               </Button>
             </motion.div>
-            <motion.div
-              initial='initial'
-              animate='visible'
-              exit='hidden'
-              variants={childrenVariants}
-            >
+            <motion.div initial='initial' animate='visible' exit='hidden' variants={childrenVariants}>
               {children}
               {state.meta.total > 0 && (
                 <div className='flex flex-col items-center justify-center py-6 pb-10 lg:pt-16'>

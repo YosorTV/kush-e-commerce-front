@@ -6,6 +6,7 @@ import { deliveryQuery } from './deliveryQuery';
 import { globalQuery } from './globalQuery';
 import { homeQuery } from './homeQuery';
 import { metaQuery } from './metaQuery';
+import { policiesQuery } from './policiesQuery';
 import { productMetaQuery, productQuery } from './productQuery';
 import { productsQuery } from './productsQuery';
 import { profileQuery } from './profileQuery';
@@ -13,6 +14,7 @@ import { sizeQuery } from './sizeQuery';
 
 export const STRAPI_QUERIES = {
   GLOBAL: globalQuery,
+  POLICIES: policiesQuery,
   HOME: homeQuery,
   CATALOG: catalogQuery,
   PRODUCTS: productsQuery,

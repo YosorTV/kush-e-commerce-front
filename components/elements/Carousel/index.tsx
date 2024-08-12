@@ -20,6 +20,7 @@ interface EmblaCarouselProps {
   autoplay?: boolean;
   titleClass?: string;
   fill?: string;
+  format: 'standart' | 'mini';
 }
 
 const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
@@ -31,6 +32,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   autoplay = false,
   titleClass = 'text-base-300',
   fill = 'fill-base-200',
+  format = 'standart',
 }) => {
   const plugins = [
     autoScroll && AutoScroll({ playOnInit: false, stopOnMouseEnter: true }),
@@ -42,7 +44,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   useAutoScroll(emblaApi, autoScroll);
 
   return (
-    <div className={cn('embla', className)}>
+    <div className={cn(`embla-${format}`, className)}>
       <div className={cn('flex w-full items-baseline', title ? 'justify-between' : 'justify-end')}>
         {title && <CarouselTitle title={title} className={titleClass} />}
         <CarouselControllers emblaApi={emblaApi} fill={fill} />

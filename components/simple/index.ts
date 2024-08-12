@@ -28,3 +28,4 @@ export * from '@/components/simple/CategoryList';
 export * from '@/components/simple/SearchCard';
 export * from '@/components/simple/StrapiBlockRender';
 export * from '@/components/simple/StrapiContentBlock';
+export * from '@/components/simple/Copyright';

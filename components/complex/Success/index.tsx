@@ -1,6 +1,5 @@
 'use client';
 
-// import { Link } from '@/lib/navigation';
 import { useCart } from '@/store';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
@@ -16,8 +15,6 @@ export const Success = () => {
     cartStore.setForm('cart');
     cartStore.onToggle();
   };
-
-  // const MotionLink = motion(Link);
 
   return (
     <motion.div

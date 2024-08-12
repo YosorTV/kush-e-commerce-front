@@ -28,8 +28,9 @@ export const CompleteLook: FC<ICompleteLook> = async ({ locale, category, classN
 
   return (
     <Carousel
+      format='standart'
       title={t('system.look')}
-      titleClass='text-base-200 py-6 xs:py-3'
+      titleClass='text-base-200 py-6 xs:py-3 pl-3 md:pl-0'
       className={cn('mx-2.5 pb-6 md:mx-5', className)}
       options={{ loop: true }}
     >

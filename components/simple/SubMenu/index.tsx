@@ -59,16 +59,16 @@ export const SubMenu: FC<TSubMenu> = ({
             display: 'none',
             opacity: 0,
           }}
-          className='fixed left-0 top-16 z-0 w-full gap-x-16 bg-base-100 px-5 pt-7'
+          className='fixed left-0 top-16 z-0 w-full gap-x-80 bg-base-100 px-5 pt-7'
         >
-          <div>
+          <nav className='relative bottom-3.5'>
             {categoryTitle && (
               <Title level='5' className={cn('text-xl uppercase text-base-200', cormorant.className)}>
                 {categoryTitle}
               </Title>
             )}
             {categories && categories?.length > 0 && (
-              <ul className='flex flex-col gap-y-4 py-4 capitalize text-base-200'>
+              <ul className='flex flex-col gap-y-4 py-1.5 capitalize text-base-200'>
                 {categories.map((category: CategoryLinkType) => (
                   <MenuItem
                     id={category.id}
@@ -81,15 +81,16 @@ export const SubMenu: FC<TSubMenu> = ({
                 ))}
               </ul>
             )}
-          </div>
+          </nav>
           {collections && collections.length > 0 && (
             <div className='relative bottom-8 flex w-full justify-between gap-x-6'>
               <CollectionCarousel
+                format='mini'
                 title={collectionTitle}
                 titleClass='!text-xl mb-2'
                 data={collections}
                 slideClass='h-60 p-0'
-                className='ml-auto w-10/12'
+                className='ml-auto w-full'
                 fill='fill-base-200'
               />
             </div>

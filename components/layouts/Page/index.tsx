@@ -4,13 +4,9 @@ import { cn } from '@/lib';
 import { PageLayoutProps } from '@/types/components';
 import { StrapiImage } from '@/components/simple';
 
-export const PageLayout: FC<PageLayoutProps> = ({
-  children,
-  className,
-  cover,
-}) => {
+export const PageLayout: FC<PageLayoutProps> = ({ children, className, cover }) => {
   return (
-    <div className={cn('mt-16 flex flex-grow flex-col', className)}>
+    <div className={cn('flex flex-grow flex-col', className)}>
       {cover && cover.url && (
         <StrapiImage
           alt={cover.alternativeText}

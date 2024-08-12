@@ -1,7 +1,6 @@
 import qs from 'qs';
 
-export const generateStrapiQuery = (props: any) =>
-  qs.stringify(props, { encodeValuesOnly: true });
+export const generateStrapiQuery = (props: any) => qs.stringify(props, { encodeValuesOnly: true });
 
 interface Params {
   [key: string]: string | number | undefined;
@@ -18,10 +17,7 @@ export const createQueryString = (baseUrl: string, params?: Params): string => {
 
   const lastPart = pathParts[pathParts.length - 1];
   if (lastPart.endsWith(`-${currentLocale}`)) {
-    pathParts[pathParts.length - 1] = lastPart.replace(
-      `-${currentLocale}`,
-      `-${newLocale}`
-    );
+    pathParts[pathParts.length - 1] = lastPart.replace(`-${currentLocale}`, `-${newLocale}`);
   }
 
   url.pathname = pathParts.join('/');
@@ -37,12 +33,7 @@ export const createQueryString = (baseUrl: string, params?: Params): string => {
   return url.toString();
 };
 
-export const updateUrlParams = (
-  pathname: string,
-  searchParams: URLSearchParams,
-  key: string,
-  value?: string
-) => {
+export const updateUrlParams = (pathname: string, searchParams: URLSearchParams, key: string, value?: string) => {
   const searchQuery = new URLSearchParams(searchParams);
 
   if (value) {

@@ -21,7 +21,13 @@
     "stepBack": "Back",
     "look": "Complete your look",
     "availableIn": "In stock {number}",
-    "emptyList": "Empty list"
+    "emptyList": "Empty list",
+    "privacy": "Privacy & Policy",
+    "terms": "Terms & Conditions"
+  },
+  "copyright": {
+    "title": "Copyright",
+    "subTitle": "All rights reserved"
   },
   "sort": {
     "title": "Sort by",

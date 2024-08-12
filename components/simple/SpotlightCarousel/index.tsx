@@ -22,6 +22,7 @@ export const SpotlightCarousel: FC<PropType> = async ({ data = [], title }) => {
 
   return (
     <Carousel
+      format='standart'
       title={title}
       options={{ loop: true }}
       titleClass='py-3 xs:py-5 text-white'

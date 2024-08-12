@@ -27,16 +27,24 @@ type ListOFPagesProps = {
     data: any[];
   };
   linkStyle?: string;
+  isFooter?: boolean;
 };
 
-export const ListOfPages: FC<ListOFPagesProps> = ({ pages, className, categories, collections, linkStyle }) => {
+export const ListOfPages: FC<ListOFPagesProps> = ({
+  pages,
+  className,
+  categories,
+  collections,
+  linkStyle,
+  isFooter = false,
+}) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const state = useFilters();
   const pathname = usePathname();
 
   const handleShowSubMenu = (index: number) => {
-    return !state.isOpen && index <= 1 ? setShowOverlay(true) : setShowOverlay(false);
+    return !state.isOpen && !isFooter && index <= 1 ? setShowOverlay(true) : setShowOverlay(false);
   };
 
   const printLinks = (data: StrapiLinkType[]) => {

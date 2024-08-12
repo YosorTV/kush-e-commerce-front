@@ -9,10 +9,7 @@ interface IGenerateMeta {
   locale: string;
 }
 
-export async function getMetadata({
-  path,
-  locale,
-}: IGenerateMeta): Promise<Metadata> {
+export async function getMetadata({ path, locale }: IGenerateMeta): Promise<Metadata> {
   const metaQP = generateStrapiQuery(STRAPI_QUERIES.META({ locale }));
   const { seo } = await getStrapiData(path, metaQP);
 

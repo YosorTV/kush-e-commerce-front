@@ -11,6 +11,7 @@ type PropType = {
   className?: string;
   fill?: string;
   titleClass?: string;
+  format: 'standart' | 'mini';
 };
 
 export const CollectionCarousel: FC<PropType> = ({
@@ -20,6 +21,7 @@ export const CollectionCarousel: FC<PropType> = ({
   className = 'w-full',
   slideClass = 'h-full md:h-96',
   fill = 'fill-white',
+  format = 'standart',
 }) => {
   const printCollectionCard = ({ cover, slug, title, hintText }: any) => {
     return (
@@ -37,6 +39,7 @@ export const CollectionCarousel: FC<PropType> = ({
 
   return (
     <Carousel
+      format={format}
       title={title}
       className={className}
       options={{ loop: true }}

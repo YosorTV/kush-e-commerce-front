@@ -9,7 +9,14 @@
     "total": "Всього {number}",
     "stepBack": "Повернутись",
     "look": "Зберіть свій образ",
-    "availableIn": "В наявності {number}"
+    "availableIn": "В наявності {number}",
+    "emptyList": "Не знайдено",
+    "privacy": "Політика конфіденційності",
+    "terms": "Умови та положення"
+  },
+  "copyright": {
+    "title": "Авторське право",
+    "subTitle": "Всі права захищені"
   },
   "cart": {
     "added": "У кошику",

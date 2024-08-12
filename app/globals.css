@@ -83,12 +83,19 @@ input:-webkit-autofill:active {
   -webkit-transition-delay: 9999s;
 }
 
-.embla {
+.embla-standart {
   --slide-size: 95%;
   --slide-height: 100%;
   --slide-spacing: 0.5rem;
   --slide-size-md: calc(100% / 2);
   --slide-size-lg: calc(100% / 3);
+}
+
+.embla-mini {
+  --slide-size: 100%;
+  --slide-height: 200px;
+  --slide-spacing: 1rem;
+  --slide-size-lg: calc(100% / 2);
 }
 
 .embla__viewport {
@@ -174,5 +181,10 @@ input:-webkit-autofill:active {
   @apply bg-base-100;
 }
 .react-zoom [data-rmiz-btn-unzoom] {
-  @apply cursor-pointer border !border-white bg-base-100 text-base-200;
+  @apply cursor-pointer bg-base-100 text-base-200;
+}
+
+.react-zoom [data-rmiz-btn-unzoom]:focus,
+.react-zoom [data-rmiz-btn-unzoom]:active {
+  @apply border-0 border-transparent;
 }

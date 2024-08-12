@@ -34,7 +34,7 @@ export const ProductCarousel: FC<PropType> = ({ data, options, containerClass })
             src={image.url}
             height={image.height}
             width={image.width}
-            className='h-112 object-cover'
+            className='h-80 object-cover'
           />
         </Zoom>
       </li>
@@ -42,7 +42,7 @@ export const ProductCarousel: FC<PropType> = ({ data, options, containerClass })
   };
 
   return (
-    <div className={cn('embla', containerClass)}>
+    <div className={cn('embla-standart', containerClass)}>
       <div className='embla__controls justify-end px-6'>
         <div className='embla__buttons'>
           <Button type='button' onClick={onPrevButtonClick} disabled={prevBtnDisabled}>

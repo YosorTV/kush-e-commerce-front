@@ -153,6 +153,8 @@ export const STRAPI_PAGES = {
   reset: 'reset-page',
   success: 'success-page',
   forgot: 'forgot-page',
+  policy: 'policy-page',
+  term: 'term-page',
   currency: 'currency-change',
   delivery: 'delivery',
 };
