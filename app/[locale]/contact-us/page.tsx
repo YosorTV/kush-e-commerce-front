@@ -1,9 +1,10 @@
 import { PageLayout } from '@/components/layouts';
-import { Title } from '@/components/elements';
 import { getMetadata } from '@/services';
 import { STRAPI_PAGES } from '@/helpers/constants';
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
+import { ContactUsSection } from '@/components/complex/ContactUsSection';
+import { getContactUsData } from '@/services/api/get-contact-us';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -13,10 +14,14 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return response;
 }
 
-export default async function ContactUs() {
+export default async function ContactUs({ params }: PageProps) {
+  const { locale } = params;
+
+  const { data } = await getContactUsData({ locale });
+
   return (
     <PageLayout className='mt-16'>
-      <Title level='1'>Contact Us</Title>
+      <ContactUsSection data={data} />
     </PageLayout>
   );
 }

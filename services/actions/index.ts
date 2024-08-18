@@ -5,3 +5,4 @@ export * from '@/services/actions/resetPassword';
 export * from '@/services/actions/profileUser';
 export * from '@/services/actions/subscription';
 export * from '@/services/actions/filter';
+export * from '@/services/actions/contactUs';

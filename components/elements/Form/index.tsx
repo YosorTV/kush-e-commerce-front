@@ -3,7 +3,7 @@
 import { Children, FC, ReactElement, useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 
-import { cn, processChild, toaster } from '@/lib';
+import { processChild, toaster } from '@/lib';
 
 import { FormProps } from '@/types/components';
 import { useRouter } from '@/lib/navigation';
@@ -45,10 +45,8 @@ export const Form: FC<FormProps<any>> = ({
   }, [formState]);
 
   return (
-    <form ref={ref} action={formAction} className={cn(className)}>
-      {Children.map(children as ReactElement[], (child, index) =>
-        processChild(child, index, formState)
-      )}
+    <form ref={ref} action={formAction} className={className}>
+      {Children.map(children as ReactElement[], (child, index) => processChild(child, index, formState))}
     </form>
   );
 };

@@ -5,3 +5,4 @@ export * from '@/lib/fetch';
 export * from '@/lib/qs';
 export * from '@/lib/zod';
 export * from '@/lib/utils';
+export * from '@/lib/map';

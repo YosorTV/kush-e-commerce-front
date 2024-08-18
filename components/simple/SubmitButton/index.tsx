@@ -23,14 +23,7 @@ interface SubmitButtonProps {
   disabled?: boolean;
 }
 
-export function SubmitButton({
-  text,
-  loadingText,
-  loading,
-  icon,
-  disabled,
-  className,
-}: Readonly<SubmitButtonProps>) {
+export function SubmitButton({ text, loadingText, loading, icon, disabled, className }: Readonly<SubmitButtonProps>) {
   const status = useFormStatus();
 
   const printButtonContent = useMemo(() => {

@@ -17,3 +17,4 @@ export * from '@/services/api/get-success';
 export * from '@/services/api/get-sizes';
 export * from '@/services/api/get-currency';
 export * from '@/services/api/get-product';
+export * from '@/services/api/post-user-message';

@@ -2,11 +2,9 @@ import { z } from 'zod';
 
 type Locale = 'en' | 'uk' | string;
 
-const PASSWORD_REG_EX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}[\]\\|;:'",.<>/?-]).{8,}$/;
+const PASSWORD_REG_EX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}[\]\\|;:'",.<>/?-]).{8,}$/;
 
-const normalizePhoneNumber = (phoneNumber: string) =>
-  phoneNumber.replace(/[^\d]/g, '');
+const normalizePhoneNumber = (phoneNumber: string) => phoneNumber.replace(/[^\d]/g, '');
 
 const getEmailErrorMessage = (locale: Locale) => {
   const messages: Record<Locale, string> = {
@@ -35,8 +33,7 @@ const requiredPasswordLengthMessage = (locale: Locale) => {
   return messages[locale] || messages.en;
 };
 
-const emailSchema = (locale: Locale) =>
-  z.string().email(getEmailErrorMessage(locale));
+const emailSchema = (locale: Locale) => z.string().email(getEmailErrorMessage(locale));
 
 const passwordSchema = (locale: Locale) =>
   z
@@ -65,10 +62,7 @@ const requiredPhoneField = (locale: Locale) =>
     (val) => {
       const normalizedPhoneNumber = normalizePhoneNumber(val);
 
-      return (
-        normalizedPhoneNumber.trim() !== '' &&
-        /^\d{6,}$/.test(normalizedPhoneNumber)
-      );
+      return normalizedPhoneNumber.trim() !== '' && /^\d{6,}$/.test(normalizedPhoneNumber);
     },
     {
       message: requiredErrorMessage(locale),
@@ -106,8 +100,7 @@ const signupSchema = (locale: Locale) =>
     email: emailSchema(locale),
   });
 
-export const forgotPasswordSchema = (locale: Locale) =>
-  z.object({ email: emailSchema(locale) });
+export const forgotPasswordSchema = (locale: Locale) => z.object({ email: emailSchema(locale) });
 
 export const resetPasswordBaseSchema = (locale: Locale) =>
   z.object({
@@ -120,8 +113,7 @@ export const resetPasswordSchema = (locale: Locale) => {
   const schema = resetPasswordBaseSchema(locale);
 
   return schema.refine((data) => data.password === data.passwordConfirmation, {
-    message:
-      locale === 'uk' ? 'Паролі не співпадають.' : "Passwords don't matched",
+    message: locale === 'uk' ? 'Паролі не співпадають.' : "Passwords don't matched",
     path: ['passwordConfirmation'],
   });
 };
@@ -138,10 +130,20 @@ export const subscriptionSchema = (locale: Locale) =>
     locale: z.string().readonly(),
   });
 
+export const contactUsSchema = (locale: Locale) => {
+  return z.object({
+    email: emailSchema(locale),
+    name: requiredTextField(locale),
+    message: requiredTextField(locale),
+    locale: z.string().readonly(),
+  });
+};
+
 export const schemas = {
   login: loginSchema,
   signup: signupSchema,
   profile: profileSchema,
+  contacts: contactUsSchema,
   subscription: subscriptionSchema,
   resetPassword: resetPasswordSchema,
   'update-password': updatePasswordScema,

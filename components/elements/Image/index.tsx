@@ -23,13 +23,13 @@ export const Image: FC<IImageProps> = ({
   if (fill) {
     return (
       <NextImage
-        quality={100}
+        quality={75}
         sizes='100vw'
         src={src}
         fill={fill}
         priority={priority}
-        placeholder='blur'
-        blurDataURL={blurDataURL}
+        placeholder={blurDataURL ? 'blur' : 'empty'}
+        blurDataURL={formats && blurDataURL}
         alt={alt ?? 'image'}
         className={cn(className, 'image-blur', { 'image-loaded': isLoaded })}
         onLoad={() => setIsLoaded(true)}
