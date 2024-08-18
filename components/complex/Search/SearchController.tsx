@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
+
 import { ChangeEvent, FC, ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoClose } from 'react-icons/io5';
@@ -36,7 +39,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
     ({ target }: ChangeEvent<HTMLInputElement>) => {
       state.onSearch(target.value);
     },
-    [state]
+    [state.onSearch]
   );
 
   const handleMore = useCallback(

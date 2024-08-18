@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { FC, useCallback } from 'react';
@@ -22,11 +23,11 @@ export const Search: FC<TSearch> = ({ placeholder }) => {
 
   const handleOpen = useCallback(() => {
     state.onToggle();
-  }, [state]);
+  }, [state.onToggle]);
 
   const handleClose = useCallback(() => {
     state.onReset();
-  }, [state]);
+  }, [state.onReset]);
 
   return (
     <>
