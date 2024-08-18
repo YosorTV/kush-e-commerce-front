@@ -9,15 +9,7 @@ const textInputTypes = (type: HTMLInputElement['type']) => {
   return !customTypesStyles.includes(type);
 };
 
-export const InputDefault: FC<InputProps> = ({
-  id,
-  name,
-  type,
-  placeholder,
-  className,
-  error,
-  ...rest
-}) => {
+export const InputDefault: FC<InputProps> = ({ id, name, type, placeholder, className, error, ...rest }) => {
   const isTextType = textInputTypes(type);
 
   return (
@@ -27,9 +19,7 @@ export const InputDefault: FC<InputProps> = ({
       type={type}
       placeholder={placeholder}
       className={cn(
-        isTextType
-          ? 'input input-bordered w-full cursor-pointer placeholder:text-gray-500'
-          : className,
+        isTextType ? 'input input-bordered w-full cursor-pointer placeholder:text-gray-500' : className,
         error && 'border-error'
       )}
       {...rest}
