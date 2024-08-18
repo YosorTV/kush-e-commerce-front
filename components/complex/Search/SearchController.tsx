@@ -55,7 +55,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
     if (state.isOpen) {
       getProducts();
     }
-  }, [name, locale, state.isOpen, getProducts]);
+  }, [name, locale, state.isOpen]);
 
   const cta = useMemo(() => {
     return {
