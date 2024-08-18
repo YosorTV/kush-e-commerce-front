@@ -3,10 +3,7 @@
 import { FC, useCallback } from 'react';
 import { RxDividerVertical } from 'react-icons/rx';
 import { EmblaCarouselType } from 'embla-carousel';
-import {
-  LiaLongArrowAltLeftSolid,
-  LiaLongArrowAltRightSolid,
-} from 'react-icons/lia';
+import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from 'react-icons/lia';
 
 import { usePrevNextButtons, useScreen } from '@/lib/hooks';
 import { Button } from '../Button';
@@ -20,33 +17,25 @@ interface ICarouseControllers {
 export const CarouselControllers: FC<ICarouseControllers> = ({
   emblaApi,
   autoplay = false,
-  fill = 'fill-base-200',
+  fill = 'fill-base-200'
 }) => {
   const { lg } = useScreen();
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = usePrevNextButtons(emblaApi);
+  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
 
   const handleButtonAutoplayClick = useCallback(
     (callback: () => void) => {
       const autoScroll = emblaApi?.plugins()?.autoScroll;
 
       if (autoplay) {
-        const resetOrStop =
-          autoScroll.options.stopOnInteraction === false
-            ? autoScroll.reset
-            : autoScroll.stop;
+        const resetOrStop = autoScroll.options.stopOnInteraction === false ? autoScroll.reset : autoScroll.stop;
         resetOrStop();
         callback();
       } else {
         callback();
       }
     },
-    [emblaApi]
+    [autoplay, emblaApi]
   );
 
   const size = lg ? 28 : 24;
@@ -60,10 +49,7 @@ export const CarouselControllers: FC<ICarouseControllers> = ({
           onClick={() => handleButtonAutoplayClick(onPrevButtonClick)}
           disabled={prevBtnDisabled}
         >
-          <LiaLongArrowAltLeftSolid
-            className={fill}
-            style={{ width: size, height: size }}
-          />
+          <LiaLongArrowAltLeftSolid className={fill} style={{ width: size, height: size }} />
         </Button>
         <RxDividerVertical
           className={cn('rotate-45', fill === 'fill-white' && 'text-white')}
@@ -75,10 +61,7 @@ export const CarouselControllers: FC<ICarouseControllers> = ({
           onClick={() => handleButtonAutoplayClick(onNextButtonClick)}
           disabled={nextBtnDisabled}
         >
-          <LiaLongArrowAltRightSolid
-            className={fill}
-            style={{ width: size, height: size }}
-          />
+          <LiaLongArrowAltRightSolid className={fill} style={{ width: size, height: size }} />
         </Button>
       </div>
     </div>

@@ -36,7 +36,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   categories,
   collections,
   linkStyle,
-  isFooter = false,
+  isFooter = false
 }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 

@@ -5,7 +5,7 @@ import { DEFAULT_LOCALE } from '@/helpers/constants';
 
 interface IContactUSBlock {
   locale: string;
-  address: string;
+  address?: string;
 }
 
 export const ContactUsBlock: FC<IContactUSBlock> = async ({ address, locale = DEFAULT_LOCALE }) => {

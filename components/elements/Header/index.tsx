@@ -20,22 +20,22 @@ export const Header: FC<HeaderProps> = ({ data, locale }) => {
     categoryTitle,
     collectionTitle,
     searchTitle,
-    signOutTitle,
+    signOutTitle
   } = data;
 
   const collectionsData = {
     title: collectionTitle,
-    data: collections.data ?? [],
+    data: collections.data ?? []
   };
 
   const categoryData = {
     title: categoryTitle,
-    data: categories.data ?? [],
+    data: categories.data ?? []
   };
 
   const pagesData = {
     title: pagesTitle,
-    data: pages,
+    data: pages
   };
 
   return (

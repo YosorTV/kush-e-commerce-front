@@ -10,14 +10,9 @@
     "plugin:import/warnings",
     "plugin:import/typescript",
     "prettier",
+    "next/core-web-vitals"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "prettier",
-    "import",
-    "react",
-    "react-hooks",
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "import", "react", "react-hooks"],
   "globals": {
     "jest": true,
     "describe": true,
@@ -37,24 +32,20 @@
     "jasmine": true,
     "window": true,
     "document": true,
-    "fetch": true,
+    "fetch": true
   },
   "env": {
     "node": true,
     "es6": true,
-    "browser": true,
+    "browser": true
   },
   "root": true,
-  "ignorePatterns": [
-    "tailwind.config.js",
-    "postcss.config.js",
-    "next.config.js",
-  ],
+  "ignorePatterns": ["tailwind.config.js", "postcss.config.js", "next.config.js"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2021, // Set the ECMAScript version
     "sourceType": "module", // Set the source type to module
-    "project": "./tsconfig.json", // Specify the path to your TypeScript project
+    "project": "./tsconfig.json" // Specify the path to your TypeScript project
   },
   "rules": {
     "no-console": ["warn", { "allow": ["info", "error"] }],
@@ -63,13 +54,13 @@
     "no-param-reassign": [
       2,
       {
-        "props": false,
-      },
+        "props": false
+      }
     ],
     "jsx-a11y/no-noninteractive-tabindex": "off",
     "eslint-comments/disable-enable-pair": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/jsx-uses-react": "off",
@@ -79,11 +70,11 @@
       "error",
       {
         "array": false,
-        "object": true,
+        "object": true
       },
       {
-        "enforceForRenamedProperties": false,
-      },
+        "enforceForRenamedProperties": false
+      }
     ],
     "react/function-component-definition": [
       2,
@@ -94,15 +85,10 @@
           "arrow-function",
           "function-declaration",
           "function-expression",
-          "arrow-function",
+          "arrow-function"
         ],
-        "unnamedComponents": [
-          "function-expression",
-          "arrow-function",
-          "function-expression",
-          "arrow-function",
-        ],
-      },
+        "unnamedComponents": ["function-expression", "arrow-function", "function-expression", "arrow-function"]
+      }
     ],
     "react/jsx-props-no-spreading": [
       "error",
@@ -110,8 +96,8 @@
         "html": "ignore",
         "custom": "ignore",
         "explicitSpread": "ignore",
-        "exceptions": [""],
-      },
+        "exceptions": [""]
+      }
     ],
     "react/button-has-type": "off",
     "import/no-anonymous-default-export": ["off"],
@@ -139,25 +125,25 @@
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto",
-      },
+        "endOfLine": "auto"
+      }
     ],
     "no-underscore-dangle": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
         "required": {
-          "some": ["nesting", "id"],
-        },
-      },
+          "some": ["nesting", "id"]
+        }
+      }
     ],
     "jsx-a11y/label-has-for": [
       "error",
       {
         "required": {
-          "some": ["nesting", "id"],
-        },
-      },
+          "some": ["nesting", "id"]
+        }
+      }
     ],
     "no-unused-vars": "error",
     "import/extensions": ["error", "never"],
@@ -166,21 +152,13 @@
       "warn",
       {
         "ignoreCase": true,
-        "ignoreDeclarationSort": true,
-      },
+        "ignoreDeclarationSort": true
+      }
     ],
     "import/order": [
       1,
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling", "index"],
-          "object",
-          "type",
-          "unknown",
-        ],
+        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "object", "type", "unknown"],
         "pathGroups": [
           { "pattern": "react*", "group": "external", "position": "before" },
           { "pattern": "@/*", "group": "external" },
@@ -189,21 +167,18 @@
           { "pattern": "@/services/", "group": "internal" },
           { "pattern": "@/store/", "group": "internal" },
           { "pattern": "@/components/", "group": "parent" },
-          { "pattern": "{types/,/types,types}", "group": "type" },
+          { "pattern": "{types/,/types,types}", "group": "type" }
         ],
         "pathGroupsExcludedImportTypes": ["react"],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
-          "caseInsensitive": true,
-        },
-      },
+          "caseInsensitive": true
+        }
+      }
     ],
-    "react/jsx-filename-extension": [
-      2,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] },
-    ],
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "no-use-before-define": "off",
-    "react/require-default-props": "off",
-  },
+    "react/require-default-props": "off"
+  }
 }
