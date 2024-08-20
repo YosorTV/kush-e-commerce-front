@@ -13,7 +13,7 @@ export const Badge: FC<BadgeProps> = ({ counter }) => {
       <motion.span
         initial={animCounter.initial}
         animate={animCounter.animate}
-        className='absolute bottom-4 left-4 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white'
+        className='absolute bottom-6 left-3 flex h-5 w-5 items-center justify-center rounded-full bg-success text-xs font-bold text-white'
       >
         {counter}
       </motion.span>

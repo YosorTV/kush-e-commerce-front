@@ -11,7 +11,7 @@ import { ShoppingCartProps } from '@/types/components/complex';
 import { Checkout } from '../Checkout';
 import { Success } from '../Success';
 import { BsFillBagFill } from 'react-icons/bs';
-import { Portal } from '@/components/elements';
+import { Button, Portal } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
@@ -20,20 +20,20 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
   const contentZone = {
     cart: <CartList data={data} />,
     checkout: <Checkout userId={userId} />,
-    success: <Success />,
+    success: <Success />
   };
 
   const handleToggle = () => cartStore.onToggle();
 
   return (
     <>
-      <button
+      <Button
         onClick={handleToggle}
         className='relative flex cursor-pointer items-center gap-x-2 border-none bg-none text-lg font-medium outline-none'
       >
         {cartStore.cart.length > 0 && <Badge counter={cartStore.cart.length} />}
         <BsFillBagFill className='h-6 w-6 fill-base-200' />
-      </button>
+      </Button>
 
       <Portal selector='portal'>
         <AnimatePresence mode='wait'>

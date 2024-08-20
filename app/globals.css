@@ -188,3 +188,11 @@ input:-webkit-autofill:active {
 .react-zoom [data-rmiz-btn-unzoom]:active {
   @apply border-0 border-transparent;
 }
+
+.gm-style-iw-d {
+  overflow: hidden !important;
+}
+
+.gm-style-iw {
+  padding: 0px !important;
+}

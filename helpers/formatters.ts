@@ -1,7 +1,7 @@
 export const formatPrice = (amount: number, locale: string, currency: number) => {
   let formattedAmount = new Intl.NumberFormat(locale === 'uk' ? 'uk-UA' : 'en-US', {
     style: 'currency',
-    currency: locale === 'uk' ? 'UAH' : 'USD',
+    currency: locale === 'uk' ? 'UAH' : 'USD'
   }).format(locale === 'uk' ? Number(currency) * amount : amount);
 
   if (locale === 'uk') {

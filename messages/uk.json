@@ -88,5 +88,10 @@
   },
   "collection": {
     "title": "Коллекція"
+  },
+  "checkout": {
+    "price": "Ціна",
+    "total": "До сплати",
+    "quantity": "Кількість"
   }
 }

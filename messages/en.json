@@ -87,5 +87,10 @@
   },
   "collection": {
     "title": "Collection"
+  },
+  "checkout": {
+    "price": "Price",
+    "total": "Total",
+    "quantity": "Quantity"
   }
 }

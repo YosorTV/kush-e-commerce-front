@@ -9,7 +9,7 @@ import { Title } from '@/components/elements';
 import { formatPrice } from '@/helpers/formatters';
 import { useLocale } from 'next-intl';
 
-export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
+export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove }) => {
   const locale = useLocale();
 
   return (
@@ -19,30 +19,30 @@ export const CartItem: FC<CartItemProps> = ({ data, onAdd, onRemove }) => {
         alt={data?.images?.alternativeText}
         formats={data?.images?.formats}
         loading='lazy'
-        width={600}
-        height={600}
-        className='w-20 rounded-md'
+        width={320}
+        height={320}
+        className='h-full rounded-md object-cover'
+        containerClass='w-20'
       />
       <div className='flex flex-col'>
         <div className='flex flex-col'>
           <Title level='2' className='text-lg font-semibold'>
             {data?.name}
           </Title>
-          <div className='flex items-center gap-x-2'>
+          <div className='flex h-min items-center gap-x-2'>
             <p className='text-md font-semibold'>Quantity: {data?.quantity}</p>
             <div className='flex items-center gap-x-1.5'>
-              <button className='btn-circle w-auto' onClick={onRemove}>
-                <IoRemoveCircle />
+              <button className='btn-circle h-min w-auto' onClick={onRemove}>
+                <IoRemoveCircle height={6} width={6} />
               </button>
-              <button className='btn-circle w-auto' onClick={onAdd}>
-                <IoAddCircle />
+              <button className='btn-circle h-min w-auto' onClick={onAdd}>
+                <IoAddCircle height={6} width={6} />
               </button>
             </div>
           </div>
         </div>
         <p className='text-sm font-semibold capitalize'>
-          {data?.price}:{' '}
-          <span>{formatPrice(data?.unit_amount, locale, 41)}</span>
+          {data?.price}: <span>{formatPrice(data?.unit_amount, locale, currency)}</span>
         </p>
       </div>
     </>

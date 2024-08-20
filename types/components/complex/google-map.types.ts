@@ -3,4 +3,5 @@ export interface IGoogleMap {
     lat: number;
     lng: number;
   };
+  address?: string;
 }

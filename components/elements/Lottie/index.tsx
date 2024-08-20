@@ -9,21 +9,11 @@ import { motion } from 'framer-motion';
 import { cormorant } from '@/assets/fonts';
 import { LottieProps } from '@/types/components';
 
-export const Lottie: FC<LottieProps> = ({
-  src,
-  text,
-  className,
-  playerClassName,
-}) => {
+export const Lottie: FC<LottieProps> = ({ src, text, className, playerClassName }) => {
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center justify-center p-12',
-        className
-      )}
-    >
+    <div className={cn('flex flex-col items-center justify-center', className)}>
       <motion.h1
-        className={cn('text-5xl uppercase', cormorant.className)}
+        className={cn('text-3xl uppercase', cormorant.className)}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
