@@ -6,7 +6,7 @@ const defaultOptions: TFiltersState['options'] = {
   materials: [],
   categories: [],
   sortBy: 'recommended',
-  price: [1, 3000],
+  price: [1, 3000]
 };
 
 export const filterSlice: StateCreator<TFiltersState> = (set) => ({
@@ -17,12 +17,12 @@ export const filterSlice: StateCreator<TFiltersState> = (set) => ({
     set((state) => ({
       options: {
         ...state.options,
-        [key]: value,
-      },
+        [key]: value
+      }
     })),
   onReset: () =>
     set({
       options: defaultOptions,
-      isOpen: false,
-    }),
+      isOpen: false
+    })
 });

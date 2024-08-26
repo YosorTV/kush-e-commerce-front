@@ -1,28 +1,23 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-
+import { useCallback } from 'react';
 import { Range } from 'react-range';
-import { useFilters } from '@/store';
-import { getCurrency } from '@/services';
 import { useLocale } from 'next-intl';
+
+import { useFilters } from '@/store';
+
+import { useCurrency } from '@/lib/hooks';
 import { formatPrice } from '@/helpers/formatters';
+
+import { RangeThumb, RangeTrack } from '@/components/elements';
 
 export const RangeSlider = () => {
   const state = useFilters();
   const locale = useLocale();
+  const currency = useCurrency();
 
-  const [currency, setCurrency] = useState<number>(41);
-
-  const fetchCurrency = async () => {
-    const result = await getCurrency();
-
-    setCurrency(result);
-  };
-
-  useEffect(() => {
-    fetchCurrency();
-  }, []);
+  const min = formatPrice(state.options.price[0], locale, currency);
+  const max = formatPrice(state.options.price[1], locale, currency);
 
   const handleRangeChange = useCallback(
     (values: number[]) => {
@@ -30,9 +25,6 @@ export const RangeSlider = () => {
     },
     [state]
   );
-
-  const min = formatPrice(state.options.price[0], locale, currency);
-  const max = formatPrice(state.options.price[1], locale, currency);
 
   return (
     <div className='flex w-full flex-col px-2.5'>
@@ -43,29 +35,11 @@ export const RangeSlider = () => {
         values={state.options.price}
         onChange={handleRangeChange}
         renderTrack={({ props, children }) => (
-          <div
-            {...props}
-            className='relative h-2 w-full rounded-3xl bg-gray-500'
-          >
-            <div
-              className='absolute h-2 bg-base-300'
-              style={{
-                left: `${(state.options.price[0] / 3000) * 100}%`,
-                width: `${((state.options.price[1] - state.options.price[0]) / 3000) * 100}%`,
-              }}
-            />
+          <RangeTrack props={props} max={Number(max)} min={Number(min)}>
             {children}
-          </div>
+          </RangeTrack>
         )}
-        renderThumb={({ props }) => (
-          <div
-            {...props}
-            className='flex h-4 w-4 items-center justify-center rounded-full border drop-shadow-xl'
-            style={{ ...props.style }}
-          >
-            <span className='block h-full w-full rounded-full bg-neutral'></span>
-          </div>
-        )}
+        renderThumb={({ props }) => <RangeThumb key={props.key} props={props} />}
       />
       <div className='mt-2 flex w-full justify-between'>
         <span>{min}</span>

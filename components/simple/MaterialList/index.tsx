@@ -1,8 +1,11 @@
-import { ChangeEvent } from 'react';
+'use client';
+
+import { ChangeEvent, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useFilters } from '@/store';
 
 import { Input } from '@/components/elements';
+import { useSearchParams } from 'next/navigation';
 
 type TMaterial = {
   id: string;
@@ -10,8 +13,11 @@ type TMaterial = {
 };
 
 export const MaterialList = () => {
-  const t = useTranslations('material');
   const state = useFilters();
+  const searchParams = useSearchParams();
+  const t = useTranslations('material');
+
+  const chosenMaterials = searchParams.getAll('materials');
 
   const materials: TMaterial[] = [
     { id: `material-${1}`, text: 'gold' },
@@ -19,16 +25,20 @@ export const MaterialList = () => {
     { id: `material-${3}`, text: 'platinum' },
     { id: `material-${4}`, text: 'brass' },
     { id: `material-${5}`, text: 'palladium' },
-    { id: `material-${6}`, text: 'titanium' },
+    { id: `material-${6}`, text: 'titanium' }
   ];
+
+  useEffect(() => {
+    if (chosenMaterials.length > 0) {
+      state.onFilter({ key: 'materials', value: chosenMaterials });
+    }
+  }, []);
 
   const handleMaterialChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = target;
     const { materials } = state.options;
 
-    const newMaterials = checked
-      ? [...materials, value]
-      : materials.filter((material) => material !== value);
+    const newMaterials = checked ? [...materials, value] : materials.filter((material) => material !== value);
 
     state.onFilter({ key: 'materials', value: newMaterials });
   };
@@ -49,9 +59,5 @@ export const MaterialList = () => {
     />
   );
 
-  return (
-    <div className='form-control gap-y-2.5'>
-      {materials.map(printMaterialList)}
-    </div>
-  );
+  return <div className='form-control gap-y-2.5'>{materials.map(printMaterialList)}</div>;
 };

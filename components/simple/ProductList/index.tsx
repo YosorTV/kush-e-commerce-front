@@ -6,14 +6,10 @@ import { Title } from '@/components/elements';
 
 import { cormorant } from '@/assets/fonts';
 import { getProductsData } from '@/services';
-import { getLocale, getTranslations } from 'next-intl/server';
-import { Product } from '@/types/components';
-import { ProductCard } from '../ProductCard';
+import { getLocale } from 'next-intl/server';
 import { ProductListController } from '../ProductListController';
-import { gridCols } from '@/helpers/formatters';
 
-import { Lottie } from '@/components/elements/Lottie';
-import lottieAnim from '@/public/LottieEmplyList.json';
+import ProductListGroup from '../ProductListGroup';
 
 interface IProductsList {
   title?: string;
@@ -23,19 +19,10 @@ interface IProductsList {
 
 export const ProductList: FC<IProductsList> = async ({ className, title, ...rest }) => {
   const locale = await getLocale();
-  const t = await getTranslations();
 
-  const { data, meta } = await getProductsData({
-    locale,
-    pageSize: rest?.pageSize ?? 4,
-    ...rest,
-  });
+  const { data, meta } = await getProductsData({ locale, ...rest });
 
   const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;
-
-  const printProduct = (product: Product, index: number) => {
-    return <ProductCard key={product.id} product={product} className={gridCols(index)} />;
-  };
 
   return (
     <section className={cn('relative flex h-max flex-col justify-between', className)}>
@@ -47,19 +34,7 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
           {title}
         </Title>
       )}
-
-      {data.length > 0 ? (
-        <div
-          className={cn(
-            'grid min-h-96 gap-5',
-            data.length >= 4 ? 'grid-cols-fluid' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-          )}
-        >
-          {data.map(printProduct)}
-        </div>
-      ) : (
-        <Lottie text={t('system.emptyList')} src={lottieAnim} playerClassName='h-96 w-96' />
-      )}
+      <ProductListGroup data={data} />
       <ProductListController
         disabled={isLastPage}
         total={meta.pagination.total}

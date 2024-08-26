@@ -75,7 +75,7 @@ export const SubMenu: FC<TSubMenu> = ({
                     key={category.id}
                     text={category.title}
                     slug={category.slug}
-                    url={`/catalog?category=${category.slug}`}
+                    url={`/catalog?categories=${category.slug}`}
                     isExternal={false}
                   />
                 ))}

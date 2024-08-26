@@ -9,14 +9,7 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   };
 }
 
-export const Button: FC<IButton> = ({
-  icon,
-  children,
-  className,
-  disabled,
-  onClick,
-  ...props
-}) => {
+export const Button: FC<IButton> = ({ icon, children, className, disabled, onClick, ...props }) => {
   const printButtonContent = () => (
     <span className='flex items-center'>
       {icon?.before && <span className='mr-2'>{icon.before}</span>}

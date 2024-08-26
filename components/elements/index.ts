@@ -16,3 +16,5 @@ export * from '@/components/elements/Sidebar';
 export * from '@/components/elements/Button';
 export * from '@/components/elements/Blockquote';
 export * from '@/components/elements/Zoom';
+export * from '@/components/elements/RangeThumb';
+export * from '@/components/elements/RangeTrack';

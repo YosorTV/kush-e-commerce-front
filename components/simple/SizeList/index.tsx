@@ -1,4 +1,8 @@
-import { ChangeEvent } from 'react';
+'use client';
+
+import { ChangeEvent, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+
 import { useFilters } from '@/store';
 
 import { Input } from '@/components/elements';
@@ -10,6 +14,8 @@ type TSize = {
 
 export const SizeList = () => {
   const state = useFilters();
+  const searchParams = useSearchParams();
+  const chosenSizes = searchParams.getAll('sizes');
 
   const sizes: TSize[] = [
     { id: 1, size: '8' },
@@ -17,15 +23,19 @@ export const SizeList = () => {
     { id: 3, size: '12' },
     { id: 4, size: '14' },
     { id: 5, size: '16' },
-    { id: 6, size: '18' },
+    { id: 6, size: '18' }
   ];
+
+  useEffect(() => {
+    if (chosenSizes.length > 0) {
+      state.onFilter({ key: 'sizes', value: chosenSizes });
+    }
+  }, []);
 
   const handleSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;
 
-    const newSizes = checked
-      ? [...state.options.sizes, value]
-      : state.options.sizes.filter((size) => size !== value);
+    const newSizes = checked ? [...state.options.sizes, value] : state.options.sizes.filter((size) => size !== value);
 
     state.onFilter({ key: 'sizes', value: newSizes as string[] });
   };
@@ -46,7 +56,5 @@ export const SizeList = () => {
     />
   );
 
-  return (
-    <div className='form-control gap-y-2.5'>{sizes.map(printSizeList)}</div>
-  );
+  return <div className='form-control gap-y-2.5'>{sizes.map(printSizeList)}</div>;
 };

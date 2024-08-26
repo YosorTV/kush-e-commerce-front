@@ -5,6 +5,7 @@ import { EmblaCarouselType } from 'embla-carousel';
 import { SCREEEN } from '@/helpers/constants';
 
 import { debounce } from './utils';
+import { getCurrency } from '@/services';
 
 const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
@@ -85,7 +86,7 @@ export const usePrevNextButtons = (
     prevBtnDisabled,
     nextBtnDisabled,
     onPrevButtonClick,
-    onNextButtonClick,
+    onNextButtonClick
   };
 };
 
@@ -126,10 +127,7 @@ export const useDebounce = (value: any, delay = 500) => {
   return debouncedValue;
 };
 
-export const useAutoScroll = (
-  emblaApi: EmblaCarouselType,
-  autoScroll: boolean
-) => {
+export const useAutoScroll = (emblaApi: EmblaCarouselType, autoScroll: boolean) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -143,20 +141,29 @@ export const useAutoScroll = (
     const handleStop = () => setIsPlaying(false);
     const handleReInit = () => setIsPlaying(onAutoScroll.isPlaying());
 
-    emblaApi
-      .on('autoScroll:play', handlePlay)
-      .on('autoScroll:stop', handleStop)
-      .on('reInit', handleReInit);
+    emblaApi.on('autoScroll:play', handlePlay).on('autoScroll:stop', handleStop).on('reInit', handleReInit);
 
     if (!isPlaying) {
       onAutoScroll.play();
     }
 
     return () => {
-      emblaApi
-        .off('autoScroll:play', handlePlay)
-        .off('autoScroll:stop', handleStop)
-        .off('reInit', handleReInit);
+      emblaApi.off('autoScroll:play', handlePlay).off('autoScroll:stop', handleStop).off('reInit', handleReInit);
     };
   }, [autoScroll, emblaApi, isPlaying]);
+};
+
+export const useCurrency = () => {
+  const [currency, setCurrency] = useState<number>(41);
+
+  useEffect(() => {
+    const fetchCurrency = async () => {
+      const result = await getCurrency();
+      setCurrency(result);
+    };
+
+    fetchCurrency();
+  }, []);
+
+  return currency;
 };

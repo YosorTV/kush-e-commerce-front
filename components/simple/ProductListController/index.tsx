@@ -15,11 +15,7 @@ interface IProductListController {
   onClick?: () => Promise<void>;
 }
 
-export const ProductListController: FC<IProductListController> = ({
-  total,
-  disabled,
-  perPage = 8,
-}) => {
+export const ProductListController: FC<IProductListController> = ({ total, disabled, perPage = 8 }) => {
   const [pageSize, setPageSize] = useState<number>(perPage);
 
   const router = useRouter();
@@ -37,9 +33,7 @@ export const ProductListController: FC<IProductListController> = ({
 
   return (
     <div className='flex flex-col items-center justify-center py-6 pb-10 lg:pt-16'>
-      <span className='text-sm font-medium uppercase text-base-200'>
-        {t('total', { number: total })}
-      </span>
+      <span className='text-sm font-medium uppercase text-base-200'>{t('total', { number: total })}</span>
       <Button className='btn-link' disabled={disabled} onClick={handleMore}>
         {t('loadMore')}
       </Button>

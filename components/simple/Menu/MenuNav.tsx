@@ -39,7 +39,7 @@ export const MenuNav: FC<MenuNavProps> = ({
       text={item.title}
       slug={item.slug}
       className='py-2.5'
-      url={`/catalog?category=${item.slug}`}
+      url={`/catalog?categories=${item.slug}`}
       isExternal={false}
     />
   );

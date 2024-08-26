@@ -9,15 +9,8 @@ import { IoClose } from 'react-icons/io5';
 import { useFilters } from '@/store';
 import { usePathname, useRouter } from '@/lib/navigation';
 
+import { CategoryList, MaterialList, RangeSlider, SizeList, SortFields } from '@/components/simple';
 import { Accordion, Button, Input, Title } from '@/components/elements';
-
-import {
-  CategoryList,
-  MaterialList,
-  RangeSlider,
-  SizeList,
-  SortFields,
-} from '@/components/simple';
 
 import { SORT_OPTIONS } from '@/helpers/constants';
 
@@ -32,23 +25,23 @@ export const FilterForm = () => {
     {
       id: 1,
       title: t('category.title'),
-      component: <CategoryList />,
+      component: <CategoryList />
     },
     {
       id: 2,
       title: t('material.title'),
-      component: <MaterialList />,
+      component: <MaterialList />
     },
     {
       id: 3,
       title: t('size.title'),
-      component: <SizeList />,
+      component: <SizeList />
     },
     {
       id: 4,
       title: t('price.title'),
-      component: <RangeSlider />,
-    },
+      component: <RangeSlider />
+    }
   ];
 
   const handleSubmit = useCallback(
@@ -58,10 +51,11 @@ export const FilterForm = () => {
       const queryString = qs.stringify(state.options, {
         arrayFormat: 'repeat',
         encodeValuesOnly: true,
-        skipNulls: true,
+        skipNulls: true
       });
 
       state.onToggle();
+
       router.replace(`${pathname}?${queryString}`, { scroll: false });
     },
     [pathname, router, state]
@@ -69,7 +63,8 @@ export const FilterForm = () => {
 
   const handleReset = useCallback(() => {
     state.onReset();
-    router.replace(pathname);
+
+    router.replace(pathname, { scroll: false });
   }, [pathname, router, state]);
 
   return (
@@ -78,11 +73,7 @@ export const FilterForm = () => {
         <Title level='2' className='text-xl font-semibold text-base-200'>
           {t('sort.title')}:
         </Title>
-        <Button
-          type='button'
-          onClick={state.onToggle}
-          className='col-span-1 col-start-5 row-start-1 md:col-start-6'
-        >
+        <Button type='button' onClick={state.onToggle} className='col-span-1 col-start-5 row-start-1 md:col-start-6'>
           <IoClose className='h-6 w-6 fill-base-200' />
         </Button>
       </div>
@@ -90,10 +81,7 @@ export const FilterForm = () => {
       <SortFields data={SORT_OPTIONS} />
       <Accordion data={FILTER_OPTIONS} />
       <div className='my-4 flex w-full flex-col justify-between'>
-        <Button
-          type='submit'
-          className='bg-transparent text-base-200 hover:!bg-base-200 hover:!text-base-100'
-        >
+        <Button type='submit' className='bg-transparent text-base-200 hover:!bg-base-200 hover:!text-base-100'>
           {t('filter.submit')}
         </Button>
         <div className='divider px-4' />
