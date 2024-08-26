@@ -29,9 +29,7 @@ export const MaterialList = () => {
   ];
 
   useEffect(() => {
-    if (chosenMaterials.length > 0) {
-      state.onFilter({ key: 'materials', value: chosenMaterials });
-    }
+    state.onFilter({ key: 'materials', value: chosenMaterials });
   }, []);
 
   const handleMaterialChange = ({ target }: ChangeEvent<HTMLInputElement>) => {

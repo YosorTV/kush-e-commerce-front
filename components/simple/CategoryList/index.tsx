@@ -17,6 +17,7 @@ export const CategoryList = () => {
   const searchParams = useSearchParams();
 
   const chosenCategories = searchParams.getAll('categories');
+  console.log('chosenCategories: ', chosenCategories);
 
   const t = useTranslations('category');
 
@@ -28,9 +29,7 @@ export const CategoryList = () => {
   ];
 
   useEffect(() => {
-    if (chosenCategories.length > 0) {
-      state.onFilter({ key: 'categories', value: chosenCategories });
-    }
+    state.onFilter({ key: 'categories', value: chosenCategories });
   }, []);
 
   const handleCategoryChange = ({ target }: ChangeEvent<HTMLInputElement>) => {

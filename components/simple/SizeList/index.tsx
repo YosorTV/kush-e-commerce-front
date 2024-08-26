@@ -27,9 +27,7 @@ export const SizeList = () => {
   ];
 
   useEffect(() => {
-    if (chosenSizes.length > 0) {
-      state.onFilter({ key: 'sizes', value: chosenSizes });
-    }
+    state.onFilter({ key: 'sizes', value: chosenSizes });
   }, []);
 
   const handleSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
