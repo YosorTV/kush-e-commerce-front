@@ -26,7 +26,7 @@ export const productsQuery = ({
     filters.$or = [
       { title: { $containsi: name } },
       { category: { $containsi: name } },
-      { collections: { title: { $containsi: name } } },
+      { collections: { title: { $containsi: name } } }
     ];
   }
 
@@ -40,7 +40,7 @@ export const productsQuery = ({
 
   if (options?.materials?.length > 0) {
     filters.materials = {
-      materials: { $eq: options.materials },
+      materials: { $eq: options.materials }
     };
   }
 
@@ -49,13 +49,11 @@ export const productsQuery = ({
   }
 
   if (options.price) {
-    const [minPrice, maxPrice] = Array.isArray(options.price)
-      ? options.price
-      : [0, 3000];
+    const [minPrice, maxPrice] = Array.isArray(options.price) ? options.price : [0, 3000];
 
     filters.price = {
       $gte: minPrice,
-      $lte: maxPrice,
+      $lte: maxPrice
     };
   }
 
@@ -71,16 +69,16 @@ export const productsQuery = ({
       images: {
         populate: {
           data: {
-            fields: IMAGE_FIELDS,
-          },
-        },
-      },
+            fields: IMAGE_FIELDS
+          }
+        }
+      }
     },
     sort,
     filters,
     pagination: {
       page,
-      pageSize,
-    },
+      pageSize
+    }
   };
 };

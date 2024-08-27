@@ -10,3 +10,4 @@ export * from '@/components/complex/CatalogSection';
 export * from '@/components/complex/CollectionSection';
 export * from '@/components/complex/CollectionDetails';
 export * from '@/components/complex/AboutSection';
+export * from '@/components/complex/Modal';

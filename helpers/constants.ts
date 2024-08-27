@@ -5,7 +5,7 @@ interface RequestOptions {
 
 const baseHeaders = {
   Accept: 'application/json',
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json'
 };
 
 const getParams = (options: RequestOptions = {}): RequestInit => {
@@ -18,7 +18,7 @@ const getParams = (options: RequestOptions = {}): RequestInit => {
   return {
     method: 'GET',
     headers,
-    ...options,
+    ...options
   };
 };
 
@@ -32,7 +32,7 @@ const postParams = (options: RequestOptions = {}): RequestInit => {
   return {
     method: 'POST',
     headers,
-    body: options.body ? JSON.stringify(options.body) : undefined,
+    body: options.body ? JSON.stringify(options.body) : undefined
   };
 };
 
@@ -46,7 +46,7 @@ const putParams = (options: RequestOptions = {}): RequestInit => {
   return {
     method: 'PUT',
     headers,
-    body: options.body ? JSON.stringify(options.body) : undefined,
+    body: options.body ? JSON.stringify(options.body) : undefined
   };
 };
 
@@ -60,7 +60,7 @@ const deleteParams = (options: RequestOptions = {}): RequestInit => {
   return {
     method: 'DELETE',
     headers,
-    ...options,
+    ...options
   };
 };
 
@@ -80,14 +80,14 @@ export const AUTH_SUCCESS_FIELDS = {
   title: true,
   description: true,
   redirect: true,
-  cover: { fields: IMAGE_FIELDS },
+  cover: { fields: IMAGE_FIELDS }
 };
 
 export const AUTH_RESET_FIELDS = {
   title: true,
   formFields: true,
   submitBtn: true,
-  cover: { fields: IMAGE_FIELDS },
+  cover: { fields: IMAGE_FIELDS }
 };
 
 export const AUTH_LOGIN_FIELDS = {
@@ -98,8 +98,8 @@ export const AUTH_LOGIN_FIELDS = {
   createAccountLink: true,
   providers: true,
   cover: {
-    fields: IMAGE_FIELDS,
-  },
+    fields: IMAGE_FIELDS
+  }
 };
 
 export const META_FIELDS = ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'];
@@ -110,8 +110,8 @@ export const PRIVATE_ROUTES = ['/profile', '/orders'];
 export const PRICE_LOCALE = {
   USD: {
     style: 'currency',
-    currency: 'USD',
-  },
+    currency: 'USD'
+  }
 };
 
 export const SCREEEN = {
@@ -120,25 +120,25 @@ export const SCREEEN = {
   md: '(min-width: 768px)',
   lg: '(min-width: 1024px)',
   xl: '(min-width: 1280px)',
-  xxl: '(min-width: 1920px)',
+  xxl: '(min-width: 1920px)'
 };
 
 export const SORT_OPTIONS = [
   {
     id: 1,
     label: 'recommended',
-    name: 'recommended',
+    name: 'recommended'
   },
   {
     id: 2,
     label: 'priceLowToHigh',
-    name: 'low',
+    name: 'low'
   },
   {
     id: 3,
     label: 'priceHighToLow',
-    name: 'high',
-  },
+    name: 'high'
+  }
 ];
 
 export const STRAPI_PAGES = {
@@ -157,6 +157,8 @@ export const STRAPI_PAGES = {
   term: 'term-page',
   currency: 'currency-change',
   delivery: 'delivery',
+  wishlistNotify: 'auth-notification',
+  wishlist: 'wishlists'
 };
 
 export const passwordValidationParams = {
@@ -164,7 +166,7 @@ export const passwordValidationParams = {
   uppercase: false,
   lowercase: false,
   number: false,
-  special: false,
+  special: false
 };
 
 export const passwordValidationRules = (value: string) => ({
@@ -172,5 +174,5 @@ export const passwordValidationRules = (value: string) => ({
   uppercase: /[A-Z]/.test(value),
   lowercase: /[a-z]/.test(value),
   number: /\d/.test(value),
-  special: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+  special: /[!@#$%^&*(),.?":{}|<>]/.test(value)
 });

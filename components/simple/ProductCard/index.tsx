@@ -9,16 +9,17 @@ import { Product } from '@/types/components';
 import { Link } from '@/lib/navigation';
 import { Price } from '../Price';
 import { getTranslations } from 'next-intl/server';
-import { getCurrency } from '@/services';
+import Wishlist from '../Wishlist';
 
 type ProductCardProps = {
   product: Product;
   className?: string;
+  currency?: number;
+  session: any;
 };
 
-export const ProductCard: FC<ProductCardProps> = async ({ product, className }) => {
+export const ProductCard: FC<ProductCardProps> = async ({ product, session, className, currency = 41 }) => {
   const t = await getTranslations();
-  const currency = await getCurrency();
 
   return (
     <figure key={product.id} className={cn('relative grid cursor-pointer', className)}>
@@ -28,10 +29,17 @@ export const ProductCard: FC<ProductCardProps> = async ({ product, className }) 
       </NextLink>
 
       <figcaption className='flex w-full flex-col py-2'>
-        <div className='flex flex-1 justify-between'>
+        <div className='flex flex-1 items-center justify-between'>
           <Title level='3' className='font-semibold'>
             {product.title}
           </Title>
+          <Wishlist
+            token={session?.accessToken}
+            locale={product.locale}
+            productId={product.id}
+            inWishlist={product?.inWishlist ?? false}
+            userId={session?.user?.id}
+          />
         </div>
         <div className='h-6'>
           {product?.collections &&

@@ -26,6 +26,7 @@ export interface Product {
   id: number;
   title: string;
   available: boolean;
+  inWishlist?: boolean;
   color: string;
   colors: {
     data: string[];

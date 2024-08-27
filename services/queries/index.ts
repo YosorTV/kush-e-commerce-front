@@ -12,6 +12,8 @@ import { productMetaQuery, productQuery } from './productQuery';
 import { productsQuery } from './productsQuery';
 import { profileQuery } from './profileQuery';
 import { sizeQuery } from './sizeQuery';
+import { wishlistNotify } from './wishlistNotify';
+import { wishlistProducts } from './wishlistProducts';
 
 export const STRAPI_QUERIES = {
   GLOBAL: globalQuery,
@@ -31,4 +33,6 @@ export const STRAPI_QUERIES = {
   META: metaQuery,
   SIZE: sizeQuery,
   DELIVERY: deliveryQuery,
+  WISHLIST_NOTIFY: wishlistNotify,
+  WISHLIST_PRODUCTS: wishlistProducts
 };

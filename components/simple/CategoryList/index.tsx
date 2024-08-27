@@ -16,10 +16,9 @@ export const CategoryList = () => {
   const state = useFilters();
   const searchParams = useSearchParams();
 
-  const chosenCategories = searchParams.getAll('categories');
-  console.log('chosenCategories: ', chosenCategories);
-
   const t = useTranslations('category');
+
+  const chosenCategories = searchParams.getAll('categories');
 
   const categories: TCategory[] = [
     { id: `category-${1}`, text: 'rings' },

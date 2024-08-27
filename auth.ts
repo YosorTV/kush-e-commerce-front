@@ -1,14 +1,8 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import CredentialProvider, {
-  CredentialInput,
-} from 'next-auth/providers/credentials';
+import CredentialProvider, { CredentialInput } from 'next-auth/providers/credentials';
 
-import {
-  googleTokenAdapter,
-  sessionAdapter,
-  tokenAdapter,
-} from '@/adapters/auth';
+import { googleTokenAdapter, sessionAdapter, tokenAdapter } from '@/adapters/auth';
 
 import { strapiProviderLogin, login } from '@/services';
 
@@ -16,11 +10,11 @@ export const {
   auth,
   signIn,
   signOut,
-  handlers: { GET, POST },
+  handlers: { GET, POST }
 } = NextAuth({
-  secret: process.env.NEXTAUTH_SECRET,
   trustHost: true,
   session: { strategy: 'jwt' },
+  secret: process.env.AUTH_SECRET || '81l3XFFjNE2TVjN9LS0ZuiPaTC8UqaR4',
   pages: { signIn: '/login' },
   providers: [
     CredentialProvider({
@@ -35,12 +29,12 @@ export const {
         }
 
         return response;
-      },
+      }
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+    })
   ],
   callbacks: {
     async jwt({ token, user, account }) {
@@ -52,7 +46,7 @@ export const {
         if (account.provider === 'google') {
           const response = await strapiProviderLogin({
             provider: account.provider,
-            options: { ...token, access_token: account.access_token },
+            options: { ...token, access_token: account.access_token }
           });
 
           if (response?.exist) {
@@ -69,6 +63,6 @@ export const {
       session = sessionAdapter({ token });
 
       return Promise.resolve(session);
-    },
-  },
+    }
+  }
 });

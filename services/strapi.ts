@@ -1,11 +1,7 @@
 import { flattenAttributes } from '@/lib/utils';
 import { getData, postData, putData } from '@/lib/fetch';
 
-export const getStrapiData = async (
-  path: string,
-  queryParams?: any,
-  options?: any
-) => {
+export const getStrapiData = async (path: string, queryParams?: any, options?: any) => {
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
 
   if (queryParams) {
@@ -17,18 +13,14 @@ export const getStrapiData = async (
   return flattenAttributes(response);
 };
 
-export const postStrapiData = async (
-  path: string,
-  data: any,
-  options?: any
-) => {
+export const postStrapiData = async (path: string, data: any, options?: any) => {
   const url = new URL(`api/${path}`, process.env.NEXT_PUBLIC_STRAPI_URL);
 
   if (options) {
-    url.search = options;
+    url.search = new URLSearchParams(options).toString();
   }
 
-  const response = await postData(url.href, data);
+  const response = await postData(url.href, data, { token: data.token });
 
   return response;
 };

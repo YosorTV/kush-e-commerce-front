@@ -31,3 +31,4 @@ export * from '@/components/simple/StrapiContentBlock';
 export * from '@/components/simple/Copyright';
 export * from '@/components/simple/ContactUsBlock';
 export * from '@/components/simple/ProductListGroup';
+export * from '@/components/simple/Wishlist';
