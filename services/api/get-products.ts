@@ -36,8 +36,6 @@ export async function getProductsData({ locale, page = 1, pageSize = 4, name, ..
 
     const filteredProducts = updatedProducts.filter((product: any) => product.locale === locale);
 
-    revalidateTag('products');
-
     return {
       ...response,
       data: filteredProducts
