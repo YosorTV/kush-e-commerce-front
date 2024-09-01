@@ -20,14 +20,19 @@ export async function getProductsData({ locale, page = 1, pageSize = 4, name, ..
   const response = await getStrapiData('products', generateStrapiQuery(productsApi), { next: { tags: ['products'] } });
 
   if (session?.accessToken) {
-    const { data: wishlist } = await getWishlistProducts({ locale, token: session.accessToken });
+    const { data: wishlist } = await getWishlistProducts({
+      locale,
+      userId: Number(session.user.id),
+      token: session.accessToken
+    });
 
-    const wishlistProductIds = wishlist.data
+    const wishlistProductIds = wishlist
       .flatMap((item: any) => item.products.data)
       .map((product: Product) => product.id);
 
     const updatedProducts = response.data.map((product: Product) => {
       const inWishlist = wishlistProductIds.includes(product.id);
+
       return {
         ...product,
         inWishlist

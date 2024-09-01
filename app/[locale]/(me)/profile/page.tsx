@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { PageLayout } from '@/components/layouts';
 import { ProfileForm } from '@/components/forms';
 import { STRAPI_PAGES } from '@/helpers/constants';
 import { getMetadata, getProfileData } from '@/services';
@@ -23,8 +22,8 @@ export default async function ProfilePage({ params }: PageProps) {
   const { data } = await getProfileData({ locale, token });
 
   return (
-    <PageLayout className='mt-16'>
+    <section className='w-full'>
       <ProfileForm data={data.formFields} state={user} />
-    </PageLayout>
+    </section>
   );
 }

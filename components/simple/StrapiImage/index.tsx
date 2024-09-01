@@ -17,6 +17,7 @@ export function StrapiImage({
   width = 600,
   priority = false,
   overlay = false,
+  sizes = '(max-width:768px) 100vw, (max-width:968px) 70vw, (max-width:1200px) 100vw'
 }: Readonly<IStrapiImageProps>) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
@@ -31,7 +32,7 @@ export function StrapiImage({
           fill={fill}
           priority
           blurDataURL={previewUrl}
-          sizes='100vw'
+          sizes={sizes}
           fetchPriority='high'
           className={className}
         />
@@ -47,6 +48,7 @@ export function StrapiImage({
           blurDataURL={previewUrl}
           priority={priority}
           className={className}
+          sizes={sizes}
         />
       )}
       {overlay && (

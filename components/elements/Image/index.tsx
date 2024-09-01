@@ -15,6 +15,7 @@ export const Image: FC<IImageProps> = ({
   fill = false,
   formats,
   loading,
+  sizes = '(max-width:768px) 50vw, (max-width:968px) 70vw, (max-width:1200px) 100vw'
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -24,7 +25,7 @@ export const Image: FC<IImageProps> = ({
     return (
       <NextImage
         quality={75}
-        sizes='100vw'
+        sizes={sizes}
         src={src}
         fill={fill}
         priority={priority}

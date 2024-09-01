@@ -11,15 +11,10 @@ interface IGetProducts {
   token: string;
 }
 
-export const getProfileData = async ({
-  locale,
-  token,
-}: IGetProducts): Promise<any> => {
+export const getProfileData = async ({ locale, token }: IGetProducts): Promise<any> => {
   const profileQP = generateStrapiQuery(STRAPI_QUERIES.PROFILE({ locale }));
 
-  const response = await getStrapiData(STRAPI_PAGES.profile, profileQP, {
-    token,
-  });
+  const response = await getStrapiData(STRAPI_PAGES.profile, profileQP, { token });
 
   if (!response.id) notFound();
 

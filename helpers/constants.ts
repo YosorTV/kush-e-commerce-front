@@ -72,7 +72,7 @@ export const LOCALES_PREFIX = 'always';
 
 export const CATEGORY_FIELDS = ['title', 'slug', 'hintText'];
 export const IMAGE_FIELDS = ['url', 'alternativeText', 'formats'];
-export const PROFILE_FIELDS = ['general', 'additional', 'actions', 'avatar'];
+export const PROFILE_FIELDS = ['general', 'additional', 'actions'];
 
 export const AUTH_FORGOT_FIELDS = ['formFields', 'submitBtn', 'title', 'loginUrl', 'cover'];
 
@@ -105,7 +105,15 @@ export const AUTH_LOGIN_FIELDS = {
 export const META_FIELDS = ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'];
 
 export const ROOT = '/';
-export const PRIVATE_ROUTES = ['/profile', '/orders'];
+
+export const PRIVATE_ROUTES = [
+  '/uk/profile',
+  '/en/profile',
+  '/uk/orders',
+  '/en/orders',
+  '/uk/favourites',
+  '/en/favourites'
+];
 
 export const PRICE_LOCALE = {
   USD: {

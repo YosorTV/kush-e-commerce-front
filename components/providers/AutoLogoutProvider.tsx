@@ -3,59 +3,59 @@
 import { FC, PropsWithChildren, useEffect } from 'react';
 
 import { useActivity } from '@/store';
-
 import { logout } from '@/services';
+import { Session } from 'next-auth';
 
 export interface AutoLogoutProviderProps {
-  timeoutMs?: number;
-  timeoutCheckMs?: number;
-  requireSession?: boolean;
-  session: any;
+  timeoutMs?: number; // Optional timeout for user inactivity
+  timeoutCheckMs?: number; // Interval time to check for user inactivity
+  requireSession?: boolean; // Flag to check if session is required
+  session: Session; // Session object that contains session-related information
 }
 
-type WindowActivityEvent = keyof WindowEventMap;
+type WindowActivityEvent = keyof WindowEventMap; // Type alias for window events
 
-export const AutoLogoutProvider: FC<
-  PropsWithChildren<AutoLogoutProviderProps>
-> = ({ timeoutMs, timeoutCheckMs = 1000, session, children }) => {
+export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> = ({
+  timeoutMs = 15 * 60 * 1000,
+  timeoutCheckMs = 1000,
+  session,
+  children
+}) => {
   const { lastActivity, setLastActivity } = useActivity();
 
-  function activity() {
-    return new Date().getTime();
-  }
+  const getCurrentTime = () => new Date().getTime();
 
-  function onUserActivity() {
-    const now = activity();
+  const onUserActivity = () => {
+    const now = getCurrentTime();
 
     setLastActivity(now);
-  }
+  };
 
-  async function isUserInactive() {
-    const now = activity();
+  const checkUserInactivity = async () => {
+    const now = getCurrentTime();
 
     if (session && session.exp) {
-      const expiry = new Date(session.exp * 1000).getTime();
+      const expiryTime = new Date(session.exp * 1000).getTime();
 
-      if (now > expiry) {
+      if (now > expiryTime) {
         await logout();
+        return;
       }
     }
 
-    if (session && lastActivity + timeoutMs < now) {
+    if (lastActivity && now - lastActivity > timeoutMs) {
       await logout();
     }
-    return false;
-  }
+  };
 
   useEffect(() => {
-    const windowEvents: WindowActivityEvent[] = ['focus', 'scroll', 'click'];
+    const windowEvents: WindowActivityEvent[] = ['focus', 'scroll', 'click', 'keydown', 'mousemove'];
 
     windowEvents.forEach((eventName) => {
       window.addEventListener(eventName, onUserActivity, false);
     });
 
-    // initialize an interval to check activity
-    const intervalId = window.setInterval(isUserInactive, timeoutCheckMs);
+    const intervalId = window.setInterval(checkUserInactivity, timeoutCheckMs);
 
     return () => {
       windowEvents.forEach((eventName) => {
@@ -63,9 +63,7 @@ export const AutoLogoutProvider: FC<
       });
       window.clearInterval(intervalId);
     };
+  }, [lastActivity, timeoutCheckMs, timeoutMs, session]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastActivity, timeoutCheckMs]);
-
-  return children;
+  return <>{children}</>;
 };

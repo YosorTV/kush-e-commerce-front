@@ -23,7 +23,8 @@
     "availableIn": "In stock {number}",
     "emptyList": "Empty list",
     "privacy": "Privacy & Policy",
-    "terms": "Terms & Conditions"
+    "terms": "Terms & Conditions",
+    "signOut": "Sign Out"
   },
   "copyright": {
     "title": "Copyright",

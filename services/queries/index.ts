@@ -10,7 +10,7 @@ import { metaQuery } from './metaQuery';
 import { policiesQuery } from './policiesQuery';
 import { productMetaQuery, productQuery } from './productQuery';
 import { productsQuery } from './productsQuery';
-import { profileQuery } from './profileQuery';
+import { profileLayoutQuery, profileQuery } from './profileQuery';
 import { sizeQuery } from './sizeQuery';
 import { wishlistNotify } from './wishlistNotify';
 import { wishlistProducts } from './wishlistProducts';
@@ -30,6 +30,7 @@ export const STRAPI_QUERIES = {
   CONTACT_US: contactUsQuery,
   CONTACT_US_BLOCK: contactUsBlockQuery,
   PROFILE: profileQuery,
+  PROFILE_LAYOUT: profileLayoutQuery,
   META: metaQuery,
   SIZE: sizeQuery,
   DELIVERY: deliveryQuery,
