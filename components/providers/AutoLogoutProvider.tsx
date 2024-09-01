@@ -63,7 +63,7 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
       });
       window.clearInterval(intervalId);
     };
-  }, [lastActivity, timeoutCheckMs, timeoutMs, session]);
+  }, [session]);
 
   return <>{children}</>;
 };
