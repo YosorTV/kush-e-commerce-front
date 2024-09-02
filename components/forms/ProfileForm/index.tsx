@@ -12,6 +12,7 @@ export const ProfileForm = ({ data, state }: any) => {
     const actionType: any = {
       delete: (
         <DeleteButton
+          key={action.id}
           className='w-1/2'
           text={action.text ?? 'Delete'}
           loadingText={action?.loadingText ?? 'Loading...'}
@@ -20,11 +21,12 @@ export const ProfileForm = ({ data, state }: any) => {
       ),
       submit: (
         <SubmitButton
+          key={action.id}
           className='w-1/2'
           text={action?.text ?? 'Apply'}
           loadingText={action?.loadingText ?? 'Loading...'}
         />
-      ),
+      )
     };
 
     return actionType[action.type];
@@ -49,13 +51,9 @@ export const ProfileForm = ({ data, state }: any) => {
         </div>
       </div>
       <div className='flex flex-col'>
-        <div className='flex flex-col gap-x-5'>
-          {printInputs(data.additional)}
-        </div>
+        <div className='flex flex-col gap-x-5'>{printInputs(data.additional)}</div>
       </div>
-      <div className='flex items-center justify-center gap-5'>
-        {printActions(data.actions)}
-      </div>
+      <div className='flex items-center justify-center gap-5'>{printActions(data.actions)}</div>
     </Form>
   );
 };

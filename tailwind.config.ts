@@ -4,10 +4,11 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './lib/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js'
   ],
   theme: {
     container: {
-      padding: '1.5rem',
+      padding: '1.5rem'
     },
     screens: {
       xs: '475px', // extra small screen
@@ -15,10 +16,10 @@ module.exports = {
       md: '768px', // medium screen
       lg: '1024px', // large screen
       xl: '1280px', // extra large screen
-      '2xl': '1536px', // 2X extra large screen
+      '2xl': '1536px' // 2X extra large screen
     },
     minWidth: {
-      btn: 240,
+      btn: 240
     },
     extend: {
       height: {
@@ -30,7 +31,7 @@ module.exports = {
         '2md': '70vh',
         md: '50vh',
         sm: '25vh',
-        '112': '480px',
+        '112': '480px'
       },
       screens: {
         xs: '475px', // extra small screen
@@ -38,7 +39,7 @@ module.exports = {
         md: '768px', // medium screen
         lg: '1024px', // large screen
         xl: '1280px', // extra large screen
-        '2xl': '1536px', // 2X extra large screen
+        '2xl': '1536px' // 2X extra large screen
       },
       fontSize: {
         xs: '0.75rem', // 12px
@@ -53,26 +54,26 @@ module.exports = {
         '6xl': '4rem', // 64px
         '7xl': '5rem', // 80px
         '8xl': '6rem', // 96px
-        '9xl': '9rem', // 112px
+        '9xl': '9rem' // 112px
       },
       scrollbar: {
         width: '12px',
         trackColor: 'white',
         thumbColor: 'black',
         thumbHoverColor: '#333',
-        cornerColor: 'white',
+        cornerColor: 'white'
       },
       objectPosition: {
-        'center-to-top': '0 75%',
+        'center-to-top': '0 75%'
       },
       boxShadow: {
-        'to-top': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 -4px 50px -2px rgb(0 0 0 / 0.1)',
+        'to-top': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 -4px 50px -2px rgb(0 0 0 / 0.1)'
       },
       gridTemplateColumns: {
         hero: 'auto 1fr',
-        fluid: 'repeat(auto-fit, minmax(19rem, 1fr))',
-      },
-    },
+        fluid: 'repeat(auto-fit, minmax(19rem, 1fr))'
+      }
+    }
   },
   darkMode: 'class',
   plugins: [require('daisyui'), require('tailwind-scrollbar')],
@@ -85,8 +86,8 @@ module.exports = {
           neutral: '#033178',
           'base-100': '#E9E8D5',
           'base-200': '#242424',
-          'base-300': '#FFFFFF',
-        },
+          'base-300': '#FFFFFF'
+        }
       },
       {
         sunset: {
@@ -96,14 +97,14 @@ module.exports = {
           neutral: '#033178',
           'base-100': '#242424',
           'base-200': '#FFFFFF',
-          'base-300': '#FFFFFF',
-        },
-      },
+          'base-300': '#FFFFFF'
+        }
+      }
     ],
     themeRoot: ':root',
     styled: true,
     base: true,
     utils: true,
-    prefix: '',
-  },
+    prefix: ''
+  }
 };
