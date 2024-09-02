@@ -13,8 +13,8 @@ export const sessionAdapter = ({ token }: any) => {
         id: token.id,
         name: token.name,
         email: token.email,
-        picture: token.picture,
-      },
+        picture: token.picture
+      }
     };
   }
 
@@ -24,7 +24,7 @@ export const sessionAdapter = ({ token }: any) => {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
     exp: token.expires ?? token.exp,
-    user: { ...decodedTokenData, name: token.name },
+    user: { ...decodedTokenData, name: token.name }
   };
 };
 
@@ -40,6 +40,7 @@ export const tokenAdapter = ({ token, user }: any) => {
     token.name = user.username;
     token.picture = user.picture;
     token.id = user.id;
+    token.email = user.email || decodedTokenData.email;
 
     return token;
   }
@@ -64,6 +65,6 @@ export const signInParamsAdapter = (credentials: SignInAdapterProps) => {
     email: credentials.email,
     password: credentials.password,
     callbackUrl: '/',
-    redirect: false,
+    redirect: false
   };
 };

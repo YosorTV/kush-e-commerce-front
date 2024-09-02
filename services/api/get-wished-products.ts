@@ -12,7 +12,7 @@ interface IGetWishlistProducts {
 export const getWishlistProducts = async ({ locale = DEFAULT_LOCALE, userId, token }: IGetWishlistProducts) => {
   const wishlistApi = STRAPI_QUERIES.WISHLIST_PRODUCTS({ locale, userId });
 
-  const { data, meta } = await getStrapiData(STRAPI_PAGES.wishlist, generateStrapiQuery(wishlistApi), token);
+  const { data = [], meta } = await getStrapiData(STRAPI_PAGES.wishlist, generateStrapiQuery(wishlistApi), token);
 
   return { data, meta };
 };

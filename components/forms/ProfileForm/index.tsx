@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Input } from '@/components/elements';
+import { Form, Input, Title } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
 import { DeleteButton } from '@/components/simple/DeleteButton';
 
@@ -8,6 +8,17 @@ import { updateProfileAction } from '@/services';
 import { schemas } from '@/lib';
 
 export const ProfileForm = ({ data, state }: any) => {
+  const printActions = (data: any) => data?.map(formActions);
+
+  const printInputs = (data: any) => {
+    return data?.map((input: any) => <Input key={input.id} {...input} />);
+  };
+
+  const inputFieldAdapter = (input: any, state: any) => ({ ...input, value: state[input.name] });
+
+  const updatedGeneralFields = data.general.map((input: any) => inputFieldAdapter(input, state));
+  const updatedContactsFields = data.contacts.map((input: any) => inputFieldAdapter(input, state));
+
   const formActions = (action: any) => {
     const actionType: any = {
       delete: (
@@ -32,28 +43,26 @@ export const ProfileForm = ({ data, state }: any) => {
     return actionType[action.type];
   };
 
-  const printActions = (data: any) => data?.map(formActions);
-
-  const printInputs = (data: any) => {
-    return data?.map((input: any) => <Input key={input.id} {...input} />);
-  };
-
   return (
     <Form
       schema={schemas.profile}
       action={updateProfileAction}
-      className='m-auto flex w-2/3 flex-col justify-center gap-y-5 pb-10'
+      className='mt-5 flex flex-col justify-center gap-5 p-10'
     >
-      <div className='flex flex-col'>
-        <div className='flex flex-col gap-x-5'>
-          <Input type='hidden' name='userId' value={state.id} />
-          {printInputs(data.general)}
-        </div>
+      <Title level='1' variant='subheading' className='text-center lg:text-left'>
+        {data?.generalTitle}
+      </Title>
+      <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>
+      <div className='flex flex-col gap-y-5'>
+        <Title level='3'>{data?.contactsTitle}</Title>
+        <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedContactsFields)}</div>
       </div>
-      <div className='flex flex-col'>
-        <div className='flex flex-col gap-x-5'>{printInputs(data.additional)}</div>
+      <div className='flex flex-col gap-y-5'>
+        <Title level='3'>{data?.additionalTitle}</Title>
+        <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(data.additional)}</div>
+        <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
       </div>
-      <div className='flex items-center justify-center gap-5'>{printActions(data.actions)}</div>
+      <div className='mt-10 flex items-center justify-center gap-5'>{printActions(data.actions)}</div>
     </Form>
   );
 };

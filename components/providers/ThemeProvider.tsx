@@ -7,12 +7,7 @@ type ThemeProviderProps = { children: React.ReactNode };
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   return (
-    <ThemeContext
-      enableSystem
-      enableColorScheme
-      defaultTheme='light'
-      attribute='data-theme'
-    >
+    <ThemeContext enableSystem enableColorScheme defaultTheme='light' attribute='data-theme'>
       {children}
     </ThemeContext>
   );

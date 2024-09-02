@@ -14,8 +14,6 @@ interface ISignOut {
 export const SignOutButton: FC<ISignOut> = ({ text, icon, className }) => {
   const handleSignOut = async () => await signOut();
 
-  console.log(icon);
-
   return (
     <button type='button' onClick={handleSignOut} className={cn('font-semibold capitalize hover:bg-none', className)}>
       <span className='flex items-center'>

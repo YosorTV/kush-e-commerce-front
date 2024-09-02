@@ -49,7 +49,7 @@ export const ProfileSidebar: FC<IProfileSidebar> = ({ links, signOutTitle = 'Ð’Ð
   };
 
   return (
-    <nav className='w-max min-w-[300px] px-5'>
+    <nav className='mt-16 hidden w-max min-w-[300px] px-5 md:block'>
       <ul className='flex flex-col gap-y-2.5'>
         {links.map(printLink)}
         <li className='flex h-12 w-full items-center'>

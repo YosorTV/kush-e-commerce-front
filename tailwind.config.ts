@@ -83,7 +83,9 @@ module.exports = {
         light: {
           success: '#41A139',
           error: '#AA0A0A',
+          secondary: '#F5A81A',
           neutral: '#033178',
+          'info-content': '#DEDDCC',
           'base-100': '#E9E8D5',
           'base-200': '#242424',
           'base-300': '#FFFFFF'
@@ -95,6 +97,7 @@ module.exports = {
           secondary: '#F5A81A',
           error: '#AA0A0A',
           neutral: '#033178',
+          'info-content': '#2D2D2D',
           'base-100': '#242424',
           'base-200': '#FFFFFF',
           'base-300': '#FFFFFF'

@@ -72,7 +72,15 @@ export const LOCALES_PREFIX = 'always';
 
 export const CATEGORY_FIELDS = ['title', 'slug', 'hintText'];
 export const IMAGE_FIELDS = ['url', 'alternativeText', 'formats'];
-export const PROFILE_FIELDS = ['general', 'additional', 'actions'];
+export const PROFILE_FIELDS = [
+  'general',
+  'additional',
+  'contacts',
+  'actions',
+  'generalTitle',
+  'additionalTitle',
+  'contactsTitle'
+];
 
 export const AUTH_FORGOT_FIELDS = ['formFields', 'submitBtn', 'title', 'loginUrl', 'cover'];
 

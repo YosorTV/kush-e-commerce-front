@@ -14,8 +14,8 @@ export default async function ProfileLayout({ children, params: { locale } }: Re
   const { data } = await getProfileLayoutData({ locale, token: session?.accessToken });
 
   return (
-    <PageLayout className='mt-28'>
-      <section className='flex w-full justify-between'>
+    <PageLayout className='mt-6'>
+      <section className='flex w-full flex-grow justify-between'>
         <ProfileSidebar links={data.navigation} signOutTitle={t('signOut')} />
         {children}
       </section>

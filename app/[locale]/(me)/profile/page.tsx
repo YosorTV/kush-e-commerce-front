@@ -22,7 +22,7 @@ export default async function ProfilePage({ params }: PageProps) {
   const { data } = await getProfileData({ locale, token });
 
   return (
-    <section className='w-full'>
+    <section className='w-full bg-info-content'>
       <ProfileForm data={data.formFields} state={user} />
     </section>
   );
