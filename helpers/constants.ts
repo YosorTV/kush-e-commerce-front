@@ -164,6 +164,7 @@ export const STRAPI_PAGES = {
   contacts: 'contact-us-page',
   about: 'about-us-page',
   profile: 'profile-page',
+  me: 'users/me',
   signup: 'registration-page',
   signin: 'login-page',
   reset: 'reset-page',

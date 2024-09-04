@@ -6,22 +6,15 @@ import PhoneInput from 'react-phone-input-2';
 import { cn } from '@/lib';
 import { InputProps } from '@/types/components';
 
-export const InputPhone: FC<InputProps> = ({
-  value,
-  id,
-  name,
-  placeholder,
-  error,
-  className,
-}) => {
+export const InputPhone: FC<InputProps> = ({ value, id, name, placeholder, error, className, ...rest }) => {
   return (
     <PhoneInput
-      value={value as string}
+      value={(value as string) || (rest?.defaultValue as string)}
       inputProps={{
         id,
         name,
         placeholder,
-        type: 'tel',
+        type: 'tel'
       }}
       key={id}
       excludeCountries={['ru', 'by']}

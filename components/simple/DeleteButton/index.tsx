@@ -21,12 +21,7 @@ interface DeleteButtonProps {
   onClick: () => void;
 }
 
-export function DeleteButton({
-  text,
-  loadingText,
-  loading,
-  className,
-}: Readonly<DeleteButtonProps>) {
+export function DeleteButton({ text, loadingText, loading, className, onClick }: Readonly<DeleteButtonProps>) {
   const status = useFormStatus();
 
   return (
@@ -34,6 +29,7 @@ export function DeleteButton({
       type='button'
       aria-disabled={status.pending || loading}
       disabled={status.pending || loading}
+      onClick={onClick}
       className={cn('btn btn-error', className)}
     >
       {loading ? <Loader text={loadingText} /> : text}

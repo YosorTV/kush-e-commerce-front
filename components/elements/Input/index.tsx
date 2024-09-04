@@ -64,7 +64,7 @@ export const Input = ({
             placeholder={placeholder}
             className={className}
             error={Boolean(error)}
-            {...rest}
+            defaultValue={rest?.defaultValue as string}
           />
         );
 
@@ -84,7 +84,7 @@ export const Input = ({
   }, [className, error, id, name, placeholder, rest, type, validation]);
 
   return (
-    <div className={cn('relative flex w-full flex-col gap-y-2', containerClass)}>
+    <div className={cn('relative flex w-full flex-col gap-y-2', containerClass, type === 'hidden' && 'hidden')}>
       {label && (
         <label htmlFor={id} className={cn('label label-text p-0', labelStyle)}>
           {label}

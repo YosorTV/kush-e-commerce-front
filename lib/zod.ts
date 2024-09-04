@@ -9,7 +9,7 @@ const normalizePhoneNumber = (phoneNumber: string) => phoneNumber.replace(/[^\d]
 const getEmailErrorMessage = (locale: Locale) => {
   const messages: Record<Locale, string> = {
     en: 'Invalid email format. ',
-    uk: 'Не вірний формат пошти. ',
+    uk: 'Не вірний формат пошти. '
   };
 
   return messages[locale] || messages.en;
@@ -18,7 +18,7 @@ const getEmailErrorMessage = (locale: Locale) => {
 const requiredErrorMessage = (locale: Locale) => {
   const messages: Record<Locale, string> = {
     en: ' Required field. ',
-    uk: ' Обовязкове поле. ',
+    uk: ' Обовязкове поле. '
   };
 
   return messages[locale] || messages.en;
@@ -27,7 +27,7 @@ const requiredErrorMessage = (locale: Locale) => {
 const requiredPasswordLengthMessage = (locale: Locale) => {
   const messages: Record<Locale, string> = {
     en: 'Password must be at least 8 characters long. ',
-    uk: 'Пароль має містити мінімум 8 символів. ',
+    uk: 'Пароль має містити мінімум 8 символів. '
   };
 
   return messages[locale] || messages.en;
@@ -40,7 +40,7 @@ const passwordSchema = (locale: Locale) =>
     .string()
     .min(8, { message: requiredPasswordLengthMessage(locale) })
     .regex(PASSWORD_REG_EX, {
-      message: requiredErrorMessage(locale),
+      message: requiredErrorMessage(locale)
     });
 
 const loginSchema = (locale: Locale) => {
@@ -48,13 +48,13 @@ const loginSchema = (locale: Locale) => {
     identifier: emailSchema(locale),
     password: passwordSchema(locale),
     remember: z.string(),
-    locale: z.string().readonly(),
+    locale: z.string().readonly()
   });
 };
 
 const requiredTextField = (locale: Locale) =>
   z.string().refine((val) => val.trim() !== '', {
-    message: requiredErrorMessage(locale),
+    message: requiredErrorMessage(locale)
   });
 
 const requiredPhoneField = (locale: Locale) =>
@@ -65,30 +65,20 @@ const requiredPhoneField = (locale: Locale) =>
       return normalizedPhoneNumber.trim() !== '' && /^\d{6,}$/.test(normalizedPhoneNumber);
     },
     {
-      message: requiredErrorMessage(locale),
+      message: requiredErrorMessage(locale)
     }
   );
 
-const profileSchema = z.object({
-  firstName: z.string().refine((val) => val.trim() !== '', {
-    message: 'First name cannot be empty',
-  }),
-  lastName: z.string().refine((val) => val.trim() !== '', {
-    message: 'Last name cannot be empty',
-  }),
-  delivery: z.string().refine((val) => val.trim() !== '', {
-    message: 'Delivery address cannot be empty',
-  }),
-  billing: z.string().refine((val) => val.trim() !== '', {
-    message: 'Billing address cannot be empty',
-  }),
-  contactNumber: z.string().refine((val) => val.trim() !== '', {
-    message: 'Contact number cannot be empty',
-  }),
-  email: z.string().email().readonly(),
-  username: z.string().readonly(),
-  userId: z.string().readonly(),
-});
+const profileSchema = (locale: Locale) => {
+  return z.object({
+    firstName: requiredTextField(locale),
+    lastName: requiredTextField(locale),
+    phoneNumber: requiredPhoneField(locale),
+    email: emailSchema(locale),
+    username: z.string().readonly(),
+    userId: z.string().readonly()
+  });
+};
 
 const signupSchema = (locale: Locale) =>
   z.object({
@@ -97,7 +87,7 @@ const signupSchema = (locale: Locale) =>
     username: z.string().readonly(),
     phoneNumber: requiredPhoneField(locale),
     password: passwordSchema(locale),
-    email: emailSchema(locale),
+    email: emailSchema(locale)
   });
 
 export const forgotPasswordSchema = (locale: Locale) => z.object({ email: emailSchema(locale) });
@@ -106,7 +96,7 @@ export const resetPasswordBaseSchema = (locale: Locale) =>
   z.object({
     password: passwordSchema(locale),
     passwordConfirmation: requiredTextField(locale),
-    code: z.string().readonly(),
+    code: z.string().readonly()
   });
 
 export const resetPasswordSchema = (locale: Locale) => {
@@ -114,20 +104,20 @@ export const resetPasswordSchema = (locale: Locale) => {
 
   return schema.refine((data) => data.password === data.passwordConfirmation, {
     message: locale === 'uk' ? 'Паролі не співпадають.' : "Passwords don't matched",
-    path: ['passwordConfirmation'],
+    path: ['passwordConfirmation']
   });
 };
 
 export const updatePasswordScema = (locale: Locale) =>
   z.object({
     email: emailSchema(locale),
-    password: passwordSchema(locale),
+    password: passwordSchema(locale)
   });
 
 export const subscriptionSchema = (locale: Locale) =>
   z.object({
     email: emailSchema(locale),
-    locale: z.string().readonly(),
+    locale: z.string().readonly()
   });
 
 export const contactUsSchema = (locale: Locale) => {
@@ -135,7 +125,7 @@ export const contactUsSchema = (locale: Locale) => {
     email: emailSchema(locale),
     name: requiredTextField(locale),
     message: requiredTextField(locale),
-    locale: z.string().readonly(),
+    locale: z.string().readonly()
   });
 };
 
@@ -147,5 +137,5 @@ export const schemas = {
   subscription: subscriptionSchema,
   resetPassword: resetPasswordSchema,
   'update-password': updatePasswordScema,
-  forgotUserPassword: forgotPasswordSchema,
+  forgotUserPassword: forgotPasswordSchema
 };

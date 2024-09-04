@@ -1,4 +1,4 @@
-import { getParams, postParams, putParams } from '@/helpers/constants';
+import { deleteParams, getParams, postParams, putParams } from '@/helpers/constants';
 
 const fetcher = async (url: string, options?: any) => {
   const response = await fetch(url, options);
@@ -9,7 +9,7 @@ const fetcher = async (url: string, options?: any) => {
     return {
       data: null,
       error: result.error.message,
-      status: result.error.status,
+      status: result.error.status
     };
   }
 
@@ -30,6 +30,12 @@ export const postData = async (path: string, data: any, options?: any) => {
 
 export const putData = async (path: string, data: any, options?: any) => {
   const response = await fetcher(path, putParams({ body: data, ...options }));
+
+  return response;
+};
+
+export const deleteData = async (path: string, options?: any) => {
+  const response = await fetcher(path, deleteParams(options));
 
   return response;
 };

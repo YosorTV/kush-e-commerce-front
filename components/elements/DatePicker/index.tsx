@@ -13,11 +13,16 @@ interface IDatePicker {
   className?: string;
   error?: boolean;
   placeholder?: string;
+  defaultValue?: string;
 }
 
-const DatePicker: FC<IDatePicker> = ({ id, name, className, error, placeholder }) => {
-  const [value, setValue] = useState({ startDate: null, endDate: null });
+const DatePicker: FC<IDatePicker> = ({ id, name, className, error, placeholder, ...rest }) => {
   const locale = useLocale();
+
+  const [value, setValue] = useState({
+    startDate: new Date(rest?.defaultValue) ?? null,
+    endDate: new Date(rest?.defaultValue) ?? null
+  });
 
   return (
     <Datepicker
@@ -27,7 +32,7 @@ const DatePicker: FC<IDatePicker> = ({ id, name, className, error, placeholder }
       placeholder={placeholder}
       inputClassName={cn(className, 'bg-base-100 input input-bordered w-full text-base-200', error && 'border-error')}
       primaryColor='amber'
-      displayFormat='DD.MM.YYYY'
+      displayFormat='YYYY-MM-DD'
       asSingle
       useRange={false}
       value={value}

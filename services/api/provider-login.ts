@@ -5,10 +5,7 @@ import { stripeApi } from '@/lib/stripe';
 export const strapiProviderLogin = async ({ provider, options }: any) => {
   const { access_token, email, name } = options;
 
-  const response = await getStrapiData(
-    `auth/${provider}/callback`,
-    generateStrapiQuery({ access_token })
-  );
+  const response = await getStrapiData(`auth/${provider}/callback`, generateStrapiQuery({ access_token }));
 
   if (response.status === 400) {
     const user = await postStrapiData('find-user', { email });
@@ -26,7 +23,7 @@ export const strapiProviderLogin = async ({ provider, options }: any) => {
         `users/${response.user.id}`,
         { stripeCustomerId: stripeCustomer.id, username: name },
         {
-          token: response.jwt,
+          token: response.jwt
         }
       );
     }
