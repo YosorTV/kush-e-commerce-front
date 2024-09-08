@@ -6,12 +6,14 @@ import { Search, UserSession } from '@/components/complex';
 
 import { HeaderProps } from '@/types/components';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
+import { auth } from '@/auth';
 
-export const Header: FC<HeaderProps> = ({ data, locale }) => {
+export const Header: FC<HeaderProps> = async ({ data, locale }) => {
+  const session = await auth();
+
   const {
     pages,
     sessionLinks,
-    session,
     cta,
     shoppingCart,
     categories,
@@ -49,12 +51,12 @@ export const Header: FC<HeaderProps> = ({ data, locale }) => {
         </div>
         <div className='flex items-center gap-x-6'>
           <Search placeholder={searchTitle} />
-          <ShoppingCart data={shoppingCart} userId={session?.user?.id} />
+          <ShoppingCart data={shoppingCart} userId={session?.user && session.user.id} />
           <UserSession
             cta={cta}
             locale={locale}
             signOutTitle={signOutTitle}
-            session={session?.user}
+            session={session}
             sessionLinks={sessionLinks}
           />
           <div className='hidden lg:flex lg:gap-x-6'>

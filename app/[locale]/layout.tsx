@@ -23,7 +23,7 @@ export default async function LocalLayout({ children, params: { locale } }: Read
   const session = await auth();
 
   return (
-    <BaseLayout locale={locale} header={{ ...headerData, shoppingCart, session }} footer={footer}>
+    <BaseLayout locale={locale} header={{ ...headerData, shoppingCart }} footer={footer}>
       <NextIntlClientProvider messages={messages}>
         <AutoLogoutProvider session={session ? session : null}>{children}</AutoLogoutProvider>
       </NextIntlClientProvider>

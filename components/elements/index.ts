@@ -19,3 +19,4 @@ export * from '@/components/elements/Zoom';
 export * from '@/components/elements/RangeThumb';
 export * from '@/components/elements/RangeTrack';
 export * from '@/components/elements/Link';
+export * from '@/components/elements/AsyncSelect';

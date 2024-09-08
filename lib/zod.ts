@@ -74,9 +74,13 @@ const profileSchema = (locale: Locale) => {
     firstName: requiredTextField(locale),
     lastName: requiredTextField(locale),
     phoneNumber: requiredPhoneField(locale),
-    email: emailSchema(locale),
     username: z.string().readonly(),
-    userId: z.string().readonly()
+    date: z.string().readonly().optional(),
+    userId: z.string().readonly(),
+    city: z.string().optional(),
+    warehouse: z.string().optional(),
+    cityID: z.string().optional(),
+    warehouseID: z.string().optional()
   });
 };
 

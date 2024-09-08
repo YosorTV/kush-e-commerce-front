@@ -47,3 +47,17 @@ export const gridCols = (index: number) => {
 
   return 'col-span-1';
 };
+
+type getInitials = {
+  firstName: string;
+  lastName: string;
+};
+
+export const getInitials = ({ firstName, lastName }: getInitials) => {
+  if (!firstName && !lastName) return '';
+
+  const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : 'Anonymous';
+  const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
+
+  return `${firstInitial}${lastInitial}`;
+};

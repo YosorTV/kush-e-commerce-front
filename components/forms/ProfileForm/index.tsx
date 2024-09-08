@@ -8,27 +8,25 @@ import { updateProfileAction } from '@/services';
 import { schemas } from '@/lib';
 import { DEFAULT_LOCALE } from '@/helpers/constants';
 import { deleteProfile } from '@/services/api/delete-account';
+import { NovaPostOptions } from '@/components/simple/NovaPostOptions';
+import { inputFieldAdapter } from '@/adapters/input';
 
 export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any) => {
   const schema = schemas.profile(locale);
 
-  const printActions = (data: any) => data?.map(formActions);
-
-  const printInputs = (data: any) => {
-    return data?.map((input: any) => <Input key={input.id} {...input} />);
-  };
-
-  const inputFieldAdapter = (input: any, state: any) => ({ ...input, defaultValue: state[input.name] });
-
   const updatedGeneralFields = data.general.map((input: any) => inputFieldAdapter(input, state));
   const updatedContactsFields = data.contacts.map((input: any) => inputFieldAdapter(input, state));
+
+  const printInputs = (data: any) => {
+    return data?.map((input: any) => <Input key={input.id} disabled={input.type === 'email'} {...input} />);
+  };
 
   const formActions = (action: any) => {
     const actionType: any = {
       delete: (
         <DeleteButton
           key={action.id}
-          className='w-1/2'
+          className='w-full rounded-none border-none outline-none md:w-1/2'
           text={action.text ?? 'Delete'}
           loadingText={action?.loadingText ?? 'Loading...'}
           onClick={() => deleteProfile({ userId: state.id, token })}
@@ -37,7 +35,7 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
       submit: (
         <SubmitButton
           key={action.id}
-          className='w-1/2'
+          className='w-full rounded-none border-none !bg-base-200 uppercase !text-base-100 outline-none md:w-1/2'
           text={action?.text ?? 'Apply'}
           loadingText={action?.loadingText ?? 'Loading...'}
         />
@@ -49,7 +47,12 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
 
   return (
     <Form schema={schema} action={updateProfileAction} className='mt-5 flex flex-col justify-center gap-5 p-10'>
-      <Title level='1' variant='subheading' className='text-center lg:text-left'>
+      <Input type='hidden' hidden name='token' value={token} className='hidden' />
+      <Input type='hidden' hidden name='locale' value={locale} className='hidden' />
+      <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
+      <Input type='hidden' hidden name='username' value={state.username} className='hidden' />
+
+      <Title level='1' variant='subheading' className='text-center md:text-left'>
         {data?.generalTitle}
       </Title>
       <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>
@@ -59,13 +62,16 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
       </div>
       <div className='flex flex-col gap-y-5'>
         <Title level='3'>{data?.additionalTitle}</Title>
-        <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(data.additional)}</div>
+        <div className='flex flex-col gap-5 lg:flex-row'>
+          <NovaPostOptions
+            cityOptions={{ label: state.city, value: state.cityID }}
+            warehouseOptions={{ label: state.warehouse, value: state.warehouseID }}
+          />
+        </div>
       </div>
-      <Input type='hidden' hidden name='token' value={token} className='hidden' />
-      <Input type='hidden' hidden name='locale' value={locale} className='hidden' />
-      <Input type='hidden' hidden name='username' value={state.username} className='hidden' />
-      <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
-      <div className='mt-20 flex items-center justify-center gap-5'>{printActions(data.actions)}</div>
+      <div className='mt-5 flex flex-col items-center justify-center gap-5 md:flex-row lg:mt-20'>
+        {data.actions.map(formActions)}
+      </div>
     </Form>
   );
 };

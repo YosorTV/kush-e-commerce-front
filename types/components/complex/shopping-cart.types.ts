@@ -1,5 +1,5 @@
 export type ShoppingCartProps = {
-  userId: number;
+  userId: string;
   data: {
     title: string;
     totalPrice: string;
