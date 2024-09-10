@@ -33,7 +33,6 @@ export function StrapiImage({
           priority
           blurDataURL={previewUrl}
           sizes={sizes}
-          fetchPriority='high'
           className={className}
         />
       ) : (

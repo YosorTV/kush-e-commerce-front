@@ -1,9 +1,6 @@
-'use client';
-
-import { cn } from '@/lib';
 import { IImageProps } from '@/types/components';
 import NextImage from 'next/image';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 export const Image: FC<IImageProps> = ({
   src,
@@ -17,8 +14,6 @@ export const Image: FC<IImageProps> = ({
   loading,
   sizes = '(max-width:768px) 50vw, (max-width:968px) 70vw, (max-width:1200px) 100vw'
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   const blurDataURL = formats?.thumbnail?.url;
 
   if (fill) {
@@ -32,8 +27,7 @@ export const Image: FC<IImageProps> = ({
         placeholder={blurDataURL ? 'blur' : 'empty'}
         blurDataURL={formats && blurDataURL}
         alt={alt ?? 'image'}
-        className={cn(className, 'image-blur', { 'image-loaded': isLoaded })}
-        onLoad={() => setIsLoaded(true)}
+        className={className}
       />
     );
   }
@@ -45,8 +39,7 @@ export const Image: FC<IImageProps> = ({
       width={width}
       placeholder={blurDataURL ? 'blur' : 'empty'}
       blurDataURL={formats && blurDataURL}
-      className={cn(className, 'image-blur', { 'image-loaded': isLoaded })}
-      onLoad={() => setIsLoaded(true)}
+      className={className}
       alt={alt ?? 'image'}
       priority={priority}
       quality={75}

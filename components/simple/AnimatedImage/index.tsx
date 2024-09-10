@@ -35,7 +35,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
         }`}
       >
         <StrapiImage
-          loading='lazy'
+          loading='eager'
           formats={img1.formats}
           height={img1?.formats?.large?.height ?? 500}
           width={img1?.formats?.large?.width ?? 500}
@@ -51,7 +51,7 @@ export const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
         }`}
       >
         <StrapiImage
-          loading='lazy'
+          loading='eager'
           height={img2?.formats?.large?.height ?? 500}
           width={img2?.formats?.large?.width ?? 500}
           src={img2?.url}
