@@ -1,31 +1,20 @@
 export type CartItemType = {
-  id: string;
-  name: string;
+  id: string | null;
+  name: string | null;
   images?: any | any[];
-  description?: string;
+  description?: string | null;
   unit_amount: number;
-  material?: string;
-  color?: string;
-  size?: number;
+  material?: string | null;
+  category?: string | null;
+  color?: string | null;
+  size?: number | null;
   quantity?: number;
 };
 
 type FormKey = 'checkout' | 'cart' | 'success';
 
-export type FormState = {
-  color: string | null;
-  id: string | null;
-  material: string | null;
-  name: string | null;
-  size: number | null;
-  unit_amount: number;
-  description: string | null;
-  images: (string | null)[];
-  quantity: number;
-};
-
 export type CartState = {
-  formState: FormState;
+  formState: CartItemType;
   cart: CartItemType[];
   key: FormKey;
   isOpen: boolean;
@@ -33,8 +22,10 @@ export type CartState = {
   setPaymentIntentId: (value: string) => void;
   setForm: (value: FormKey) => void;
   onToggle: () => void;
-  onAdd: (field: { key: keyof FormState; value: any }) => void;
+  onAdd: (field: { key: keyof CartItemType; value: any }) => void;
   onSubmit: (item: CartItemType) => void;
   onRemove: (item: CartItemType) => void;
   onReset: () => void;
+  onIncrease: (data: CartItemType) => void;
+  syncCartData: (data: CartItemType) => void;
 };

@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { animCart } from '@/assets/animations';
 import { CartList } from '@/components/simple';
 import { ShoppingCartProps } from '@/types/components/complex';
-import { Checkout } from '../Checkout';
 import { Success } from '../Success';
 import { BsFillBagFill } from 'react-icons/bs';
 import { Button, Portal } from '@/components/elements';
@@ -19,7 +18,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
 
   const contentZone = {
     cart: <CartList data={data} />,
-    checkout: <Checkout userId={userId} />,
+    checkout: <p>Checkout</p>,
     success: <Success />
   };
 

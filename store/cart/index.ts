@@ -1,4 +1,4 @@
-import { CartState } from '@/types/store';
+import { CartItemType, CartState } from '@/types/store';
 import { StateCreator } from 'zustand';
 
 export const cartSlice: StateCreator<CartState> = (set) => ({
@@ -6,12 +6,13 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
     color: null,
     id: null,
     material: null,
+    category: null,
     name: null,
     size: null,
     unit_amount: 0,
     description: null,
     images: [],
-    quantity: 0,
+    quantity: 0
   },
   cart: [],
   key: 'cart',
@@ -52,9 +53,25 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
     set((state) => ({
       formState: {
         ...state.formState,
-        [key]: value,
-      },
+        [key]: value
+      }
     })),
+  onIncrease: (data: CartItemType) =>
+    set((state) => {
+      const existingItem = state.cart.find((cartItem) => cartItem.id === data.id);
+
+      if (existingItem) {
+        const updatedCart = state.cart.map((el) => {
+          if (el.id === data.id) return { ...el, quantity: el.quantity! + 1 };
+
+          return el;
+        });
+
+        return { cart: updatedCart };
+      }
+
+      return { cart: [...state.cart, { ...data, quantity: 1 }] };
+    }),
   onReset: () =>
     set(() => ({
       cart: [],
@@ -68,9 +85,17 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         unit_amount: 0,
         description: null,
         images: [],
-        quantity: 0,
-      },
+        quantity: 0
+      }
     })),
   setPaymentIntentId: (value) => set(() => ({ paymentIntentId: value })),
   setForm: (value) => set(() => ({ key: value })),
+  syncCartData: (data: CartItemType) =>
+    set((state) => ({
+      formState: {
+        ...state.formState,
+        ...data,
+        quantity: state.formState.quantity || 1
+      }
+    }))
 });

@@ -1,7 +1,8 @@
+import { CartItemType } from '@/types/store';
 import { ProductItem } from './products.type';
 
 export type CartItemProps = {
-  data: ProductItem;
+  data: CartItemType;
   currency: number;
   onAdd: () => void;
   onRemove: () => void;

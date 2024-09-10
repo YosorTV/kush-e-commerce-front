@@ -1,18 +1,31 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useCart } from '@/store';
 import { AddCartProps } from '@/types/components';
 import { useTranslations } from 'next-intl';
 
 export const AddCart: FC<AddCartProps> = ({ data }) => {
-  const state = useCart();
-  const t = useTranslations('cart');
   const [added, setAdded] = useState(false);
 
+  const t = useTranslations('cart');
+  const state = useCart();
+
+  useEffect(() => {
+    state.syncCartData(data);
+  }, [data]);
+
+  const isButtonDisabled = () => {
+    const { formState } = state;
+
+    return !Object.values(formState).some((value) => value === null) || added;
+  };
+
+  const disabled = isButtonDisabled();
+
   const handleAdd = () => {
-    state.onSubmit({ ...state.formState, ...data });
+    state.onSubmit(state.formState);
     setAdded(true);
     setTimeout(() => {
       setAdded(false);
@@ -22,9 +35,9 @@ export const AddCart: FC<AddCartProps> = ({ data }) => {
   return (
     <button
       aria-label='Add'
-      disabled={added}
+      disabled={!disabled}
       onClick={handleAdd}
-      className='btn btn-neutral no-animation btn-block mt-6 rounded-none text-xl font-semibold text-white disabled:bg-gray-500/50'
+      className='btn btn-neutral no-animation btn-block rounded-none text-xl font-semibold text-white disabled:!bg-gray-500/50'
     >
       {t('add')}
     </button>

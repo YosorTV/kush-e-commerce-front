@@ -1,20 +1,19 @@
 'use client';
 
-import { AddCart } from '@/components/simple/AddButton';
 import { ColorOptions } from '@/components/simple/ColorOptions';
 import { MaterialOptions } from '@/components/simple/MaterialOptions';
 import { SizeOptions } from '@/components/simple/SizeOptions';
 import { useCart } from '@/store';
 import { usePathname } from '@/lib/navigation';
-import { useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 import { useTranslations } from 'use-intl';
 
-export const ProductParams = ({
+export const ProductParams: FC<PropsWithChildren<any>> = ({
   sizes = [],
   colors = [],
   materials = [],
   availableSizes = [],
-  cartData,
+  children
 }: any) => {
   const state = useCart();
   const t = useTranslations();
@@ -28,19 +27,11 @@ export const ProductParams = ({
   }, [pathname]);
 
   return (
-    <section className='flex flex-col gap-y-6'>
-      {materials && (
-        <MaterialOptions data={materials} title={t('material.title')} />
-      )}
+    <section className='flex w-auto flex-col gap-y-6'>
+      {materials && <MaterialOptions data={materials} title={t('material.title')} />}
       {colors && <ColorOptions data={colors} title={t('color.title')} />}
-      {sizes && (
-        <SizeOptions
-          data={sizes}
-          sizes={availableSizes}
-          title={t('size.title')}
-        />
-      )}
-      <AddCart data={cartData} />
+      {sizes && <SizeOptions data={sizes} sizes={availableSizes} title={t('size.title')} />}
+      {children}
     </section>
   );
 };

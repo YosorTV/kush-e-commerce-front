@@ -1,12 +1,15 @@
+import { auth } from '@/auth';
 import { CompleteLook } from '@/components/complex/CompleteLook';
 import { DeliveryRules } from '@/components/complex/DeliveryRules';
 import { ProductGallery } from '@/components/complex/ProductGallery';
 import { ProductParams } from '@/components/complex/ProductParams';
 import { NextLink, Title } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
+import { AddCart } from '@/components/simple/AddButton';
 import { DeliveryBlock } from '@/components/simple/DeliveryBlock';
 import { Price } from '@/components/simple/Price';
 import { StepBack } from '@/components/simple/StepBack';
+import Wishlist from '@/components/simple/Wishlist';
 
 import { getCurrency, getProductData, getProductMeta, getSizesData } from '@/services';
 
@@ -30,6 +33,8 @@ export default async function ProductDetails({ params }: PageProps) {
 
   const t = await getTranslations();
 
+  const session = await auth();
+
   const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
   const { data: allSizes } = await getSizesData({ locale });
@@ -39,12 +44,13 @@ export default async function ProductDetails({ params }: PageProps) {
   }
 
   const cartData: CartItemType = {
-    id: data?.id,
-    name: data?.title,
-    unit_amount: data?.price,
+    id: data.id,
+    name: data.title,
+    unit_amount: data.price,
+    category: data.category,
     quantity: 1,
     description: data?.description,
-    images: data?.images?.data?.[0],
+    images: data?.images?.data?.[0]
   };
 
   return (
@@ -52,14 +58,16 @@ export default async function ProductDetails({ params }: PageProps) {
       <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
         <section className='z-10 flex h-full w-full flex-col gap-3 bg-base-100 p-3 !pb-0 xs:gap-6 xs:p-6'>
           <header className='flex w-full justify-between' role='product-name'>
-            <Title
-              level='1'
-              id='product-title'
-              aria-label='product-title'
-              className='text-xl font-semibold leading-10 text-base-200 md:text-3xl lg:text-4xl'
-            >
-              {data?.title}
-            </Title>
+            {data?.title && (
+              <Title
+                level='1'
+                id='product-title'
+                aria-label='product-title'
+                className='text-xl font-semibold leading-10 text-base-200 md:text-3xl lg:text-4xl'
+              >
+                {data?.title}
+              </Title>
+            )}
             <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
           <div className='flex items-baseline justify-between'>
@@ -81,11 +89,23 @@ export default async function ProductDetails({ params }: PageProps) {
           <p className='whitespace-pre-line text-pretty'>{data?.description}</p>
           <ProductParams
             sizes={allSizes}
-            cartData={cartData}
             colors={data.colors.data}
             materials={data.materials.data}
             availableSizes={data.sizes.data}
-          />
+          >
+            <div className='mt-5 flex flex-col'>
+              <Wishlist
+                text={t(data?.inWishlist ? 'wishlist.added' : 'wishlist.add')}
+                token={session?.accessToken}
+                locale={locale}
+                productId={data?.id}
+                userId={Number(session?.user?.id)}
+                inWishlist={data?.inWishlist}
+              />
+              <div className='divider' />
+              <AddCart data={cartData} />
+            </div>
+          </ProductParams>
           <DeliveryBlock locale={locale} />
         </section>
         <div className='relative w-full'>

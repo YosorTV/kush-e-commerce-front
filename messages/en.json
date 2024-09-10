@@ -94,5 +94,9 @@
     "price": "Price",
     "total": "Total",
     "quantity": "Quantity"
+  },
+  "wishlist": {
+    "added": "Remove from wishlist",
+    "add": "Add to wishlist"
   }
 }

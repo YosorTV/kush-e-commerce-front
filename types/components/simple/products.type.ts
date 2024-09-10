@@ -55,7 +55,8 @@ export type ProductItem = {
   id: string;
   name: string;
   images?: any | any[];
-  quantity?: number | 1;
+  category?: string;
+  quantity?: number;
   unit_amount: number | null;
-  price?: string;
+  price?: number;
 };

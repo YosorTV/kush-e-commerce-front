@@ -15,16 +15,17 @@ interface IWishlist {
   productId: number;
   locale: string;
   inWishlist: boolean;
+  text?: string;
 }
 
-const Wishlist: FC<IWishlist> = async ({ productId, userId, locale, inWishlist = false, token }) => {
+const Wishlist: FC<IWishlist> = async ({ productId, text, userId, locale, inWishlist = false, token }) => {
   const handleAdd = async () => {
     if (!Boolean(token)) {
       const dialog = document.getElementById('my_modal_3') as HTMLDialogElement;
 
       dialog.showModal();
     } else {
-      const { message } = await addToWishlist({ access_token: token, productId, userId, locale });
+      const { message } = await addToWishlist({ access_token: token, productId, userId: Number(userId), locale });
 
       if (message) {
         toast.success(message);
@@ -32,18 +33,27 @@ const Wishlist: FC<IWishlist> = async ({ productId, userId, locale, inWishlist =
     }
   };
 
+  const setColor = (added: boolean) => {
+    if (text) {
+      return added ? 'fill-red-600' : 'fill-base-100';
+    }
+
+    return added ? 'fill-red-600' : 'fill-base-300';
+  };
+
   return (
     <>
       <Button
         onClick={handleAdd}
+        className={cn(text && 'btn btn-block !bg-base-200 !text-base-100')}
         title='wishlist'
         aria-label='wishlist'
         icon={{
-          before: (
-            <HeartIcon width={20} height={20} className={cn('h-5 w-5', inWishlist ? 'fill-red-600' : 'fill-white')} />
-          )
+          before: <HeartIcon width={20} height={20} className={cn('h-5 w-5', setColor(inWishlist))} />
         }}
-      />
+      >
+        {text && text}
+      </Button>
     </>
   );
 };

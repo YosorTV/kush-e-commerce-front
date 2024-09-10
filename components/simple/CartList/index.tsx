@@ -4,16 +4,12 @@ import { FC, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { useCart } from '@/store';
-import { cn } from '@/lib';
 
 import { Button, Title } from '@/components/elements';
 import { Lottie } from '@/components/elements/Lottie';
 import { CartItem } from '../CartItem';
 
-import { CartItemType } from '@/types/store';
-
 import { animCart } from '@/assets/animations';
-import { roboto } from '@/assets/fonts';
 import lottieAnim from '@/public/LottieEmpty.json';
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 import { useLocale } from 'next-intl';
@@ -61,37 +57,30 @@ export const CartList: FC<any> = ({ data }) => {
     );
   }
 
-  const printCartItem = (item: CartItemType) => {
-    return (
-      <motion.div layout key={item.id} className='flex gap-x-3'>
-        <CartItem
-          data={item}
-          onAdd={() => cartStore.onAdd(item)}
-          currency={currency}
-          onRemove={() => cartStore.onRemove(item)}
-        />
-      </motion.div>
-    );
-  };
-
   return (
     <div className='relative flex w-full flex-col items-start gap-y-6'>
       <Button onClick={handleBack} className='btn btn-link px-0 text-lg normal-case'>
         {data.getBack}
       </Button>
       <div className='flex w-full flex-col gap-y-6'>
-        <Title
-          level='3'
-          className={cn('w-full self-center text-center text-2xl font-light underline', roboto.className)}
-        >
+        <Title level='3' className='w-full self-center text-center text-2xl font-light'>
           {data.title}
         </Title>
-        {cartStore.cart.map(printCartItem)}
+        {cartStore.cart.map((item) => (
+          <motion.div layout key={item.id} className='flex gap-x-3'>
+            <CartItem
+              data={item}
+              onAdd={() => cartStore.onIncrease(item)}
+              currency={currency}
+              onRemove={() => cartStore.onRemove(item)}
+            />
+          </motion.div>
+        ))}
       </div>
       <p className='font-semibold capitalize'>
         {data.totalPrice}: {formatPrice(totalPrice, locale, currency)}
       </p>
-      <button onClick={() => cartStore.setForm('checkout')} className='btn btn-primary w-full text-base-100'>
+      <button disabled onClick={() => cartStore.setForm('checkout')} className='btn btn-primary w-full text-base-100'>
         {data.checkout}
       </button>
     </div>
