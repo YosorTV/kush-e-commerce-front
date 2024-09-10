@@ -34,7 +34,9 @@ export const SubMenu: FC<TSubMenu> = ({
   const pathname = usePathname();
 
   useEffect(() => {
-    return () => onHoverEnd();
+    return () => {
+      onHoverEnd();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 

@@ -29,4 +29,5 @@ export type LinkType = {
   replace?: boolean;
   scroll?: boolean;
   prefetch?: boolean;
+  onClick?: () => void;
 };

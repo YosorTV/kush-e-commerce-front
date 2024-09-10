@@ -26,7 +26,8 @@ export const productsQuery = ({
     filters.$or = [
       { title: { $containsi: name } },
       { category: { $containsi: name } },
-      { collections: { title: { $containsi: name } } }
+      { collections: { title: { $containsi: name } } },
+      { seo: { keywords: { $containsi: name } } }
     ];
   }
 

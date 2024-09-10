@@ -12,6 +12,7 @@ import { childrenVariants, fadeVariants, searchVariants } from '@/assets/animati
 import { useLocale } from 'next-intl';
 
 import { useDebounce } from '@/lib/hooks';
+import { usePathname } from 'next/navigation';
 
 interface TSearchController {
   onClose: () => void;
@@ -24,6 +25,8 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
 
   const locale = useLocale();
 
+  const pathname = usePathname();
+
   const name = useDebounce(state.searchValue, 500);
 
   const getProducts = useCallback(() => {
@@ -31,7 +34,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
       name,
       locale,
       page: '1',
-      pageSize: '4',
+      pageSize: '20'
     });
   }, [state, locale, name]);
 
@@ -48,7 +51,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
         name,
         locale,
         page: '1',
-        pageSize: String(perPage),
+        pageSize: String(perPage)
       });
     },
     [state, locale, name]
@@ -60,10 +63,14 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
     }
   }, [name, locale, state.isOpen]);
 
+  useEffect(() => {
+    onClose();
+  }, [pathname]);
+
   const cta = useMemo(() => {
     return {
       title: locale === 'uk' ? 'Показати ще' : 'Load more',
-      total: locale === 'uk' ? 'Всього' : 'Total',
+      total: locale === 'uk' ? 'Всього' : 'Total'
     };
   }, [locale]);
 
@@ -87,7 +94,10 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
               variants={fadeVariants}
               className='grid w-full grid-cols-4 justify-center'
             >
-              <Logo className='relative top-1.5 col-span-1 col-start-1 row-start-1 cursor-default' />
+              <Logo
+                className='relative top-1 col-span-1 col-start-1 row-start-1 w-min cursor-pointer'
+                onClick={onClose}
+              />
               <Input
                 name='search'
                 placeholder={placeholder}
