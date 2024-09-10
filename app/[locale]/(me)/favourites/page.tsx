@@ -32,7 +32,7 @@ export default async function FavouritesPage({ params }: PageProps) {
   const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;
 
   return (
-    <section className='flex w-full flex-col'>
+    <section className='mt-10 flex w-full flex-col bg-info-content p-5'>
       <ProductListGroup data={wishlist} className='grid-cols-fluid' />
       {wishlist.length > 0 && (
         <ProductListController

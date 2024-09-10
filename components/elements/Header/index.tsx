@@ -1,12 +1,13 @@
 import { FC } from 'react';
 
+import { auth } from '@/auth';
+
+import { Search, UserSession } from '@/components/complex';
+import { ShoppingCart } from '@/components/complex/ShoppingCart';
 import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
 import { Logo } from '@/components/elements';
-import { Search, UserSession } from '@/components/complex';
 
 import { HeaderProps } from '@/types/components';
-import { ShoppingCart } from '@/components/complex/ShoppingCart';
-import { auth } from '@/auth';
 
 export const Header: FC<HeaderProps> = async ({ data, locale }) => {
   const session = await auth();

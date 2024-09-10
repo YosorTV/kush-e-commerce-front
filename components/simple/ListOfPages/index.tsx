@@ -1,7 +1,6 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { motion } from 'framer-motion';
 
 import { useFilters } from '@/store';
 
@@ -57,9 +56,9 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
           : pathname.startsWith(urlObj.pathname) || pathname.startsWith('collection');
 
       return (
-        <motion.li
+        <li
           key={page.id}
-          onHoverStart={() => handleShowSubMenu(index)}
+          onMouseEnter={() => handleShowSubMenu(index)}
           className={cn('group py-2.5 text-base-200', { active: isActive })}
         >
           <NextLink
@@ -72,7 +71,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
           >
             {page.text}
           </NextLink>
-        </motion.li>
+        </li>
       );
     });
   };
