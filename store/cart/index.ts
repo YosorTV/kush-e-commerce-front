@@ -74,8 +74,6 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
     }),
   onReset: () =>
     set(() => ({
-      cart: [],
-      paymentIntentId: '',
       formState: {
         color: null,
         id: null,
