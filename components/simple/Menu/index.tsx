@@ -3,7 +3,7 @@
 import { FC, useEffect } from 'react';
 
 import { motion } from 'framer-motion';
-import { Hamburger, Sidebar } from '@/components/elements';
+import { Hamburger, Portal, Sidebar } from '@/components/elements';
 import { MenuNav } from './MenuNav';
 
 import { usePathname } from '@/lib/navigation';
@@ -49,9 +49,11 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
       <ListOfPages pages={pages.data} categories={categories} collections={collections} className='hidden lg:flex' />
       <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'} className='w-full lg:hidden'>
         <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
-        <Sidebar opened={menu.isOpen} position='left' onToggle={handleToggle}>
-          <MenuNav pages={pages} categories={categories} collections={collections} />
-        </Sidebar>
+        <Portal selector='portal'>
+          <Sidebar opened={menu.isOpen} position='left' onToggle={handleToggle}>
+            <MenuNav pages={pages} categories={categories} collections={collections} />
+          </Sidebar>
+        </Portal>
       </motion.div>
     </>
   );

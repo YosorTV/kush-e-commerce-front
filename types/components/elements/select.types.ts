@@ -13,6 +13,7 @@ export interface SelectProps {
   placeholder?: string;
   value: OptionType | null;
   options?: OptionType[];
+  disabled: boolean;
 }
 
 export type ClassNamesType = {

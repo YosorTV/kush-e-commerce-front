@@ -7,7 +7,7 @@ import { useFilters } from '@/store';
 import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
 import { usePathname } from '@/lib/navigation';
-import { NextLink } from '@/components/elements';
+import { NextLink, Portal } from '@/components/elements';
 import { ROOT } from '@/helpers/constants';
 import { StrapiLinkType } from '@/types/components';
 import { navAnimations } from '@/assets/animations';
@@ -94,24 +94,26 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   return (
     <ul className={cn('flex gap-x-6', className)}>
       {printLinks}
-      <AnimatePresence mode='wait' initial={false}>
-        {isLgScreen && (
-          <motion.div
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            variants={navAnimations}
-            onHoverEnd={() => setShowOverlay(false)}
-          >
-            <SubMenu
-              categoryTitle={categories?.title}
-              collectionTitle={collections?.title}
-              categories={categories?.data}
-              collections={collections?.data}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Portal selector='portal'>
+        <AnimatePresence mode='wait' initial={false}>
+          {isLgScreen && (
+            <motion.div
+              initial='initial'
+              animate='animate'
+              exit='exit'
+              variants={navAnimations}
+              onHoverEnd={() => setShowOverlay(false)}
+            >
+              <SubMenu
+                categoryTitle={categories?.title}
+                collectionTitle={collections?.title}
+                categories={categories?.data}
+                collections={collections?.data}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Portal>
     </ul>
   );
 };

@@ -8,7 +8,7 @@ import { cn } from '@/lib';
 import { ClassNamesType, SelectProps } from '@/types/components/elements/select.types';
 
 const classes: ClassNamesType = {
-  container: () => 'w-full',
+  container: () => 'w-full disabled:cursor-not-allowed disabled:opacity-50',
   singleValue: () => '!text-base-200',
   valueContainer: () => '!text-white !p-0',
   input: () => '!text-base-200',
@@ -26,12 +26,20 @@ const classes: ClassNamesType = {
   }
 };
 
-export const AsyncSelect: FC<SelectProps> = ({ loadOptions, onChange, value, placeholder = 'Search...' }) => {
+export const AsyncSelect: FC<SelectProps> = ({
+  loadOptions,
+  onChange,
+  value,
+  placeholder = 'Search...',
+  disabled = false
+}) => {
   return (
     <AsyncPaginate
       isClearable
+      isDisabled={disabled}
       value={value}
       defaultOptions
+      className={cn(disabled && 'cursor-not-allowed opacity-50')}
       classNames={classes}
       placeholder={placeholder}
       loadOptions={loadOptions}

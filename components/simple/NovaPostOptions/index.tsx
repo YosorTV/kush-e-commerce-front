@@ -1,7 +1,6 @@
 'use client';
 
 import { FC, useCallback, useState } from 'react';
-import { useTranslations } from 'use-intl';
 
 import { AsyncSelect, Input } from '@/components/elements';
 
@@ -16,11 +15,10 @@ type TOption = {
 interface INovaPostOptions {
   cityOptions?: TOption;
   warehouseOptions?: TOption;
+  disabled?: boolean;
 }
 
-export const NovaPostOptions: FC<INovaPostOptions> = ({ cityOptions, warehouseOptions }) => {
-  const t = useTranslations('system');
-
+export const NovaPostOptions: FC<INovaPostOptions> = ({ cityOptions, warehouseOptions, disabled = false }) => {
   const [city, setCity] = useState<TOption>(cityOptions);
   const [warehouse, setWarehouse] = useState<TOption>(warehouseOptions);
 
@@ -78,14 +76,21 @@ export const NovaPostOptions: FC<INovaPostOptions> = ({ cityOptions, warehouseOp
 
   return (
     <>
-      <AsyncSelect value={city} placeholder={t('search')} onChange={handleCityChange} loadOptions={loadCityOptions} />
+      <AsyncSelect
+        value={city}
+        disabled={disabled}
+        placeholder='Search'
+        onChange={handleCityChange}
+        loadOptions={loadCityOptions}
+      />
       {city.value && (
         <AsyncSelect
+          disabled={disabled}
           key={city.value}
           value={warehouse}
           onChange={handleWarehouseChange}
           loadOptions={loadWarehousesOptions}
-          placeholder={t('search')}
+          placeholder='Search'
         />
       )}
       <Input type='hidden' hidden name='city' value={city.label} className='hidden' />

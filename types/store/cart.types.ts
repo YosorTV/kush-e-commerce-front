@@ -11,7 +11,7 @@ export type CartItemType = {
   quantity?: number;
 };
 
-type FormKey = 'checkout' | 'cart' | 'success';
+type FormKey = 'checkout' | 'cart' | 'success' | 'delivery';
 
 export type CartState = {
   formState: CartItemType;

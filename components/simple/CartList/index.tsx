@@ -14,7 +14,6 @@ import lottieAnim from '@/public/LottieEmpty.json';
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 import { useLocale } from 'next-intl';
 import { getCurrency } from '@/services';
-import { useScrollLock } from '@/lib/hooks';
 
 export const CartList: FC<any> = ({ data }) => {
   const locale = useLocale();
@@ -31,8 +30,6 @@ export const CartList: FC<any> = ({ data }) => {
 
     setCurrency(response);
   };
-
-  useScrollLock(cartStore.isOpen);
 
   useEffect(() => {
     if (cartStore.cart.length > 0) {
@@ -80,7 +77,7 @@ export const CartList: FC<any> = ({ data }) => {
       <p className='font-semibold capitalize'>
         {data.totalPrice}: {formatPrice(totalPrice, locale, currency)}
       </p>
-      <button disabled onClick={() => cartStore.setForm('checkout')} className='btn btn-primary w-full text-base-100'>
+      <button onClick={() => cartStore.setForm('delivery')} className='btn btn-primary w-full text-base-100'>
         {data.checkout}
       </button>
     </div>
