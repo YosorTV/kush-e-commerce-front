@@ -14,14 +14,14 @@ type PropType = {
   format: 'standart' | 'mini';
 };
 
-export const CollectionCarousel: FC<PropType> = ({
+const CollectionCarousel: FC<PropType> = ({
   data,
   title,
   titleClass,
   className = 'w-full',
   slideClass = 'h-full md:h-96',
   fill = 'fill-white',
-  format = 'standart',
+  format = 'standart'
 }) => {
   const printCollectionCard = ({ cover, slug, title, hintText }: any) => {
     return (
@@ -50,3 +50,5 @@ export const CollectionCarousel: FC<PropType> = ({
     </Carousel>
   );
 };
+
+export default CollectionCarousel;

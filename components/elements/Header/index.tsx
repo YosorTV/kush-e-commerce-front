@@ -47,8 +47,8 @@ export const Header: FC<HeaderProps> = async ({ data, locale }) => {
         <div className='flex items-center'>
           <Menu pages={pagesData} collections={collectionsData} categories={categoryData} />
         </div>
-        <div className='flex w-full lg:justify-center'>
-          <Logo width={160} height={48} className='!lg:absolute-center hidden xs:left-36 xs:block' />
+        <div className='absolute left-1/2 -translate-x-1/2 transform'>
+          <Logo width={160} height={48} className='hidden lg:block' />
         </div>
         <div className='flex items-center gap-x-6'>
           <Search placeholder={searchTitle} />

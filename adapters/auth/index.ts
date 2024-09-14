@@ -53,7 +53,6 @@ export const googleTokenAdapter = ({ token, user }: any) => {
   token.id = user.user.id;
   token.provider = user.user.provider;
   token.email = user.user.email;
-  token.stripeCustomerId = user.user.stripeCustomerId;
 
   return token;
 };

@@ -1,18 +1,18 @@
 'use client';
 
-import { FC, useState } from 'react';
-
+import { FC, useState, useMemo, useCallback } from 'react';
+import dynamic from 'next/dynamic';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useFilters } from '@/store';
-
 import { cn } from '@/lib';
+import { useScreen } from '@/lib/hooks';
 import { usePathname } from '@/lib/navigation';
-
-import { ROOT } from '@/helpers/constants';
-
 import { NextLink } from '@/components/elements';
-import { SubMenu } from '../SubMenu';
-
+import { ROOT } from '@/helpers/constants';
 import { StrapiLinkType } from '@/types/components';
+import { navAnimations } from '@/assets/animations';
+
+const SubMenu = dynamic(() => import('../SubMenu'), { ssr: false });
 
 type ListOFPagesProps = {
   pages: StrapiLinkType[];
@@ -37,58 +37,81 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   linkStyle,
   isFooter = false
 }) => {
-  const [showOverlay, setShowOverlay] = useState<boolean>(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const state = useFilters();
   const pathname = usePathname();
 
-  const handleShowSubMenu = (index: number) => {
-    return !state.isOpen && !isFooter && (index === 0 || index === 1) ? setShowOverlay(true) : setShowOverlay(false);
-  };
+  const { lg } = useScreen();
 
-  const printLinks = (data: StrapiLinkType[]) => {
-    return data.map((page, index) => {
-      const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
+  const isLgScreen = useMemo(() => {
+    return lg && showOverlay;
+  }, [lg, showOverlay]);
 
-      const isActive =
-        urlObj.pathname === ROOT
-          ? pathname === urlObj.pathname
-          : pathname.startsWith(urlObj.pathname) || pathname.startsWith('collection');
+  const handleShowSubMenu = useCallback(
+    (index: number) => {
+      setShowOverlay(!state.isOpen && !isFooter && (index === 0 || index === 1));
+    },
+    [state.isOpen, isFooter]
+  );
 
-      return (
-        <li
-          key={page.id}
-          onMouseEnter={() => handleShowSubMenu(index)}
-          className={cn('group py-2.5 text-base-200', { active: isActive })}
-        >
-          <NextLink
-            href={page.url}
-            replace={page.isExternal}
-            className={cn(
-              'whitespace-nowrap py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
-              linkStyle
-            )}
+  const printLinks = useMemo(
+    () =>
+      pages.map((page, index) => {
+        const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
+
+        const isActive =
+          urlObj.pathname === ROOT
+            ? pathname === urlObj.pathname
+            : pathname.startsWith(urlObj.pathname) || pathname.startsWith('collection');
+
+        return (
+          <li
+            key={page.id}
+            onMouseEnter={() => handleShowSubMenu(index)}
+            className={cn('group py-2.5 text-base-200 hover:underline hover:underline-offset-8', {
+              active: isActive
+            })}
           >
-            {page.text}
-          </NextLink>
-        </li>
-      );
-    });
-  };
+            <NextLink
+              href={page.url}
+              replace={page.isExternal}
+              className={cn(
+                'whitespace-nowrap py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
+                linkStyle
+              )}
+            >
+              {page.text}
+            </NextLink>
+          </li>
+        );
+      }),
+    [pages, handleShowSubMenu, pathname, linkStyle]
+  );
 
   if (!pages?.length) return null;
 
   return (
-    <>
-      <ul className={cn('flex gap-x-6', className)}>{printLinks(pages)}</ul>
-      <SubMenu
-        isHovered={showOverlay}
-        onHoverEnd={() => setShowOverlay(false)}
-        categoryTitle={categories?.title}
-        collectionTitle={collections?.title}
-        categories={categories?.data}
-        collections={collections?.data}
-      />
-    </>
+    <ul className={cn('flex gap-x-6', className)}>
+      {printLinks}
+      <AnimatePresence mode='wait' initial={false}>
+        {isLgScreen && (
+          <motion.div
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            variants={navAnimations}
+            onHoverEnd={() => setShowOverlay(false)}
+          >
+            <SubMenu
+              categoryTitle={categories?.title}
+              collectionTitle={collections?.title}
+              categories={categories?.data}
+              collections={collections?.data}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </ul>
   );
 };

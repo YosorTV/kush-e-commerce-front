@@ -10,8 +10,6 @@ import { getLocale } from 'next-intl/server';
 import { ProductListController } from '../ProductListController';
 
 import ProductListGroup from '../ProductListGroup';
-import Modal from '@/components/complex/Modal';
-import { WishlistNotification } from '../WishlistNotification';
 
 interface IProductsList {
   title?: string;
@@ -42,9 +40,6 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
         total={meta.pagination.total}
         perPage={meta?.pagination?.pageSize * 2}
       />
-      <Modal id='my_modal_3'>
-        <WishlistNotification locale={locale} />
-      </Modal>
     </section>
   );
 };

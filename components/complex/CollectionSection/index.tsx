@@ -1,5 +1,6 @@
-import { CollectionCarousel } from '@/components/simple';
 import { FC } from 'react';
+
+import CollectionCarousel from '@/components/simple/CollectionCarousel';
 
 interface ICollectionSection {
   data: {
@@ -19,7 +20,7 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
       key={id}
       className='relative flex flex-col bg-neutral p-2.5 !pt-0 hover:cursor-grab active:cursor-grabbing lg:p-5'
     >
-      <CollectionCarousel title={title} titleClass='!text-white' data={collections.data} />
+      <CollectionCarousel format='standart' title={title} titleClass='!text-white' data={collections.data} />
     </section>
   );
 };

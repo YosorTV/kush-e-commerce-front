@@ -5,17 +5,20 @@ const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
 
 const nextConfig = {
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production'
+  },
+  experimental: {
+    optimizePackageImports: ['framer-motion']
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   reactStrictMode: false,
   env: {
-    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL
   },
   images: {
     loader: 'custom',
@@ -24,32 +27,28 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        hostname: 'lh3.googleusercontent.com'
       },
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '1337',
+        port: '1337'
       },
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        hostname: 'res.cloudinary.com'
       },
       {
         protocol: 'https',
         hostname: 'dev.kush-test.pp.ua',
-        pathname: 'uploads/**/*',
+        pathname: 'uploads/**/*'
       },
       {
         protocol: 'https',
-        hostname: 'placehold.co',
-      },
-      {
-        protocol: 'https',
-        hostname: 'files.stripe.com',
-      },
-    ],
-  },
+        hostname: 'placehold.co'
+      }
+    ]
+  }
 };
 
 module.exports = withNextIntl(nextConfig);

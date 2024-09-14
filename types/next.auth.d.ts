@@ -10,7 +10,6 @@ declare module 'next-auth' {
     lastName: string;
     phoneNumber: string;
     deliveryAddress: string;
-    stripeCustomerId: string;
     blocked: boolean;
     confirmed: boolean;
     provider: string;
@@ -28,7 +27,6 @@ declare module 'next-auth' {
       lastName: string;
       phoneNumber: string;
       deliveryAddress: string;
-      stripeCustomerId: string;
       blocked: boolean;
       confirmed: boolean;
       provider: string;

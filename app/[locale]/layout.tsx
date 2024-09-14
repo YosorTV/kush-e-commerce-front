@@ -9,6 +9,8 @@ import { LayoutProps } from '@/types/app/layout.types';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLayoutData } from '@/services';
 import { AutoLogoutProvider } from '@/components/providers';
+import Modal from '@/components/complex/Modal';
+import { WishlistNotification } from '@/components/simple/WishlistNotification';
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -27,6 +29,9 @@ export default async function LocalLayout({ children, params: { locale } }: Read
       <NextIntlClientProvider messages={messages}>
         <AutoLogoutProvider session={session ? session : null}>{children}</AutoLogoutProvider>
       </NextIntlClientProvider>
+      <Modal id='my_modal_3'>
+        <WishlistNotification locale={locale} />
+      </Modal>
     </BaseLayout>
   );
 }

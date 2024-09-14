@@ -8,24 +8,29 @@ import { Button } from '@/components/elements';
 import { cn } from '@/lib';
 import addToWishlist from '@/services/actions/addToWishlist';
 import { toast } from 'sonner';
+import { Session } from 'next-auth';
 
 interface IWishlist {
-  token: string | null;
-  userId?: number;
+  session: Session;
   productId: number;
   locale: string;
   inWishlist: boolean;
   text?: string;
 }
 
-const Wishlist: FC<IWishlist> = async ({ productId, text, userId, locale, inWishlist = false, token }) => {
+export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = false, session }) => {
   const handleAdd = async () => {
-    if (!Boolean(token)) {
+    if (!Boolean(session?.accessToken)) {
       const dialog = document.getElementById('my_modal_3') as HTMLDialogElement;
 
       dialog.showModal();
     } else {
-      const { message } = await addToWishlist({ access_token: token, productId, userId: Number(userId), locale });
+      const { message } = await addToWishlist({
+        locale,
+        productId,
+        userId: Number(session.user.id),
+        access_token: session.accessToken
+      });
 
       if (message) {
         toast.success(message);
@@ -42,20 +47,16 @@ const Wishlist: FC<IWishlist> = async ({ productId, text, userId, locale, inWish
   };
 
   return (
-    <>
-      <Button
-        onClick={handleAdd}
-        className={cn(text && 'btn btn-block !bg-base-200 !text-base-100')}
-        title='wishlist'
-        aria-label='wishlist'
-        icon={{
-          before: <HeartIcon width={20} height={20} className={cn('h-5 w-5', setColor(inWishlist))} />
-        }}
-      >
-        {text && text}
-      </Button>
-    </>
+    <Button
+      onClick={handleAdd}
+      className={cn(text && 'btn btn-block !bg-base-200 !text-base-100')}
+      title='wishlist'
+      aria-label='wishlist'
+      icon={{
+        before: text ? null : <HeartIcon width={20} height={20} className={cn('h-5 w-5', setColor(inWishlist))} />
+      }}
+    >
+      {text && text}
+    </Button>
   );
 };
-
-export default Wishlist;

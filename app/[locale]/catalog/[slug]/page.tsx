@@ -1,24 +1,18 @@
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
+
 import { auth } from '@/auth';
-import { CompleteLook } from '@/components/complex/CompleteLook';
-import { DeliveryRules } from '@/components/complex/DeliveryRules';
-import { ProductGallery } from '@/components/complex/ProductGallery';
-import { ProductParams } from '@/components/complex/ProductParams';
-import { NextLink, Title } from '@/components/elements';
-import { PageLayout } from '@/components/layouts';
-import { AddCart } from '@/components/simple/AddButton';
-import { DeliveryBlock } from '@/components/simple/DeliveryBlock';
-import { Price } from '@/components/simple/Price';
-import { StepBack } from '@/components/simple/StepBack';
-import Wishlist from '@/components/simple/Wishlist';
 
 import { getCurrency, getProductData, getProductMeta, getSizesData } from '@/services';
 
-import { PageProps } from '@/types/app/page.types';
-import { CartItemType } from '@/types/store';
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { PageLayout } from '@/components/layouts';
+import { NextLink, Title } from '@/components/elements';
+import { Price, Wishlist, AddCart, DeliveryBlock, StepBack } from '@/components/simple';
+import { CompleteLook, DeliveryRules, ProductGallery, ProductParams } from '@/components/complex';
 
-import { notFound } from 'next/navigation';
+import { CartItemType } from '@/types/store';
+import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale, slug } = props.params;
@@ -96,10 +90,9 @@ export default async function ProductDetails({ params }: PageProps) {
             <div className='mt-5 flex flex-col'>
               <Wishlist
                 text={t(data?.inWishlist ? 'wishlist.added' : 'wishlist.add')}
-                token={session?.accessToken}
+                session={session}
                 locale={locale}
                 productId={data?.id}
-                userId={Number(session?.user?.id)}
                 inWishlist={data?.inWishlist}
               />
               <div className='divider' />
