@@ -10,7 +10,7 @@ type TGetNovapostWarehouses = {
 export const getNovapostWarehouses = async (params: TGetNovapostWarehouses) => {
   const { cityId, search = '', limit = '50', page = '1' } = params;
 
-  const response = await getStrapiData(`/novapost/warehouses/${cityId}?search=${search}&limit=${limit}&page=${page}`);
+  const response = await getStrapiData(`novapost/warehouses/${cityId}?search=${search}&limit=${limit}&page=${page}`);
 
   const warehousesDataAdapter = ({ data }: any) => {
     if (!data) return [];

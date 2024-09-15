@@ -14,24 +14,17 @@ import { Button, Portal } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 import { CartDelivery } from '@/components/simple/CartDelivery';
 import { useScrollLock } from '@/lib/hooks';
+import { CartCheckout } from '@/components/simple/CartCheckout';
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
   const cartStore = useCart();
 
   useScrollLock(cartStore.isOpen);
 
-  const handleBack = () => cartStore.setForm('delivery');
-
   const contentZone = {
     cart: <CartList data={data} />,
     delivery: <CartDelivery title='Оберіть спосіб доставки' />,
-    checkout: (
-      <div className='flex h-full w-full'>
-        <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
-          Повернутись
-        </Button>
-      </div>
-    ),
+    checkout: <CartCheckout />,
     success: <Success />
   };
 

@@ -4,6 +4,7 @@ import { Footer, Header } from '@/components/elements';
 import { ThemeProvider } from '@/components/providers';
 import { cn } from '@/lib';
 import { BaseLayoutProps } from '@/types/components';
+import Script from 'next/script';
 
 export async function BaseLayout({ children, locale, header, footer }: BaseLayoutProps) {
   return (
@@ -17,6 +18,7 @@ export async function BaseLayout({ children, locale, header, footer }: BaseLayou
           <ClientSideRender />
         </ThemeProvider>
       </body>
+      <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='lazyOnload' async />
     </html>
   );
 }
