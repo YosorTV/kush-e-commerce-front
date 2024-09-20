@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
-
 import { useLocale } from 'next-intl';
 
 import { useCart } from '@/store';
@@ -37,7 +35,11 @@ export const CartCheckout: React.FC = () => {
     const options = paymentDataAdapter({
       locale,
       currency,
-      data: cartStore.cart
+      data: cartStore.cart,
+      customer: {
+        ...cartStore.delivery,
+        customer_delivery: `Місто: ${cartStore.delivery.novapostCity.label} Відділеня: ${cartStore.delivery.novapostWarehouse.label}`
+      }
     });
 
     const response = await paymentCreate(options);

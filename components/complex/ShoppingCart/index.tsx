@@ -10,7 +10,7 @@ import { CartList } from '@/components/simple';
 import { ShoppingCartProps } from '@/types/components/complex';
 import { Success } from '../Success';
 import { BsFillBagFill } from 'react-icons/bs';
-import { Button, Portal } from '@/components/elements';
+import { Button } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 import { CartDelivery } from '@/components/simple/CartDelivery';
 import { useScrollLock } from '@/lib/hooks';
@@ -23,7 +23,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
 
   const contentZone = {
     cart: <CartList data={data} />,
-    delivery: <CartDelivery title='Оберіть спосіб доставки' />,
+    delivery: <CartDelivery />,
     checkout: <CartCheckout />,
     success: <Success />
   };
@@ -40,27 +40,25 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
         <BsFillBagFill className='h-6 w-6 fill-base-200' />
       </Button>
 
-      <Portal selector='portal'>
-        <AnimatePresence mode='wait'>
-          {cartStore.isOpen && (
+      <AnimatePresence mode='wait'>
+        {cartStore.isOpen && (
+          <motion.div
+            initial={animCart.fade.initial}
+            animate={animCart.fade.animate}
+            exit={animCart.fade.exit}
+            onClick={() => cartStore.onToggle()}
+            className='fixed left-0 top-0 z-20 h-screen w-full bg-black/50'
+          >
             <motion.div
-              initial={animCart.fade.initial}
-              animate={animCart.fade.animate}
-              exit={animCart.fade.exit}
-              onClick={() => cartStore.onToggle()}
-              className='fixed left-0 top-0 z-20 h-screen w-full bg-black/50'
+              layout
+              onClick={(e) => e.stopPropagation()}
+              className='absolute right-0 top-0 z-30 h-screen w-full overflow-y-auto bg-base-100 p-8 md:w-[600px]'
             >
-              <motion.div
-                layout
-                onClick={(e) => e.stopPropagation()}
-                className='absolute right-0 top-0 z-30 h-screen w-full overflow-y-auto bg-base-100 p-8 md:w-[600px]'
-              >
-                <div className='flex w-full'>{contentZone[cartStore.key]}</div>
-              </motion.div>
+              <div className='flex w-full'>{contentZone[cartStore.key]}</div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </Portal>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

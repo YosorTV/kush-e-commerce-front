@@ -1,4 +1,4 @@
-import { CartItemType, CartState } from '@/types/store';
+import { CartItemType, CartState, IDeliveryForm } from '@/types/store';
 import { StateCreator } from 'zustand';
 
 export const cartSlice: StateCreator<CartState> = (set) => ({
@@ -13,6 +13,21 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
     description: null,
     images: [],
     quantity: 0
+  },
+  delivery: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    self: false,
+    novapostCity: {
+      label: null,
+      value: null
+    },
+    novapostWarehouse: {
+      label: null,
+      value: null
+    }
   },
   cart: [],
   key: 'cart',
@@ -84,6 +99,13 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         description: null,
         images: [],
         quantity: 0
+      }
+    })),
+  setDelivery: (key: keyof IDeliveryForm, value: string) =>
+    set((state) => ({
+      delivery: {
+        ...state.delivery,
+        [key]: value
       }
     })),
   setPaymentIntentId: (value) => set(() => ({ paymentIntentId: value })),

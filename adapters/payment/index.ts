@@ -8,6 +8,13 @@ interface IPaymentAdapter {
   data: CartItemType[];
   locale: string;
   currency: number;
+  customer: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    customer_delivery: string;
+  };
 }
 
 interface ILiqPayAdapter {
@@ -15,12 +22,12 @@ interface ILiqPayAdapter {
   signature: string;
 }
 
-export const paymentDataAdapter = ({ data, locale, currency }: IPaymentAdapter) => {
+export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymentAdapter) => {
   const { totalPrice } = formatTotalAmount(data);
 
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
-  const totalAmout = parseFloat(formatPrice(totalPrice, locale, currency).replace(/[^\d.,-]/g, ''));
+  const amount = parseFloat(formatPrice(totalPrice, locale, currency).replace(/[^\d.,-]/g, ''));
 
   const products = data.map((item: CartItemType) => ({
     name: item.name,
@@ -29,23 +36,18 @@ export const paymentDataAdapter = ({ data, locale, currency }: IPaymentAdapter) 
   }));
 
   return {
-    amount: totalAmout,
+    amount,
     shop_name: 'KUSH | JEWERLY',
     currency: locale === 'uk' ? 'UAH' : 'USD',
     description: `Оплата ювелірних прикрас: ${description}`,
+    products,
+    customer,
     order_id,
     rro_info: {
       items: products,
       delivery_emails: ['yosorit@gmail.com'],
-      total_amount: totalAmout,
+      total_amount: amount,
       cashier: 'John Doe'
-    },
-    products: products,
-    customer: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      phone: '+380501234567'
     }
   };
 };

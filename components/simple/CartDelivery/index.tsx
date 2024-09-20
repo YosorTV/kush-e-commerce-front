@@ -1,48 +1,55 @@
 'use client';
 
-import { useState } from 'react';
-import { NovaPostOptions } from '@/components/simple/NovaPostOptions';
-import { Button, Input, Title } from '@/components/elements';
+import { Button } from '@/components/elements';
 import { useCart } from '@/store';
+import { DeliveryForm, PeronalCheckoutForm } from '@/components/forms';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
-export const CartDelivery = ({ title = 'Оберіть спосіб доставки' }) => {
-  const [self, setSelf] = useState(false);
+import { getMe } from '@/services/api/get-me';
+import { useTranslations } from 'next-intl';
+import { isFormIncomplete } from '@/helpers/validator';
 
+export const CartDelivery = () => {
+  const [user, setUser] = useState(null);
+
+  const t = useTranslations();
   const cartStore = useCart();
 
+  const disabled = isFormIncomplete(cartStore.delivery);
+
   const handleBack = () => cartStore.setForm('cart');
+
+  const session = useSession();
+
+  const fetchProfileData = async () => {
+    const { data } = await getMe({ token: session.data.accessToken });
+
+    setUser(data);
+  };
+
+  useEffect(() => {
+    if (session.status === 'authenticated' && !user) {
+      fetchProfileData();
+    }
+  }, [session.status]);
 
   return (
     <div className='form-control w-full'>
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
         Повернутись
       </Button>
-      <div className='form-control gap-y-5 pt-5'>
-        <Title level='3' className='w-full self-center pb-5 text-center text-2xl font-light'>
-          {title}
-        </Title>
-        <Input
-          id='self'
-          type='checkbox'
-          checked={self}
-          label='Забрати самостійно'
-          onChange={() => setSelf(!self)}
-          className='checkbox checked:fill-base-200'
-          labelStyle='text-base-200 font-medium text-lg cursor-pointer'
-          containerClass='flex-row flex-row-reverse justify-end items-center gap-x-3'
-        />
+      <div className='form-control gap-y-2.5 pt-2.5'>
+        <PeronalCheckoutForm data={user} title={t('cart.personal')} />
+        <div className='divider mb-2.5' />
+        <DeliveryForm data={user} title={t('cart.delivery')} />
         <div className='divider' />
-        <div className='form-control gap-y-5'>
-          <Title level='3'>Доставити за допомогою нової пошти</Title>
-          <NovaPostOptions
-            warehouseOptions={{ label: null, value: null }}
-            cityOptions={{ label: null, value: null }}
-            disabled={self}
-          />
-        </div>
-        <div className='divider' />
-        <button onClick={() => cartStore.setForm('checkout')} className='btn btn-primary w-full text-base-100'>
-          Перейти до оплати
+        <button
+          disabled={disabled}
+          onClick={() => cartStore.setForm('checkout')}
+          className='btn btn-primary w-full text-base-100 disabled:opacity-50'
+        >
+          {t('checkout.payments')}
         </button>
       </div>
     </div>

@@ -51,7 +51,7 @@ export const Input = ({
             placeholder={placeholder}
             className={className}
             error={Boolean(error)}
-            {...rest}
+            {...(rest as any)}
           />
         );
 

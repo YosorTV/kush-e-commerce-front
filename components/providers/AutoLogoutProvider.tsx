@@ -4,23 +4,23 @@ import { FC, PropsWithChildren, useEffect } from 'react';
 
 import { useActivity } from '@/store';
 import { logout } from '@/services';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 
 export interface AutoLogoutProviderProps {
-  timeoutMs?: number; // Optional timeout for user inactivity
-  timeoutCheckMs?: number; // Interval time to check for user inactivity
-  requireSession?: boolean; // Flag to check if session is required
-  session: Session; // Session object that contains session-related information
+  timeoutMs?: number;
+  timeoutCheckMs?: number;
+  requireSession?: boolean;
 }
 
-type WindowActivityEvent = keyof WindowEventMap; // Type alias for window events
+type WindowActivityEvent = keyof WindowEventMap;
 
 export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> = ({
   timeoutMs = 15 * 60 * 1000,
   timeoutCheckMs = 1000,
-  session,
   children
 }) => {
+  const session = useSession();
+
   const { lastActivity, setLastActivity } = useActivity();
 
   const getCurrentTime = () => new Date().getTime();
@@ -34,8 +34,8 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
   const checkUserInactivity = async () => {
     const now = getCurrentTime();
 
-    if (session && session.exp) {
-      const expiryTime = new Date(session.exp * 1000).getTime();
+    if (session.data && session.data.exp) {
+      const expiryTime = new Date(session.data.exp * 1000).getTime();
 
       if (now > expiryTime) {
         await logout();
@@ -63,7 +63,7 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
       });
       window.clearInterval(intervalId);
     };
-  }, [session]);
+  }, [session.data]);
 
   return <>{children}</>;
 };

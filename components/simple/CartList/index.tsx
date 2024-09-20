@@ -14,12 +14,16 @@ import lottieAnim from '@/public/LottieEmpty.json';
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 import { useLocale } from 'next-intl';
 import { getCurrency } from '@/services';
+import { useTheme } from 'next-themes';
+import { cn } from '@/lib';
 
 export const CartList: FC<any> = ({ data }) => {
+  const [currency, setCurrency] = useState<number>();
+
   const locale = useLocale();
   const cartStore = useCart();
 
-  const [currency, setCurrency] = useState<number>();
+  const { theme } = useTheme();
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
@@ -49,7 +53,11 @@ export const CartList: FC<any> = ({ data }) => {
           {data.getBack}
         </Button>
 
-        <Lottie text={data.emptyList} src={lottieAnim} />
+        <Lottie
+          text={data.emptyList}
+          src={lottieAnim}
+          playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0')}
+        />
       </motion.div>
     );
   }

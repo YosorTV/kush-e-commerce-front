@@ -1,15 +1,31 @@
 'use client';
 
-import { FC } from 'react';
-import PhoneInput from 'react-phone-input-2';
+import { FC, useState } from 'react';
+import PhoneInput, { PhoneInputProps } from 'react-phone-input-2';
 
 import { cn } from '@/lib';
-import { InputProps } from '@/types/components';
 
-export const InputPhone: FC<InputProps> = ({ value, id, name, placeholder, error, className, ...rest }) => {
+interface InputProps extends PhoneInputProps {
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  error?: boolean;
+  className?: string;
+  defaultValue?: string;
+}
+
+export const InputPhone: FC<InputProps> = ({ defaultValue, id, name, placeholder, error, className, ...rest }) => {
+  const [value, setValue] = useState<string>(defaultValue);
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+  };
+
   return (
     <PhoneInput
-      value={(value as string) || (rest?.defaultValue as string)}
+      autoFormat
+      value={value}
+      onChange={handleChange}
       inputProps={{
         id,
         name,
@@ -28,6 +44,7 @@ export const InputPhone: FC<InputProps> = ({ value, id, name, placeholder, error
         error && '!border-error',
         className
       )}
+      {...rest}
     />
   );
 };

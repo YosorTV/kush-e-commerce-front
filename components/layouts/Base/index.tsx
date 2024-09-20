@@ -1,5 +1,4 @@
 import { montserrat } from '@/assets/fonts';
-import { ClientSideRender } from '@/components/complex';
 import { Footer, Header } from '@/components/elements';
 import { ThemeProvider } from '@/components/providers';
 import { cn } from '@/lib';
@@ -15,7 +14,6 @@ export async function BaseLayout({ children, locale, header, footer }: BaseLayou
           <main className='flex min-h-dvh flex-grow flex-col'>{children}</main>
           <Footer data={footer} locale={locale} />
           <div id='portal' />
-          <ClientSideRender />
         </ThemeProvider>
       </body>
       <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='lazyOnload' async />

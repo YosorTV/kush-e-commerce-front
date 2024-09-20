@@ -11,14 +11,26 @@ export type CartItemType = {
   quantity?: number;
 };
 
+export interface IDeliveryForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  self: boolean;
+  novapostWarehouse: Record<string, string | null>;
+  novapostCity: Record<string, string | null>;
+}
+
 type FormKey = 'checkout' | 'cart' | 'success' | 'delivery';
 
 export type CartState = {
   formState: CartItemType;
+  delivery: IDeliveryForm;
   cart: CartItemType[];
   key: FormKey;
   isOpen: boolean;
   paymentIntentId: string;
+  setDelivery: (key: keyof IDeliveryForm, value: any) => void;
   setPaymentIntentId: (value: string) => void;
   setForm: (value: FormKey) => void;
   onToggle: () => void;

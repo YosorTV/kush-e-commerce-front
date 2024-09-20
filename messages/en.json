@@ -5,7 +5,12 @@
   },
   "cart": {
     "added": "Already in cart",
-    "add": "Add to cart"
+    "add": "Add to cart",
+    "personal": "Personal information",
+    "delivery": "Delivery options",
+    "self": "Self delivery",
+    "novapost": "Nova Post",
+    "delivery_spot": "Select delivery address"
   },
   "validation": {
     "length": "Min {number} characters long",
@@ -93,7 +98,8 @@
   "checkout": {
     "price": "Price",
     "total": "Total",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "payments": "Checkout"
   },
   "wishlist": {
     "added": "Remove from wishlist",
