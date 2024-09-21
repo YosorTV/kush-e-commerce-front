@@ -4,7 +4,7 @@ import { Button } from '@/components/elements';
 import { useCart } from '@/store';
 import { DeliveryForm, PeronalCheckoutForm } from '@/components/forms';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { getMe } from '@/services/api/get-me';
 import { useTranslations } from 'next-intl';
@@ -16,9 +16,14 @@ export const CartDelivery = () => {
   const t = useTranslations();
   const cartStore = useCart();
 
-  const disabled = isFormIncomplete(cartStore.delivery);
+  const disabled = useMemo(() => {
+    return isFormIncomplete(cartStore.delivery);
+  }, [cartStore.delivery]);
 
-  const handleBack = () => cartStore.setForm('cart');
+  const handleBack = () => {
+    cartStore.setForm('cart');
+    cartStore.resetDelivery();
+  };
 
   const session = useSession();
 

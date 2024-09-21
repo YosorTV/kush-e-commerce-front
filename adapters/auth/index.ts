@@ -9,7 +9,7 @@ export const sessionAdapter = ({ token }: any) => {
     return {
       accessToken: token.accessToken,
       exp: token.exp,
-      user: {
+      data: {
         id: token.id,
         name: token.name,
         email: token.email,
@@ -24,7 +24,7 @@ export const sessionAdapter = ({ token }: any) => {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
     exp: token.expires ?? token.exp,
-    user: { ...decodedTokenData, name: token.name }
+    data: { ...decodedTokenData, name: token.name }
   };
 };
 
@@ -64,6 +64,6 @@ export const signInParamsAdapter = (credentials: SignInAdapterProps) => {
     email: credentials.email,
     password: credentials.password,
     callbackUrl: '/',
-    redirect: false
+    redirect: true
   };
 };

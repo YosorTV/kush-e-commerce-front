@@ -15,20 +15,17 @@ interface IDeliveryForm {
 }
 
 export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб доставки' }) => {
+  const t = useTranslations('cart');
   const cartStore = useCart();
 
   const [self, setSelf] = useState(false);
   const [withNp, setWithNp] = useState(false);
 
-  const handleSelf = () => {
-    setSelf(!self);
-
-    cartStore.setDelivery('self', self);
-  };
-
-  const t = useTranslations('cart');
+  const handleSelf = () => setSelf(!self);
 
   useEffect(() => {
+    cartStore.setDelivery('self', self);
+
     if (self) {
       cartStore.setDelivery('novapostCity', null);
       cartStore.setDelivery('novapostWarehouse', null);

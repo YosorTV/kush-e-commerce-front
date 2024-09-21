@@ -108,6 +108,55 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         [key]: value
       }
     })),
+  globalReset: () =>
+    set(() => ({
+      cart: [],
+      key: 'cart',
+      formState: {
+        color: null,
+        id: null,
+        material: null,
+        name: null,
+        size: null,
+        unit_amount: 0,
+        description: null,
+        images: [],
+        quantity: 0
+      },
+      delivery: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        self: false,
+        novapostCity: {
+          label: null,
+          value: null
+        },
+        novapostWarehouse: {
+          label: null,
+          value: null
+        }
+      }
+    })),
+  resetDelivery: () =>
+    set(() => ({
+      delivery: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        self: false,
+        novapostCity: {
+          label: null,
+          value: null
+        },
+        novapostWarehouse: {
+          label: null,
+          value: null
+        }
+      }
+    })),
   setPaymentIntentId: (value) => set(() => ({ paymentIntentId: value })),
   setForm: (value) => set(() => ({ key: value })),
   syncCartData: (data: CartItemType) =>

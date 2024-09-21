@@ -3,6 +3,9 @@ import { postStrapiData } from '../strapi';
 interface IPayment {
   data: string;
   signature: string;
+  products: any[];
+  customer: any;
+  userId: number;
 }
 
 export const paymentCallback = async (data: IPayment) => {

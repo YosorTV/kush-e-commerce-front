@@ -27,6 +27,7 @@ export type CartState = {
   formState: CartItemType;
   delivery: IDeliveryForm;
   cart: CartItemType[];
+  globalReset: () => void;
   key: FormKey;
   isOpen: boolean;
   paymentIntentId: string;
@@ -39,5 +40,6 @@ export type CartState = {
   onRemove: (item: CartItemType) => void;
   onReset: () => void;
   onIncrease: (data: CartItemType) => void;
+  resetDelivery: () => void;
   syncCartData: (data: CartItemType) => void;
 };

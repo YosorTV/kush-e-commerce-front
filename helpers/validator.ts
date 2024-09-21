@@ -1,11 +1,13 @@
 import { IDeliveryForm } from '@/types/store';
 
-export const isFormIncomplete = (data: IDeliveryForm) => {
+export const isFormIncomplete = (data: IDeliveryForm): boolean => {
   const { firstName, lastName, email, phone, self, novapostCity, novapostWarehouse } = data;
 
+  const isBasicInfoIncomplete = !firstName || !lastName || !email || !phone;
+
   if (self) {
-    return !firstName || !lastName || !email || !phone;
+    return isBasicInfoIncomplete;
   }
 
-  return !firstName || !lastName || !email || !phone || !novapostCity?.value || !novapostWarehouse?.value;
+  return isBasicInfoIncomplete || !novapostCity?.value || !novapostWarehouse?.value;
 };

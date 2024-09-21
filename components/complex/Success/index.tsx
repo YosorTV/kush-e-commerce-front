@@ -1,18 +1,14 @@
 'use client';
 
+import { Button } from '@/components/elements';
 import { useCart } from '@/store';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 
 export const Success = () => {
   const cartStore = useCart();
 
-  useEffect(() => {
-    cartStore.onReset();
-  }, []);
-
   const handleClose = () => {
-    cartStore.setForm('cart');
+    cartStore.globalReset();
     cartStore.onToggle();
   };
 
@@ -29,11 +25,11 @@ export const Success = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          Check your email for the reciept.
+          Дякуємо за покупку
         </motion.p>
-        <button className='btn btn-primary' onClick={handleClose}>
-          Proceed with shopping
-        </button>
+        <Button onClick={handleClose} className='btn btn-link justify-start px-0 text-lg normal-case'>
+          Продовжити покупки
+        </Button>
       </div>
     </motion.div>
   );

@@ -52,7 +52,7 @@ export const Header: FC<HeaderProps> = async ({ data, locale }) => {
         </div>
         <div className='flex items-center gap-x-6'>
           <Search placeholder={searchTitle} />
-          <ShoppingCart data={shoppingCart} userId={session?.user && session.user.id} />
+          <ShoppingCart data={shoppingCart} locale={locale} />
           <UserSession
             cta={cta}
             locale={locale}

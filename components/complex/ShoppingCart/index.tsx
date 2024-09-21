@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { useCart } from '@/store';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,16 +15,52 @@ import { Badge } from '@/components/elements/Badge';
 import { CartDelivery } from '@/components/simple/CartDelivery';
 import { useScrollLock } from '@/lib/hooks';
 import { CartCheckout } from '@/components/simple/CartCheckout';
+import { getCurrency, paymentCreate } from '@/services';
+import { paymentDataAdapter } from '@/adapters/payment';
 
-export const ShoppingCart: FC<ShoppingCartProps> = ({ data, userId }) => {
+export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
   const cartStore = useCart();
+
+  const [currency, setCurrency] = useState<number>(0);
+  const [liqPayData, setLiqPayData] = useState({
+    data: '',
+    signature: ''
+  });
+
+  const fetchCurrency = useCallback(async () => {
+    const response = await getCurrency();
+    setCurrency(response);
+  }, []);
+
+  const fetchLiqPayData = useCallback(async () => {
+    const options = paymentDataAdapter({
+      locale,
+      currency,
+      data: cartStore.cart,
+      customer: cartStore.delivery
+    });
+
+    const response = await paymentCreate(options);
+
+    setLiqPayData(response);
+  }, [currency, cartStore.cart, cartStore.delivery]);
+
+  useEffect(() => {
+    fetchCurrency();
+  }, []);
+
+  useEffect(() => {
+    if (cartStore.key === 'checkout') {
+      fetchLiqPayData();
+    }
+  }, [cartStore.key]);
 
   useScrollLock(cartStore.isOpen);
 
   const contentZone = {
     cart: <CartList data={data} />,
     delivery: <CartDelivery />,
-    checkout: <CartCheckout />,
+    checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
     success: <Success />
   };
 

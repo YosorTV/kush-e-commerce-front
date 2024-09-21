@@ -11,12 +11,10 @@ export async function authUserAction(prevState: any, formData: FormData) {
       identifier: formData.get('identifier'),
       password: formData.get('password'),
       remember: formData.get('remember') || 'off',
-      locale: formData.get('locale') || 'uk',
+      locale: formData.get('locale') || 'uk'
     };
 
-    const validatedData: any = schemas
-      .login(fields.locale as string)
-      .safeParse(fields);
+    const validatedData: any = schemas.login(fields.locale as string).safeParse(fields);
 
     if (!validatedData.success) {
       const errors = validatedData.error.flatten().fieldErrors;
@@ -26,14 +24,13 @@ export async function authUserAction(prevState: any, formData: FormData) {
         errors,
         strapiError: null,
         status: 400,
-        message:
-          fields.locale === 'uk' ? 'Валідаційна помилка.' : 'Validation error.',
+        message: fields.locale === 'uk' ? 'Валідаційна помилка.' : 'Validation error.'
       };
     }
 
     await signIn('credentials', {
       ...validatedData.data,
-      redirectTo: ROOT,
+      redirectTo: ROOT
     });
   } catch (error) {
     if (error instanceof AuthError) {
@@ -44,11 +41,8 @@ export async function authUserAction(prevState: any, formData: FormData) {
             data: null,
             errors: null,
             status: 400,
-            message:
-              formData.get('locale') === 'uk'
-                ? 'Помилка запиту.'
-                : 'Bad Request.',
-            strapiError: error.cause['err'].message,
+            message: formData.get('locale') === 'uk' ? 'Помилка запиту.' : 'Bad Request.',
+            strapiError: error.cause['err'].message
           };
         default:
           return {
@@ -56,12 +50,8 @@ export async function authUserAction(prevState: any, formData: FormData) {
             data: null,
             errors: null,
             status: 400,
-            message:
-              formData.get('locale') === 'uk'
-                ? 'Помилка запиту.'
-                : 'Bad Request.',
-            strapiError:
-              error.cause['err'].message ?? 'An unexpected error occurred',
+            message: formData.get('locale') === 'uk' ? 'Помилка запиту.' : 'Bad Request.',
+            strapiError: error.cause['err'].message ?? 'An unexpected error occurred'
           };
       }
     }

@@ -1,5 +1,5 @@
 export type ShoppingCartProps = {
-  userId: string;
+  locale: string;
   data: {
     title: string;
     totalPrice: string;

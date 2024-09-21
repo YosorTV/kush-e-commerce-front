@@ -2,19 +2,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 
-import { CartItemType } from '@/types/store';
+import { CartItemType, IDeliveryForm } from '@/types/store';
 
 interface IPaymentAdapter {
   data: CartItemType[];
   locale: string;
   currency: number;
-  customer: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    customer_delivery: string;
-  };
+  customer: IDeliveryForm;
 }
 
 interface ILiqPayAdapter {
@@ -30,6 +24,7 @@ export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymen
   const amount = parseFloat(formatPrice(totalPrice, locale, currency).replace(/[^\d.,-]/g, ''));
 
   const products = data.map((item: CartItemType) => ({
+    id: item.id,
     name: item.name,
     quantity: item.quantity,
     price: formatPrice(item.unit_amount, locale, currency).replace(/[^\d.,-]/g, '')
@@ -40,14 +35,19 @@ export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymen
     shop_name: 'KUSH | JEWERLY',
     currency: locale === 'uk' ? 'UAH' : 'USD',
     description: `Оплата ювелірних прикрас: ${description}`,
-    products,
-    customer,
     order_id,
+    products,
+    customer: {
+      ...customer,
+      customer_city: customer.self ? '' : customer.novapostCity.label,
+      customer_warehouse: customer.self ? '' : customer.novapostWarehouse.label,
+      self_delivery: customer.self
+    },
     rro_info: {
       items: products,
-      delivery_emails: ['yosorit@gmail.com'],
+      delivery_emails: [customer.email],
       total_amount: amount,
-      cashier: 'John Doe'
+      cashier: 'KUSH'
     }
   };
 };

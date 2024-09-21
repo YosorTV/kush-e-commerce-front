@@ -1,86 +1,88 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, FC, useCallback } from 'react';
+import { useSession } from 'next-auth/react';
 import { useLocale } from 'next-intl';
 
 import { useCart } from '@/store';
-import { getCurrency, paymentCreate } from '@/services';
-
-import { liqPayAdapter, paymentDataAdapter } from '@/adapters/payment';
+import { liqPayAdapter } from '@/adapters/payment';
 import { Button } from '@/components/elements';
-import { useScrollLock } from '@/lib/hooks';
 import { paymentCallback } from '@/services/api/payment-update';
+import { formatPrice } from '@/helpers/formatters';
+import { CartItemType } from '@/types/store';
+import { debounce } from 'lodash';
 
-export const CartCheckout: React.FC = () => {
+interface ICartCheckout {
+  currency: number;
+  liqPayData: { data: string; signature: string };
+}
+
+export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const locale = useLocale();
   const cartStore = useCart();
+  const { data: session } = useSession();
 
-  const [currency, setCurrency] = useState<number>(0);
-  const [liqPayData, setLiqPayData] = useState({
-    data: '',
-    signature: ''
-  });
+  const liqPayContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleBack = () => cartStore.setForm('delivery');
+  const handleBack = useCallback(() => cartStore.setForm('delivery'), [cartStore]);
 
-  useScrollLock(cartStore.isOpen);
+  const products = useMemo(() => {
+    return cartStore.cart.map((item: CartItemType) => ({
+      id: item.id,
+      name: item.name,
+      quantity: item.quantity,
+      images: item.images,
+      price: formatPrice(item.unit_amount, locale, currency).replace(/[^\d.,-]/g, '')
+    }));
+  }, [cartStore.cart, locale, currency]);
 
-  const fetchCurrency = async () => {
-    const response = await getCurrency();
-
-    setCurrency(response);
-  };
-
-  const fetchLiqPayData = async () => {
-    const options = paymentDataAdapter({
-      locale,
-      currency,
-      data: cartStore.cart,
-      customer: {
+  const debouncedCallback = useCallback(
+    debounce(async ({ data, signature }) => {
+      const customer = {
         ...cartStore.delivery,
-        customer_delivery: `Місто: ${cartStore.delivery.novapostCity.label} Відділеня: ${cartStore.delivery.novapostWarehouse.label}`
-      }
-    });
-
-    const response = await paymentCreate(options);
-
-    setLiqPayData(response);
-  };
-
-  useEffect(() => {
-    if (cartStore.key === 'checkout') {
-      fetchCurrency();
-      fetchLiqPayData();
-    }
-  }, [cartStore.key, currency]);
-
-  useEffect(() => {
-    if (liqPayData.data && liqPayData.signature && cartStore.key === 'checkout') {
-      const container = document.getElementById('liqpay_checkout');
-
-      if (container) {
-        container.innerHTML = '';
-      }
-
-      window.LiqPayCheckoutCallback = function () {
-        if (typeof LiqPayCheckout !== 'undefined') {
-          LiqPayCheckout.init(liqPayAdapter(liqPayData)).on('liqpay.callback', async ({ data, signature }) => {
-            await paymentCallback({ data, signature });
-          });
-        }
+        customer_city: cartStore.delivery.self ? '' : cartStore.delivery.novapostCity.label,
+        customer_warehouse: cartStore.delivery.self ? '' : cartStore.delivery.novapostWarehouse.label,
+        self_delivery: cartStore.delivery.self
       };
 
-      window.LiqPayCheckoutCallback();
+      const result = await paymentCallback({
+        data,
+        signature,
+        products,
+        customer,
+        userId: Number(session?.data?.id) || null
+      });
+
+      if (result.status === 200) {
+        cartStore.setForm('success');
+      }
+    }, 500),
+    [cartStore.delivery, products, session]
+  );
+
+  useEffect(() => {
+    if (liqPayData.data && liqPayData.signature) {
+      if (liqPayContainerRef.current) {
+        liqPayContainerRef.current.innerHTML = '';
+      }
+
+      if (typeof LiqPayCheckout !== 'undefined') {
+        const liqPayInstance = LiqPayCheckout.init(liqPayAdapter(liqPayData));
+        liqPayInstance.on('liqpay.callback', debouncedCallback);
+      }
     }
-  }, [liqPayData, cartStore.key]);
+
+    return () => {
+      liqPayContainerRef.current = null;
+    };
+  }, [liqPayData]);
 
   return (
     <div className='w-full'>
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
         Повернутись
       </Button>
-
-      <div id='liqpay_checkout' />
+      <div ref={liqPayContainerRef} id='liqpay_checkout' />
     </div>
   );
 };
