@@ -23,8 +23,9 @@ export const {
       credentials: {} as Record<string, CredentialInput>,
       async authorize(credentials: any) {
         const response = await login(credentials);
+        console.log('response: ', response);
 
-        if (response?.status !== 200) {
+        if (!response?.jwt) {
           throw new Error(response.error, { cause: 'auth' });
         }
 
@@ -57,12 +58,12 @@ export const {
         }
       }
 
-      return token;
+      return Promise.resolve(token);
     },
     async session({ token, session }: any) {
       session = sessionAdapter({ token });
 
-      return session;
+      return Promise.resolve(session);
     }
   }
 });

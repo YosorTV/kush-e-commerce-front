@@ -8,6 +8,7 @@ interface IDeliveryRules {
 
 export const DeliveryRules: FC<IDeliveryRules> = async ({ locale = 'uk' }) => {
   const { data } = await getDeliveryData({ locale });
+  console.log('data: ', data);
 
   const printRule = (rule: any) => (
     <RuleCard key={rule.id} icon={rule.icon} title={rule.title} description={rule.description} />

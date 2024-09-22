@@ -5,11 +5,8 @@ import { SignInLink } from '@/components/simple';
 import { StrapiLinkType } from '@/types/components';
 import { NextLink } from '@/components/elements';
 import { Avatar } from '@/components/elements/Avatar';
-import { useSession } from 'next-auth/react';
 
-export default function UserSession({ cta, signOutTitle, sessionLinks = [] }: any) {
-  const { data: session } = useSession();
-
+export default function UserSession({ cta, signOutTitle, session, locale, sessionLinks = [] }: any) {
   if (!session) {
     return <SignInLink {...cta} />;
   }

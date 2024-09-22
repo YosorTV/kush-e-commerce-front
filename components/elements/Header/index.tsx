@@ -1,5 +1,3 @@
-'use client';
-
 import { Search } from '@/components/complex';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
 import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
@@ -8,7 +6,7 @@ import { Logo } from '@/components/elements';
 import { HeaderProps } from '@/types/components';
 import UserSession from '@/components/complex/UserSession';
 
-export default function Header({ data, shoppingCart, locale }: HeaderProps) {
+export default async function Header({ data, shoppingCart, session, locale }: HeaderProps) {
   const {
     pages,
     cta,
@@ -49,7 +47,13 @@ export default function Header({ data, shoppingCart, locale }: HeaderProps) {
         <div className='flex items-center gap-x-6'>
           <Search placeholder={searchTitle} />
           <ShoppingCart data={shoppingCart} locale={locale} />
-          <UserSession cta={cta} locale={locale} signOutTitle={signOutTitle} sessionLinks={sessionLinks} />
+          <UserSession
+            cta={cta}
+            locale={locale}
+            session={session}
+            signOutTitle={signOutTitle}
+            sessionLinks={sessionLinks}
+          />
           <div className='hidden lg:flex lg:gap-x-6'>
             <LangChanger />
             <ThemeChanger />

@@ -1,11 +1,9 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { ThemeProvider as ThemeContext } from 'next-themes';
 
-type ThemeProviderProps = { children: React.ReactNode };
-
-export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeContext enableSystem enableColorScheme defaultTheme='light' attribute='data-theme'>
       {children}

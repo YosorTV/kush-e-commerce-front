@@ -19,10 +19,8 @@ export default async function ProfilePage({ params }: PageProps) {
   const { locale } = params;
 
   const session = await auth();
-  console.log('session: ', session);
 
   const { data } = await getProfileData({ locale, token: session.accessToken });
-  console.log('data: ', data);
   const { data: me } = await getMe({ token: session.accessToken });
 
   return (

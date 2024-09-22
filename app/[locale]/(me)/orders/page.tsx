@@ -19,6 +19,7 @@ export default async function OrdersPage({ params }: PageProps) {
   const session = await auth();
 
   const { data } = await getOrdersData({ locale, userId: session.user.id, token: session?.accessToken });
+  console.log('data: ', data);
 
   return <section className='flex w-full flex-col justify-center bg-info-content'>Orders</section>;
 }

@@ -12,9 +12,7 @@ interface ISignOut {
 }
 
 export const SignOutButton: FC<ISignOut> = ({ text, icon, className }) => {
-  const handleSignOut = async () => {
-    await signOut({ redirect: true, callbackUrl: '/' });
-  };
+  const handleSignOut = async () => await signOut({ redirect: true, callbackUrl: '/' });
 
   return (
     <button type='button' onClick={handleSignOut} className={cn('font-semibold capitalize hover:bg-none', className)}>

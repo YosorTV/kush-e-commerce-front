@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
@@ -34,7 +33,7 @@ export default async function ProductDetails({ params }: PageProps) {
   const { data: allSizes } = await getSizesData({ locale });
 
   if (!data) {
-    return notFound();
+    return null;
   }
 
   const cartData: CartItemType = {
