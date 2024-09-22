@@ -37,3 +37,4 @@ export * from '@/components/simple/Wishlist';
 export * from '@/components/simple/AddButton';
 export * from '@/components/simple/DeliveryBlock';
 export * from '@/components/simple/StepBack';
+export * from '@/components/simple/OrderCard';

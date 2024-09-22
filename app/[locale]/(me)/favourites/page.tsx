@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 
-import { STRAPI_PAGES } from '@/helpers/constants';
-import { getMetadata } from '@/services';
 import { PageProps } from '@/types/app/page.types';
 import { getWishlistProducts } from '@/services/api/get-wished-products';
 import { auth } from '@/auth';
@@ -12,9 +10,12 @@ import { ProductListController } from '@/components/simple/ProductListController
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.profile, locale });
-
-  return response;
+  return {
+    title: {
+      default: `KUSH | ${locale === 'uk' ? 'Cписок бажань' : 'Wishlist'}`,
+      template: '%s | KUSH'
+    }
+  };
 }
 
 export default async function FavouritesPage({ params }: PageProps) {

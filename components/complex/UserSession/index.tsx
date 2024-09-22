@@ -6,7 +6,7 @@ import { StrapiLinkType } from '@/types/components';
 import { NextLink } from '@/components/elements';
 import { Avatar } from '@/components/elements/Avatar';
 
-export default function UserSession({ cta, signOutTitle, session, locale, sessionLinks = [] }: any) {
+export default function UserSession({ cta, signOutTitle, session, sessionLinks = [] }: any) {
   if (!session) {
     return <SignInLink {...cta} />;
   }

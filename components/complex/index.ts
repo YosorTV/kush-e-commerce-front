@@ -14,3 +14,4 @@ export * from '@/components/complex/CollectionSection';
 export * from '@/components/complex/CollectionDetails';
 export * from '@/components/complex/AboutSection';
 export * from '@/components/complex/Modal';
+export * from '@/components/complex/OrdersSection';

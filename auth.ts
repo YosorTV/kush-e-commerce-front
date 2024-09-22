@@ -23,7 +23,6 @@ export const {
       credentials: {} as Record<string, CredentialInput>,
       async authorize(credentials: any) {
         const response = await login(credentials);
-        console.log('response: ', response);
 
         if (!response?.jwt) {
           throw new Error(response.error, { cause: 'auth' });

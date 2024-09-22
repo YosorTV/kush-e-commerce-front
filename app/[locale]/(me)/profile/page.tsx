@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 import { ProfileForm } from '@/components/forms';
-import { STRAPI_PAGES } from '@/helpers/constants';
-import { getMetadata, getProfileData } from '@/services';
+
+import { getProfileData } from '@/services';
 import { PageProps } from '@/types/app/page.types';
 import { auth } from '@/auth';
 import { getMe } from '@/services/api/get-me';
@@ -10,9 +10,12 @@ import { getMe } from '@/services/api/get-me';
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.profile, locale });
-
-  return response;
+  return {
+    title: {
+      default: `KUSH | ${locale === 'uk' ? 'Профіль' : 'Profile'}`,
+      template: '%s | KUSH'
+    }
+  };
 }
 
 export default async function ProfilePage({ params }: PageProps) {
