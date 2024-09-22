@@ -3,7 +3,9 @@
 import { schemas } from '@/lib/zod';
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
+import { signInParamsAdapter } from '@/adapters/auth';
 import { ROOT } from '@/helpers/constants';
+import { revalidatePath } from 'next/cache';
 
 export async function authUserAction(prevState: any, formData: FormData) {
   try {
@@ -28,10 +30,24 @@ export async function authUserAction(prevState: any, formData: FormData) {
       };
     }
 
-    await signIn('credentials', {
-      ...validatedData.data,
-      redirectTo: ROOT
-    });
+    const result = await signIn('credentials', signInParamsAdapter(validatedData.data));
+    if (result) {
+      revalidatePath('/');
+
+      return {
+        ...prevState,
+        status: 200,
+        url: ROOT,
+        message: formData.get('locale') === 'uk' ? 'З поверненням.' : 'Welcome back.',
+        strapiError: null
+      };
+    }
+    return {
+      ...prevState,
+      status: 200,
+      message: null,
+      strapiError: null
+    };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -42,7 +58,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
             errors: null,
             status: 400,
             message: formData.get('locale') === 'uk' ? 'Помилка запиту.' : 'Bad Request.',
-            strapiError: error.cause['err'].message
+            strapiError: error?.cause?.['err'].message
           };
         default:
           return {
@@ -51,11 +67,18 @@ export async function authUserAction(prevState: any, formData: FormData) {
             errors: null,
             status: 400,
             message: formData.get('locale') === 'uk' ? 'Помилка запиту.' : 'Bad Request.',
-            strapiError: error.cause['err'].message ?? 'An unexpected error occurred'
+            strapiError: error.message ?? 'An unexpected error occurred'
           };
       }
     }
-    throw error;
+    return {
+      ...prevState,
+      data: null,
+      errors: error,
+      status: 400,
+      message: formData.get('locale') === 'uk' ? 'Помилка запиту.' : 'Bad Request.',
+      strapiError: error.message ?? 'An unexpected error occurred'
+    };
   }
 }
 

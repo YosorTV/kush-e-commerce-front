@@ -9,6 +9,7 @@ import { getTranslations } from 'next-intl/server';
 
 export default async function ProfileLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
   const session = await auth();
+
   const t = await getTranslations('system');
 
   const { data } = await getProfileLayoutData({ locale, token: session?.accessToken });

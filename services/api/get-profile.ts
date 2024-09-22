@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { generateStrapiQuery } from '@/lib';
 
 import { STRAPI_QUERIES } from '../queries';
@@ -15,8 +14,6 @@ export const getProfileData = async ({ locale, token }: IGetProducts): Promise<a
   const profileQP = generateStrapiQuery(STRAPI_QUERIES.PROFILE({ locale }));
 
   const response = await getStrapiData(STRAPI_PAGES.profile, profileQP, { token });
-
-  if (!response.id) notFound();
 
   return { data: response };
 };

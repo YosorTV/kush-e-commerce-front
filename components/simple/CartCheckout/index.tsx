@@ -50,7 +50,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         signature,
         products,
         customer,
-        userId: Number(session?.data?.id) || null
+        userId: Number(session?.user?.id) || null
       });
 
       if (result.status === 200) {

@@ -1,35 +1,22 @@
-import { SessionProvider } from 'next-auth/react';
-import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
-
-import { auth } from '@/auth';
-import { BaseLayout } from '@/components/layouts';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 import { LOCALES } from '@/helpers/constants';
 
 import { LayoutProps } from '@/types/app/layout.types';
-import { NextIntlClientProvider } from 'next-intl';
-import { getLayoutData } from '@/services';
-import { AutoLogoutProvider } from '@/components/providers';
+
+import BaseLayout from '@/components/layouts/Base';
+import RootProvider from '@/components/providers/RootProvider';
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default async function LocalLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
+export default async function LocaleLayout({ children, params: { locale } }: LayoutProps) {
   unstable_setRequestLocale(locale);
 
-  const { header: headerData, footer, shoppingCart } = await getLayoutData({ locale });
-
-  const messages = await getMessages();
-  const session = await auth();
-
   return (
-    <NextIntlClientProvider messages={messages}>
-      <SessionProvider session={session}>
-        <BaseLayout locale={locale} header={{ ...headerData, shoppingCart }} footer={footer}>
-          <AutoLogoutProvider>{children}</AutoLogoutProvider>
-        </BaseLayout>
-      </SessionProvider>
-    </NextIntlClientProvider>
+    <RootProvider>
+      <BaseLayout locale={locale}>{children}</BaseLayout>
+    </RootProvider>
   );
 }

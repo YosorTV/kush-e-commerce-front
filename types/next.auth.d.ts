@@ -23,7 +23,7 @@ declare module 'next-auth' {
   }
 
   interface Session {
-    data: User;
+    user: User;
     exp: number;
     accessToken: string;
     refreshToken: string;

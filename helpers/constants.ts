@@ -175,7 +175,8 @@ export const STRAPI_PAGES = {
   currency: 'currency-change',
   delivery: 'delivery',
   wishlistNotify: 'auth-notification',
-  wishlist: 'wishlists'
+  wishlist: 'wishlists',
+  orders: 'orders'
 };
 
 export const passwordValidationParams = {

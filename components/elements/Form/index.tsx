@@ -18,8 +18,8 @@ export const Form: FC<FormProps<any>> = ({
     message: null,
     errors: null,
     strapiError: null,
-    status: null,
-  },
+    status: null
+  }
 }) => {
   const ref = useRef<HTMLFormElement>(null);
   const router = useRouter();
@@ -37,7 +37,7 @@ export const Form: FC<FormProps<any>> = ({
       toaster({
         key: 'error',
         message: formState.message,
-        description: formState.strapiError?.message ?? formState.strapiError,
+        description: formState.strapiError?.message ?? formState.strapiError
       });
     }
 

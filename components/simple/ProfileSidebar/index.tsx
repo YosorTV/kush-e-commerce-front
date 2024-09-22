@@ -18,7 +18,7 @@ type TIconVariant = 'profile' | 'orders' | 'favourites';
 
 type IIconType = { [key in TIconVariant]: JSX.Element };
 
-export const ProfileSidebar: FC<IProfileSidebar> = ({ links, signOutTitle = 'Вийти' }) => {
+export const ProfileSidebar: FC<IProfileSidebar> = ({ links = [], signOutTitle = 'Вийти' }) => {
   const IconByPath: IIconType = {
     profile: <TbUsers className='h-4 w-4 stroke-base-200' />,
     orders: <PiListDashesFill className='h-4 w-4 fill-base-200' />,
@@ -51,7 +51,7 @@ export const ProfileSidebar: FC<IProfileSidebar> = ({ links, signOutTitle = 'В�
   return (
     <nav className='mt-16 hidden w-max min-w-[300px] px-5 md:block'>
       <ul className='flex flex-col gap-y-2.5'>
-        {links.map(printLink)}
+        {links.length > 0 && links?.map(printLink)}
         <li className='flex h-12 w-full items-center'>
           <SignOutButton
             text={signOutTitle}

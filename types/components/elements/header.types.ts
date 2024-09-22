@@ -19,6 +19,6 @@ export type HeaderProps = {
       data: any[];
     };
     sessionLinks: StrapiLinkType[];
-    shoppingCart?: any;
   };
+  shoppingCart?: any;
 };

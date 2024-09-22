@@ -1,29 +1,25 @@
-import { FC } from 'react';
+'use client';
 
-import { auth } from '@/auth';
-
-import { Search, UserSession } from '@/components/complex';
+import { Search } from '@/components/complex';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
 import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
 import { Logo } from '@/components/elements';
 
 import { HeaderProps } from '@/types/components';
+import UserSession from '@/components/complex/UserSession';
 
-export const Header: FC<HeaderProps> = async ({ data, locale }) => {
-  const session = await auth();
-
+export default function Header({ data, shoppingCart, locale }: HeaderProps) {
   const {
     pages,
-    sessionLinks,
     cta,
-    shoppingCart,
     categories,
     collections,
     pagesTitle,
     categoryTitle,
     collectionTitle,
     searchTitle,
-    signOutTitle
+    signOutTitle,
+    sessionLinks
   } = data;
 
   const collectionsData = {
@@ -53,13 +49,7 @@ export const Header: FC<HeaderProps> = async ({ data, locale }) => {
         <div className='flex items-center gap-x-6'>
           <Search placeholder={searchTitle} />
           <ShoppingCart data={shoppingCart} locale={locale} />
-          <UserSession
-            cta={cta}
-            locale={locale}
-            signOutTitle={signOutTitle}
-            session={session}
-            sessionLinks={sessionLinks}
-          />
+          <UserSession cta={cta} locale={locale} signOutTitle={signOutTitle} sessionLinks={sessionLinks} />
           <div className='hidden lg:flex lg:gap-x-6'>
             <LangChanger />
             <ThemeChanger />
@@ -68,4 +58,4 @@ export const Header: FC<HeaderProps> = async ({ data, locale }) => {
       </nav>
     </header>
   );
-};
+}

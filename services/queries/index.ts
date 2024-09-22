@@ -7,6 +7,7 @@ import { deliveryQuery } from './deliveryQuery';
 import { globalQuery } from './globalQuery';
 import { homeQuery } from './homeQuery';
 import { metaQuery } from './metaQuery';
+import { ordersQuery } from './ordersQuery';
 import { policiesQuery } from './policiesQuery';
 import { productMetaQuery, productQuery } from './productQuery';
 import { productsQuery } from './productsQuery';
@@ -35,5 +36,6 @@ export const STRAPI_QUERIES = {
   SIZE: sizeQuery,
   DELIVERY: deliveryQuery,
   WISHLIST_NOTIFY: wishlistNotify,
-  WISHLIST_PRODUCTS: wishlistProducts
+  WISHLIST_PRODUCTS: wishlistProducts,
+  ORDERS: ordersQuery
 };

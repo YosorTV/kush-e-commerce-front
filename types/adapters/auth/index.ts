@@ -25,6 +25,7 @@ export type SessionAdapterProps = {
 };
 
 export type SignInAdapterProps = {
-  email: string;
+  identifier: string;
   password: string;
+  remember: boolean;
 };

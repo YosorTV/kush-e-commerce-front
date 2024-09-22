@@ -4,6 +4,7 @@ import { FC, PropsWithChildren, useEffect } from 'react';
 
 import { useActivity } from '@/store';
 import { logout } from '@/services';
+
 import { useSession } from 'next-auth/react';
 
 export interface AutoLogoutProviderProps {
@@ -19,7 +20,9 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
   timeoutCheckMs = 1000,
   children
 }) => {
-  const session = useSession();
+  const { data: session } = useSession();
+
+  if (!session) return children;
 
   const { lastActivity, setLastActivity } = useActivity();
 
@@ -34,8 +37,8 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
   const checkUserInactivity = async () => {
     const now = getCurrentTime();
 
-    if (session.data && session.data.exp) {
-      const expiryTime = new Date(session.data.exp * 1000).getTime();
+    if (session.user && session.exp) {
+      const expiryTime = new Date(session.exp * 1000).getTime();
 
       if (now > expiryTime) {
         await logout();
@@ -63,7 +66,7 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
       });
       window.clearInterval(intervalId);
     };
-  }, [session.data]);
+  }, [session]);
 
   return <>{children}</>;
 };

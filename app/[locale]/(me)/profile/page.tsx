@@ -19,13 +19,15 @@ export default async function ProfilePage({ params }: PageProps) {
   const { locale } = params;
 
   const session = await auth();
+  console.log('session: ', session);
 
   const { data } = await getProfileData({ locale, token: session.accessToken });
+  console.log('data: ', data);
   const { data: me } = await getMe({ token: session.accessToken });
 
   return (
     <section className='flex w-full flex-col justify-center bg-info-content'>
-      <ProfileForm data={data.formFields} state={me} locale={locale} token={session.accessToken} />
+      {data.formFields && <ProfileForm data={data.formFields} state={me} locale={locale} token={session.accessToken} />}
     </section>
   );
 }
