@@ -26,22 +26,22 @@ export default async function BaseLayout({
   return (
     <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth')}>
       <body className='relative grid overflow-x-clip'>
-        <SessionProvider session={session}>
-          <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages}>
+          <SessionProvider session={session}>
             <AutoLogoutProvider>
               <ThemeProvider>
                 <Header data={header} shoppingCart={cart} locale={locale} session={session} />
                 <main className='flex min-h-dvh flex-grow flex-col'>{children}</main>
-                <div id='portal' />
-                <ClientSideRender />
+                <Footer data={footer} locale={locale} />
                 <Modal id='my_modal_3'>
                   <WishlistNotification locale={locale} />
                 </Modal>
-                <Footer data={footer} locale={locale} />
+                <div id='portal' />
+                <ClientSideRender />
               </ThemeProvider>
             </AutoLogoutProvider>
-          </NextIntlClientProvider>
-        </SessionProvider>
+          </SessionProvider>
+        </NextIntlClientProvider>
         <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='lazyOnload' async />
       </body>
     </html>

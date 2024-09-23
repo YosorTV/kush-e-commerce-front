@@ -3,13 +3,10 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@/auth';
 
-import { LOCALES, LOCALES_PREFIX, PRIVATE_ROUTES, ROOT } from '@/helpers/constants';
+import { PRIVATE_ROUTES, ROOT } from '@/helpers/constants';
+import { routing } from './lib/navigation';
 
-const intlMiddleware = createIntlMiddleware({
-  defaultLocale: 'uk',
-  locales: LOCALES,
-  localePrefix: LOCALES_PREFIX
-});
+const intlMiddleware = createIntlMiddleware(routing);
 
 export default auth((req) => {
   const { nextUrl } = req;

@@ -4,15 +4,15 @@
 
 @layer base {
   ::-webkit-scrollbar {
-    @apply w-1 bg-transparent;
+    @apply w-1 bg-transparent !important;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-base-100;
+    @apply bg-base-100 !important;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-base-200;
+    @apply rounded-full bg-base-200 !important;
   }
 
   .image-blur {
@@ -96,6 +96,7 @@ input:-webkit-autofill:active {
   --slide-height: 200px;
   --slide-spacing: 1rem;
   --slide-size-lg: calc(100% / 2);
+  --slide-size-md: calc(100% / 1.5);
 }
 
 .embla__viewport {

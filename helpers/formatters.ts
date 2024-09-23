@@ -1,12 +1,10 @@
 export const formatPrice = (amount: number, locale: string, currency: number) => {
-  let formattedAmount = new Intl.NumberFormat(locale === 'uk' ? 'uk-UA' : 'en-US', {
+  let formattedAmount = new Intl.NumberFormat('uk-UA', {
     style: 'currency',
-    currency: locale === 'uk' ? 'UAH' : 'USD'
-  }).format(locale === 'uk' ? Number(currency) * amount : amount);
+    currency: 'UAH'
+  }).format(Number(currency) * amount);
 
-  if (locale === 'uk') {
-    formattedAmount = formattedAmount.replace('грн', '₴');
-  }
+  formattedAmount = formattedAmount.replace('грн', '₴');
 
   const [integerPart, fractionalPart] = formattedAmount.split('.');
 

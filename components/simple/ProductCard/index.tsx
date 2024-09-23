@@ -8,7 +8,6 @@ import { cn } from '@/lib';
 import { Link } from '@/lib/navigation';
 
 import { Product } from '@/types/components';
-import { auth } from '@/auth';
 
 type ProductCardProps = {
   product: Product;
@@ -16,16 +15,14 @@ type ProductCardProps = {
   currency?: number;
 };
 
-export const ProductCard: FC<ProductCardProps> = async ({ product, className, currency = 41 }) => {
-  const session = await auth();
-
+export const ProductCard: FC<ProductCardProps> = ({ product, className, currency = 41 }) => {
   const collectionTitlePrefix = product.locale === 'uk' ? 'Коллекція: ' : 'Collection: ';
   const availableTitlePrefix =
     product.locale === 'uk' ? `У наявності: ${product.quantity}` : `Available in: ${product.quantity}`;
 
   return (
     <figure className={cn('relative grid cursor-pointer', className)}>
-      <NextLink className='relative z-10' href={`/catalog/${product.slug}`}>
+      <NextLink className='relative' href={`/catalog/${product.slug}`}>
         <AnimatedImage product={product} />
         <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>{product.hintText}</span>
       </NextLink>
@@ -35,12 +32,7 @@ export const ProductCard: FC<ProductCardProps> = async ({ product, className, cu
           <Title level='3' className='font-semibold'>
             {product.title}
           </Title>
-          <Wishlist
-            session={session}
-            locale={product.locale}
-            productId={product.id}
-            inWishlist={product?.inWishlist ?? false}
-          />
+          <Wishlist locale={product.locale} productId={product.id} inWishlist={product?.inWishlist ?? false} />
         </div>
         <div className='h-6'>
           {product?.collections &&

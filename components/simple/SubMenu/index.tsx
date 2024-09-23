@@ -19,7 +19,7 @@ type TSubMenu = {
 
 const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collectionTitle }) => {
   return (
-    <nav className='fixed left-0 top-16 z-0 flex w-full gap-x-40 bg-base-100 px-5 pt-7'>
+    <nav className='fixed left-0 top-16 z-10 flex w-full gap-x-40 bg-info-content px-5 pt-7'>
       <div className='relative bottom-3.5'>
         {categoryTitle && (
           <Title level='5' className={cn('text-xl uppercase text-base-200', cormorant.className)}>

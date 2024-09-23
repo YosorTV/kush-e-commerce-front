@@ -22,9 +22,7 @@ interface TSearchController {
 
 export const SearchController: FC<TSearchController> = ({ onClose, children, placeholder = 'Search' }) => {
   const state = useSearch();
-
   const locale = useLocale();
-
   const pathname = usePathname();
 
   const name = useDebounce(state.searchValue, 500);
@@ -84,9 +82,12 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
           animate='animate'
           exit='exit'
           variants={searchVariants}
-          className='fixed left-0 top-0 z-20 h-screen w-full'
+          className='fixed left-0 top-16 z-20 h-screen w-full'
         >
-          <motion.div layout className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-base-100 p-8'>
+          <motion.div
+            layout
+            className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-info-content p-8'
+          >
             <motion.div
               initial='hidden'
               animate='visible'

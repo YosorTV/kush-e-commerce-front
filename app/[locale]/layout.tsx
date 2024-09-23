@@ -1,6 +1,4 @@
-import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
-
-import { LOCALES } from '@/helpers/constants';
+import { getMessages, unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
 
 import { LayoutProps } from '@/types/app/layout.types';
 
@@ -9,14 +7,12 @@ import BaseLayout from '@/components/layouts/Base';
 import { getLayoutData } from '@/services';
 import { auth } from '@/auth';
 
-export function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
-}
+import '../globals.css';
 
 export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = params;
 
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   const session = await auth();
   const messages = await getMessages();

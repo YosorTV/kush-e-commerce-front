@@ -6,7 +6,7 @@ import { useCart } from '@/store';
 import { AddCartProps } from '@/types/components';
 import { useTranslations } from 'next-intl';
 
-export const AddCart: FC<AddCartProps> = ({ data }) => {
+export const AddCart: FC<AddCartProps> = ({ data, isDisabled }) => {
   const [added, setAdded] = useState(false);
 
   const t = useTranslations('cart');
@@ -19,7 +19,7 @@ export const AddCart: FC<AddCartProps> = ({ data }) => {
   const isButtonDisabled = () => {
     const { formState } = state;
 
-    return !Object.values(formState).some((value) => value === null) || added;
+    return !Object.values(formState).some((value) => value === null) || added || isDisabled;
   };
 
   const disabled = isButtonDisabled();

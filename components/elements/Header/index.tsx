@@ -36,7 +36,7 @@ export default async function Header({ data, shoppingCart, session, locale }: He
   };
 
   return (
-    <header className='fixed z-20 flex min-h-16 w-full cursor-pointer items-center bg-base-100 px-5 drop-shadow-md'>
+    <header className='fixed z-50 flex min-h-16 w-full cursor-pointer items-center border-b border-info-content bg-base-100 px-5 drop-shadow-md'>
       <nav className='flex w-full items-center justify-between'>
         <div className='flex items-center'>
           <Menu pages={pagesData} collections={collectionsData} categories={categoryData} />

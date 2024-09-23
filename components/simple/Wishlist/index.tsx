@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { HeartIcon } from '@/assets/icons';
 import { Button } from '@/components/elements';
@@ -8,22 +8,26 @@ import { Button } from '@/components/elements';
 import { cn } from '@/lib';
 import addToWishlist from '@/services/actions/addToWishlist';
 import { toast } from 'sonner';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 
 interface IWishlist {
-  session: Session;
   productId: number;
   locale: string;
   inWishlist: boolean;
   text?: string;
 }
 
-export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = false, session }) => {
+export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = false }) => {
+  const { data: session } = useSession();
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+  useEffect(() => {
+    dialogRef.current = document.getElementById('my_modal_3') as HTMLDialogElement;
+  }, []);
+
   const handleAdd = async () => {
     if (!Boolean(session?.accessToken)) {
-      const dialog = document.getElementById('my_modal_3') as HTMLDialogElement;
-
-      dialog.showModal();
+      dialogRef.current?.showModal();
     } else {
       const { message } = await addToWishlist({
         locale,

@@ -28,10 +28,17 @@ export async function authUserAction(prevState: any, formData: FormData) {
       };
     }
 
-    await signIn('credentials', {
-      ...validatedData.data,
-      redirectTo: ROOT
-    });
+    await signIn('credentials', { ...validatedData.data, redirectTo: `/${formData.get('locale')}` });
+
+    return {
+      ...prevState,
+      data: null,
+      errors: null,
+      url: ROOT,
+      status: 200,
+      message: formData.get('locale') === 'uk' ? 'З поверненням.' : 'Welcome back.',
+      strapiError: null
+    };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

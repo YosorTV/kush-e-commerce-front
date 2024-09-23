@@ -27,13 +27,13 @@ export const Form: FC<FormProps<any>> = ({
   const [formState, formAction] = useFormState(action, state);
 
   useEffect(() => {
-    if (formState.status === 200) {
+    if (formState?.status === 200) {
       ref.current.reset();
-      if (formState.url) {
+      if (formState?.url) {
         router.push(formState.url);
       }
       toaster({ key: 'success', message: formState.message });
-    } else if (formState.status === 400) {
+    } else if (formState?.status === 400) {
       toaster({
         key: 'error',
         message: formState.message,

@@ -89,7 +89,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
               <motion.div
                 layout
                 onClick={(e) => e.stopPropagation()}
-                className='absolute right-0 top-0 z-30 h-screen w-full overflow-y-auto bg-base-100 p-8 md:w-[600px]'
+                className='absolute right-0 top-0 z-30 h-screen w-full overflow-y-auto bg-info-content p-8 md:w-[600px]'
               >
                 <div className='flex w-full'>{contentZone[cartStore.key]}</div>
               </motion.div>

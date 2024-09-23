@@ -2,11 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { MenuItem } from './MenuItem';
-import {
-  CategoryLinkType,
-  CollectionLinkType,
-  StrapiLinkType,
-} from '@/types/components';
+import { CategoryLinkType, CollectionLinkType, StrapiLinkType } from '@/types/components';
 import { FC } from 'react';
 import { Logo, Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
@@ -27,11 +23,7 @@ type MenuNavProps = {
   };
 };
 
-export const MenuNav: FC<MenuNavProps> = ({
-  pages,
-  categories,
-  collections,
-}) => {
+export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) => {
   const printCategory = (item: CategoryLinkType) => (
     <MenuItem
       id={item.id}
@@ -45,12 +37,9 @@ export const MenuNav: FC<MenuNavProps> = ({
   );
 
   return (
-    <div className='pt-10'>
+    <div className='relative top-16'>
       <div>
-        <Title
-          level='5'
-          className={cn(cormorant.className, 'text-2xl capitalize')}
-        >
+        <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
         </Title>
         <motion.ul>
@@ -68,20 +57,14 @@ export const MenuNav: FC<MenuNavProps> = ({
       </div>
       <div className='divider pr-5' />
       <div>
-        <Title
-          level='5'
-          className={cn(cormorant.className, 'text-2xl capitalize')}
-        >
+        <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {categories.title}
         </Title>
         <motion.ul>{categories.data.map(printCategory)}</motion.ul>
       </div>
       <div className='divider pr-5' />
       <div>
-        <Title
-          level='5'
-          className={cn(cormorant.className, 'text-2xl capitalize')}
-        >
+        <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {collections.title}
         </Title>
         <motion.ul>

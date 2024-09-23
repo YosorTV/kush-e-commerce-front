@@ -24,6 +24,9 @@ const DatePicker: FC<IDatePicker> = ({ id, name, className, error, placeholder, 
     endDate: new Date(rest?.defaultValue) ?? null
   });
 
+  const today = new Date();
+  const minAllowedDate = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate());
+
   return (
     <Datepicker
       i18n={locale || DEFAULT_LOCALE}
@@ -33,6 +36,7 @@ const DatePicker: FC<IDatePicker> = ({ id, name, className, error, placeholder, 
       inputClassName={cn(className, 'bg-base-100 input input-bordered w-full text-base-200', error && 'border-error')}
       primaryColor='amber'
       displayFormat='YYYY-MM-DD'
+      maxDate={minAllowedDate}
       asSingle
       useRange={false}
       value={value}

@@ -57,12 +57,12 @@ export const {
         }
       }
 
-      return Promise.resolve(token);
+      return token;
     },
     async session({ token, session }: any) {
       session = sessionAdapter({ token });
 
-      return Promise.resolve(session);
+      return session;
     }
   }
 });

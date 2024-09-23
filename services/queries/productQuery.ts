@@ -6,26 +6,14 @@ type TProductQuery = {
 };
 
 // Profile Query
-export const productQuery = ({
-  slug,
-  locale = DEFAULT_LOCALE,
-}: TProductQuery) => ({
+export const productQuery = ({ slug, locale = DEFAULT_LOCALE }: TProductQuery) => ({
   locale,
   filters: {
     slug: {
-      $eq: slug,
-    },
+      $eq: slug
+    }
   },
-  fields: [
-    'title',
-    'color',
-    'price',
-    'priceText',
-    'hintText',
-    'category',
-    'saleValue',
-    'description',
-  ],
+  fields: ['title', 'color', 'price', 'priceText', 'hintText', 'category', 'saleValue', 'description', 'available'],
   populate: {
     colors: true,
     materials: true,
@@ -33,33 +21,30 @@ export const productQuery = ({
     collections: {
       populate: {
         data: {
-          fields: ['title'],
-        },
-      },
+          fields: ['title']
+        }
+      }
     },
     images: {
       populate: {
         data: {
-          fields: IMAGE_FIELDS,
-        },
-      },
-    },
-  },
+          fields: IMAGE_FIELDS
+        }
+      }
+    }
+  }
 });
 
-export const productMetaQuery = ({
-  slug,
-  locale = DEFAULT_LOCALE,
-}: TProductQuery) => ({
+export const productMetaQuery = ({ slug, locale = DEFAULT_LOCALE }: TProductQuery) => ({
   locale,
   filters: {
     slug: {
-      $eq: slug,
-    },
+      $eq: slug
+    }
   },
   populate: {
     seo: {
-      fields: META_FIELDS,
-    },
-  },
+      fields: META_FIELDS
+    }
+  }
 });

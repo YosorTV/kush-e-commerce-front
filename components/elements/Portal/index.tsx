@@ -8,7 +8,13 @@ export const Portal: FC<PortalProps> = ({ children, selector }) => {
   const ref = useRef<Element | null>(null);
 
   useEffect(() => {
-    ref.current = document.getElementById(selector);
+    const element = document.getElementById(selector);
+
+    if (element) {
+      ref.current = element;
+    } else {
+      console.error(`Element with selector "${selector}" not found`);
+    }
   }, [selector]);
 
   return ref.current ? createPortal(children, ref.current) : null;

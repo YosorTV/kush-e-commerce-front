@@ -30,23 +30,19 @@ const getStatus = (stat: string) => {
 
 const OrderCard: FC<IOrderCard> = ({ id, status, quantity, price, image }) => {
   return (
-    <figure
-      key={id}
-      className='flex min-h-32 w-full items-center justify-between border-b border-b-gray-400 pb-2.5 pr-5'
-    >
-      <div className='flex gap-5'>
-        <div className={cn('flex flex-col gap-5 border-l-8 px-5', getStatus(status))}>
+    <figure key={id} className={cn('flex min-h-24 w-full items-center justify-between border-l-8', getStatus(status))}>
+      <figcaption className='flex gap-5 pr-2.5'>
+        <div className='flex flex-col gap-5 px-5'>
           <span>№ {id}</span>
-          <p>Cтатус: {status}</p>
+          <p className=''>Cтатус: {status}</p>
         </div>
 
-        <div className='flex flex-col gap-5'>
-          <span>кількість: {quantity}</span>
+        <div className='flex flex-1 flex-col gap-5'>
+          <span className='whitespace-nowrap'>кількість: {quantity}</span>
           <p>Ціна: {price}</p>
         </div>
-      </div>
-
-      <div className='h-28 w-28'>
+      </figcaption>
+      <div className='h-24 w-24'>
         <StrapiImage
           src={image.url}
           width={image.width}

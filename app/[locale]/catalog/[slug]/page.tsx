@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { auth } from '@/auth';
-
 import { getCurrency, getProductData, getProductMeta, getSizesData } from '@/services';
 
 import { PageLayout } from '@/components/layouts';
@@ -25,8 +23,6 @@ export default async function ProductDetails({ params }: PageProps) {
   const { locale, slug } = params;
 
   const t = await getTranslations();
-
-  const session = await auth();
 
   const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
@@ -89,13 +85,12 @@ export default async function ProductDetails({ params }: PageProps) {
             <div className='mt-5 flex flex-col'>
               <Wishlist
                 text={t(data?.inWishlist ? 'wishlist.added' : 'wishlist.add')}
-                session={session}
                 locale={locale}
                 productId={data?.id}
                 inWishlist={data?.inWishlist}
               />
               <div className='divider' />
-              <AddCart data={cartData} />
+              <AddCart data={cartData} isDisabled={data?.available} />
             </div>
           </ProductParams>
           <DeliveryBlock locale={locale} />
