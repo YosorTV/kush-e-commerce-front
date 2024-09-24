@@ -50,7 +50,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, currency
           <p className='line-clamp-1 w-3/4 text-base font-medium text-base-200'>{product.description}</p>
           <div className='flex w-full items-end justify-between'>
             <span className='text-sm'>{availableTitlePrefix}</span>
-            <Price currency={currency} price={product?.price} sale={product?.saleValue} locale={product.locale} />
+            <Price currency={currency} price={product?.price} sale={product?.saleValue} />
           </div>
         </div>
       </figcaption>

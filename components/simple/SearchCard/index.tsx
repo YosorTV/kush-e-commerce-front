@@ -10,14 +10,14 @@ import { cn } from '@/lib';
 import { Product } from '@/types/components';
 import { Link } from '@/lib/navigation';
 import { Price } from '../Price';
-// import { getCurrency } from '@/services';
 
 type ProductCardProps = {
   product: Product;
   className?: string;
+  currency?: number;
 };
 
-export const SearchCard: FC<ProductCardProps> = ({ product, className }) => {
+export const SearchCard: FC<ProductCardProps> = ({ product, className, currency = 41 }) => {
   return (
     <figure key={product.id} className={cn('relative grid cursor-pointer', className)}>
       <NextLink className='relative' href={`/catalog/${product.slug}`}>
@@ -48,7 +48,7 @@ export const SearchCard: FC<ProductCardProps> = ({ product, className }) => {
             {product.description}
           </p>
           <div className='flex w-full items-baseline justify-between'>
-            <Price currency={41} price={product?.price} sale={product?.saleValue} locale={product.locale} />
+            <Price currency={currency} price={product?.price} sale={product?.saleValue} />
           </div>
         </div>
       </figcaption>

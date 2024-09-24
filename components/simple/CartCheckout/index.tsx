@@ -32,7 +32,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       name: item.name,
       quantity: item.quantity,
       images: item.images,
-      price: formatPrice(item.unit_amount, locale, currency).replace(/[^\d.,-]/g, '')
+      price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, '')
     }));
   }, [cartStore.cart, locale, currency]);
 
@@ -82,7 +82,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
         Повернутись
       </Button>
-      <div ref={liqPayContainerRef} id='liqpay_checkout' />
+      <div ref={liqPayContainerRef} id='liqpay_checkout' className='py-10' />
     </div>
   );
 };

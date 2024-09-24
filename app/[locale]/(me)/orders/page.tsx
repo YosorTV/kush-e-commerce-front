@@ -5,6 +5,8 @@ import { PageProps } from '@/types/app/page.types';
 import { auth } from '@/auth';
 import OrdersSection from '@/components/complex/OrdersSection';
 
+import { getTranslations } from 'next-intl/server';
+
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
@@ -20,12 +22,12 @@ export default async function OrdersPage({ params }: PageProps) {
   const { locale } = params;
 
   const session = await auth();
-
-  const { data } = await getOrdersData({ locale, userId: session.user.id, token: session?.accessToken });
+  const t = await getTranslations('system');
+  const { data } = await getOrdersData({ locale, email: session.user.email, token: session?.accessToken });
 
   return (
-    <section className='mt-10 w-full bg-info-content'>
-      <OrdersSection orders={data} />
+    <section className='mt-10 w-full bg-info-content p-5'>
+      <OrdersSection orders={data} emptyTitle={t('emptyList')} />
     </section>
   );
 }

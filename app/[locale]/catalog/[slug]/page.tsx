@@ -60,13 +60,7 @@ export default async function ProductDetails({ params }: PageProps) {
             <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
           <div className='flex items-baseline justify-between'>
-            <Price
-              locale={locale}
-              currency={currency}
-              price={data?.price}
-              sale={data?.saleValue}
-              className='flex flex-row'
-            />
+            <Price currency={currency} price={data?.price} sale={data?.saleValue} className='flex flex-row' />
             <NextLink
               href={`/catalog?categories=${data?.category}`}
               className='capitalize text-base-200 underline underline-offset-8'

@@ -5,16 +5,15 @@ import { FC } from 'react';
 interface IPrice {
   price: number;
   sale?: number;
-  locale: string;
   currency: any;
   className?: string;
 }
 
-export const Price: FC<Readonly<IPrice>> = ({ price = 0, sale = 0, locale = 'uk', currency, className }) => {
+export const Price: FC<Readonly<IPrice>> = ({ price = 0, sale = 0, currency, className }) => {
   const discountAmount = price * (sale / 100);
-  const originalPrice = formatPrice(price, locale, currency);
+  const originalPrice = formatPrice(price, currency);
 
-  const salePrice = formatPrice(price - discountAmount, locale, currency);
+  const salePrice = formatPrice(price - discountAmount, currency);
 
   return (
     <p aria-label={`Price: ${price}`} className={cn('flex flex-col-reverse items-end gap-x-3 xs:flex-row', className)}>

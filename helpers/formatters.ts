@@ -1,4 +1,4 @@
-export const formatPrice = (amount: number, locale: string, currency: number) => {
+export const formatPrice = (amount: number, currency: number) => {
   let formattedAmount = new Intl.NumberFormat('uk-UA', {
     style: 'currency',
     currency: 'UAH'

@@ -21,13 +21,13 @@ export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymen
 
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
-  const amount = parseFloat(formatPrice(totalPrice, locale, currency).replace(/[^\d.,-]/g, ''));
+  const amount = parseFloat(formatPrice(totalPrice, currency).replace(/[^\d.,-]/g, ''));
 
   const products = data.map((item: CartItemType) => ({
     id: item.id,
     name: item.name,
     quantity: item.quantity,
-    price: formatPrice(item.unit_amount, locale, currency).replace(/[^\d.,-]/g, '')
+    price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, '')
   }));
 
   return {

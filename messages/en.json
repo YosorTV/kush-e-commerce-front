@@ -10,7 +10,9 @@
     "delivery": "Delivery options",
     "self": "Self delivery",
     "novapost": "Nova Post",
-    "delivery_spot": "Select delivery address"
+    "delivery_spot": "Select delivery address",
+    "thanks": "Thanks for purchasing",
+    "proceed": "Procced with shopping"
   },
   "validation": {
     "length": "Min {number} characters long",

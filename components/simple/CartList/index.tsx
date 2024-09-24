@@ -12,7 +12,6 @@ import { CartItem } from '../CartItem';
 import { animCart } from '@/assets/animations';
 import lottieAnim from '@/public/LottieEmpty.json';
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
-import { useLocale } from 'next-intl';
 import { getCurrency } from '@/services';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib';
@@ -20,7 +19,6 @@ import { cn } from '@/lib';
 export const CartList: FC<any> = ({ data }) => {
   const [currency, setCurrency] = useState<number>();
 
-  const locale = useLocale();
   const cartStore = useCart();
 
   const { theme } = useTheme();
@@ -49,7 +47,7 @@ export const CartList: FC<any> = ({ data }) => {
         exit={animCart.basket.exit}
         className='relative flex h-2md w-full flex-col items-center justify-center'
       >
-        <Button onClick={handleBack} className='btn btn-link absolute -left-5 -top-5 text-lg'>
+        <Button onClick={handleBack} className='btn btn-link absolute -left-2.5 -top-2.5 text-lg normal-case'>
           {data.getBack}
         </Button>
 
@@ -64,7 +62,7 @@ export const CartList: FC<any> = ({ data }) => {
 
   return (
     <div className='relative flex w-full flex-col items-start gap-y-6'>
-      <Button onClick={handleBack} className='btn btn-link px-0 text-lg normal-case'>
+      <Button onClick={handleBack} className='btn btn-link relative -top-2.5 px-0 text-lg normal-case'>
         {data.getBack}
       </Button>
       <div className='flex w-full flex-col gap-y-6'>
@@ -83,7 +81,7 @@ export const CartList: FC<any> = ({ data }) => {
         ))}
       </div>
       <p className='font-semibold capitalize'>
-        {data.totalPrice}: {formatPrice(totalPrice, locale, currency)}
+        {data.totalPrice}: {formatPrice(totalPrice, currency)}
       </p>
       <button onClick={() => cartStore.setForm('delivery')} className='btn btn-primary w-full text-base-100'>
         {data.checkout}

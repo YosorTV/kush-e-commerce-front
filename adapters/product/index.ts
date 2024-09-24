@@ -4,7 +4,7 @@ import { Product } from '@/types/components';
 export const productsAdapter = (products: Product[], currency: number) => {
   return products.map((product) => ({
     ...product,
-    price: formatPrice(Number(product.price), product.locale, currency)
+    price: formatPrice(Number(product.price), currency)
   }));
 };
 

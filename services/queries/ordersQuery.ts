@@ -1,13 +1,11 @@
 import { DEFAULT_LOCALE } from '@/helpers/constants';
 
-export const ordersQuery = ({ locale = DEFAULT_LOCALE, userId }: any) => ({
+export const ordersQuery = ({ locale = DEFAULT_LOCALE, email }: any) => ({
   locale,
-  // filters: {
-  //   user: {
-  //     id: {
-  //       $eq: userId
-  //     }
-  //   }
-  // },
+  filters: {
+    customer_email: {
+      $eq: email
+    }
+  },
   populate: '*'
 });

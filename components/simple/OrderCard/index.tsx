@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { StrapiImage } from '../StrapiImage';
 import { cn } from '@/lib';
+import { Price } from '../Price';
 
 interface IOrderCard {
   name: string;
@@ -39,7 +40,7 @@ const OrderCard: FC<IOrderCard> = ({ id, status, quantity, price, image }) => {
 
         <div className='flex flex-1 flex-col gap-5'>
           <span className='whitespace-nowrap'>кількість: {quantity}</span>
-          <p>Ціна: {price}</p>
+          <Price price={parseFloat(price)} currency={1} />
         </div>
       </figcaption>
       <div className='h-24 w-24'>

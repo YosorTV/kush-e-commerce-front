@@ -58,7 +58,7 @@ export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove })
             {sizeTitle}&nbsp;{data?.size}
           </p>
           <p className='text-sm font-medium normal-case text-base-200'>
-            {priceTitle}&nbsp;{formatPrice(data?.unit_amount, locale, currency)}
+            {priceTitle}&nbsp;{formatPrice(data?.unit_amount, currency)}
           </p>
         </div>
       </div>

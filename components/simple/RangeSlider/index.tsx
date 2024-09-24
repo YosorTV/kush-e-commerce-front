@@ -2,7 +2,6 @@
 
 import { useCallback } from 'react';
 import { Range } from 'react-range';
-import { useLocale } from 'next-intl';
 
 import { useFilters } from '@/store';
 
@@ -13,11 +12,10 @@ import { RangeThumb, RangeTrack } from '@/components/elements';
 
 export const RangeSlider = () => {
   const state = useFilters();
-  const locale = useLocale();
   const currency = useCurrency();
 
-  const min = formatPrice(state.options.price[0], locale, currency);
-  const max = formatPrice(state.options.price[1], locale, currency);
+  const min = formatPrice(state.options.price[0], currency);
+  const max = formatPrice(state.options.price[1], currency);
 
   const handleRangeChange = useCallback(
     (values: number[]) => {

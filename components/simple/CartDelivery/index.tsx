@@ -44,7 +44,7 @@ export const CartDelivery = () => {
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
         Повернутись
       </Button>
-      <div className='form-control gap-y-2.5 pt-2.5'>
+      <div className='form-control gap-y-2.5 pt-10'>
         <PeronalCheckoutForm data={user} title={t('cart.personal')} />
         <div className='divider mb-2.5' />
         <DeliveryForm data={user} title={t('cart.delivery')} />
