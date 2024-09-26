@@ -5,16 +5,25 @@ import { useCart } from '@/store';
 import { IDeliveryForm } from '@/types/store';
 import { Session } from 'next-auth';
 import { useLocale } from 'next-intl';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 interface IPersonalCheckoutForm {
-  data: Session['data'];
+  data: Session['user'];
   title: string;
 }
 
 export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = 'Особисті дані' }) => {
   const cartStore = useCart();
   const locale = useLocale();
+
+  useEffect(() => {
+    if (data) {
+      cartStore.setDelivery('firstName', data.firstName || '');
+      cartStore.setDelivery('lastName', data.lastName || '');
+      cartStore.setDelivery('email', data.email || '');
+      cartStore.setDelivery('phone', data.phoneNumber || '');
+    }
+  }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

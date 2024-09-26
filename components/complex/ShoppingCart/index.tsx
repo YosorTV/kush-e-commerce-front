@@ -3,17 +3,14 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import { useCart } from '@/store';
-import { AnimatePresence, motion } from 'framer-motion';
 
-import { animCart } from '@/assets/animations';
 import { CartList } from '@/components/simple';
 import { ShoppingCartProps } from '@/types/components/complex';
 import { Success } from '../Success';
 import { BsFillBagFill } from 'react-icons/bs';
-import { Button, Portal } from '@/components/elements';
+import { Button, Portal, Sidebar } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 import { CartDelivery } from '@/components/simple/CartDelivery';
-import { useScrollLock } from '@/lib/hooks';
 import { CartCheckout } from '@/components/simple/CartCheckout';
 import { getCurrency, paymentCreate } from '@/services';
 import { paymentDataAdapter } from '@/adapters/payment';
@@ -55,8 +52,6 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
     }
   }, [cartStore.key]);
 
-  useScrollLock(cartStore.isOpen);
-
   const contentZone = {
     cart: <CartList data={data} />,
     delivery: <CartDelivery />,
@@ -77,25 +72,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
       </Button>
 
       <Portal selector='portal'>
-        <AnimatePresence mode='wait'>
-          {cartStore.isOpen && (
-            <motion.div
-              initial={animCart.fade.initial}
-              animate={animCart.fade.animate}
-              exit={animCart.fade.exit}
-              onClick={() => cartStore.onToggle()}
-              className='fixed left-0 top-0 z-20 h-screen w-full bg-black/50'
-            >
-              <motion.div
-                layout
-                onClick={(e) => e.stopPropagation()}
-                className='absolute right-0 top-16 z-30 h-screen w-full overflow-y-auto bg-info-content p-8 md:w-[600px]'
-              >
-                <div className='flex w-full'>{contentZone[cartStore.key]}</div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
+          <div className='relative top-16 flex p-5 pt-0'>{contentZone[cartStore.key]}</div>
+        </Sidebar>
       </Portal>
     </>
   );

@@ -37,7 +37,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
   );
 
   return (
-    <div className='relative top-16'>
+    <div className='relative top-16 h-screen'>
       <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
@@ -80,7 +80,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
           ))}
         </motion.ul>
         <div className='divider pr-5' />
-        <div className='flex w-full justify-center pr-5'>
+        <div className='flex w-full justify-center pb-10 pr-5'>
           <Logo height={90} />
         </div>
       </div>

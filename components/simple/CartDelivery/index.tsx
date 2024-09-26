@@ -4,11 +4,12 @@ import { Button } from '@/components/elements';
 import { useCart } from '@/store';
 import { DeliveryForm, PeronalCheckoutForm } from '@/components/forms';
 import { useSession } from 'next-auth/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getMe } from '@/services/api/get-me';
 import { useTranslations } from 'next-intl';
 import { isFormIncomplete } from '@/helpers/validator';
+import { useScrollLock } from '@/lib/hooks';
 
 export const CartDelivery = () => {
   const [user, setUser] = useState(null);
@@ -16,14 +17,12 @@ export const CartDelivery = () => {
   const t = useTranslations();
   const cartStore = useCart();
 
-  const disabled = useMemo(() => {
-    return isFormIncomplete(cartStore.delivery);
-  }, [cartStore.delivery]);
-
   const handleBack = () => {
     cartStore.setForm('cart');
     cartStore.resetDelivery();
   };
+
+  useScrollLock(cartStore.isOpen);
 
   const session = useSession();
 
@@ -39,18 +38,20 @@ export const CartDelivery = () => {
     }
   }, [session.status]);
 
+  console.log(cartStore.delivery);
+
   return (
     <div className='form-control w-full'>
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
         Повернутись
       </Button>
-      <div className='form-control gap-y-2.5 pt-10'>
+      <div className='form-control gap-y-2.5 py-10'>
         <PeronalCheckoutForm data={user} title={t('cart.personal')} />
         <div className='divider mb-2.5' />
         <DeliveryForm data={user} title={t('cart.delivery')} />
         <div className='divider' />
         <button
-          disabled={disabled}
+          disabled={isFormIncomplete(cartStore.delivery)}
           onClick={() => cartStore.setForm('checkout')}
           className='btn btn-primary w-full text-base-100 disabled:opacity-50'
         >

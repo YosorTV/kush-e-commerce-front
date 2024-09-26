@@ -15,6 +15,7 @@ import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 import { getCurrency } from '@/services';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib';
+import { useScrollLock } from '@/lib/hooks';
 
 export const CartList: FC<any> = ({ data }) => {
   const [currency, setCurrency] = useState<number>();
@@ -24,6 +25,8 @@ export const CartList: FC<any> = ({ data }) => {
   const { theme } = useTheme();
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
+
+  useScrollLock(cartStore.isOpen);
 
   const handleBack = () => cartStore.onToggle();
 

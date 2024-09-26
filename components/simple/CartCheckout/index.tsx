@@ -11,6 +11,7 @@ import { paymentCallback } from '@/services/api/payment-update';
 import { formatPrice } from '@/helpers/formatters';
 import { CartItemType } from '@/types/store';
 import { debounce } from 'lodash';
+import { useScrollLock } from '@/lib/hooks';
 
 interface ICartCheckout {
   currency: number;
@@ -25,6 +26,8 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const liqPayContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleBack = useCallback(() => cartStore.setForm('delivery'), [cartStore]);
+
+  useScrollLock(cartStore.isOpen);
 
   const products = useMemo(() => {
     return cartStore.cart.map((item: CartItemType) => ({

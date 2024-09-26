@@ -7,10 +7,13 @@ import { Button } from '@/components/elements';
 import { Confetti } from '@/components/simple/Confetti';
 
 import { useCart } from '@/store';
+import { useScrollLock } from '@/lib/hooks';
 
 export const Success = () => {
   const cartStore = useCart();
   const t = useTranslations('cart');
+
+  useScrollLock(cartStore.isOpen);
 
   const handleClose = () => {
     cartStore.globalReset();
@@ -19,7 +22,7 @@ export const Success = () => {
 
   return (
     <>
-      <Confetti />
+      <Confetti className='absolute !-top-5' />
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
