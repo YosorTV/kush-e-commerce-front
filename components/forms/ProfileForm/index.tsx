@@ -46,13 +46,13 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
   };
 
   return (
-    <Form schema={schema} action={updateProfileAction} className='mt-5 flex flex-col justify-center gap-5 p-10'>
+    <Form schema={schema} action={updateProfileAction} className='flex flex-col justify-center gap-5 p-10'>
       <Input type='hidden' hidden name='token' value={token} className='hidden' />
       <Input type='hidden' hidden name='locale' value={locale} className='hidden' />
       <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
       <Input type='hidden' hidden name='username' value={state.username} className='hidden' />
 
-      <Title level='1' variant='subheading' className='text-center md:text-left'>
+      <Title level='2' variant='subheading' className='my-5 whitespace-nowrap text-center text-base md:text-left'>
         {data?.generalTitle}
       </Title>
       <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>

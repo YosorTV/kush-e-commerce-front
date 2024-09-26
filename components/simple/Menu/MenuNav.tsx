@@ -38,7 +38,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
 
   return (
     <div className='relative top-16'>
-      <div>
+      <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
         </Title>
@@ -56,14 +56,14 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
         </motion.ul>
       </div>
       <div className='divider pr-5' />
-      <div>
+      <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {categories.title}
         </Title>
         <motion.ul>{categories.data.map(printCategory)}</motion.ul>
       </div>
       <div className='divider pr-5' />
-      <div>
+      <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {collections.title}
         </Title>

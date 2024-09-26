@@ -17,10 +17,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return response;
 }
 
-export default async function ResetPasswordPage({
-  searchParams,
-  params,
-}: PageProps) {
+export default async function ResetPasswordPage({ searchParams, params }: PageProps) {
   const { locale } = params;
   const { code } = searchParams;
 

@@ -1,10 +1,12 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
+
 import { Button } from '@/components/elements';
 import { Confetti } from '@/components/simple/Confetti';
+
 import { useCart } from '@/store';
-import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 
 export const Success = () => {
   const cartStore = useCart();

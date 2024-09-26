@@ -39,7 +39,7 @@ export const ProfileSidebar: FC<IProfileSidebar> = ({ links = [], signOutTitle =
       <li key={link.id} className='flex h-12 w-full items-center'>
         <NextLink
           href={link.url}
-          className='link-hover flex items-center gap-x-2 font-semibold uppercase text-base-200 hover:bg-none'
+          className='link-hover flex items-center gap-x-2 font-semibold uppercase text-base-200 !underline-offset-8 hover:bg-none'
         >
           {iconVariant && IconByPath[iconVariant]}
           {link.text}

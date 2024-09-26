@@ -1,5 +1,3 @@
-'use client';
-
 import { SignOutButton } from '@/components/simple/SignOutButton';
 import { SignInLink } from '@/components/simple';
 import { StrapiLinkType } from '@/types/components';
@@ -24,14 +22,17 @@ export default function UserSession({ cta, signOutTitle, session, sessionLinks =
   return (
     <nav className='flex items-center justify-end gap-x-5'>
       <div className='dropdown dropdown-end'>
-        <div tabIndex={-1} className='flex w-full cursor-pointer items-center justify-center gap-5'>
+        <button role='button' tabIndex={0} className='flex w-full cursor-pointer items-center justify-center gap-5'>
           {session?.user && (
             <Avatar firstName={session?.user?.name || session?.user?.firstName} lastName={session?.user?.lastName} />
           )}
-        </div>
-        <ul tabIndex={0} className='menu dropdown-content top-8 min-w-btn space-y-2.5 rounded-sm bg-base-100 shadow'>
+        </button>
+        <ul
+          tabIndex={0}
+          className='menu dropdown-content menu-dropdown-toggle right-0 top-12 min-w-btn space-y-2.5 rounded-sm border border-t-0 border-info-content bg-base-100 shadow'
+        >
           {printMenuLinks(sessionLinks)}
-          <li tabIndex={2}>
+          <li tabIndex={4}>
             <SignOutButton text={signOutTitle} />
           </li>
         </ul>

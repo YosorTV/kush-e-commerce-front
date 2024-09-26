@@ -31,7 +31,7 @@ export default async function BaseLayout({
             <AutoLogoutProvider>
               <ThemeProvider>
                 <Header data={header} shoppingCart={cart} locale={locale} session={session} />
-                <main className='flex min-h-dvh flex-grow flex-col'>{children}</main>
+                <main className='flex min-h-dvh flex-col'>{children}</main>
                 <Footer data={footer} locale={locale} />
                 <Modal id='my_modal_3'>
                   <WishlistNotification locale={locale} />

@@ -19,7 +19,11 @@ export const SignOutButton: FC<ISignOut> = ({ text, icon, className }) => {
   const handleSignOut = async () => await signOut({ redirect: true, callbackUrl: `${ROOT}${locale}` });
 
   return (
-    <button type='button' onClick={handleSignOut} className={cn('font-semibold capitalize hover:bg-none', className)}>
+    <button
+      type='button'
+      onClick={handleSignOut}
+      className={cn('font-semibold capitalize underline-offset-8 hover:bg-none', className)}
+    >
       <span className='flex items-center'>
         {icon && <span className='mr-2'>{icon}</span>}
         {text}

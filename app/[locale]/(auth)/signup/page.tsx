@@ -23,12 +23,13 @@ export default async function SignUpPage({ params }: PageProps) {
   const { data } = await getSignUpData({ locale });
 
   return (
-    <PageLayout className='auth-page_wrapper' cover={data.cover}>
+    <PageLayout className='auth-page_wrapper mt-16' cover={data.cover}>
       <SignUpForm
         locale={locale}
         cta={data.submitBtn}
         title={data.title}
         formFields={data.formFields}
+        className='absolute-center'
       />
     </PageLayout>
   );

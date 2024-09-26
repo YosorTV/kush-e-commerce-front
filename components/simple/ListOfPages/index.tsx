@@ -1,15 +1,20 @@
 'use client';
 
 import { FC, useState, useMemo, useCallback } from 'react';
-import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
 import { useFilters } from '@/store';
+
 import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
 import { usePathname } from '@/lib/navigation';
+
 import { NextLink, Portal } from '@/components/elements';
+
 import { ROOT } from '@/helpers/constants';
 import { StrapiLinkType } from '@/types/components';
+
 import { navAnimations } from '@/assets/animations';
 
 const SubMenu = dynamic(() => import('../SubMenu'), { ssr: false });

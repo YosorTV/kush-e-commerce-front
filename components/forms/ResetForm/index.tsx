@@ -3,7 +3,7 @@
 import { Form, Input, Title } from '@/components/elements';
 import { schemas } from '@/lib/zod';
 import { resetPassword } from '@/services';
-import { SubmitButton } from '@/components/simple';
+import { StepBack, SubmitButton } from '@/components/simple';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
 
@@ -11,9 +11,7 @@ export const ResetForm = ({ data, code, locale }: any) => {
   const schema = schemas.resetPassword(locale);
 
   const printInputs = (inputs: any) => {
-    return inputs?.map((input: any) => (
-      <Input validation={input.name === 'password'} key={input.id} {...input} />
-    ));
+    return inputs?.map((input: any) => <Input validation={input.name === 'password'} key={input.id} {...input} />);
   };
 
   return (
@@ -22,27 +20,25 @@ export const ResetForm = ({ data, code, locale }: any) => {
       method='post'
       id='reset-password'
       action={resetPassword}
-      className='auth-page_form mt-5 !gap-y-5'
+      className='auth-page_form absolute-center'
     >
-      <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
-        {data.title}
-      </Title>
-      <div className='flex flex-col gap-y-5 py-2.5'>
-        <Input
-          type='hidden'
-          name='locale'
-          value={locale}
-          containerClass='hidden'
+      <StepBack className='absolute left-5 top-2' />
+      <div className='relative mt-14 w-full md:mt-5'>
+        <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
+          {data.title}
+        </Title>
+        <div className='flex flex-col gap-y-5 py-2.5'>
+          <Input type='hidden' name='locale' value={locale} containerClass='hidden' />
+          <Input type='hidden' name='code' containerClass='hidden' value={code} />
+          {printInputs(data.formFields)}
+        </div>
+        <div className='divider !m-0 w-full px-5' />
+        <SubmitButton
+          className='auth-form_submit !mt-2.5'
+          text={data.submitBtn?.text}
+          loadingText={data.submitBtn?.loadingText}
         />
-        <Input type='hidden' name='code' containerClass='hidden' value={code} />
-        {printInputs(data.formFields)}
       </div>
-      <div className='divider !m-0 w-full px-5' />
-      <SubmitButton
-        className='auth-form_submit !mt-2.5'
-        text={data.submitBtn?.text}
-        loadingText={data.submitBtn?.loadingText}
-      />
     </Form>
   );
 };

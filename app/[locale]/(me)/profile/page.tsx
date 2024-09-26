@@ -28,7 +28,9 @@ export default async function ProfilePage({ params }: PageProps) {
 
   return (
     <section className='flex w-full flex-col justify-center bg-info-content'>
-      {data.formFields && <ProfileForm data={data.formFields} state={me} locale={locale} token={session.accessToken} />}
+      {data?.formFields && me && (
+        <ProfileForm data={data.formFields} state={me} locale={locale} token={session.accessToken} />
+      )}
     </section>
   );
 }
