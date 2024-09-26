@@ -26,4 +26,3 @@ docker run -d --restart always -e NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" \
                                -e JWT_SECRET=eyJhbGciOiJIUzI1NiJ9eyJjcmVhdGVkQXQiOiIyMDIzLTA5LTA5VDE3OjQwOjExLjYyM1oiLCJleHBpcmVkIjoiMjAyMy0wOS0wOVQxNzo0MDoxMS42MjNaIiwibmFtZSI6Im5hbWUiLCJ1c2VySWQiOiJpZCIsImVtYWlsIjoiZW1haWwifQ.PCwTY1WR9NnFyCzpkk7Jaf-PR-jIsMcEv_uFyiXFRDI \
                                -p 3000:3000 \
                                kush-e-commerce-front:"${GITHUB_RUN_ID}" 
-
