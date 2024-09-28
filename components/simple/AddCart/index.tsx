@@ -1,16 +1,16 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { useCart } from '@/store';
 import { AddCartProps } from '@/types/components';
-import { useTranslations } from 'next-intl';
 
-export const AddCart: FC<AddCartProps> = ({ data, isDisabled }) => {
-  const [added, setAdded] = useState(false);
-
-  const t = useTranslations('cart');
+export const AddCart: FC<AddCartProps> = ({ data, isDisabled = false }) => {
   const state = useCart();
+  const t = useTranslations('cart');
+
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
     state.syncCartData(data);
@@ -19,7 +19,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isDisabled }) => {
   const isButtonDisabled = () => {
     const { formState } = state;
 
-    return !Object.values(formState).some((value) => value === null) || added || isDisabled;
+    return Object.values(formState).some((value) => value === null) || added;
   };
 
   const disabled = isButtonDisabled();
@@ -34,8 +34,8 @@ export const AddCart: FC<AddCartProps> = ({ data, isDisabled }) => {
 
   return (
     <button
-      aria-label='Add'
-      disabled={!disabled}
+      aria-label='add to cart'
+      disabled={disabled || !isDisabled}
       onClick={handleAdd}
       className='btn btn-neutral no-animation btn-block rounded-none text-xl font-semibold text-white disabled:!bg-gray-500/50'
     >

@@ -24,22 +24,22 @@ export default async function BaseLayout({
   cart
 }: PropsWithChildren<BaseLayoutProps>) {
   return (
-    <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth')}>
+    <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
       <body className='relative grid overflow-x-clip'>
         <NextIntlClientProvider messages={messages}>
           <SessionProvider session={session}>
-            <AutoLogoutProvider>
-              <ThemeProvider>
-                <Header data={header} shoppingCart={cart} locale={locale} session={session} />
-                <main className='flex min-h-dvh flex-col'>{children}</main>
-                <Footer data={footer} locale={locale} />
-                <Modal id='my_modal_3'>
-                  <WishlistNotification locale={locale} />
-                </Modal>
-                <div id='portal' />
-                <ClientSideRender />
-              </ThemeProvider>
-            </AutoLogoutProvider>
+            <ThemeProvider>
+              <Header data={header} shoppingCart={cart} locale={locale} session={session} />
+              <main className='flex min-h-dvh flex-col'>
+                <AutoLogoutProvider>{children}</AutoLogoutProvider>
+              </main>
+              <Footer data={footer} locale={locale} />
+              <Modal id='my_modal_3'>
+                <WishlistNotification locale={locale} />
+              </Modal>
+              <div id='portal' />
+              <ClientSideRender />
+            </ThemeProvider>
           </SessionProvider>
         </NextIntlClientProvider>
         <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='lazyOnload' async />

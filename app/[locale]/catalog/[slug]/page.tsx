@@ -32,22 +32,25 @@ export default async function ProductDetails({ params }: PageProps) {
     return null;
   }
 
+  const discountAmount = data.price * (data.saleValue / 100);
+
   const cartData: CartItemType = {
     id: data.id,
-    name: data.title,
-    unit_amount: data.price,
-    category: data.category,
     quantity: 1,
+    name: data.title,
+    category: data.category,
+    url: `/catalog/${data.slug}`,
     description: data?.description,
     images: data?.images?.data?.[0],
-    url: `/catalog/${data.slug}`
+    unit_amount: data.price - discountAmount
   };
 
   return (
-    <PageLayout className='mt-16 min-h-screen'>
-      <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
-        <section className='z-10 flex h-full w-full flex-col gap-3 bg-base-100 p-3 !pb-0 xs:gap-6 xs:p-6'>
-          <header className='flex w-full justify-between' role='product-name'>
+    <PageLayout className='mt-16'>
+      <StepBack className='absolute z-10 !mx-5 justify-start lg:relative lg:z-0' />
+      <article className='relative flex w-full flex-col-reverse lg:flex-row-reverse'>
+        <section className='flex h-full w-full flex-col gap-2.5 bg-base-100 p-3 !py-0 sm:p-5'>
+          <header className='flex w-full flex-wrap justify-between gap-2.5 pt-5 lg:pt-0' role='product-name'>
             {data?.title && (
               <Title
                 level='1'
@@ -60,7 +63,7 @@ export default async function ProductDetails({ params }: PageProps) {
             )}
             <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
-          <div className='flex items-baseline justify-between'>
+          <div className='flex flex-wrap items-baseline justify-between py-2.5'>
             <Price currency={currency} price={data?.price} sale={data?.saleValue} className='flex flex-row' />
             <NextLink
               href={`/catalog?categories=${data?.category}`}
@@ -70,7 +73,7 @@ export default async function ProductDetails({ params }: PageProps) {
               {t(`category.${data?.category}`)}
             </NextLink>
           </div>
-          <p className='whitespace-pre-line text-pretty'>{data?.description}</p>
+          <p className='whitespace-pre-line text-wrap'>{data?.description}</p>
           <ProductParams
             sizes={allSizes}
             colors={data.colors.data}
@@ -90,10 +93,7 @@ export default async function ProductDetails({ params }: PageProps) {
           </ProductParams>
           <DeliveryBlock locale={locale} />
         </section>
-        <div className='relative w-full'>
-          <StepBack className='absolute left-6 lg:relative' />
-          <ProductGallery images={data?.images?.data.slice(0, 4)} className='w-full' />
-        </div>
+        <ProductGallery images={data?.images?.data.slice(0, 4)} />
       </article>
       <DeliveryRules locale={locale} />
       <CompleteLook locale={locale} currency={currency} category={data.category} />

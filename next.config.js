@@ -4,6 +4,7 @@ const { hostname } = require('os');
 const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
 
 const nextConfig = {
+  reactStrictMode: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
   },
@@ -16,7 +17,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  reactStrictMode: false,
   env: {
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL
   },

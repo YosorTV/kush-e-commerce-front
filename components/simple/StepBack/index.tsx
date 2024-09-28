@@ -22,7 +22,7 @@ export const StepBack: FC<IStepBack> = ({ className }) => {
     <Button
       type='button'
       onClick={handleBack}
-      className={cn(className, 'z-10 !text-xs underline-offset-8 hover:underline md:!text-sm')}
+      className={cn(className, '!text-xs underline-offset-8 hover:underline md:!text-sm')}
       icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
     >
       {t('stepBack')}

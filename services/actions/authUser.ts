@@ -49,7 +49,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
             errors: null,
             status: 400,
             message: '',
-            strapiError: formData.get('locale') === 'uk' ? 'Помилка провайдера.' : 'Invalid provider.'
+            strapiError: error.cause['err'].message ?? 'An unexpected error occurred'
           };
         default:
           return {
@@ -58,7 +58,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
             errors: null,
             status: 400,
             message: '',
-            strapiError: error.cause['err'].message ?? 'An unexpected error occurred'
+            strapiError: formData.get('locale') === 'uk' ? 'Помилка авторизації.' : 'Authorization error.'
           };
       }
     }
@@ -66,6 +66,6 @@ export async function authUserAction(prevState: any, formData: FormData) {
   }
 }
 
-export async function logout() {
-  await signOut();
+export async function logout({ locale = 'uk' }: { locale?: string }) {
+  await signOut({ redirect: true, redirectTo: `${ROOT}${locale}` });
 }

@@ -1,72 +1,50 @@
 'use client';
 
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren, useCallback, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 
 import { useActivity } from '@/store';
 import { logout } from '@/services';
 
-import { useSession } from 'next-auth/react';
-
-export interface AutoLogoutProviderProps {
-  timeoutMs?: number;
-  timeoutCheckMs?: number;
-  requireSession?: boolean;
-}
-
-type WindowActivityEvent = keyof WindowEventMap;
+import { AutoLogoutProviderProps, WindowActivityEvent } from '@/types/components';
+import { useLocale } from 'next-intl';
 
 export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> = ({
-  timeoutMs = 15 * 60 * 1000,
-  timeoutCheckMs = 1000,
+  timeoutCheckMs = 60000,
   children
 }) => {
+  const locale = useLocale();
   const { data: session } = useSession();
-
-  if (!session) return children;
-
   const { lastActivity, setLastActivity } = useActivity();
 
-  const getCurrentTime = () => new Date().getTime();
+  const getCurrentTime = useCallback(() => new Date().getTime(), []);
 
-  const onUserActivity = () => {
-    const now = getCurrentTime();
+  const onUserActivity = useCallback(() => {
+    setLastActivity(getCurrentTime());
+  }, [getCurrentTime, setLastActivity]);
 
-    setLastActivity(now);
-  };
+  const checkUserInactivity = useCallback(async () => {
+    if (session) {
+      const expiryTime = session.exp * 1000;
 
-  const checkUserInactivity = async () => {
-    const now = getCurrentTime();
-
-    if (session.user && session.exp) {
-      const expiryTime = new Date(session.exp * 1000).getTime();
-
-      if (now > expiryTime) {
-        await logout();
-        return;
+      if (lastActivity > expiryTime) {
+        await logout({ locale });
       }
     }
-
-    if (lastActivity && now - lastActivity > timeoutMs) {
-      await logout();
-    }
-  };
+  }, [session, lastActivity]);
 
   useEffect(() => {
     const windowEvents: WindowActivityEvent[] = ['focus', 'scroll', 'click', 'keydown', 'mousemove'];
 
-    windowEvents.forEach((eventName) => {
-      window.addEventListener(eventName, onUserActivity, false);
-    });
+    windowEvents.forEach((event) => window.addEventListener(event, onUserActivity));
 
-    const intervalId = window.setInterval(checkUserInactivity, timeoutCheckMs);
+    const intervalId = setInterval(checkUserInactivity, timeoutCheckMs);
 
     return () => {
-      windowEvents.forEach((eventName) => {
-        window.removeEventListener(eventName, onUserActivity, false);
-      });
-      window.clearInterval(intervalId);
+      windowEvents.forEach((event) => window.removeEventListener(event, onUserActivity));
+      clearInterval(intervalId);
     };
-  }, [session]);
+  }, [onUserActivity, checkUserInactivity, timeoutCheckMs]);
 
   return <>{children}</>;
 };

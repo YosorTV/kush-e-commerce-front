@@ -34,7 +34,7 @@ export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymen
   return {
     amount,
     shop_name: 'KUSH | JEWERLY',
-    currency: locale === 'uk' ? 'UAH' : 'USD',
+    currency: 'UAH',
     description: `Оплата ювелірних прикрас: ${description}`,
     order_id,
     products,

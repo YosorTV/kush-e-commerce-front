@@ -16,7 +16,7 @@ interface ICompleteLookAdater {
 export const completeLookAdapter = ({ category, products = [] }: ICompleteLookAdater) => {
   if (!products) return [];
 
-  return products.filter((product: Product) => product.category !== category);
+  return products.filter((product: Product) => product.category !== category && product.available);
 };
 
 export const inWishlistDataAdatapter = (products: Product[]) => {

@@ -8,7 +8,7 @@ import { CartList } from '@/components/simple';
 import { ShoppingCartProps } from '@/types/components/complex';
 import { Success } from '../Success';
 import { BsFillBagFill } from 'react-icons/bs';
-import { Button, Portal, Sidebar } from '@/components/elements';
+import { Button, Sidebar } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 import { CartDelivery } from '@/components/simple/CartDelivery';
 import { CartCheckout } from '@/components/simple/CartCheckout';
@@ -71,11 +71,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
         <BsFillBagFill className='h-6 w-6 fill-base-200' />
       </Button>
 
-      <Portal selector='portal'>
-        <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-          <div className='relative top-16 flex p-5 pt-0'>{contentZone[cartStore.key]}</div>
-        </Sidebar>
-      </Portal>
+      <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
+        <div className='relative flex h-full overflow-auto px-5'>{contentZone[cartStore.key]}</div>
+      </Sidebar>
     </>
   );
 };

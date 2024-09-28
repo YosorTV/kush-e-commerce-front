@@ -16,6 +16,7 @@ import { getCurrency } from '@/services';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib';
 import { useScrollLock } from '@/lib/hooks';
+import { useTranslations } from 'next-intl';
 
 export const CartList: FC<any> = ({ data }) => {
   const [currency, setCurrency] = useState<number>();
@@ -23,6 +24,7 @@ export const CartList: FC<any> = ({ data }) => {
   const cartStore = useCart();
 
   const { theme } = useTheme();
+  const t = useTranslations('');
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
@@ -66,11 +68,11 @@ export const CartList: FC<any> = ({ data }) => {
   return (
     <div className='relative flex w-full flex-col items-start gap-y-6'>
       <Button onClick={handleBack} className='btn btn-link relative -top-2.5 px-0 text-lg normal-case'>
-        {data.getBack}
+        {t('system.stepBack')}
       </Button>
       <div className='flex w-full flex-col gap-y-6'>
         <Title level='3' className='w-full self-center text-center text-2xl font-light'>
-          {data.title}
+          {t('checkout.title')}
         </Title>
         {cartStore.cart.map((item) => (
           <motion.div layout key={item.id} className='flex gap-x-3'>
@@ -84,10 +86,10 @@ export const CartList: FC<any> = ({ data }) => {
         ))}
       </div>
       <p className='font-semibold capitalize'>
-        {data.totalPrice}: {formatPrice(totalPrice, currency)}
+        {t('checkout.total')}: {formatPrice(totalPrice, currency)}
       </p>
       <button onClick={() => cartStore.setForm('delivery')} className='btn btn-primary w-full text-base-100'>
-        {data.checkout}
+        {t('checkout.delivery')}
       </button>
     </div>
   );

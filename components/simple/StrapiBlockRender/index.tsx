@@ -1,11 +1,6 @@
 import { FC } from 'react';
 
-import {
-  CatalogSection,
-  HeroSection,
-  SpotlightSection,
-  CollectionSection,
-} from '@/components/complex';
+import { CatalogSection, HeroSection, SpotlightSection, CollectionSection } from '@/components/complex';
 
 import { ProductList } from '../ProductList';
 
@@ -16,14 +11,7 @@ function blockRenderer(block: any, params: any) {
     case 'complex.spotlight':
       return <SpotlightSection key={block.id} data={block} />;
     case 'complex.products':
-      return (
-        <ProductList
-          key={block.id}
-          title={block.title}
-          className='px-6 pt-0 lg:pt-5'
-          {...params}
-        />
-      );
+      return <ProductList key={block.id} title={block.title} className='px-6' {...params} />;
     case 'complex.collection-group':
       return <CollectionSection key={block.id} data={block} />;
     case 'complex.category-group':

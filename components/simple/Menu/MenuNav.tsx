@@ -37,7 +37,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
   );
 
   return (
-    <div className='relative top-16 h-screen'>
+    <>
       <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
@@ -84,6 +84,6 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
           <Logo height={90} />
         </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -1,19 +1,23 @@
 'use client';
 
-import { Zoom } from '@/components/elements';
-import { StrapiImage } from '@/components/simple';
-import { ProductCarousel } from '@/components/simple/ProductCarousel';
-import { getImgGrid } from '@/lib';
-import { useScreen } from '@/lib/hooks';
 import { useMemo } from 'react';
+
+import { StrapiImage, ProductCarousel } from '@/components/simple';
+
+import { Zoom } from '@/components/elements';
+
+import { getImgGrid } from '@/lib';
+
+import { useScreen } from '@/lib/hooks';
 
 export const ProductGallery = ({ images = [], className }: { images: any[]; className?: string }) => {
   const { lg } = useScreen();
+
   const gallery = getImgGrid({ images });
 
   const printImage = (image: any) => {
     return (
-      <li key={image.id} id={image.id} className='h-96 overflow-hidden'>
+      <li key={image.id} id={image.id} className='h-full overflow-clip'>
         <Zoom>
           <StrapiImage
             priority
@@ -22,7 +26,7 @@ export const ProductGallery = ({ images = [], className }: { images: any[]; clas
             height={image.height}
             formats={image.formats}
             alt={image.alternativeText}
-            className='h-full w-full cursor-pointer object-cover'
+            className='aspect-square h-full w-full cursor-pointer object-cover'
           />
         </Zoom>
       </li>
@@ -31,7 +35,7 @@ export const ProductGallery = ({ images = [], className }: { images: any[]; clas
 
   const printGallery = useMemo(() => {
     if (lg) {
-      return <ul className='grid gap-3 lg:grid-cols-1 xl:grid-cols-2'>{gallery.map(printImage)}</ul>;
+      return <ul className='grid w-full grid-cols-fluid gap-2.5 2xl:grid-cols-2'>{gallery.map(printImage)}</ul>;
     } else {
       return <ProductCarousel data={images} options={{ loop: true }} containerClass='lg:hidden' />;
     }

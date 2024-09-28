@@ -1,15 +1,14 @@
 import { FC } from 'react';
+import { getLocale } from 'next-intl/server';
 
 import { cn } from '@/lib';
 
 import { Title } from '@/components/elements';
 
-import { cormorant } from '@/assets/fonts';
 import { getProductsData } from '@/services';
-import { getLocale } from 'next-intl/server';
-import { PaginateController } from '../PaginateController';
 
 import ProductListGroup from '../ProductListGroup';
+import { PaginateController } from '../PaginateController';
 
 interface IProductsList {
   title?: string;
@@ -29,7 +28,8 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
       {title && (
         <Title
           level='3'
-          className={cn(cormorant.className, 'text-2xl uppercase text-base-200 xs:text-4xl lg:text-5xl')}
+          variant='subheading'
+          className='py-2.5 text-2xl uppercase text-base-200 xs:text-4xl md:py-5 lg:text-5xl'
         >
           {title}
         </Title>

@@ -38,12 +38,10 @@ export const CartDelivery = () => {
     }
   }, [session.status]);
 
-  console.log(cartStore.delivery);
-
   return (
     <div className='form-control w-full'>
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
-        Повернутись
+        {t('system.stepBack')}
       </Button>
       <div className='form-control gap-y-2.5 py-10'>
         <PeronalCheckoutForm data={user} title={t('cart.personal')} />

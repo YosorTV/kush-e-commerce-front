@@ -106,7 +106,9 @@
     "price": "Price",
     "total": "Total",
     "quantity": "Quantity",
-    "payments": "Checkout"
+    "payments": "Checkout",
+    "delivery": "Set delivery options",
+    "title": "Purchase list"
   },
   "wishlist": {
     "added": "Remove from wishlist",
@@ -124,5 +126,9 @@
     "pickup": "Pickup",
     "novapay": "By nova pay",
     "link": "Link to the product"
+  },
+  "notFound": {
+    "message": "Oops! The page you are looking for does not exist",
+    "return": "Return to home page"
   }
 }

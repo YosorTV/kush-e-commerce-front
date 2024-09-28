@@ -7,7 +7,11 @@ import BaseLayout from '@/components/layouts/Base';
 import { getLayoutData } from '@/services';
 import { auth } from '@/auth';
 
-import '../globals.css';
+import { LOCALES } from '@/helpers/constants';
+
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = params;

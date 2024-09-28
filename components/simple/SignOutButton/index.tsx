@@ -1,11 +1,10 @@
 'use client';
 
 import { FC } from 'react';
-import { signOut } from 'next-auth/react';
 
 import { cn } from '@/lib';
 import { useLocale } from 'next-intl';
-import { ROOT } from '@/helpers/constants';
+import { logout } from '@/services';
 
 interface ISignOut {
   text: string;
@@ -16,7 +15,7 @@ interface ISignOut {
 export const SignOutButton: FC<ISignOut> = ({ text, icon, className }) => {
   const locale = useLocale();
 
-  const handleSignOut = async () => await signOut({ redirect: true, callbackUrl: `${ROOT}${locale}` });
+  const handleSignOut = async () => await logout({ locale });
 
   return (
     <button

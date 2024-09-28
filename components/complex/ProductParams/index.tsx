@@ -27,7 +27,7 @@ export const ProductParams: FC<PropsWithChildren<any>> = ({
   }, [pathname]);
 
   return (
-    <section className='flex w-auto flex-col gap-y-6'>
+    <section className='flex flex-col gap-y-6'>
       {materials && <MaterialOptions data={materials} title={t('material.title')} />}
       {colors && <ColorOptions data={colors} title={t('color.title')} />}
       {sizes && <SizeOptions data={sizes} sizes={availableSizes} title={t('size.title')} />}
