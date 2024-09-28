@@ -15,7 +15,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   };
 }
 
-export default async function NotFound() {
+export default async function NotFoundPage() {
   const t = await getTranslations('notFound');
 
   return (
