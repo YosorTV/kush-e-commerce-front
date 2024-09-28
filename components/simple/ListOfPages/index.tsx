@@ -67,7 +67,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
     return (
       <li
         key={page.id}
-        onMouseEnter={() => handleShowSubMenu(index)}
+        onMouseEnter={handleShowSubMenu}
         className={cn('group py-2.5 text-base-200 hover:underline hover:underline-offset-8', {
           active: isActive
         })}
