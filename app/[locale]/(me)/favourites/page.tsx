@@ -6,6 +6,8 @@ import { auth } from '@/auth';
 import ProductListGroup from '@/components/simple/ProductListGroup';
 import { inWishlistDataAdatapter } from '@/adapters/product';
 import { PaginateController } from '@/components/simple/PaginateController';
+import { Title } from '@/components/elements';
+import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -22,6 +24,7 @@ export default async function FavouritesPage({ params }: PageProps) {
   const { locale } = params;
 
   const session = await auth();
+  const t = await getTranslations('system');
 
   const { data, meta } = await getWishlistProducts({
     locale,
@@ -34,7 +37,12 @@ export default async function FavouritesPage({ params }: PageProps) {
 
   return (
     <section className='mt-10 flex w-full flex-col bg-info-content p-5'>
+      <Title level='2' variant='subheading' className='text-center'>
+        {t('wishlist')}
+      </Title>
+      <div className='divider' />
       <ProductListGroup data={wishlist} className='grid-cols-fluid' />
+      <div className='divider' />
       {wishlist.length > 0 && (
         <PaginateController
           disabled={isLastPage}

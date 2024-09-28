@@ -40,11 +40,10 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
   return (
     <section className='mt-10 w-full bg-info-content p-5'>
       <Title level='2' variant='subheading' className='text-center'>
-        Замовлення
+        {t('orders')}
       </Title>
       <div className='divider' />
       <OrdersSection orders={data} emptyTitle={t('emptyList')} />
-      <div className='divider' />
       <PaginateController
         disabled={isLastPage}
         total={meta.pagination.total}

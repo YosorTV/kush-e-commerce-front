@@ -52,14 +52,13 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
       <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
       <Input type='hidden' hidden name='username' value={state.username} className='hidden' />
 
-      <Title level='2' variant='subheading' className='my-5 whitespace-nowrap text-center text-base md:text-left'>
-        {data?.generalTitle}
-      </Title>
       <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>
+      <div className='divider' />
       <div className='flex flex-col gap-y-5'>
         <Title level='3'>{data?.contactsTitle}</Title>
         <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedContactsFields)}</div>
       </div>
+      <div className='divider' />
       <div className='flex flex-col gap-y-5'>
         <Title level='3'>{data?.additionalTitle}</Title>
         <div className='flex flex-col gap-5 lg:flex-row'>
@@ -69,9 +68,8 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
           />
         </div>
       </div>
-      <div className='mt-5 flex flex-col items-center justify-center gap-5 md:flex-row lg:mt-20'>
-        {data.actions.map(formActions)}
-      </div>
+      <div className='divider' />
+      <div className='flex flex-col items-center justify-center gap-5 md:flex-row'>{data.actions.map(formActions)}</div>
     </Form>
   );
 };

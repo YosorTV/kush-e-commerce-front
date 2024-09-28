@@ -3,39 +3,11 @@ import { StrapiImage } from '../StrapiImage';
 import { cn } from '@/lib';
 import { Price } from '../Price';
 import { NextLink } from '@/components/elements';
-import { formatDate } from '@/helpers/formatters';
+import { formatDate, getStatusBorder } from '@/helpers/formatters';
 import StatusBadge from '../StatusBadge';
+import { IOrderCard } from '@/types/components';
 
-interface IOrderCard {
-  name: string;
-  price: string;
-  image: any;
-  status: string;
-  amount: string;
-  id: number;
-  quantity: number;
-  self_delivery: boolean;
-  publishedAt: Date;
-  url: string | undefined;
-  t: (key: string, options?: Record<string, any>) => string;
-}
-
-const getStatus = (stat: string) => {
-  switch (stat) {
-    case 'sandbox':
-      return 'border-purple-600';
-    case 'completed':
-      return 'border-success';
-    case 'error':
-      return 'border-error';
-    case 'pending':
-      return 'border-warning';
-    default:
-      return 'border-purple-600';
-  }
-};
-
-const OrderCard: FC<IOrderCard> = ({
+export const OrderCardDesktop: FC<IOrderCard> = ({
   id,
   status,
   quantity,
@@ -49,7 +21,10 @@ const OrderCard: FC<IOrderCard> = ({
   t
 }) => {
   return (
-    <figure key={id} className={cn('flex min-h-24 w-full items-center justify-between border-l-8', getStatus(status))}>
+    <figure
+      key={id}
+      className={cn('flex min-h-24 w-full items-center justify-between border-l-8', getStatusBorder(status))}
+    >
       <figcaption className='flex gap-20 pr-2.5'>
         <div className='flex flex-col gap-5 px-5'>
           <span>{t('order', { number: id })} </span>
@@ -80,7 +55,7 @@ const OrderCard: FC<IOrderCard> = ({
           </NextLink>
         </div>
       </figcaption>
-      <NextLink href={url} className='h-24 w-24' title={name}>
+      <NextLink href={url} className='h-32 w-32' title={name}>
         <StrapiImage
           src={image.url}
           width={image.width}
@@ -93,5 +68,3 @@ const OrderCard: FC<IOrderCard> = ({
     </figure>
   );
 };
-
-export default OrderCard;

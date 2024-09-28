@@ -36,5 +36,6 @@ export * from '@/components/simple/Wishlist';
 export * from '@/components/simple/AddButton';
 export * from '@/components/simple/DeliveryBlock';
 export * from '@/components/simple/StepBack';
-export * from '@/components/simple/OrderCard';
+export * from '@/components/simple/OrderCardDesktop';
+export * from '@/components/simple/OrderCardMobile';
 export * from '@/components/simple/StatusBadge';

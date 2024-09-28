@@ -16,7 +16,10 @@
     "signOut": "Вийти",
     "search": "Пошук...",
     "collection": "Коллекція:",
-    "available": "У наявності {number}"
+    "available": "У наявності {number}",
+    "orders": "Замовлення",
+    "wishlist": "Список замовлень",
+    "profile": "Інформація профілю"
   },
   "copyright": {
     "title": "Авторське право",

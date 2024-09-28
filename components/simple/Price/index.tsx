@@ -16,7 +16,10 @@ export const Price: FC<Readonly<IPrice>> = ({ price = 0, sale = 0, currency, cla
   const salePrice = formatPrice(price - discountAmount, currency);
 
   return (
-    <p aria-label={`Price: ${price}`} className={cn('flex flex-col-reverse items-end gap-x-3 xs:flex-row', className)}>
+    <p
+      aria-label={`Price: ${price}`}
+      className={cn('flex flex-col-reverse items-start gap-x-3 xs:flex-row', className)}
+    >
       {sale > 0 && <span className='text-base text-base-200'>{salePrice}</span>}
       <span className={cn('text-base', sale > 0 && 'line-through')}>{originalPrice}</span>
     </p>

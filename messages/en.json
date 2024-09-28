@@ -34,7 +34,10 @@
     "signOut": "Sign Out",
     "search": "Search...",
     "collection": "Collection:",
-    "available": "In stock {number}"
+    "available": "In stock {number}",
+    "orders": "Orders",
+    "wishlist": "Wish list",
+    "profile": "Profile information"
   },
   "copyright": {
     "title": "Copyright",
