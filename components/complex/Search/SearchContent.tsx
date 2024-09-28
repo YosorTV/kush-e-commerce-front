@@ -1,6 +1,6 @@
 'use client';
 
-import { SearchCard } from '@/components/simple';
+import { ProductCard } from '@/components/simple';
 import { gridCols } from '@/helpers/formatters';
 
 import { useSearch } from '@/store';
@@ -11,15 +11,15 @@ import { useTranslations } from 'next-intl';
 import { Lottie } from '@/components/elements/Lottie';
 
 export const SearchContent = () => {
-  const t = useTranslations('system');
   const state = useSearch();
+  const t = useTranslations('system');
 
   if (!state.searchResult.length) {
     return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-20' playerClassName='h-96 w-96' />;
   }
 
   const printProducts = (product: Product, index: number) => {
-    return <SearchCard key={product.id} product={product} className={gridCols(index)} />;
+    return <ProductCard t={t} key={product.id} product={product} className={gridCols(index)} />;
   };
 
   return (

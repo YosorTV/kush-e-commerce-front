@@ -7,7 +7,7 @@ import { Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { getProductsData } from '@/services';
 import { getLocale } from 'next-intl/server';
-import { ProductListController } from '../ProductListController';
+import { PaginateController } from '../PaginateController';
 
 import ProductListGroup from '../ProductListGroup';
 
@@ -35,10 +35,10 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
         </Title>
       )}
       <ProductListGroup data={data} />
-      <ProductListController
+      <PaginateController
         disabled={isLastPage}
         total={meta.pagination.total}
-        perPage={meta?.pagination?.pageSize * 2}
+        perPage={meta?.pagination?.pageSize + 5}
       />
     </section>
   );

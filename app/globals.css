@@ -141,7 +141,7 @@ input:-webkit-autofill:active {
     flex: 0 0 var(--slide-size-lg);
   }
   .embla__viewport {
-    padding: 0 0;
+    padding: 12px 0 6px 0;
   }
 }
 

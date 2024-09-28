@@ -28,7 +28,7 @@ export const formatDate = (date: Date) => {
   const month = String(fullDate.getMonth() + 1).padStart(2, '0');
   const year = fullDate.getFullYear();
 
-  return `${month}/${day}/${year}`;
+  return `${day}.${month}.${year}`;
 };
 
 export const formatBySlug = (data: any[], slug: string) => {
@@ -58,4 +58,19 @@ export const getInitials = ({ firstName, lastName }: getInitials) => {
   const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
 
   return `${firstInitial}${lastInitial}`;
+};
+
+export const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'sandbox':
+      return 'bg-purple-600';
+    case 'completed':
+      return 'bg-success';
+    case 'error':
+      return 'bg-error';
+    case 'pending':
+      return 'bg-warning';
+    default:
+      return 'bg-purple-600';
+  }
 };

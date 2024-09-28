@@ -27,6 +27,7 @@ export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymen
     id: item.id,
     name: item.name,
     quantity: item.quantity,
+    url: item.url,
     price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, '')
   }));
 

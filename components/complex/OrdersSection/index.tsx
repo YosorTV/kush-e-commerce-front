@@ -2,8 +2,11 @@ import React from 'react';
 import OrderCard from '@/components/simple/OrderCard';
 import lottieAnim from '@/public/LottieEmplyList.json';
 import { Lottie } from '@/components/elements/Lottie';
+import { getTranslations } from 'next-intl/server';
 
-const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) => {
+const OrdersSection = async ({ orders, emptyTitle = 'Не знайдено' }: any) => {
+  const t = await getTranslations('order');
+
   if (!orders.length) {
     return <Lottie text={emptyTitle} src={lottieAnim} className='relative top-20' playerClassName='h-96 w-96' />;
   }
@@ -12,6 +15,8 @@ const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) =>
     order.products.map((el: any) => {
       return (
         <OrderCard
+          t={t}
+          url={el.url}
           key={order.id}
           id={order.id}
           amount={order.amount}
@@ -26,7 +31,7 @@ const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) =>
       );
     });
 
-  return <section className='mx-4 mt-8 flex flex-col gap-y-5'>{orders.map(printOrder)}</section>;
+  return <section className='mx-4 mt-8 flex flex-col gap-y-20'>{orders.map(printOrder)}</section>;
 };
 
 export default OrdersSection;

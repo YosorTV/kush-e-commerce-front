@@ -39,7 +39,8 @@ export default async function ProductDetails({ params }: PageProps) {
     category: data.category,
     quantity: 1,
     description: data?.description,
-    images: data?.images?.data?.[0]
+    images: data?.images?.data?.[0],
+    url: `/catalog/${data.slug}`
   };
 
   return (

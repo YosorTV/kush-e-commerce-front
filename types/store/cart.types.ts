@@ -9,6 +9,7 @@ export type CartItemType = {
   color?: string | null;
   size?: number | null;
   quantity?: number;
+  url?: string;
 };
 
 export interface IDeliveryForm {

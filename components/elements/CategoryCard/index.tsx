@@ -47,7 +47,8 @@ export const CategoryCard: FC<any> = ({ data, currency, locale = 'uk' }) => {
         <div className='h-96 w-full lg:h-[512px]'>
           <StrapiImage
             fill
-            loading='lazy'
+            priority
+            loading='eager'
             overlay={showOverlay}
             formats={data?.images?.data?.[0]?.formats}
             src={data?.images?.data?.[0]?.url}
@@ -73,7 +74,6 @@ export const CategoryCard: FC<any> = ({ data, currency, locale = 'uk' }) => {
             <div className='flex w-full items-center justify-between'>
               <Price
                 className='!flex-row font-medium text-base-300'
-                locale={locale}
                 price={data?.price}
                 sale={data?.sale}
                 currency={currency}

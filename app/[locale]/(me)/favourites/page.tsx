@@ -5,7 +5,7 @@ import { getWishlistProducts } from '@/services/api/get-wished-products';
 import { auth } from '@/auth';
 import ProductListGroup from '@/components/simple/ProductListGroup';
 import { inWishlistDataAdatapter } from '@/adapters/product';
-import { ProductListController } from '@/components/simple/ProductListController';
+import { PaginateController } from '@/components/simple/PaginateController';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -36,10 +36,10 @@ export default async function FavouritesPage({ params }: PageProps) {
     <section className='mt-10 flex w-full flex-col bg-info-content p-5'>
       <ProductListGroup data={wishlist} className='grid-cols-fluid' />
       {wishlist.length > 0 && (
-        <ProductListController
+        <PaginateController
           disabled={isLastPage}
           total={meta.pagination.total}
-          perPage={meta?.pagination?.pageSize * 2}
+          perPage={meta?.pagination?.pageSize + 5}
         />
       )}
     </section>

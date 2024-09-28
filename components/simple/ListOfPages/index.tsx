@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useMemo, useCallback } from 'react';
+import { FC, useState, useMemo, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
@@ -45,9 +45,8 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   const [showOverlay, setShowOverlay] = useState(false);
 
   const state = useFilters();
-  const pathname = usePathname();
-
   const { lg } = useScreen();
+  const pathname = usePathname();
 
   const isLgScreen = useMemo(() => {
     return lg && showOverlay;
@@ -60,45 +59,45 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
     [state.isOpen, isFooter]
   );
 
-  const printLinks = useMemo(
-    () =>
-      pages.map((page, index) => {
-        const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
+  const printLink = (page: StrapiLinkType, index: number) => {
+    const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
 
-        const isActive =
-          urlObj.pathname === ROOT
-            ? pathname === urlObj.pathname
-            : pathname.startsWith(urlObj.pathname) || pathname.startsWith('collection');
+    const isActive =
+      urlObj.pathname === ROOT
+        ? pathname === urlObj.pathname
+        : pathname.startsWith(urlObj.pathname) || pathname.startsWith('collection');
 
-        return (
-          <li
-            key={page.id}
-            onMouseEnter={() => handleShowSubMenu(index)}
-            className={cn('group py-2.5 text-base-200 hover:underline hover:underline-offset-8', {
-              active: isActive
-            })}
-          >
-            <NextLink
-              href={page.url}
-              replace={page.isExternal}
-              className={cn(
-                'whitespace-nowrap py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
-                linkStyle
-              )}
-            >
-              {page.text}
-            </NextLink>
-          </li>
-        );
-      }),
-    [pages, handleShowSubMenu, pathname, linkStyle]
-  );
+    return (
+      <li
+        key={page.id}
+        onMouseEnter={() => handleShowSubMenu(index)}
+        className={cn('group py-2.5 text-base-200 hover:underline hover:underline-offset-8', {
+          active: isActive
+        })}
+      >
+        <NextLink
+          href={page.url}
+          replace={page.isExternal}
+          className={cn(
+            'whitespace-nowrap py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
+            linkStyle
+          )}
+        >
+          {page.text}
+        </NextLink>
+      </li>
+    );
+  };
+
+  useEffect(() => {
+    setShowOverlay(false);
+  }, [pathname]);
 
   if (!pages?.length) return null;
 
   return (
     <ul className={cn('flex gap-x-6', className)}>
-      {printLinks}
+      {pages.length > 0 && pages.map(printLink)}
       <Portal selector='portal'>
         <AnimatePresence mode='wait' initial={false}>
           {isLgScreen && (

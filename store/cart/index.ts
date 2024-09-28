@@ -12,7 +12,8 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
     unit_amount: 0,
     description: null,
     images: [],
-    quantity: 0
+    quantity: 0,
+    url: ''
   },
   delivery: {
     firstName: '',
@@ -98,7 +99,8 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         unit_amount: 0,
         description: null,
         images: [],
-        quantity: 0
+        quantity: 0,
+        url: ''
       }
     })),
   setDelivery: (key: keyof IDeliveryForm, value: string) =>
@@ -121,7 +123,8 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         unit_amount: 0,
         description: null,
         images: [],
-        quantity: 0
+        quantity: 0,
+        url: ''
       },
       delivery: {
         firstName: '',

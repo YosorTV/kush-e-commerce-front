@@ -2,6 +2,8 @@
 
 import { FC, useState, useMemo } from 'react';
 
+import { useRouter } from '@/lib/navigation';
+
 import { StrapiImage } from '../StrapiImage';
 import { Product } from '@/types/components';
 import { cn } from '@/lib';
@@ -11,6 +13,7 @@ interface TAnimatedImage {
 }
 const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
+  const router = useRouter();
 
   const [img1, img2] = useMemo(() => {
     return product?.images?.data || [];
@@ -20,6 +23,8 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
 
   return (
     <div
+      aria-hidden
+      onClick={() => router.push(`/catalog/${product.slug}`)}
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
       className='relative h-96 md:h-112'

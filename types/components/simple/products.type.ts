@@ -60,3 +60,10 @@ export type ProductItem = {
   unit_amount: number | null;
   price?: number;
 };
+
+export type ProductCardProps = {
+  product: Product;
+  className?: string;
+  currency?: number;
+  t: (key: string, options?: Record<string, any>) => string;
+};

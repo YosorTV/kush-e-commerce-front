@@ -25,11 +25,12 @@ const ProductListGroup: FC<IProductListGroup> = async ({
   const t = await getTranslations('system');
 
   const printProduct = (product: Product, index: number) => {
-    return <ProductCard key={product.id} product={product} currency={currency} className={gridCols(index)} />;
+    return <ProductCard key={product.id} product={product} currency={currency} className={gridCols(index)} t={t} />;
   };
 
-  if (!data.length)
-    return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-20' playerClassName='h-96 w-96' />;
+  if (!data.length) {
+    return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-10' playerClassName='h-96 w-96' />;
+  }
 
   return (
     <div className={cn('grid min-h-96 gap-5', className, data.length >= 4 && 'grid-cols-fluid')}>

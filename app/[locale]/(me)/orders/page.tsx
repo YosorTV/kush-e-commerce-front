@@ -6,28 +6,50 @@ import { auth } from '@/auth';
 import OrdersSection from '@/components/complex/OrdersSection';
 
 import { getTranslations } from 'next-intl/server';
+import { PaginateController } from '@/components/simple/PaginateController';
+import { Title } from '@/components/elements';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
   return {
     title: {
-      default: `KUSH | ${locale === 'uk' ? 'Замовлення' : 'Orders'}`,
+      default: `KUSH | ${locale === 'uk' ? 'ЗАМОВЛЕННЯ' : 'ORDERS'}`,
       template: '%s | KUSH'
     }
   };
 }
 
-export default async function OrdersPage({ params }: PageProps) {
+export default async function OrdersPage({ params, searchParams }: PageProps) {
   const { locale } = params;
+  const { page, pageSize } = searchParams;
 
   const session = await auth();
   const t = await getTranslations('system');
-  const { data } = await getOrdersData({ locale, email: session.user.email, token: session?.accessToken });
+
+  const { data, meta } = await getOrdersData({
+    locale,
+    email: session.user.email,
+    token: session?.accessToken,
+    page,
+    pageSize
+  });
+
+  const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;
 
   return (
     <section className='mt-10 w-full bg-info-content p-5'>
+      <Title level='2' variant='subheading' className='text-center'>
+        Замовлення
+      </Title>
+      <div className='divider' />
       <OrdersSection orders={data} emptyTitle={t('emptyList')} />
+      <div className='divider' />
+      <PaginateController
+        disabled={isLastPage}
+        total={meta.pagination.total}
+        perPage={meta?.pagination?.pageSize + 5}
+      />
     </section>
   );
 }

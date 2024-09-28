@@ -32,7 +32,9 @@
     "privacy": "Privacy & Policy",
     "terms": "Terms & Conditions",
     "signOut": "Sign Out",
-    "search": "Search..."
+    "search": "Search...",
+    "collection": "Collection:",
+    "available": "In stock {number}"
   },
   "copyright": {
     "title": "Copyright",
@@ -106,5 +108,18 @@
   "wishlist": {
     "added": "Remove from wishlist",
     "add": "Add to wishlist"
+  },
+  "order": {
+    "order": "Order: №{number}",
+    "name": "Name: {name}",
+    "status": "Status:",
+    "quantity": "Quantity of goods: {number}",
+    "price": "Price per unit:",
+    "total": "Total amount of payment:",
+    "date": "Date of purchase: {date}",
+    "delivery": "Delivery:",
+    "pickup": "Pickup",
+    "novapay": "By nova pay",
+    "link": "Link to the product"
   }
 }

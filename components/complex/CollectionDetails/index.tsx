@@ -5,6 +5,7 @@ import { ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simpl
 import { Title } from '@/components/elements';
 
 import { IImageFormats } from '@/types/components';
+import { getTranslations } from 'next-intl/server';
 
 interface ICollectionDetails {
   title?: string;
@@ -17,12 +18,14 @@ interface ICollectionDetails {
   };
 }
 
-export const CollectionDetails: FC<ICollectionDetails> = ({ content, title, cover, products }) => {
-  const printProduct = (product: any) => <ProductCard product={product} key={product.id} />;
+export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title, cover, products }) => {
+  const t = await getTranslations('system');
+
+  const printProduct = (product: any) => <ProductCard t={t} product={product} key={product.id} />;
 
   return (
     <article className='flex flex-col'>
-      <div className='h-sm relative md:h-md'>
+      <div className='relative h-sm md:h-md'>
         <Title level='1' variant='heading' className='absolute-center z-10 text-base-300'>
           {title}
         </Title>

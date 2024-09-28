@@ -13,7 +13,18 @@ export const productQuery = ({ slug, locale = DEFAULT_LOCALE }: TProductQuery) =
       $eq: slug
     }
   },
-  fields: ['title', 'color', 'price', 'priceText', 'hintText', 'category', 'saleValue', 'description', 'available'],
+  fields: [
+    'title',
+    'color',
+    'price',
+    'priceText',
+    'hintText',
+    'category',
+    'saleValue',
+    'description',
+    'available',
+    'slug'
+  ],
   populate: {
     colors: true,
     materials: true,

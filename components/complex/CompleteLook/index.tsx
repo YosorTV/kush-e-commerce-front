@@ -16,20 +16,25 @@ interface ICompleteLook {
 
 export const CompleteLook: FC<ICompleteLook> = async ({ locale, category, className }) => {
   const { data: products } = await getProductsData({ locale });
-  const t = await getTranslations();
+  const t = await getTranslations('system');
 
   const data = completeLookAdapter({ products, category });
 
   const printProduct = (product: Product) => {
     return (
-      <ProductCard key={product.id} product={product} className='embla__slide cursor-grab active:cursor-grabbing' />
+      <ProductCard
+        t={t}
+        key={product.id}
+        product={product}
+        className='embla__slide cursor-grab active:cursor-grabbing'
+      />
     );
   };
 
   return (
     <Carousel
       format='standart'
-      title={t('system.look')}
+      title={t('look')}
       titleClass='text-base-200 py-6 xs:py-3 pl-3 md:pl-0'
       className={cn('mx-2.5 pb-6 md:mx-5', className)}
       options={{ loop: true }}

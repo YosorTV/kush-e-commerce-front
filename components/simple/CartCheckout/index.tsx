@@ -35,7 +35,8 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       name: item.name,
       quantity: item.quantity,
       images: item.images,
-      price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, '')
+      price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, ''),
+      url: item.url
     }));
   }, [cartStore.cart, locale, currency]);
 

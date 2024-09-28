@@ -1,21 +1,15 @@
 import { FC } from 'react';
-
-import { cormorant } from '@/assets/fonts';
-import { Title } from '@/components/elements';
-import { cn } from '@/lib';
-import { MenuItem } from '../Menu/MenuItem';
-import { CategoryLinkType } from '@/types/components';
-
 import dynamic from 'next/dynamic';
 
-const CollectionCarousel = dynamic(() => import('../CollectionCarousel'), { ssr: false });
+import { cormorant } from '@/assets/fonts';
+import { cn } from '@/lib';
 
-type TSubMenu = {
-  categoryTitle: string;
-  categories: CategoryLinkType[];
-  collectionTitle?: string;
-  collections?: any[];
-};
+import { Title } from '@/components/elements';
+import { MenuItem } from '../Menu/MenuItem';
+
+import { TSubMenu } from '@/types/components/simple/subMenu.types';
+
+const CollectionCarousel = dynamic(() => import('../CollectionCarousel'), { ssr: false });
 
 const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collectionTitle }) => {
   return (
@@ -42,17 +36,15 @@ const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collect
         )}
       </div>
       {collections && collections.length > 0 && (
-        <div className='flex w-full justify-between gap-5 gap-x-6'>
-          <CollectionCarousel
-            format='mini'
-            data={collections}
-            title={collectionTitle}
-            fill='fill-base-200'
-            titleClass='!text-xl'
-            slideClass='h-60 p-0'
-            className='relative top-2.5 ml-auto w-full'
-          />
-        </div>
+        <CollectionCarousel
+          format='mini'
+          data={collections}
+          title={collectionTitle}
+          fill='fill-base-200'
+          titleClass='!text-xl'
+          slideClass='h-60 p-0'
+          className='relative top-2.5 ml-auto w-full'
+        />
       )}
     </nav>
   );
