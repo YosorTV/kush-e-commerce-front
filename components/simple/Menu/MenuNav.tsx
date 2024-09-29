@@ -80,7 +80,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
           ))}
         </motion.ul>
         <div className='divider pr-5' />
-        <div className='flex w-full justify-center pb-10 pr-5'>
+        <div className='flex w-full justify-center'>
           <Logo height={90} />
         </div>
       </div>

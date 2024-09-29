@@ -18,7 +18,7 @@
     "collection": "Коллекція:",
     "available": "У наявності {number}",
     "orders": "Замовлення",
-    "wishlist": "Список замовлень",
+    "wishlist": "Список бажань",
     "profile": "Інформація профілю"
   },
   "copyright": {
@@ -125,7 +125,7 @@
     "date": "Дата покупки: {date}",
     "delivery": "Доставка:",
     "pickup": "Самовивіз",
-    "novapay": "Через Nova Pay",
+    "novapay": "Нова пошта",
     "link": "Посилання на товар"
   },
   "notFound": {

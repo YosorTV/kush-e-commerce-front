@@ -19,12 +19,17 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
     return product?.images?.data || [];
   }, [product.images.data]);
 
+  const handleRedirect = () => {
+    router.push(`/catalog/${product.slug}`);
+  };
+
   if (!img1 && !img2) return null;
 
   return (
     <div
       aria-hidden
-      onClick={() => router.push(`/catalog/${product.slug}`)}
+      onClick={handleRedirect}
+      onTouchStart={handleRedirect}
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
       className='relative h-96 md:h-112'

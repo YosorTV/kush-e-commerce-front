@@ -87,8 +87,9 @@ input:-webkit-autofill:active {
   --slide-size: 95%;
   --slide-height: 100%;
   --slide-spacing: 0.5rem;
-  --slide-size-md: calc(100% / 2);
   --slide-size-lg: calc(100% / 3);
+  --slide-size-md: calc(100% / 2);
+  --slide-size-sm: calc(100% / 1);
 }
 
 .embla-mini {
@@ -97,6 +98,7 @@ input:-webkit-autofill:active {
   --slide-spacing: 1rem;
   --slide-size-lg: calc(100% / 2);
   --slide-size-md: calc(100% / 1.5);
+  --slide-size-sm: calc(100% / 1);
 }
 
 .embla__viewport {

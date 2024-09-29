@@ -1,20 +1,14 @@
 'use client';
 
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { animCart } from '@/assets/animations';
 import { cn } from '@/lib';
 import { useScrollLock } from '@/lib/hooks';
+import { SidebarProps } from '@/types/components';
 
-interface SidebarProps {
-  opened: boolean;
-  children: ReactNode;
-  position: 'left' | 'right';
-  onToggle: () => void;
-}
-
-export const Sidebar: FC<SidebarProps> = ({ opened, position, children, onToggle }) => {
+export const Sidebar: FC<PropsWithChildren<SidebarProps>> = ({ opened, position, children, onToggle }) => {
   useScrollLock(opened);
 
   return (
@@ -31,7 +25,7 @@ export const Sidebar: FC<SidebarProps> = ({ opened, position, children, onToggle
             layout
             onClick={(e) => e.stopPropagation()}
             className={cn(
-              'fixed top-0 h-screen w-full bg-info-content p-5 pr-0 sm:w-3/4 md:w-2/3 xl:w-1/2',
+              'fixed top-0 h-full w-full overflow-auto bg-info-content px-0 py-5 sm:w-3/4 md:w-2/3 xl:w-1/2',
               position === 'left' && 'left-0',
               position === 'right' && 'right-0'
             )}

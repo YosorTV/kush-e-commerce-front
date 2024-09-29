@@ -22,7 +22,7 @@ export const OrderCardMobile: FC<IOrderCard> = ({
   t
 }) => {
   return (
-    <div className={cn('group card image-full h-96 w-96 overflow-hidden border-2', getStatusBorder(status))}>
+    <div className={cn('group card image-full h-80 overflow-hidden border-2', getStatusBorder(status))}>
       <figure className='overflow-hidden rounded-md'>
         <StrapiImage
           src={image.url}
@@ -33,21 +33,21 @@ export const OrderCardMobile: FC<IOrderCard> = ({
           className='aspect-square h-full w-full transform-gpu object-cover transition-all duration-300 group-hover:scale-105'
         />
       </figure>
-      <div className='card-body gap-y-5 rounded-md font-semibold !text-white'>
+      <div className='card-body gap-y-5 rounded-md text-xs font-medium !text-white'>
         <div className='grid grid-cols-1'>
           <div className='flex flex-col gap-2.5'>
-            <span className=''>{t('order', { number: id })}</span>
+            <span>{t('order', { number: id })}</span>
             <p>
               {t('status')}&nbsp;
               <StatusBadge status={status} />
             </p>
             <span className='whitespace-nowrap'>{t('name', { name })}</span>
             <span className='whitespace-nowrap'>{t('quantity', { number: quantity })}</span>
-            <span className='flex gap-x-2.5 whitespace-nowrap'>
-              {t('price')} <Price price={parseFloat(price)} currency={1} />
+            <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
+              {t('price')} <Price price={parseFloat(price)} currency={1} className='!text-xs' />
             </span>
-            <span className='flex gap-x-2.5 whitespace-nowrap'>
-              {t('total')} <Price price={parseFloat(amount)} currency={1} />
+            <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
+              {t('total')} <Price price={parseFloat(amount)} currency={1} className='!text-xs' />
             </span>
             <span>{t('date', { date: formatDate(publishedAt) })}</span>
             <span>

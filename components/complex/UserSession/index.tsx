@@ -15,7 +15,7 @@ export default async function UserSession({ cta, signOutTitle, session, sessionL
   const printMenuLinks = (links: StrapiLinkType[]) => {
     return links.map((link: StrapiLinkType, index) => (
       <li tabIndex={index + 1} key={link.id}>
-        <NextLink href={link.url} className='font-semibold capitalize hover:bg-none'>
+        <NextLink href={link.url} className='font-semibold normal-case hover:bg-none'>
           {link.text}
         </NextLink>
       </li>
@@ -33,7 +33,7 @@ export default async function UserSession({ cta, signOutTitle, session, sessionL
         </button>
         <ul
           tabIndex={0}
-          className='menu dropdown-content menu-dropdown-toggle right-0 top-12 min-w-btn space-y-2.5 rounded-sm border border-t-0 border-info-content bg-base-100 shadow'
+          className='menu dropdown-content right-0 top-12 min-w-btn space-y-2.5 rounded-sm border border-t-0 border-info-content bg-base-100 shadow'
         >
           {printMenuLinks(sessionLinks)}
           <li tabIndex={4}>

@@ -6,7 +6,7 @@ import { RiListSettingsLine } from 'react-icons/ri';
 import { useFilters } from '@/store';
 
 import { FilterForm } from '@/components/forms';
-import { Button, Sidebar, Title } from '@/components/elements';
+import { Button, Portal, Sidebar, Title } from '@/components/elements';
 import { FC } from 'react';
 
 interface IProductsController {
@@ -27,9 +27,11 @@ export const ProductsController: FC<IProductsController> = ({ title }) => {
           {t('title')}
         </Button>
         <RiListSettingsLine className='h-6 w-6 fill-base-200' />
-        <Sidebar opened={state.isOpen} onToggle={state.onToggle} position='right'>
-          <FilterForm />
-        </Sidebar>
+        <Portal selector='portal'>
+          <Sidebar opened={state.isOpen} onToggle={state.onToggle} position='right'>
+            <FilterForm />
+          </Sidebar>
+        </Portal>
       </div>
     </nav>
   );

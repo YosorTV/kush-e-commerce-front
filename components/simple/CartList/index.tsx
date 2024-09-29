@@ -1,22 +1,24 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
 
 import { useCart } from '@/store';
+import { getCurrency } from '@/services';
+
+import { cn } from '@/lib';
+
+import { animCart } from '@/assets/animations';
+import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 
 import { Button, Title } from '@/components/elements';
 import { Lottie } from '@/components/elements/Lottie';
+
 import { CartItem } from '../CartItem';
 
-import { animCart } from '@/assets/animations';
 import lottieAnim from '@/public/LottieEmpty.json';
-import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
-import { getCurrency } from '@/services';
-import { useTheme } from 'next-themes';
-import { cn } from '@/lib';
-import { useScrollLock } from '@/lib/hooks';
-import { useTranslations } from 'next-intl';
 
 export const CartList: FC<any> = ({ data }) => {
   const [currency, setCurrency] = useState<number>();
@@ -24,11 +26,9 @@ export const CartList: FC<any> = ({ data }) => {
   const cartStore = useCart();
 
   const { theme } = useTheme();
-  const t = useTranslations('');
+  const t = useTranslations();
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
-
-  useScrollLock(cartStore.isOpen);
 
   const handleBack = () => cartStore.onToggle();
 
@@ -50,9 +50,9 @@ export const CartList: FC<any> = ({ data }) => {
         initial={animCart.basket.initial}
         animate={animCart.basket.animate}
         exit={animCart.basket.exit}
-        className='relative flex h-2md w-full flex-col items-center justify-center'
+        className='relative flex w-full flex-col items-center justify-center'
       >
-        <Button onClick={handleBack} className='btn btn-link absolute -left-2.5 -top-2.5 text-lg normal-case'>
+        <Button onClick={handleBack} className='btn btn-link text-base normal-case'>
           {data.getBack}
         </Button>
 
@@ -75,7 +75,7 @@ export const CartList: FC<any> = ({ data }) => {
           {t('checkout.title')}
         </Title>
         {cartStore.cart.map((item) => (
-          <motion.div layout key={item.id} className='flex gap-x-3'>
+          <motion.div layout key={item.id} className='flex gap-x-3 px-5'>
             <CartItem
               data={item}
               onAdd={() => cartStore.onIncrease(item)}

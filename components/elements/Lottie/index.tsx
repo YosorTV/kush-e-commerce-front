@@ -13,7 +13,7 @@ export const Lottie: FC<LottieProps> = ({ src, text, className, playerClassName 
   return (
     <div className={cn('flex flex-col items-center justify-center', className)}>
       <motion.h1
-        className={cn('text-3xl uppercase', cormorant.className)}
+        className={cn('text-2xl uppercase', cormorant.className)}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
