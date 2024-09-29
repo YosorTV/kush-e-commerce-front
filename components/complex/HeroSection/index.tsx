@@ -3,7 +3,6 @@ import { StrapiImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
 
 export const HeroSection: FC<any> = ({ data }) => {
-  console.log(data.image);
   return (
     <section className='group relative flex flex-col'>
       <div className='relative flex h-96 w-full overflow-hidden md:h-2md'>
