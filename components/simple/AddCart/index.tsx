@@ -19,7 +19,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isDisabled = false }) => {
   const isButtonDisabled = () => {
     const { formState } = state;
 
-    return Object.values(formState).some((value) => value === null) || added;
+    return Object.values(formState).some((value) => value === null) || added || !isDisabled;
   };
 
   const disabled = isButtonDisabled();
@@ -35,7 +35,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isDisabled = false }) => {
   return (
     <button
       aria-label='add to cart'
-      disabled={disabled || !isDisabled}
+      disabled={disabled}
       onClick={handleAdd}
       className='btn btn-neutral no-animation btn-block rounded-none text-xl font-semibold text-white disabled:!bg-gray-500/50'
     >

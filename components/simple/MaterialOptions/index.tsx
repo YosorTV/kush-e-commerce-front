@@ -12,21 +12,20 @@ interface IMaterialOptions {
 }
 
 export const MaterialOptions: FC<IMaterialOptions> = ({ data = [], title }) => {
-  console.log('data: ', data);
   const state = useCart();
 
   const t = useTranslations('material');
 
-  const printElement = ({ materials, id }: any) => {
+  const printElement = ({ value, id }: any) => {
     return (
       <ProductOption
         key={id}
         id={`material-${id}`}
         name='material'
-        checked={state.formState.material === materials}
-        title={t(materials?.trim())}
-        onChange={() => state.onAdd({ key: 'material', value: materials })}
-        className={state.formState.material === materials && 'underline'}
+        checked={state.formState.material === value}
+        title={t(value.trim())}
+        onChange={() => state.onAdd({ key: 'material', value: value })}
+        className={state.formState.material === value && 'underline'}
       />
     );
   };

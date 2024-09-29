@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getMetadata, getSignInData } from '@/services';
 
 import { SignInForm } from '@/components/forms';
@@ -7,7 +8,6 @@ import { PageLayout } from '@/components/layouts';
 import { STRAPI_PAGES } from '@/helpers/constants';
 
 import { PageProps } from '@/types/app/page.types';
-import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;

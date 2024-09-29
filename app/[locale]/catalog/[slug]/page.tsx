@@ -29,6 +29,8 @@ export default async function ProductDetails({ params }: PageProps) {
   const { data } = await getProductData({ locale, slug });
   const { data: sizes } = await getSizesData({ locale });
 
+  console.log(data.materials);
+
   if (!data) {
     return notFound();
   }

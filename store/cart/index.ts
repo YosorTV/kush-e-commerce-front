@@ -3,7 +3,6 @@ import { StateCreator } from 'zustand';
 
 export const cartSlice: StateCreator<CartState> = (set) => ({
   formState: {
-    color: null,
     id: null,
     material: null,
     category: null,
@@ -91,7 +90,6 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
   onReset: () =>
     set(() => ({
       formState: {
-        color: null,
         id: null,
         material: null,
         name: null,
@@ -115,7 +113,6 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
       cart: [],
       key: 'cart',
       formState: {
-        color: null,
         id: null,
         material: null,
         name: null,

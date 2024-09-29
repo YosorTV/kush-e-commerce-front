@@ -6,7 +6,6 @@ export type CartItemType = {
   unit_amount: number;
   material?: string | null;
   category?: string | null;
-  color?: string | null;
   size?: number | null;
   quantity?: number;
   url?: string;
