@@ -43,7 +43,8 @@ export default async function ProductDetails({ params }: PageProps) {
     images: data?.images?.data?.[0],
     unit_amount: data.price - data.price * (data.saleValue / 100)
   };
-
+  // bracelets, браслети, 925, 18k, gilding, позолота, silver, gold, zvyv
+  // bracelets, 925, 18k, gilding, silver, gold, morde
   return (
     <PageLayout className='mt-16'>
       <StepBack className='absolute z-10 !mx-5 justify-start lg:relative lg:z-0' />

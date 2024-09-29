@@ -64,7 +64,7 @@ module.exports = {
         cornerColor: 'white'
       },
       objectPosition: {
-        'center-to-top': '0 75%'
+        'center-to-top': '0 25%'
       },
       boxShadow: {
         'to-top': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 -4px 50px -2px rgb(0 0 0 / 0.1)'

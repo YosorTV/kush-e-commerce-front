@@ -51,7 +51,7 @@ export function StrapiImage({
         />
       )}
       {overlay && (
-        <div className='pointer-events-none absolute inset-0 z-0 bg-black/50 transition-all duration-300 ease-linear' />
+        <div className='pointer-events-none absolute inset-0 z-0 bg-black/70 transition-all duration-300 ease-linear' />
       )}
     </div>
   );

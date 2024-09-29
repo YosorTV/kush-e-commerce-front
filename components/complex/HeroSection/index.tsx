@@ -3,22 +3,27 @@ import { StrapiImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
 
 export const HeroSection: FC<any> = ({ data }) => {
+  console.log(data.image);
   return (
-    <section className='relative flex flex-col'>
-      <div className='relative flex justify-center py-5'>
-        <Title level='1' variant='heading'>
-          {data?.title}
-        </Title>
-      </div>
-      <div className='relative flex h-80 w-full flex-col-reverse overflow-hidden text-center text-white md:h-2md'>
+    <section className='group relative flex flex-col'>
+      <div className='relative flex h-96 w-full overflow-hidden md:h-2md'>
         <StrapiImage
           fill
           priority
-          className='hero-image'
-          formats={data?.image?.formats}
-          src={data?.image?.url}
-          alt={data?.image?.alternativeText}
+          className='aspect-video h-full w-full object-cover object-center-to-top transition-transform duration-300 ease-out'
+          formats={data.image.formats}
+          src={data.image.url}
+          alt={data.image.alternativeText}
+          sizes='100vw'
+          overlay
         />
+        <Title
+          level='1'
+          variant='subheading'
+          className='absolute-x-center flex h-full items-center justify-center text-center !text-base-300'
+        >
+          {data.title}
+        </Title>
         <NextLink href={data.link.url} className='absolute-x-center link-hover link bottom-10 z-10 underline-offset-8'>
           {data?.link?.text}
         </NextLink>

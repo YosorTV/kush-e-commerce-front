@@ -8,7 +8,7 @@ import { auth } from '@/auth';
 import { getWishlistProducts } from './get-wished-products';
 import { Product } from '@/types/components';
 
-export async function getProductsData({ locale, page = 1, pageSize = 4, name, ...rest }: any) {
+export async function getProductsData({ locale, page = 1, pageSize = 5, name, ...rest }: any) {
   const session = await auth();
 
   const productsApi = STRAPI_QUERIES.PRODUCTS({
