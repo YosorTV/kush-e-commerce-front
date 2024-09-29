@@ -29,13 +29,9 @@ export default async function ProductDetails({ params }: PageProps) {
   const { data } = await getProductData({ locale, slug });
   const { data: sizes } = await getSizesData({ locale });
 
-  console.log(data.materials);
-
   if (!data) {
     return notFound();
   }
-
-  const discountAmount = data.price * (data.saleValue / 100);
 
   const cartData: CartItemType = {
     id: data.id,
@@ -45,7 +41,7 @@ export default async function ProductDetails({ params }: PageProps) {
     url: `/catalog/${data.slug}`,
     description: data?.description,
     images: data?.images?.data?.[0],
-    unit_amount: data.price - discountAmount
+    unit_amount: data.price - data.price * (data.saleValue / 100)
   };
 
   return (

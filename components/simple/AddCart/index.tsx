@@ -11,18 +11,23 @@ export const AddCart: FC<AddCartProps> = ({ data, isDisabled = false }) => {
   const t = useTranslations('cart');
 
   const [added, setAdded] = useState(false);
-
-  useEffect(() => {
-    state.syncCartData(data);
-  }, [data]);
+  const [disabled, setDisabled] = useState(true);
 
   const isButtonDisabled = () => {
     const { formState } = state;
 
-    return Object.values(formState).some((value) => value === null) || added || !isDisabled;
+    return Object.values(formState).some((value) => value === null) || added;
   };
 
-  const disabled = isButtonDisabled();
+  useEffect(() => {
+    state.syncCartData(data);
+  }, []);
+
+  useEffect(() => {
+    const disabled = isButtonDisabled();
+
+    setDisabled(disabled);
+  }, [state.formState, data]);
 
   const handleAdd = () => {
     state.onSubmit(state.formState);

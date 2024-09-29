@@ -24,7 +24,7 @@ export const MaterialOptions: FC<IMaterialOptions> = ({ data = [], title }) => {
         name='material'
         checked={state.formState.material === value}
         title={t(value.trim())}
-        onChange={() => state.onAdd({ key: 'material', value: value })}
+        onChange={() => state.onAdd({ key: 'material', value })}
         className={state.formState.material === value && 'underline'}
       />
     );

@@ -15,17 +15,10 @@ export const SizeOptions: FC<ISizeOptions> = ({ sizes, title, data }) => {
 
   const availableSizes = sizes.map((size) => size.size);
 
-  const printSize = ({ size, id }: any) => {
+  const printSize = ({ size }: any) => {
     return (
-      <label key={id} className='w-min'>
-        <input
-          type='radio'
-          name='size'
-          value={size}
-          className='hidden'
-          hidden={availableSizes.includes(size)}
-          disabled={availableSizes.includes(size)}
-        />
+      <label key={size} className='w-min'>
+        <input type='radio' name='size' value={size} className='hidden' disabled={availableSizes.includes(size)} />
         <span
           onClick={() => state.onAdd({ key: 'size', value: size })}
           className={cn(

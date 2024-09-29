@@ -66,7 +66,7 @@ export const CartList: FC<any> = ({ data }) => {
   }
 
   return (
-    <div className='relative flex w-full flex-col items-start gap-y-5 px-5'>
+    <div className='relative flex w-full flex-col items-start gap-y-5 p-5'>
       <Button onClick={handleBack} className='btn btn-link relative -top-2.5 px-0 text-lg normal-case'>
         {t('system.stepBack')}
       </Button>
