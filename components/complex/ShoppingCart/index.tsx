@@ -73,7 +73,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
 
       <Portal selector='portal'>
         <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-          <div className='relative top-16 flex h-full overflow-hidden'>{contentZone[cartStore.key]}</div>
+          <div className='relative top-12 flex h-full'>{contentZone[cartStore.key]}</div>
         </Sidebar>
       </Portal>
     </>

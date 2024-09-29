@@ -82,7 +82,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
 
   return (
     <div className='w-full'>
-      <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
+      <Button onClick={handleBack} className='btn btn-link relative left-5 mx-5 justify-start'>
         {t('system.stepBack')}
       </Button>
       <div ref={liqPayContainerRef} id='liqpay_checkout' />

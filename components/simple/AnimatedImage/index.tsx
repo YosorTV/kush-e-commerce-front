@@ -29,7 +29,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
     <div
       aria-hidden
       onClick={handleRedirect}
-      onTouchStart={handleRedirect}
+      onTouchStartCapture={handleRedirect}
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
       className='relative h-96 md:h-112'

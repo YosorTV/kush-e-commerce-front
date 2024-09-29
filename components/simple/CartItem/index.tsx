@@ -33,8 +33,8 @@ export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove })
         loading='lazy'
         width={320}
         height={320}
-        className='h-full rounded-md object-cover'
-        containerClass='w-24'
+        className='aspect-square h-full w-full rounded-md object-cover'
+        containerClass='w-32'
       />
       <div className='flex flex-col'>
         <div className='flex flex-col gap-y-2.5'>

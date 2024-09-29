@@ -39,7 +39,7 @@ export const CartDelivery = () => {
   }, [session.status]);
 
   return (
-    <div className='form-control w-full'>
+    <div className='form-control w-full px-5'>
       <Button onClick={handleBack} className='btn btn-link justify-start px-0 text-lg normal-case'>
         {t('system.stepBack')}
       </Button>
