@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
-import { cn } from '@/lib';
-import { getStatusColor } from '@/helpers/formatters';
+import { cn, getStatusColor } from '@/lib';
 import { IStatusBadge } from '@/types/components';
 
 const StatusBadge: FC<IStatusBadge> = ({ status }) => {

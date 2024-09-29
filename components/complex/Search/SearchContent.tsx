@@ -1,7 +1,6 @@
 'use client';
 
 import { ProductCard } from '@/components/simple';
-import { gridCols } from '@/helpers/formatters';
 
 import { useSearch } from '@/store';
 import { Product } from '@/types/components';
@@ -19,12 +18,8 @@ export const SearchContent = () => {
   }
 
   const printProducts = (product: Product, index: number) => {
-    return <ProductCard t={t} key={product.id} product={product} className={gridCols(index)} />;
+    return <ProductCard t={t} key={product.id} product={product} className='col-span-1' />;
   };
 
-  return (
-    <div className='xxl:grid-cols-5 grid grid-cols-1 gap-5 py-12 md:grid-cols-2 xl:grid-cols-3'>
-      {state.searchResult.map(printProducts)}
-    </div>
-  );
+  return <div className='my-10 grid grid-cols-1 gap-5 md:grid-cols-2'>{state.searchResult.map(printProducts)}</div>;
 };

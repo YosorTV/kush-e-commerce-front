@@ -11,7 +11,7 @@ import { ProductCardProps } from '@/types/components';
 
 export const ProductCard: FC<ProductCardProps> = ({ product, className, currency = 41, t }) => {
   return (
-    <figure className={cn('relative grid cursor-pointer', className)}>
+    <figure className={cn('grid cursor-pointer', className)}>
       <div className='relative'>
         <AnimatedImage product={product} />
         <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>{product.hintText}</span>

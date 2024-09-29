@@ -13,7 +13,7 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({ children, params }: LayoutProps) {
+export default async function GlobalLayout({ children, params }: LayoutProps) {
   const { locale } = params;
 
   setRequestLocale(locale);

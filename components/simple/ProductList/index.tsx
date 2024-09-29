@@ -37,7 +37,7 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
       <ProductListGroup data={data} />
       <PaginateController
         disabled={isLastPage}
-        total={meta.pagination.total}
+        total={meta?.pagination?.total}
         perPage={meta?.pagination?.pageSize + 5}
       />
     </section>

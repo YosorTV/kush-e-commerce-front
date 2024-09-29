@@ -1,3 +1,5 @@
+'use server';
+
 import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
 import { generateStrapiQuery } from '@/lib';

@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import { HeartIcon } from '@/assets/icons';
 import { Button } from '@/components/elements';
@@ -19,6 +19,12 @@ interface IWishlist {
 
 export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = false }) => {
   const { data: session } = useSession();
+  const [add, setAdd] = useState(inWishlist);
+
+  useEffect(() => {
+    setAdd(inWishlist);
+  }, [inWishlist]);
+
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
@@ -29,6 +35,7 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = 
     if (!Boolean(session?.accessToken)) {
       dialogRef.current?.showModal();
     } else {
+      setAdd((prev) => !prev);
       const { message } = await addToWishlist({
         locale,
         productId,
@@ -42,13 +49,7 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = 
     }
   };
 
-  const setColor = (added: boolean) => {
-    if (text) {
-      return added ? 'fill-red-600' : 'fill-base-100';
-    }
-
-    return added ? 'fill-red-600' : 'fill-base-300';
-  };
+  const setColor = (added: boolean) => (added ? 'fill-red-600' : 'fill-base-300');
 
   return (
     <Button
@@ -57,7 +58,7 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = 
       title='wishlist'
       aria-label='wishlist'
       icon={{
-        before: text ? null : <HeartIcon width={20} height={20} className={cn('h-5 w-5', setColor(inWishlist))} />
+        before: text ? null : <HeartIcon width={20} height={20} className={cn('h-5 w-5', setColor(add))} />
       }}
     >
       {text && text}

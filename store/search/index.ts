@@ -1,8 +1,6 @@
 import { StateCreator } from 'zustand';
 import { TSearchState } from '@/types/store';
-import { STRAPI_QUERIES } from '@/services';
-import { getStrapiData } from '@/services/strapi';
-import { generateStrapiQuery } from '@/lib';
+import { getProductsData } from '@/services';
 
 export const searchSlice: StateCreator<TSearchState> = (set) => ({
   isOpen: false,
@@ -19,38 +17,24 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
       error: null,
       searchValue: '',
       searchResult: [],
-      meta: { page: 1, pageCount: 0, pageSize: 4, total: 0 },
+      meta: { page: 1, pageCount: 0, pageSize: 4, total: 0 }
     }),
   fetchProducts: async ({ locale, name, page, pageSize }) => {
     set({ isLoading: true, error: null });
 
-    try {
-      const productsApi = STRAPI_QUERIES.PRODUCTS({
-        page,
-        name,
-        locale,
-        pageSize,
-      });
+    const { data, meta } = await getProductsData({ locale, page, pageSize, name });
 
-      const { data, meta } = await getStrapiData(
-        'products',
-        generateStrapiQuery(productsApi)
-      );
+    const pagination = meta?.pagination || {
+      page: 1,
+      pageSize: 4,
+      pageCount: 1,
+      total: 0
+    };
 
-      const pagination = meta?.pagination || {
-        page: 1,
-        pageSize: 4,
-        pageCount: 1,
-        total: 0,
-      };
-
-      set({
-        isLoading: false,
-        searchResult: data ?? [],
-        meta: pagination,
-      });
-    } catch (error) {
-      set({ isLoading: false, error });
-    }
-  },
+    set({
+      isLoading: false,
+      searchResult: data ?? [],
+      meta: pagination
+    });
+  }
 });

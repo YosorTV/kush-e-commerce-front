@@ -59,33 +59,3 @@ export const getInitials = ({ firstName, lastName }: getInitials) => {
 
   return `${firstInitial}${lastInitial}`;
 };
-
-export const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'sandbox':
-      return 'bg-purple-600';
-    case 'completed':
-      return 'bg-success';
-    case 'error':
-      return 'bg-error';
-    case 'pending':
-      return 'bg-warning';
-    default:
-      return 'bg-purple-600';
-  }
-};
-
-export const getStatusBorder = (status: string) => {
-  switch (status) {
-    case 'sandbox':
-      return 'border-purple-600';
-    case 'completed':
-      return 'border-success';
-    case 'error':
-      return 'border-error';
-    case 'pending':
-      return 'border-warning';
-    default:
-      return 'border-purple-600';
-  }
-};

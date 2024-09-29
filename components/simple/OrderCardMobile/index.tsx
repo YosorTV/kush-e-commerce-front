@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import { IOrderCard } from '@/types/components';
 import { StrapiImage } from '../StrapiImage';
 import StatusBadge from '../StatusBadge';
-import { cn } from '@/lib';
-import { formatDate, getStatusBorder } from '@/helpers/formatters';
+import { cn, getStatusBorder } from '@/lib';
+import { formatDate } from '@/helpers/formatters';
 import { Price } from '../Price';
 import { NextLink } from '@/components/elements';
 

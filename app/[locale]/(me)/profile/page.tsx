@@ -14,7 +14,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
   return {
     title: {
-      default: `KUSH | ${locale === 'uk' ? 'Профіль' : 'Profile'}`,
+      default: `KUSH | ${locale === 'uk' ? 'ПРОФІЛЬ' : 'PROFILE'}`,
       template: '%s | KUSH'
     }
   };

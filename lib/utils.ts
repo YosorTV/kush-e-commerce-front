@@ -8,12 +8,7 @@ export function getStrapiURL() {
 
 export const flattenAttributes = (data: any): any => {
   // Check if data is a plain object; return as is if not
-  if (
-    typeof data !== 'object' ||
-    data === null ||
-    data instanceof Date ||
-    typeof data === 'function'
-  ) {
+  if (typeof data !== 'object' || data === null || data instanceof Date || typeof data === 'function') {
     return data;
   }
 
@@ -31,11 +26,7 @@ export const flattenAttributes = (data: any): any => {
     if (!data.hasOwnProperty(key)) continue;
 
     // If the key is 'attributes' or 'data', and its value is an object, merge their contents
-    if (
-      (key === 'attributes' || key === 'data') &&
-      typeof data[key] === 'object' &&
-      !Array.isArray(data[key])
-    ) {
+    if ((key === 'attributes' || key === 'data') && typeof data[key] === 'object' && !Array.isArray(data[key])) {
       Object.assign(flattened, flattenAttributes(data[key]));
     } else {
       // For other keys, copy the value, applying flattenAttributes if it's an object
@@ -46,10 +37,7 @@ export const flattenAttributes = (data: any): any => {
   return flattened;
 };
 
-export function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  delay: number
-): (...args: Parameters<T>) => void {
+export function debounce<T extends (...args: any[]) => any>(func: T, delay: number): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
   return (...args: Parameters<T>) => {
@@ -60,28 +48,22 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-export const processChild = (
-  child: React.ReactElement,
-  index: number,
-  state: any
-): React.ReactNode => {
+export const processChild = (child: React.ReactElement, index: number, state: any): React.ReactNode => {
   // If the child is an input element with a name prop, modify it
   if (child?.props?.name) {
     return React.createElement(child.type as React.ComponentType<InputProps>, {
       ...child.props,
       key: `${child.props.name}_${index}`,
-      error: state?.errors?.[child?.props?.name] || null,
+      error: state?.errors?.[child?.props?.name] || null
     });
   }
   // If the child has its own children, recursively process them
   if (child?.props?.children) {
     return React.cloneElement(child, {
       ...child.props,
-      children: React.Children.map(
-        child.props.children,
-        (childElement, childIndex) =>
-          processChild(childElement as React.ReactElement, childIndex, state)
-      ),
+      children: React.Children.map(child.props.children, (childElement, childIndex) =>
+        processChild(childElement as React.ReactElement, childIndex, state)
+      )
     });
   }
   // If it's not an input or container, return the child unchanged
@@ -96,11 +78,41 @@ export const getImgGrid = ({ images }: { images: any }) => {
       width: 600,
       height: 600,
       formats: null,
-      alternativeText: 'Placeholder image',
+      alternativeText: 'Placeholder image'
     }));
 
     return [...images, ...additionalImages];
   }
 
   return images;
+};
+
+export const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'sandbox':
+      return 'bg-purple-600';
+    case 'completed':
+      return 'bg-success';
+    case 'error':
+      return 'bg-error';
+    case 'pending':
+      return 'bg-warning';
+    default:
+      return 'bg-purple-600';
+  }
+};
+
+export const getStatusBorder = (status: string) => {
+  switch (status) {
+    case 'sandbox':
+      return 'border-purple-600';
+    case 'completed':
+      return 'border-success';
+    case 'error':
+      return 'border-error';
+    case 'pending':
+      return 'border-warning';
+    default:
+      return 'border-purple-600';
+  }
 };
