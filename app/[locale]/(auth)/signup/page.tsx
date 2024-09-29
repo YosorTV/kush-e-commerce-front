@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { getMetadata, getSignUpData } from '@/services';
 
@@ -21,6 +22,10 @@ export default async function SignUpPage({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getSignUpData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='auth-page_wrapper mt-16' cover={data.cover}>

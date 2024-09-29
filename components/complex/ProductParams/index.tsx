@@ -1,6 +1,5 @@
 'use client';
 
-import { ColorOptions } from '@/components/simple/ColorOptions';
 import { MaterialOptions } from '@/components/simple/MaterialOptions';
 import { SizeOptions } from '@/components/simple/SizeOptions';
 import { useCart } from '@/store';
@@ -10,7 +9,6 @@ import { useTranslations } from 'use-intl';
 
 export const ProductParams: FC<PropsWithChildren<any>> = ({
   sizes = [],
-  colors = [],
   materials = [],
   availableSizes = [],
   children
@@ -20,16 +18,12 @@ export const ProductParams: FC<PropsWithChildren<any>> = ({
   const pathname = usePathname();
 
   useEffect(() => {
-    return () => {
-      state.onReset();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    state.onReset();
   }, [pathname]);
 
   return (
     <section className='flex flex-col gap-y-6'>
       {materials && <MaterialOptions data={materials} title={t('material.title')} />}
-      {colors && <ColorOptions data={colors} title={t('color.title')} />}
       {sizes && <SizeOptions data={sizes} sizes={availableSizes} title={t('size.title')} />}
       {children}
     </section>

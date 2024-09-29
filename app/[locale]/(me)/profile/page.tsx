@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { ProfileForm } from '@/components/forms';
 
@@ -29,6 +30,10 @@ export default async function ProfilePage({ params }: PageProps) {
 
   const { data } = await getProfileData({ locale, token: session.accessToken });
   const { data: me } = await getMe({ token: session.accessToken });
+
+  if (!data || !me) {
+    return notFound();
+  }
 
   return (
     <section className='mt-10 w-full bg-info-content p-5'>

@@ -8,6 +8,7 @@ import { inWishlistDataAdatapter } from '@/adapters/product';
 import { PaginateController } from '@/components/simple/PaginateController';
 import { Title } from '@/components/elements';
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -31,6 +32,10 @@ export default async function FavouritesPage({ params }: PageProps) {
     userId: Number(session.user.id),
     token: session.accessToken
   });
+
+  if (!data) {
+    return notFound();
+  }
 
   const wishlist = inWishlistDataAdatapter(data?.[0]?.products?.data);
   const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;

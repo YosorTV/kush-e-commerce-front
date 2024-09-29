@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { getMetadata, getResetPasswordData } from '@/services';
 
@@ -22,6 +23,10 @@ export default async function ResetPasswordPage({ searchParams, params }: PagePr
   const { code } = searchParams;
 
   const { data } = await getResetPasswordData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='auth-page_wrapper' cover={data.cover}>

@@ -4,6 +4,7 @@ import { getCollectionData, getCollectionMeta } from '@/services/api/get-collect
 
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale, slug } = props.params;
@@ -17,6 +18,10 @@ export default async function Collection({ params }: PageProps) {
   const { locale, slug } = params;
 
   const { data } = await getCollectionData({ locale, slug });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-16 min-h-screen'>

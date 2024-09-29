@@ -68,24 +68,11 @@
   },
   "material": {
     "title": "Матеріал",
-    "gold": "Золото",
-    "silver": "Срібло",
-    "platinum": "Платина",
-    "brass": "Латунь",
-    "bronze": "Бронза",
-    "palladium": "Паладій",
-    "stainless": "Нержавіюча сталь",
-    "titanium": "Титан",
-    "tungsten": "Вольфрам"
-  },
-  "color": {
-    "title": "Колір",
-    "yellow": "Жовтий",
-    "white": "Білий",
-    "green": "Зелений",
-    "grey": "Сірий",
-    "purple": "Фіолетовий",
-    "black": "Чорний"
+    "silver_925": "Срібло 925'",
+    "silver_925_gold": "Срібло 925' з позолотою 18k",
+    "silver_925_gold_natural_pearl": "Срібло 925' з позолотою 18k та натуральною перлиною",
+    "silver_925_gold_onyx": "Срібло 925' з позолотою 18k та камінням онікс",
+    "silver_925_gold_swarovski": "Срібло 925' з позолотою 18k та камінням Swarovski"
   },
   "category": {
     "title": "Категорія",

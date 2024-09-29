@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { getHomeData, getMetadata } from '@/services';
 
@@ -20,6 +21,10 @@ export default async function Home({ params, searchParams }: PageProps) {
   const { locale } = params;
 
   const { data } = await getHomeData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-16'>

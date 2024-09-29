@@ -1,9 +1,15 @@
 import { Metadata } from 'next';
-import { NextLink } from '@/components/elements';
+import { notFound } from 'next/navigation';
+
 import { PageLayout } from '@/components/layouts';
-import { PageProps } from '@/types/app/page.types';
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { NextLink } from '@/components/elements';
+
 import { getMetadata, getSuccessData } from '@/services';
+
+import { STRAPI_PAGES } from '@/helpers/constants';
+
+import { PageProps } from '@/types/app/page.types';
+
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
@@ -16,6 +22,10 @@ export default async function SuccessPage({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getSuccessData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='auth-page_wrapper' cover={data.cover}>

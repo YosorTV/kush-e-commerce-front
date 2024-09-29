@@ -6,6 +6,7 @@ import { getProfileLayoutData } from '@/services/api/get-profile-layout';
 
 import { LayoutProps } from '@/types/app/layout.types';
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 export default async function ProfileLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
   const session = await auth();
@@ -13,6 +14,10 @@ export default async function ProfileLayout({ children, params: { locale } }: Re
   const t = await getTranslations('system');
 
   const { data } = await getProfileLayoutData({ locale, token: session?.accessToken });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-6'>

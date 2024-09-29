@@ -1,10 +1,15 @@
-import { RuleSection } from '@/components/complex/RuleSection';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import { PageLayout } from '@/components/layouts';
+import { RuleSection } from '@/components/complex/RuleSection';
+
 import { STRAPI_PAGES } from '@/helpers/constants';
+
 import { getMetadata } from '@/services';
 import { getPolicyData } from '@/services/api/get-policy';
+
 import { PageProps } from '@/types/app/page.types';
-import { Metadata } from 'next';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -18,6 +23,10 @@ export default async function PrivacyPolicy({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getPolicyData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-16'>

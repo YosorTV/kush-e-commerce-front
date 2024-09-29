@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { getMetadata, getForgotPasswordData } from '@/services';
 
@@ -21,6 +22,10 @@ export default async function ForgotPasswordPage({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getForgotPasswordData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='auth-page_wrapper' cover={data.cover}>

@@ -1,10 +1,15 @@
-import { RuleSection } from '@/components/complex/RuleSection';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import { PageLayout } from '@/components/layouts';
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { RuleSection } from '@/components/complex/RuleSection';
+
 import { getMetadata } from '@/services';
 import { getTermData } from '@/services/api/get-terms';
+
+import { STRAPI_PAGES } from '@/helpers/constants';
+
 import { PageProps } from '@/types/app/page.types';
-import { Metadata } from 'next';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -18,6 +23,10 @@ export default async function TermsConditions({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getTermData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-16'>

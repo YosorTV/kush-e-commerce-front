@@ -1,8 +1,11 @@
 import React from 'react';
+
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import { PageLayout } from '@/components/layouts';
 import { getMetadata } from '@/services';
 import { PageProps } from '@/types/app/page.types';
-import { Metadata } from 'next';
 import { STRAPI_PAGES } from '@/helpers/constants';
 import { getAboutUsData } from '@/services/api/get-about-us';
 import { AboutSection } from '@/components/complex';
@@ -19,6 +22,10 @@ export default async function AboutUs({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getAboutUsData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-16'>

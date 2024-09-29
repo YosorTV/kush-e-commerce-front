@@ -8,6 +8,7 @@ import OrdersSection from '@/components/complex/OrdersSection';
 import { getTranslations } from 'next-intl/server';
 import { PaginateController } from '@/components/simple/PaginateController';
 import { Title } from '@/components/elements';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -34,6 +35,10 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
     page,
     pageSize
   });
+
+  if (!data) {
+    return notFound();
+  }
 
   const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;
 

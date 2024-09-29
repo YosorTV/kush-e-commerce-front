@@ -10,6 +10,7 @@ import { CompleteLook, DeliveryRules, ProductGallery, ProductParams } from '@/co
 
 import { CartItemType } from '@/types/store';
 import { PageProps } from '@/types/app/page.types';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale, slug } = props.params;
@@ -26,10 +27,10 @@ export default async function ProductDetails({ params }: PageProps) {
 
   const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
-  const { data: allSizes } = await getSizesData({ locale });
+  const { data: sizes } = await getSizesData({ locale });
 
   if (!data) {
-    return null;
+    return notFound();
   }
 
   const discountAmount = data.price * (data.saleValue / 100);
@@ -74,12 +75,7 @@ export default async function ProductDetails({ params }: PageProps) {
             </NextLink>
           </div>
           <p className='whitespace-pre-line text-wrap'>{data?.description}</p>
-          <ProductParams
-            sizes={allSizes}
-            colors={data.colors.data}
-            materials={data.materials.data}
-            availableSizes={data.sizes.data}
-          >
+          <ProductParams sizes={sizes} materials={data.materials.data} availableSizes={data.sizes.data}>
             <div className='mt-5 flex flex-col'>
               <Wishlist
                 text={t(data?.inWishlist ? 'wishlist.added' : 'wishlist.add')}

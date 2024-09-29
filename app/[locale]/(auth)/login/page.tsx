@@ -7,6 +7,7 @@ import { PageLayout } from '@/components/layouts';
 import { STRAPI_PAGES } from '@/helpers/constants';
 
 import { PageProps } from '@/types/app/page.types';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -20,6 +21,10 @@ export default async function LoginPage({ params }: PageProps) {
   const { locale } = params;
 
   const { data } = await getSignInData({ locale });
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='auth-page_wrapper' cover={data.cover}>

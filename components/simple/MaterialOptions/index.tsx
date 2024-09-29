@@ -12,6 +12,7 @@ interface IMaterialOptions {
 }
 
 export const MaterialOptions: FC<IMaterialOptions> = ({ data = [], title }) => {
+  console.log('data: ', data);
   const state = useCart();
 
   const t = useTranslations('material');
