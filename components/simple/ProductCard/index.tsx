@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Title } from '@/components/elements';
+import { NextLink, Title } from '@/components/elements';
 import { Price, Wishlist } from '@/components/simple';
 import AnimatedImage from '@/components/simple/AnimatedImage';
 
@@ -18,9 +18,11 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, currency
       </div>
       <figcaption className='flex w-full flex-col py-2'>
         <div className='flex flex-1 items-center justify-between'>
-          <Title level='3' className='font-semibold'>
-            {product.title}
-          </Title>
+          <NextLink href={`/catalog/${product.slug}`}>
+            <Title level='3' className='font-semibold'>
+              {product.title}
+            </Title>
+          </NextLink>
           <Wishlist locale={product.locale} productId={product.id} inWishlist={product?.inWishlist ?? false} />
         </div>
 

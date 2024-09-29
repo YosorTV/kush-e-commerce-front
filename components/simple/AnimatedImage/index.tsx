@@ -11,6 +11,7 @@ import { cn } from '@/lib';
 interface TAnimatedImage {
   product: Product;
 }
+
 const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
@@ -29,7 +30,6 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
     <div
       aria-hidden
       onClick={handleRedirect}
-      onTouchEndCapture={handleRedirect}
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
       className='relative h-96 md:h-112'
