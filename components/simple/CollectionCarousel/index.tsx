@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { CollectionCard } from '../CollectionCard';
+
 import Carousel from '@/components/elements/Carousel';
 import { cn } from '@/lib';
 
@@ -12,12 +13,15 @@ type PropType = {
   fill?: string;
   titleClass?: string;
   format: 'standart' | 'mini';
+  autoplay?: boolean;
+  autoScroll?: boolean;
 };
 
 const CollectionCarousel: FC<PropType> = ({
   data,
   title,
   titleClass,
+  autoScroll = false,
   className = 'w-full',
   slideClass = 'h-full md:h-96',
   fill = 'fill-white',
@@ -39,6 +43,7 @@ const CollectionCarousel: FC<PropType> = ({
 
   return (
     <Carousel
+      autoScroll={autoScroll}
       format={format}
       title={title}
       className={className}

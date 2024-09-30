@@ -28,7 +28,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
     return <ProductCard key={product.id} product={product} currency={currency} className={gridCols(index)} t={t} />;
   };
 
-  if (!data.length) {
+  if (!data?.length) {
     return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-10' playerClassName='h-96 w-96' />;
   }
 

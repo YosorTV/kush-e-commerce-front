@@ -39,9 +39,9 @@ export const productsQuery = ({
     filters.sizes = { size: { $eq: options.sizes } };
   }
 
-  if (options?.materials?.length > 0) {
+  if (options?.materials) {
     filters.materials = {
-      materials: { $eq: options.materials }
+      value: { $in: options.materials }
     };
   }
 

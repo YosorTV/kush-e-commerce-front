@@ -34,10 +34,10 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   fill = 'fill-base-200',
   format = 'standart'
 }) => {
-  const plugins = [
-    autoScroll && AutoScroll({ playOnInit: false, stopOnMouseEnter: true }),
-    autoplay && Autoplay({ delay: 1000, stopOnMouseEnter: true })
-  ].filter(Boolean);
+  const autoScrollPlugin = AutoScroll({ playOnInit: true, stopOnMouseEnter: true, stopOnInteraction: true });
+  const autoPlayPlugin = Autoplay({ delay: 1000, stopOnMouseEnter: true });
+
+  const plugins = [autoScroll ? autoScrollPlugin : null, autoplay ? autoPlayPlugin : null].filter(Boolean);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins);
 
@@ -47,7 +47,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
     <div className={cn(`embla-${format}`, className)}>
       <div className={cn('flex w-full items-center', title ? 'justify-between' : 'justify-end')}>
         {title && <CarouselTitle title={title} className={titleClass} />}
-        <CarouselControllers emblaApi={emblaApi} fill={fill} />
+        <CarouselControllers emblaApi={emblaApi} fill={fill} autoScroll={autoScroll} />
       </div>
       <div className='embla__viewport' ref={emblaRef}>
         <div className='embla__container'>{children}</div>

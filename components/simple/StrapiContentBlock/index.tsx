@@ -32,7 +32,7 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
             />
           );
         },
-        paragraph: ({ children }) => <p className='break-words text-sm text-base-200 md:text-base'>{children}</p>,
+        paragraph: ({ children }) => <p className='break-words text-sm text-base-200 md:text-base'>{children}</p>
       }}
     />
   );

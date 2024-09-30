@@ -25,6 +25,7 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
         title={title}
         titleClass='!text-white py-2.5 md:py-5'
         data={collections.data}
+        autoScroll
       />
     </section>
   );

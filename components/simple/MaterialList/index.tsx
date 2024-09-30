@@ -8,25 +8,17 @@ import { Input } from '@/components/elements';
 import { useSearchParams } from 'next/navigation';
 
 type TMaterial = {
-  id: string;
-  text: string;
+  id: number;
+  title: string;
+  value: string;
 };
 
-export const MaterialList = () => {
+export const MaterialList = ({ data }: any) => {
   const state = useFilters();
   const searchParams = useSearchParams();
   const t = useTranslations('material');
 
   const chosenMaterials = searchParams.getAll('materials');
-
-  const materials: TMaterial[] = [
-    { id: `material-${1}`, text: 'gold' },
-    { id: `material-${2}`, text: 'silver' },
-    { id: `material-${3}`, text: 'platinum' },
-    { id: `material-${4}`, text: 'brass' },
-    { id: `material-${5}`, text: 'palladium' },
-    { id: `material-${6}`, text: 'titanium' }
-  ];
 
   useEffect(() => {
     state.onFilter({ key: 'materials', value: chosenMaterials });
@@ -44,12 +36,12 @@ export const MaterialList = () => {
   const printMaterialList = (el: TMaterial) => (
     <Input
       key={el.id}
-      id={el.id}
+      id={String(el.id)}
       name='material'
-      label={t(el.text)}
+      label={t(el.value)}
       type='checkbox'
-      value={el.text}
-      checked={state.options?.materials?.includes(el.text)}
+      value={el.value}
+      checked={state.options?.materials?.includes(el.value)}
       onChange={handleMaterialChange}
       className='checkbox checked:fill-base-200'
       labelStyle='text-base-200 font-medium text-lg cursor-pointer'
@@ -57,5 +49,5 @@ export const MaterialList = () => {
     />
   );
 
-  return <div className='form-control gap-y-2.5'>{materials.map(printMaterialList)}</div>;
+  return <div className='form-control gap-y-2.5'>{data.map(printMaterialList)}</div>;
 };

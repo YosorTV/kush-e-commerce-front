@@ -68,10 +68,11 @@
   "material": {
     "title": "Material",
     "silver_925": "Silver 925'",
-    "silver_925_gold": "Silver 925' with 18k gold plating",
-    "silver_925_gold_natural_pearl": "Silver 925' with 18k gold plating and natural pearl",
-    "silver_925_gold_onyx": "Silver 925' with 18k gold plating and onyx stones",
-    "silver_925_gold_swarovski": "Silver 925' with 18k gold plating and Swarovski stones"
+    "silver_925_gold": "Silver 925' with 18k gold gilding",
+    "silver_925_gold_onyx": "Silver 925' with 18k gold gilding & Onyx stones",
+    "silver_925_gold_swarovski": "Silver 925' with 18k gold gilding & Swarovski stones",
+    "silver_925_gold_natural_pearl": "Silver 925' with 18k gold gilding & Natural pearl",
+    "silver_925_gold_ruby": "Silver 925' with 18k gold gilding & Rubin"
   },
   "category": {
     "title": "Category",

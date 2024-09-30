@@ -38,8 +38,8 @@ export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
       </div>
       <div className='flex flex-col gap-5 p-6'>
         {content && (
-          <section className='flex flex-1 flex-col gap-5'>
-            <StrapiContentBlock content={content} imageClass='h-80' />
+          <section className='h- flex flex-1 flex-col gap-5'>
+            <StrapiContentBlock content={content} imageClass='h-2md' />
           </section>
         )}
       </div>

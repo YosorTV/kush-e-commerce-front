@@ -11,12 +11,14 @@ import { cn } from '@/lib';
 interface ICarouseControllers {
   emblaApi: EmblaCarouselType;
   autoplay?: boolean;
+  autoScroll?: boolean;
   fill?: string;
 }
 
 export const CarouselControllers: FC<ICarouseControllers> = ({
   emblaApi,
   autoplay = false,
+  autoScroll = false,
   fill = 'fill-base-200'
 }) => {
   const { lg } = useScreen();
@@ -25,17 +27,27 @@ export const CarouselControllers: FC<ICarouseControllers> = ({
 
   const handleButtonAutoplayClick = useCallback(
     (callback: () => void) => {
-      const autoScroll = emblaApi?.plugins()?.autoScroll;
+      const scrollPlugin = emblaApi?.plugins()?.autoScroll;
+      const autoplayPlugin = emblaApi?.plugins()?.autoplay;
+
+      if (autoScroll) {
+        const resetOrStop = scrollPlugin.options.stopOnInteraction === false ? scrollPlugin.reset : scrollPlugin.stop;
+        resetOrStop();
+        callback();
+      } else {
+        callback();
+      }
 
       if (autoplay) {
-        const resetOrStop = autoScroll.options.stopOnInteraction === false ? autoScroll.reset : autoScroll.stop;
+        const resetOrStop =
+          autoplayPlugin.options.stopOnInteraction === false ? autoplayPlugin.reset : autoplayPlugin.stop;
         resetOrStop();
         callback();
       } else {
         callback();
       }
     },
-    [autoplay, emblaApi]
+    [autoScroll, autoplay, emblaApi]
   );
 
   const size = lg ? 28 : 24;

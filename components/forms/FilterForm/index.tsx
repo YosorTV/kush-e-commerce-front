@@ -2,7 +2,7 @@
 
 import qs from 'qs';
 
-import { FormEvent, useCallback } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { IoClose } from 'react-icons/io5';
 
@@ -13,6 +13,7 @@ import { CategoryList, MaterialList, RangeSlider, SizeList, SortFields } from '@
 import { Accordion, Button, Input, Title } from '@/components/elements';
 
 import { SORT_OPTIONS } from '@/helpers/constants';
+import { getMaterialsData, getSizesData } from '@/services';
 
 export const FilterForm = () => {
   const router = useRouter();
@@ -20,6 +21,21 @@ export const FilterForm = () => {
   const state = useFilters();
   const t = useTranslations();
   const pathname = usePathname();
+
+  const [listOfSizes, setListOfSizes] = useState([]);
+  const [listOfMaterials, setListOfMaterials] = useState([]);
+
+  const fetchSizes = useCallback(async () => {
+    const { data } = await getSizesData({ locale });
+    const { data: materials } = await getMaterialsData({ locale });
+
+    setListOfSizes(data);
+    setListOfMaterials(materials);
+  }, [locale, getSizesData]);
+
+  useEffect(() => {
+    fetchSizes();
+  }, []);
 
   const FILTER_OPTIONS = [
     {
@@ -30,12 +46,12 @@ export const FilterForm = () => {
     {
       id: 2,
       title: t('material.title'),
-      component: <MaterialList />
+      component: <MaterialList data={listOfMaterials} />
     },
     {
       id: 3,
       title: t('size.title'),
-      component: <SizeList />
+      component: <SizeList data={listOfSizes} />
     },
     {
       id: 4,
@@ -79,6 +95,7 @@ export const FilterForm = () => {
       </div>
       <Input name='locale' defaultValue={locale} hidden className='hidden' />
       <SortFields data={SORT_OPTIONS} />
+      <div className='divider' />
       <Accordion data={FILTER_OPTIONS} />
       <div className='my-4 flex w-full flex-col justify-between'>
         <Button type='submit' className='bg-transparent text-base-200 hover:!bg-base-200 hover:!text-base-100'>

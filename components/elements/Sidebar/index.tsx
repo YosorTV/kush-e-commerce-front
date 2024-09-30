@@ -25,7 +25,7 @@ export const Sidebar: FC<PropsWithChildren<SidebarProps>> = ({ opened, position,
             layout
             onClick={(e) => e.stopPropagation()}
             className={cn(
-              'fixed top-0 h-full w-full overflow-auto bg-info-content px-0 py-5 sm:w-3/4 md:w-2/3 xl:w-1/2',
+              'fixed top-0 h-full w-full overflow-auto overflow-x-hidden bg-info-content px-0 py-5 scrollbar sm:w-3/4 md:w-2/3 xl:w-1/3',
               position === 'left' && 'left-0',
               position === 'right' && 'right-0'
             )}

@@ -20,3 +20,4 @@ export * from '@/services/api/get-product';
 export * from '@/services/api/post-user-message';
 export * from '@/services/api/payment-create';
 export * from '@/services/api/get-orders';
+export * from '@/services/api/get-materials';
