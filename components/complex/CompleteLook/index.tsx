@@ -36,7 +36,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ locale, category, classN
       format='standart'
       title={t('look')}
       titleClass='text-base-200 py-6 xs:py-3 pl-3 md:pl-0'
-      className={cn('mx-2.5 pb-6 md:mx-5', className)}
+      className={cn('w-svw p-2.5 pt-0 sm:p-5', className)}
       options={{ loop: true }}
     >
       {data.map(printProduct)}

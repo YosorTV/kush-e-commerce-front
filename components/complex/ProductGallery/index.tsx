@@ -37,7 +37,7 @@ export const ProductGallery = ({ images = [], className }: { images: any[]; clas
     if (lg) {
       return <ul className='grid w-full grid-cols-fluid gap-2.5 2xl:grid-cols-2'>{gallery.map(printImage)}</ul>;
     } else {
-      return <ProductCarousel data={images} options={{ loop: true }} containerClass='lg:hidden' />;
+      return <ProductCarousel data={images} options={{ loop: true }} containerClass='lg:hidden w-svw' />;
     }
   }, [lg, gallery, images]);
 
