@@ -22,8 +22,8 @@ export const OrderCardMobile: FC<IOrderCard> = ({
   t
 }) => {
   return (
-    <div className={cn('group card image-full h-80 overflow-hidden border-2', getStatusBorder(status))}>
-      <figure className='overflow-hidden rounded-md'>
+    <div className={cn('group card image-full h-80 overflow-hidden rounded-none border-2', getStatusBorder(status))}>
+      <figure className='overflow-hidden !rounded-none'>
         <StrapiImage
           src={image.url}
           width={image.width}
@@ -33,7 +33,7 @@ export const OrderCardMobile: FC<IOrderCard> = ({
           className='aspect-square h-full w-full transform-gpu object-cover transition-all duration-300 group-hover:scale-105'
         />
       </figure>
-      <div className='card-body gap-y-5 rounded-md text-xs font-medium !text-white'>
+      <div className='card-body gap-y-5 !rounded-none text-xs font-medium !text-white'>
         <div className='grid grid-cols-1'>
           <div className='flex flex-col gap-2.5'>
             <span>{t('order', { number: id })}</span>

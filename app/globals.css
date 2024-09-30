@@ -84,7 +84,7 @@ input:-webkit-autofill:active {
 }
 
 .embla-standart {
-  --slide-size: 95%;
+  --slide-size: 90%;
   --slide-height: 100%;
   --slide-spacing: 0.5rem;
   --slide-size-lg: calc(100% / 3);
@@ -202,4 +202,5 @@ input:-webkit-autofill:active {
 
 .card.image-full:before {
   background: rgb(0, 0, 0) !important;
+  border-radius: 0 !important;
 }

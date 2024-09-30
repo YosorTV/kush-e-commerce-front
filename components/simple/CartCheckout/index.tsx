@@ -42,7 +42,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   }, [cartStore.cart, locale, currency]);
 
   const debouncedCallback = useCallback(
-    debounce(async ({ data, signature }) => {
+    debounce(async ({ data, signature, ...rest }) => {
       const customer = {
         ...cartStore.delivery,
         customer_city: cartStore.delivery.self ? '' : cartStore.delivery.novapostCity.label,
@@ -50,7 +50,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         self_delivery: cartStore.delivery.self
       };
 
-      const result = await paymentCallback({
+      await paymentCallback({
         data,
         signature,
         products,
@@ -58,7 +58,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         userId: Number(session?.user?.id) || null
       });
 
-      if (result.status === 200) {
+      if (rest?.result === 'ok') {
         cartStore.setForm('success');
       }
     }, 500),

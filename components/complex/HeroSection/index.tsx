@@ -19,7 +19,7 @@ export const HeroSection: FC<any> = ({ data }) => {
         <Title
           level='1'
           variant='subheading'
-          className='absolute-x-center flex h-full items-center justify-center whitespace-pre-line text-center !text-base-300'
+          className='absolute-center mx-a absolute flex h-full w-3/4 items-center justify-center whitespace-pre-line text-center !text-base-300'
         >
           {data.title}
         </Title>

@@ -11,4 +11,5 @@ export type CartItemProps = {
 export type AddCartProps = {
   data: ProductItem;
   isDisabled: boolean;
+  isSizesNotAvailable: boolean;
 };

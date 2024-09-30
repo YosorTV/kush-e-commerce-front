@@ -45,10 +45,10 @@ export default async function ProductDetails({ params }: PageProps) {
   };
 
   return (
-    <PageLayout className='mt-16'>
+    <PageLayout className='relative mt-16'>
       <StepBack className='absolute z-10 !mx-5 justify-start lg:relative lg:z-0' />
-      <article className='relative flex w-full flex-col-reverse lg:flex-row-reverse'>
-        <section className='flex h-full w-full flex-col gap-2.5 bg-base-100 p-3 !py-0 sm:p-5'>
+      <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
+        <section className='flex h-full w-svw flex-col gap-2.5 bg-base-100 p-3 !py-0 sm:p-5'>
           <header className='flex w-full flex-wrap justify-between gap-2.5 pt-5 lg:pt-0' role='product-name'>
             {data?.title && (
               <Title
@@ -82,7 +82,7 @@ export default async function ProductDetails({ params }: PageProps) {
                 inWishlist={data?.inWishlist}
               />
               <div className='divider' />
-              <AddCart data={cartData} isDisabled={data?.available} />
+              <AddCart data={cartData} isDisabled={data?.available} isSizesNotAvailable={!data.sizes.data.length} />
             </div>
           </ProductParams>
           <DeliveryBlock locale={locale} />

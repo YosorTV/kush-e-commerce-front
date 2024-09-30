@@ -1,23 +1,33 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { useCart } from '@/store';
 import { AddCartProps } from '@/types/components';
 
-export const AddCart: FC<AddCartProps> = ({ data, isDisabled = false }) => {
+export const AddCart: FC<AddCartProps> = ({ data, isSizesNotAvailable, isDisabled = false }) => {
   const state = useCart();
   const t = useTranslations('cart');
 
   const [added, setAdded] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
-  const isButtonDisabled = () => {
+  const isButtonDisabled = useCallback(() => {
     const { formState } = state;
 
-    return Object.values(formState).some((value) => value === null) || added;
-  };
+    const isFormIncompleteWithoutSize = Object.entries(formState).some(
+      ([key, value]) => key !== 'size' && value === null
+    );
+
+    if (isSizesNotAvailable) {
+      return isFormIncompleteWithoutSize || added;
+    }
+
+    const isFormIncomplete = Object.values(formState).some((value) => value === null);
+
+    return isFormIncomplete || added || !isDisabled;
+  }, [state.formState, isSizesNotAvailable, isDisabled]);
 
   useEffect(() => {
     state.syncCartData(data);
@@ -27,7 +37,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isDisabled = false }) => {
     const disabled = isButtonDisabled();
 
     setDisabled(disabled);
-  }, [state.formState, data]);
+  }, [state.formState, data, isSizesNotAvailable, isDisabled]);
 
   const handleAdd = () => {
     state.onSubmit(state.formState);

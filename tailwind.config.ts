@@ -8,7 +8,8 @@ module.exports = {
   ],
   theme: {
     container: {
-      padding: '1.5rem'
+      padding: '0',
+      center: true
     },
     screens: {
       xs: '475px', // extra small screen

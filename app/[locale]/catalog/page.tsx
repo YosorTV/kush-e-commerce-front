@@ -41,7 +41,7 @@ export default async function Catalog({ params, searchParams }: PageProps) {
         <Title
           level='1'
           variant='subheading'
-          className='absolute flex h-full w-full items-center justify-center text-center !text-base-300'
+          className='absolute-center mx-a absolute flex h-full w-3/4 items-center justify-center whitespace-pre-line text-center !text-base-300'
         >
           {data.title}
         </Title>
