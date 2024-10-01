@@ -28,7 +28,7 @@ export const Form: FC<FormProps<any>> = ({
 
   const [formState, formAction] = useFormState(action, state);
 
-  const debouncedPush = debounce((url) => router.push(url), 150);
+  const debouncedPush = debounce((url) => router.push(url), 300);
 
   useEffect(() => {
     if (formState?.status === 200) {
