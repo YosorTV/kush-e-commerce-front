@@ -12,12 +12,8 @@ export const DeliveryBlock: FC<IDeliveryBlock> = async ({ locale = 'uk' }) => {
   const DELIVERY_OPTIONS = [
     {
       title: delivery?.title,
-      component: (
-        <p className='whitespace-pre-line text-pretty'>
-          {delivery?.description}
-        </p>
-      ),
-    },
+      component: <p className='whitespace-pre-line text-pretty'>{delivery?.description}</p>
+    }
   ];
 
   return <Accordion data={DELIVERY_OPTIONS} />;

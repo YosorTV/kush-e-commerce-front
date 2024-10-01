@@ -2,21 +2,13 @@ import { Input } from '@/components/elements';
 import { cn } from '@/lib';
 import React from 'react';
 
-export const ProductOption = ({
-  id,
-  value,
-  title,
-  name,
-  className,
-  onChange,
-  checked,
-}: any) => {
+export const ProductOption = ({ id, value, title, name, className, onChange, checked }: any) => {
   return (
     <label
       key={id}
       htmlFor={id}
       className={cn(
-        'flex w-min cursor-pointer items-center justify-start gap-3 underline-offset-8 hover:underline',
+        'flex w-auto cursor-pointer items-center justify-start gap-3 underline-offset-8 hover:underline',
         className
       )}
     >
@@ -27,11 +19,9 @@ export const ProductOption = ({
         name={name}
         value={value}
         onChange={onChange}
-        className='radio'
+        className='radio w-6'
       />
-      <span className='whitespace-nowrap font-semibold text-base-200'>
-        {title}
-      </span>
+      <span className='w-full whitespace-pre-wrap text-pretty font-semibold text-base-200'>{title}</span>
     </label>
   );
 };

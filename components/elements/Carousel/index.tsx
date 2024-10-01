@@ -34,7 +34,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   fill = 'fill-base-200',
   format = 'standart'
 }) => {
-  const autoScrollPlugin = AutoScroll({ playOnInit: true, stopOnMouseEnter: true, stopOnInteraction: true });
+  const autoScrollPlugin = AutoScroll({ playOnInit: false, stopOnMouseEnter: true, stopOnInteraction: true });
   const autoPlayPlugin = Autoplay({ delay: 1000, stopOnMouseEnter: true });
 
   const plugins = [autoScroll ? autoScrollPlugin : null, autoplay ? autoPlayPlugin : null].filter(Boolean);

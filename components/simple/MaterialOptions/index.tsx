@@ -34,9 +34,7 @@ export const MaterialOptions: FC<IMaterialOptions> = ({ data = [], title }) => {
     <div className='flex flex-col gap-y-5'>
       {title && <p className='text-lg font-semibold'>{title}</p>}
       {data.length > 0 && (
-        <div className={cn('flex gap-5 sm:flex-row', data.length >= 4 ? 'flex-col' : 'flex-row')}>
-          {data.map(printElement)}
-        </div>
+        <div className={cn('flex gap-5', data.length >= 4 ? 'flex-col' : 'flex-row')}>{data.map(printElement)}</div>
       )}
     </div>
   );

@@ -85,7 +85,7 @@ export const Input = ({
   }, [className, error, id, name, placeholder, rest, type, validation]);
 
   return (
-    <div className={cn('relative flex w-full flex-col gap-y-2', containerClass, type === 'hidden' && 'hidden')}>
+    <div className={cn('relative flex w-auto flex-col gap-y-2', containerClass, type === 'hidden' && 'hidden')}>
       {label && (
         <label htmlFor={id} className={cn('label label-text p-0', labelStyle)}>
           {label}
