@@ -8,6 +8,8 @@ import { processChild, toaster } from '@/lib';
 import { FormProps } from '@/types/components';
 import { useRouter } from '@/lib/navigation';
 
+import { debounce } from 'lodash';
+
 export const Form: FC<FormProps<any>> = ({
   children,
   className,
@@ -26,12 +28,16 @@ export const Form: FC<FormProps<any>> = ({
 
   const [formState, formAction] = useFormState(action, state);
 
+  const debouncedPush = debounce((url) => router.push(url), 150);
+
   useEffect(() => {
     if (formState?.status === 200) {
       ref.current.reset();
       if (formState?.url) {
-        router.push(formState.url);
+        router.refresh();
+        debouncedPush(formState?.url);
       }
+
       toaster({ key: 'success', message: formState.message });
     } else if (formState?.status === 400) {
       toaster({

@@ -4,6 +4,7 @@ import { schemas } from '@/lib/zod';
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { ROOT } from '@/helpers/constants';
+import { revalidatePath } from 'next/cache';
 
 export async function authUserAction(prevState: any, formData: FormData) {
   try {
@@ -28,7 +29,8 @@ export async function authUserAction(prevState: any, formData: FormData) {
       };
     }
 
-    await signIn('credentials', { ...validatedData.data, redirectTo: `/${formData.get('locale')}` });
+    await signIn('credentials', { ...validatedData.data, redirect: false });
+    revalidatePath('/');
 
     return {
       ...prevState,

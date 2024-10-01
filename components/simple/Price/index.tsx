@@ -20,8 +20,8 @@ export const Price: FC<Readonly<IPrice>> = ({ price = 0, sale = 0, currency, cla
       aria-label={`Price: ${price}`}
       className={cn('flex flex-col-reverse items-start gap-x-3 xs:flex-row', className)}
     >
-      {sale > 0 && <span className='text-xs text-base-200 md:text-base'>{salePrice}</span>}
-      <span className={cn('text-xs md:text-base', sale > 0 && 'line-through')}>{originalPrice}</span>
+      {sale > 0 && <span className='text-sm text-base-200 md:text-base'>{salePrice}</span>}
+      <span className={cn('text-sm md:text-base', sale > 0 && 'line-through')}>{originalPrice}</span>
     </p>
   );
 };
