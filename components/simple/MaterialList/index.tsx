@@ -1,11 +1,10 @@
 'use client';
 
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { useFilters } from '@/store';
 
 import { Input } from '@/components/elements';
-import { useSearchParams } from 'next/navigation';
 
 type TMaterial = {
   id: number;
@@ -15,14 +14,8 @@ type TMaterial = {
 
 export const MaterialList = ({ data }: any) => {
   const state = useFilters();
-  const searchParams = useSearchParams();
+
   const t = useTranslations('material');
-
-  const chosenMaterials = searchParams.getAll('materials');
-
-  useEffect(() => {
-    state.onFilter({ key: 'materials', value: chosenMaterials });
-  }, []);
 
   const handleMaterialChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = target;

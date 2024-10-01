@@ -14,6 +14,7 @@ import { Accordion, Button, Input, Title } from '@/components/elements';
 
 import { SORT_OPTIONS } from '@/helpers/constants';
 import { getMaterialsData, getSizesData } from '@/services';
+import { useSearchParams } from 'next/navigation';
 
 export const FilterForm = () => {
   const router = useRouter();
@@ -21,9 +22,14 @@ export const FilterForm = () => {
   const state = useFilters();
   const t = useTranslations();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [listOfSizes, setListOfSizes] = useState([]);
   const [listOfMaterials, setListOfMaterials] = useState([]);
+
+  const chosenSizes = searchParams.getAll('sizes');
+  const chosenMaterials = searchParams.getAll('materials');
+  const chosenCategories = searchParams.getAll('categories');
 
   const fetchSizes = useCallback(async () => {
     const { data } = await getSizesData({ locale });
@@ -32,6 +38,12 @@ export const FilterForm = () => {
     setListOfSizes(data);
     setListOfMaterials(materials);
   }, [locale, getSizesData]);
+
+  useEffect(() => {
+    state.onFilter({ key: 'sizes', value: chosenSizes });
+    state.onFilter({ key: 'materials', value: chosenMaterials });
+    state.onFilter({ key: 'categories', value: chosenCategories });
+  }, []);
 
   useEffect(() => {
     fetchSizes();

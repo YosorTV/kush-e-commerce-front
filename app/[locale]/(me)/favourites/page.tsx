@@ -5,7 +5,6 @@ import { getWishlistProducts } from '@/services/api/get-wished-products';
 import { auth } from '@/auth';
 import ProductListGroup from '@/components/simple/ProductListGroup';
 import { inWishlistDataAdatapter } from '@/adapters/product';
-import { PaginateController } from '@/components/simple/PaginateController';
 import { Title } from '@/components/elements';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -21,14 +20,17 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   };
 }
 
-export default async function FavouritesPage({ params }: PageProps) {
+export default async function FavouritesPage({ params, searchParams }: PageProps) {
   const { locale } = params;
+  const { page = '1', pageSize = '5' } = searchParams;
 
   const session = await auth();
   const t = await getTranslations('system');
 
-  const { data, meta } = await getWishlistProducts({
+  const { data } = await getWishlistProducts({
+    page,
     locale,
+    pageSize,
     userId: Number(session.user.id),
     token: session.accessToken
   });
@@ -38,7 +40,6 @@ export default async function FavouritesPage({ params }: PageProps) {
   }
 
   const wishlist = inWishlistDataAdatapter(data?.[0]?.products?.data);
-  const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;
 
   return (
     <section className='mt-10 flex w-full flex-col bg-info-content p-5'>
@@ -47,14 +48,6 @@ export default async function FavouritesPage({ params }: PageProps) {
       </Title>
       <div className='divider' />
       <ProductListGroup data={wishlist} className='grid-cols-fluid' />
-      <div className='divider' />
-      {wishlist.length > 0 && (
-        <PaginateController
-          disabled={isLastPage}
-          total={meta.pagination.total}
-          perPage={meta?.pagination?.pageSize + 5}
-        />
-      )}
     </section>
   );
 }

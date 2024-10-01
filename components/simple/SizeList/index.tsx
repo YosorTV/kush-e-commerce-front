@@ -1,7 +1,6 @@
 'use client';
 
-import { ChangeEvent, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { ChangeEvent } from 'react';
 
 import { useFilters } from '@/store';
 
@@ -15,12 +14,6 @@ type TSize = {
 
 export const SizeList = ({ data }: any) => {
   const state = useFilters();
-  const searchParams = useSearchParams();
-  const chosenSizes = searchParams.getAll('sizes');
-
-  useEffect(() => {
-    state.onFilter({ key: 'sizes', value: chosenSizes });
-  }, []);
 
   const handleSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;

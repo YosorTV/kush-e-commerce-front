@@ -3,9 +3,11 @@ import { DEFAULT_LOCALE, IMAGE_FIELDS } from '@/helpers/constants';
 interface IWishlistProducts {
   locale: string;
   userId: number;
+  page: string;
+  pageSize: string;
 }
 
-export const wishlistProducts = ({ locale = DEFAULT_LOCALE, userId }: IWishlistProducts) => ({
+export const wishlistProducts = ({ locale = DEFAULT_LOCALE, userId, page, pageSize }: IWishlistProducts) => ({
   locale,
   populate: {
     products: {
@@ -36,5 +38,9 @@ export const wishlistProducts = ({ locale = DEFAULT_LOCALE, userId }: IWishlistP
         $eq: userId
       }
     }
+  },
+  pagination: {
+    page,
+    pageSize
   }
 });

@@ -1,11 +1,10 @@
 'use client';
 
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { useFilters } from '@/store';
 
 import { Input } from '@/components/elements';
-import { useSearchParams } from 'next/navigation';
 
 type TCategory = {
   id: string;
@@ -14,11 +13,8 @@ type TCategory = {
 
 export const CategoryList = () => {
   const state = useFilters();
-  const searchParams = useSearchParams();
 
   const t = useTranslations('category');
-
-  const chosenCategories = searchParams.getAll('categories');
 
   const categories: TCategory[] = [
     { id: `category-${1}`, text: 'rings' },
@@ -26,10 +22,6 @@ export const CategoryList = () => {
     { id: `category-${3}`, text: 'necklaces' },
     { id: `category-${4}`, text: 'earrings' }
   ];
-
-  useEffect(() => {
-    state.onFilter({ key: 'categories', value: chosenCategories });
-  }, []);
 
   const handleCategoryChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = target;
