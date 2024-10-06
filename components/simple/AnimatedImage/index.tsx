@@ -32,6 +32,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       onClick={handleRedirect}
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
+      onTouchEndCapture={handleRedirect}
       className='relative h-80 sm:h-96 md:h-112'
     >
       {[img1, img2].map((img, idx) => (
