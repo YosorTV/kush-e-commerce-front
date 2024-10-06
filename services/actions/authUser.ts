@@ -3,7 +3,7 @@
 import { schemas } from '@/lib/zod';
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
-import { ROOT } from '@/helpers/constants';
+import { DEFAULT_LOCALE, ROOT } from '@/helpers/constants';
 import { revalidatePath } from 'next/cache';
 
 export async function authUserAction(prevState: any, formData: FormData) {
@@ -29,16 +29,29 @@ export async function authUserAction(prevState: any, formData: FormData) {
       };
     }
 
-    await signIn('credentials', { ...validatedData.data, redirect: false });
-    revalidatePath('/');
+    const res = await signIn('credentials', { ...validatedData.data, redirect: false });
+
+    if (res) {
+      revalidatePath(`${ROOT}${formData.get('locale')}`);
+
+      return {
+        ...prevState,
+        data: null,
+        errors: null,
+        url: ROOT,
+        status: 200,
+        message: formData.get('locale') === 'uk' ? 'З поверненням.' : 'Welcome back.',
+        strapiError: null
+      };
+    }
 
     return {
       ...prevState,
       data: null,
       errors: null,
-      url: ROOT,
-      status: 200,
-      message: formData.get('locale') === 'uk' ? 'З поверненням.' : 'Welcome back.',
+      url: null,
+      status: 400,
+      message: formData.get('locale') === 'uk' ? 'Помилка авторизації.' : 'Authorization error.',
       strapiError: null
     };
   } catch (error) {
@@ -68,6 +81,6 @@ export async function authUserAction(prevState: any, formData: FormData) {
   }
 }
 
-export async function logout({ locale = 'uk' }: { locale?: string }) {
+export async function logout({ locale = DEFAULT_LOCALE }: { locale?: string }) {
   await signOut({ redirect: true, redirectTo: `${ROOT}${locale}` });
 }

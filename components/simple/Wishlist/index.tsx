@@ -18,14 +18,14 @@ interface IWishlist {
 }
 
 export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = false }) => {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
   const { data: session } = useSession();
   const [add, setAdd] = useState(inWishlist);
 
   useEffect(() => {
     setAdd(inWishlist);
   }, [inWishlist]);
-
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
     dialogRef.current = document.getElementById('my_modal_3') as HTMLDialogElement;

@@ -48,7 +48,7 @@ export default async function ProductDetails({ params }: PageProps) {
     <PageLayout className='relative mt-16'>
       <StepBack className='absolute z-10 !mx-5 justify-start lg:relative lg:z-0' />
       <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
-        <section className='flex h-full w-svw flex-col gap-2.5 bg-base-100 p-3 !py-0 sm:p-5'>
+        <section className='flex h-full w-full flex-col gap-2.5 bg-base-100 p-3 !py-0 sm:p-5 lg:w-[50svw]'>
           <header className='flex w-full flex-wrap justify-between gap-2.5 pt-5 lg:pt-0' role='product-name'>
             {data?.title && (
               <Title

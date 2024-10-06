@@ -29,7 +29,7 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
           className='w-full rounded-none border-none outline-none md:w-1/2'
           text={action.text ?? 'Delete'}
           loadingText={action?.loadingText ?? 'Loading...'}
-          onClick={() => deleteProfile({ userId: state.id, token })}
+          onClick={() => deleteProfile({ userId: state.id, token, locale })}
         />
       ),
       submit: (

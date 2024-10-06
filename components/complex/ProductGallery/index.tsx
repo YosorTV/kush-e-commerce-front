@@ -10,7 +10,7 @@ import { getImgGrid } from '@/lib';
 
 import { useScreen } from '@/lib/hooks';
 
-export const ProductGallery = ({ images = [], className }: { images: any[]; className?: string }) => {
+export const ProductGallery = ({ images = [] }: { images: any[] }) => {
   const { lg } = useScreen();
 
   const gallery = getImgGrid({ images });
@@ -42,7 +42,7 @@ export const ProductGallery = ({ images = [], className }: { images: any[]; clas
   }, [lg, gallery, images]);
 
   return (
-    <section className={className} aria-label='Product gallery'>
+    <section className='w-full md:w-[50svw]' aria-label='Product gallery'>
       {printGallery}
     </section>
   );

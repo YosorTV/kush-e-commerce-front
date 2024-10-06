@@ -1,7 +1,6 @@
 import { completeLookAdapter } from '@/adapters/product';
 import Carousel from '@/components/elements/Carousel';
 import { ProductCard } from '@/components/simple';
-import { cn } from '@/lib';
 import { getProductsData } from '@/services';
 import { Product } from '@/types/components';
 import { getTranslations } from 'next-intl/server';
@@ -11,10 +10,9 @@ interface ICompleteLook {
   locale: string;
   category: string;
   currency: number;
-  className?: string;
 }
 
-export const CompleteLook: FC<ICompleteLook> = async ({ locale, category, className }) => {
+export const CompleteLook: FC<ICompleteLook> = async ({ locale, category }) => {
   const { data: products } = await getProductsData({ locale });
   const t = await getTranslations('system');
 
@@ -36,8 +34,8 @@ export const CompleteLook: FC<ICompleteLook> = async ({ locale, category, classN
       format='standart'
       title={t('look')}
       titleClass='text-base-200 py-6 xs:py-3 pl-3 md:pl-0'
-      className={cn('w-svw p-2.5 pt-0 sm:p-5', className)}
-      options={{ loop: true }}
+      className='w-svw px-5'
+      options={{ loop: true, align: 'start' }}
     >
       {data.map(printProduct)}
     </Carousel>

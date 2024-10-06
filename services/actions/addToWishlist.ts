@@ -2,7 +2,6 @@
 
 import { revalidateTag } from 'next/cache';
 import { postStrapiWishlist } from '../api/wishlist';
-
 interface IAddToWishlist {
   productId: number;
   userId: number;
