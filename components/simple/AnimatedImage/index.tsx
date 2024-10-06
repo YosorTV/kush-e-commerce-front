@@ -7,6 +7,7 @@ import { useRouter } from '@/lib/navigation';
 import { StrapiImage } from '../StrapiImage';
 import { Product } from '@/types/components';
 import { cn } from '@/lib';
+import { useScreen } from '@/lib/hooks';
 
 interface TAnimatedImage {
   product: Product;
@@ -15,6 +16,8 @@ interface TAnimatedImage {
 const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
+
+  const { md } = useScreen();
 
   const [img1, img2] = useMemo(() => {
     return product?.images?.data || [];
@@ -30,9 +33,8 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
     <div
       aria-hidden
       onClick={handleRedirect}
-      onMouseEnter={() => setShowOverlay(true)}
-      onMouseLeave={() => setShowOverlay(false)}
-      onTouchEndCapture={handleRedirect}
+      onMouseEnter={() => md && setShowOverlay(true)}
+      onMouseLeave={() => md && setShowOverlay(false)}
       className='relative h-80 sm:h-96 md:h-112'
     >
       {[img1, img2].map((img, idx) => (
