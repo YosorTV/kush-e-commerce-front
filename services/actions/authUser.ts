@@ -4,7 +4,6 @@ import { schemas } from '@/lib/zod';
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { DEFAULT_LOCALE, ROOT } from '@/helpers/constants';
-import { revalidatePath } from 'next/cache';
 
 export async function authUserAction(prevState: any, formData: FormData) {
   try {
@@ -25,15 +24,17 @@ export async function authUserAction(prevState: any, formData: FormData) {
         errors,
         strapiError: null,
         status: 400,
-        message: 'Missing Fields. Failed to Login.'
+        message: formData.get('locale') === 'uk' ? 'Валідаційна помилка' : 'Validation error'
       };
     }
 
-    const res = await signIn('credentials', { ...validatedData.data, redirect: false });
+    const res = await signIn('credentials', {
+      ...validatedData.data,
+      redirect: true,
+      redirectTo: `${ROOT}${formData.get('locale')}`
+    });
 
     if (res) {
-      revalidatePath(`${ROOT}${formData.get('locale')}`);
-
       return {
         ...prevState,
         data: null,

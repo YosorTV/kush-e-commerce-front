@@ -1,3 +1,5 @@
+import { Session } from 'next-auth';
+
 interface TextNode {
   type: 'text';
   text: string;
@@ -65,5 +67,6 @@ export type ProductCardProps = {
   product: Product;
   className?: string;
   currency?: number;
+  session?: Session;
   t: (key: string, options?: Record<string, any>) => string;
 };

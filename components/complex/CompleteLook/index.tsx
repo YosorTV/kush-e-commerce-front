@@ -1,8 +1,9 @@
 import { completeLookAdapter } from '@/adapters/product';
 import Carousel from '@/components/elements/Carousel';
 import { ProductCard } from '@/components/simple';
-import { getProductsData } from '@/services';
+import { getCurrency, getProductsData } from '@/services';
 import { Product } from '@/types/components';
+import { auth } from '@/auth';
 import { getTranslations } from 'next-intl/server';
 import { FC } from 'react';
 
@@ -15,6 +16,8 @@ interface ICompleteLook {
 export const CompleteLook: FC<ICompleteLook> = async ({ locale, category }) => {
   const { data: products } = await getProductsData({ locale });
   const t = await getTranslations('system');
+  const session = await auth();
+  const currency = await getCurrency();
 
   const data = completeLookAdapter({ products, category });
 
@@ -22,6 +25,8 @@ export const CompleteLook: FC<ICompleteLook> = async ({ locale, category }) => {
     return (
       <ProductCard
         t={t}
+        currency={currency}
+        session={session}
         key={product.id}
         product={product}
         className='embla__slide cursor-grab active:cursor-grabbing'

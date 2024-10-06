@@ -2,25 +2,26 @@
 
 import { FC, useEffect, useRef, useState } from 'react';
 
+import { toast } from 'sonner';
+import { Session } from 'next-auth';
+
 import { HeartIcon } from '@/assets/icons';
 import { Button } from '@/components/elements';
 
 import { cn } from '@/lib';
 import addToWishlist from '@/services/actions/addToWishlist';
-import { toast } from 'sonner';
-import { useSession } from 'next-auth/react';
 
 interface IWishlist {
   productId: number;
   locale: string;
   inWishlist: boolean;
   text?: string;
+  session: Session;
 }
 
-export const Wishlist: FC<IWishlist> = ({ productId, text, locale, inWishlist = false }) => {
+export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = null, inWishlist = false }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-  const { data: session } = useSession();
   const [add, setAdd] = useState(inWishlist);
 
   useEffect(() => {

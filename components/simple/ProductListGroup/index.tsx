@@ -11,6 +11,7 @@ import { ProductCard } from '../ProductCard';
 
 import lottieAnim from '@/public/LottieEmplyList.json';
 import { getCurrency } from '@/services';
+import { auth } from '@/auth';
 
 interface IProductListGroup {
   data: Product[];
@@ -22,10 +23,20 @@ const ProductListGroup: FC<IProductListGroup> = async ({
   className = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
 }) => {
   const currency = await getCurrency();
+  const session = await auth();
   const t = await getTranslations('system');
 
   const printProduct = (product: Product, index: number) => {
-    return <ProductCard key={product.id} product={product} currency={currency} className={gridCols(index)} t={t} />;
+    return (
+      <ProductCard
+        t={t}
+        session={session}
+        key={product.id}
+        product={product}
+        currency={currency}
+        className={gridCols(index)}
+      />
+    );
   };
 
   if (!data?.length) {

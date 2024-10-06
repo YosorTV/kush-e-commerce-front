@@ -12,6 +12,8 @@ import { CartItemType } from '@/types/store';
 import { PageProps } from '@/types/app/page.types';
 import { notFound } from 'next/navigation';
 
+import { auth } from '@/auth';
+
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale, slug } = props.params;
 
@@ -24,6 +26,7 @@ export default async function ProductDetails({ params }: PageProps) {
   const { locale, slug } = params;
 
   const t = await getTranslations();
+  const session = await auth();
 
   const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
@@ -77,6 +80,7 @@ export default async function ProductDetails({ params }: PageProps) {
             <div className='mt-5 flex flex-col'>
               <Wishlist
                 text={t(data?.inWishlist ? 'wishlist.added' : 'wishlist.add')}
+                session={session}
                 locale={locale}
                 productId={data?.id}
                 inWishlist={data?.inWishlist}

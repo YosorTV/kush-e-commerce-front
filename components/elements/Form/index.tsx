@@ -34,7 +34,6 @@ export const Form: FC<FormProps<any>> = ({
     if (formState?.status === 200) {
       ref.current.reset();
       if (formState?.url) {
-        router.refresh();
         debouncedPush(formState?.url);
       }
 

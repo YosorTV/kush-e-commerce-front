@@ -9,7 +9,7 @@ import { Link } from '@/lib/navigation';
 
 import { ProductCardProps } from '@/types/components';
 
-export const ProductCard: FC<ProductCardProps> = ({ product, className, currency = 41, t }) => {
+export const ProductCard: FC<ProductCardProps> = ({ product, className, session = null, currency = 41, t }) => {
   return (
     <figure className={cn('grid cursor-pointer', className)}>
       <div className='relative'>
@@ -23,7 +23,12 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, currency
               {product.title}
             </Title>
           </NextLink>
-          <Wishlist locale={product.locale} productId={product.id} inWishlist={product?.inWishlist ?? false} />
+          <Wishlist
+            session={session}
+            locale={product.locale}
+            productId={product.id}
+            inWishlist={product?.inWishlist ?? false}
+          />
         </div>
 
         {product?.collections &&
