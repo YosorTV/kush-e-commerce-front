@@ -39,12 +39,13 @@ export interface Product {
   };
   category: string;
   slug: string;
-  materials: string[];
   description: string;
   locale: string;
   price: number;
   priceText: string;
   saleValue: number;
+  sizes: { data: string[] };
+  materials: { data: string[] };
   hintText: string;
   quantity: number;
   updatedAt: string;

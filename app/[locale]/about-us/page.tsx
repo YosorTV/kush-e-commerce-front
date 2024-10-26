@@ -1,19 +1,17 @@
-import React from 'react';
-
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PageLayout } from '@/components/layouts';
-import { getMetadata } from '@/services';
-import { PageProps } from '@/types/app/page.types';
-import { STRAPI_PAGES } from '@/helpers/constants';
-import { getAboutUsData } from '@/services/api/get-about-us';
 import { AboutSection } from '@/components/complex';
+import { PageLayout } from '@/components/layouts';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
+import { getMetadata } from '@/services';
+import { getAboutUsData } from '@/services/api/get-about-us';
+import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.about, locale });
+  const response = await getMetadata({ path: STRAPI_ENTRIES.about, locale });
 
   return response;
 }

@@ -1,19 +1,19 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PageLayout } from '@/components/layouts';
 import { NextLink } from '@/components/elements';
+import { PageLayout } from '@/components/layouts';
 
 import { getMetadata, getSuccessData } from '@/services';
 
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
 
 import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.success, locale });
+  const response = await getMetadata({ path: STRAPI_ENTRIES.success, locale });
 
   return response;
 }

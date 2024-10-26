@@ -1,8 +1,7 @@
 import { Input } from '@/components/elements';
 import { cn } from '@/lib';
-import React from 'react';
 
-export const ProductOption = ({ id, value, title, name, className, onChange, checked }: any) => {
+export const ProductOption = ({ id, value, title, name, className, onChange, checked = true }: any) => {
   return (
     <label
       key={id}
@@ -16,6 +15,7 @@ export const ProductOption = ({ id, value, title, name, className, onChange, che
         id={id}
         type='radio'
         defaultChecked={checked}
+        checked={checked}
         name={name}
         value={value}
         onChange={onChange}

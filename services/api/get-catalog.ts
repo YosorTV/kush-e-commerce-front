@@ -1,7 +1,7 @@
+import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { getStrapiData } from '../strapi';
 
 interface IGetCatalogData {
   locale: string;
@@ -10,10 +10,7 @@ interface IGetCatalogData {
 export async function getCatalogData({ locale }: IGetCatalogData) {
   const catalogQP = STRAPI_QUERIES.CATALOG({ locale });
 
-  const response = await getStrapiData(
-    STRAPI_PAGES.catalog,
-    generateStrapiQuery(catalogQP)
-  );
+  const response = await getStrapiData(STRAPI_ENTRIES.catalog, generateStrapiQuery(catalogQP));
 
   return { data: response };
 }

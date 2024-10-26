@@ -1,13 +1,13 @@
 'use client';
 
-import { FC } from 'react';
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import { FC } from 'react';
 
-import { Blockquote, Title, NextLink } from '@/components/elements';
+import { Blockquote, NextLink, Title } from '@/components/elements';
 
+import { cn } from '@/lib';
 import { IStrapiContentBlock } from '@/types/components/simple';
 import { StrapiImage } from '../StrapiImage';
-import { cn } from '@/lib';
 
 export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClass = 'h-full' }) => {
   return (
@@ -15,7 +15,11 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
       content={content}
       blocks={{
         quote: ({ children }) => <Blockquote>{children}</Blockquote>,
-        link: ({ children, url }) => <NextLink href={url}>{children}</NextLink>,
+        link: ({ children, url }) => (
+          <NextLink href={url} className='text-blue-500 underline-offset-2 hover:underline'>
+            {children}
+          </NextLink>
+        ),
         heading: ({ level, children }) => <Title level={`${level}`}>{children}</Title>,
         image: ({ image }) => {
           return (

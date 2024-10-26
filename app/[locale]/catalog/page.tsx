@@ -1,7 +1,7 @@
 import { Title } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
 import { StrapiBlockRender, StrapiImage } from '@/components/simple';
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
 
 import { getCatalogData, getMetadata } from '@/services';
 
@@ -12,7 +12,7 @@ import { notFound } from 'next/navigation';
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.catalog, locale });
+  const response = await getMetadata({ path: STRAPI_ENTRIES.catalog, locale });
 
   return response;
 }

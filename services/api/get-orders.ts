@@ -1,7 +1,7 @@
 import { generateStrapiQuery } from '@/lib';
 import { getStrapiData } from '../strapi';
 
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { STRAPI_QUERIES } from '../queries';
 
 interface IGetOrders {
@@ -15,7 +15,7 @@ interface IGetOrders {
 export const getOrdersData = async ({ locale, email, token, page = '1', pageSize = '5' }: IGetOrders): Promise<any> => {
   const orderesQP = generateStrapiQuery(STRAPI_QUERIES.ORDERS({ locale, email, page, pageSize }));
 
-  const response = await getStrapiData(STRAPI_PAGES.orders, orderesQP, { token, next: { tags: ['orders'] } });
+  const response = await getStrapiData(STRAPI_ENTRIES.orders, orderesQP, { token, next: { tags: ['orders'] } });
 
   return { ...response };
 };

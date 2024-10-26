@@ -1,26 +1,27 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { getHomeData, getMetadata } from '@/services';
-
 import { PageLayout } from '@/components/layouts';
-import { StrapiBlockRender } from '@/components/simple';
+
 import { STRAPI_ENTRIES } from '@/helpers/constants';
 
+import { getMetadata, getOffertaData } from '@/services';
+
+import { OffertaSection } from '@/components/complex';
 import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_ENTRIES.home, locale });
+  const response = await getMetadata({ path: STRAPI_ENTRIES.offerta, locale });
 
   return response;
 }
 
-export default async function Home({ params, searchParams }: PageProps) {
+export default async function Offerta({ params }: PageProps) {
   const { locale } = params;
 
-  const { data } = await getHomeData({ locale });
+  const { data } = await getOffertaData({ locale });
 
   if (!data) {
     return notFound();
@@ -28,7 +29,7 @@ export default async function Home({ params, searchParams }: PageProps) {
 
   return (
     <PageLayout className='mt-16'>
-      <StrapiBlockRender data={data.blocks} {...searchParams} />
+      {data?.content && <OffertaSection content={data.content} title={data.title} />}
     </PageLayout>
   );
 }

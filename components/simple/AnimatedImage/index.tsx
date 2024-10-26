@@ -1,13 +1,13 @@
 'use client';
 
-import { FC, useState, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 
 import { useRouter } from '@/lib/navigation';
 
-import { StrapiImage } from '../StrapiImage';
-import { Product } from '@/types/components';
 import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
+import { Product } from '@/types/components';
+import { StrapiImage } from '../StrapiImage';
 
 interface TAnimatedImage {
   product: Product;

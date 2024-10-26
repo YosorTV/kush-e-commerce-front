@@ -1,7 +1,7 @@
-import { getStrapiData } from '../strapi';
-import { STRAPI_QUERIES } from '../queries';
+import { DEFAULT_LOCALE, STRAPI_ENTRIES } from '@/helpers/constants';
 import { generateStrapiQuery } from '@/lib';
-import { DEFAULT_LOCALE, STRAPI_PAGES } from '@/helpers/constants';
+import { STRAPI_QUERIES } from '../queries';
+import { getStrapiData } from '../strapi';
 
 interface IGetWishlistProducts {
   locale: string;
@@ -20,7 +20,7 @@ export const getWishlistProducts = async ({
 }: IGetWishlistProducts) => {
   const wishlistApi = STRAPI_QUERIES.WISHLIST_PRODUCTS({ locale, userId, page, pageSize });
 
-  const { data = [], meta } = await getStrapiData(STRAPI_PAGES.wishlist, generateStrapiQuery(wishlistApi), token);
+  const { data = [], meta } = await getStrapiData(STRAPI_ENTRIES.wishlist, generateStrapiQuery(wishlistApi), token);
 
   return { data, meta };
 };

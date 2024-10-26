@@ -1,13 +1,13 @@
-import { FC } from 'react';
 import { type BlocksContent } from '@strapi/blocks-react-renderer';
+import { FC } from 'react';
 
-import { ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simple';
 import { Title } from '@/components/elements';
+import { ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simple';
 
-import { IImageFormats } from '@/types/components';
-import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
 import { getCurrency } from '@/services';
+import { IImageFormats } from '@/types/components';
+import { getTranslations } from 'next-intl/server';
 
 interface ICollectionDetails {
   title?: string;
@@ -28,6 +28,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
   const printProduct = (product: any) => {
     return <ProductCard t={t} session={session} product={product} key={product.id} currency={currency} />;
   };
+
   return (
     <article className='flex flex-col'>
       <div className='relative h-sm md:h-md'>

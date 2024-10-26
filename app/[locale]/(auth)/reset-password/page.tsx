@@ -3,17 +3,17 @@ import { notFound } from 'next/navigation';
 
 import { getMetadata, getResetPasswordData } from '@/services';
 
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
 
-import { PageLayout } from '@/components/layouts';
 import { ResetForm } from '@/components/forms';
+import { PageLayout } from '@/components/layouts';
 
 import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.reset, locale });
+  const response = await getMetadata({ path: STRAPI_ENTRIES.reset, locale });
 
   return response;
 }

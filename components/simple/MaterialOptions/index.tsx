@@ -1,10 +1,10 @@
 'use client';
 
-import { FC } from 'react';
+import { cn } from '@/lib';
 import { useCart } from '@/store';
 import { useTranslations } from 'next-intl';
+import { FC, useCallback, useEffect } from 'react';
 import { ProductOption } from '../ProductOption';
-import { cn } from '@/lib';
 
 interface IMaterialOptions {
   data?: any[];
@@ -16,16 +16,29 @@ export const MaterialOptions: FC<IMaterialOptions> = ({ data = [], title }) => {
 
   const t = useTranslations('material');
 
+  useEffect(() => {
+    if (data.length === 1) {
+      state.onAdd({ key: 'material', value: data[0].value });
+    }
+  }, [data]);
+
+  const isChecked = useCallback(
+    (value: string) => {
+      return state.formState.material === value || false;
+    },
+    [state.formState.material]
+  );
+
   const printElement = ({ value, id }: any) => {
     return (
       <ProductOption
         key={id}
         id={`material-${id}`}
         name='material'
-        checked={state.formState.material === value}
+        checked={isChecked(value)}
         title={t(value.trim())}
         onChange={() => state.onAdd({ key: 'material', value })}
-        className={state.formState.material === value && 'underline'}
+        className={isChecked(value) && 'underline'}
       />
     );
   };

@@ -64,7 +64,7 @@ const deleteParams = (options: RequestOptions = {}): RequestInit => {
   };
 };
 
-export { getParams, postParams, putParams, deleteParams };
+export { deleteParams, getParams, postParams, putParams };
 
 export const DEFAULT_LOCALE = 'uk';
 export const LOCALES = ['uk', 'en'] as const;
@@ -157,26 +157,27 @@ export const SORT_OPTIONS = [
   }
 ];
 
-export const STRAPI_PAGES = {
-  global: 'global',
-  home: 'home',
-  catalog: 'products-page',
-  contacts: 'contact-us-page',
-  about: 'about-us-page',
-  profile: 'profile-page',
+export const STRAPI_ENTRIES = {
   me: 'users/me',
-  signup: 'registration-page',
-  signin: 'login-page',
+  home: 'home',
+  global: 'global',
+  orders: 'orders',
+  term: 'term-page',
   reset: 'reset-page',
-  success: 'success-page',
+  signin: 'login-page',
   forgot: 'forgot-page',
   policy: 'policy-page',
-  term: 'term-page',
-  currency: 'currency-change',
+  about: 'about-us-page',
+  profile: 'profile-page',
+  success: 'success-page',
+  offerta: 'offerta-page',
+  catalog: 'products-page',
+  contacts: 'contact-us-page',
+  signup: 'registration-page',
   delivery: 'delivery',
-  wishlistNotify: 'auth-notification',
   wishlist: 'wishlists',
-  orders: 'orders'
+  currency: 'currency-change',
+  wishlistNotify: 'auth-notification'
 };
 
 export const passwordValidationParams = {

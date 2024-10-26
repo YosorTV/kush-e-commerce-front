@@ -1,12 +1,12 @@
 'use server';
 
-import { getStrapiData } from '../strapi';
-import { STRAPI_QUERIES } from '../queries';
-import { generateStrapiQuery } from '@/lib';
-import { revalidateTag } from 'next/cache';
 import { auth } from '@/auth';
-import { getWishlistProducts } from './get-wished-products';
+import { generateStrapiQuery } from '@/lib';
 import { Product } from '@/types/components';
+import { revalidateTag } from 'next/cache';
+import { STRAPI_QUERIES } from '../queries';
+import { getStrapiData } from '../strapi';
+import { getWishlistProducts } from './get-wished-products';
 
 export async function getProductsData({ locale, page = 1, pageSize = 5, name, ...rest }: any) {
   const session = await auth();
@@ -24,6 +24,8 @@ export async function getProductsData({ locale, page = 1, pageSize = 5, name, ..
   if (session?.accessToken) {
     const { data: wishlist } = await getWishlistProducts({
       locale,
+      page: '1',
+      pageSize: '10',
       userId: Number(session.user.id),
       token: session.accessToken
     });

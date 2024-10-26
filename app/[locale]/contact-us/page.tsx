@@ -1,16 +1,16 @@
+import { ContactUsSection } from '@/components/complex/ContactUsSection';
 import { PageLayout } from '@/components/layouts';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { getMetadata } from '@/services';
-import { STRAPI_PAGES } from '@/helpers/constants';
+import { getContactUsData } from '@/services/api/get-contact-us';
 import { PageProps } from '@/types/app/page.types';
 import { Metadata } from 'next';
-import { ContactUsSection } from '@/components/complex/ContactUsSection';
-import { getContactUsData } from '@/services/api/get-contact-us';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
 
-  const response = await getMetadata({ path: STRAPI_PAGES.contacts, locale });
+  const response = await getMetadata({ path: STRAPI_ENTRIES.contacts, locale });
 
   return response;
 }
