@@ -1,12 +1,12 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { motion } from 'framer-motion';
+import { FC, useEffect, useState } from 'react';
 
-import { useCart } from '@/store';
 import { getCurrency } from '@/services';
+import { useCart } from '@/store';
 
 import { cn } from '@/lib';
 
@@ -50,17 +50,13 @@ export const CartList: FC<any> = ({ data }) => {
         initial={animCart.basket.initial}
         animate={animCart.basket.animate}
         exit={animCart.basket.exit}
-        className='relative flex w-full flex-col items-center justify-center'
+        className='relative flex w-full flex-col items-center justify-center gap-y-4'
       >
+        <Title level='2'>{data.emptyList}</Title>
         <Button onClick={handleBack} className='btn btn-link text-base normal-case'>
           {data.getBack}
         </Button>
-
-        <Lottie
-          text={data.emptyList}
-          src={lottieAnim}
-          playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0')}
-        />
+        <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0')} />
       </motion.div>
     );
   }

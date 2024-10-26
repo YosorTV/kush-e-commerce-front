@@ -3,9 +3,9 @@
 import { FC, useState } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 
+import { DEFAULT_LOCALE } from '@/helpers/constants';
 import { cn } from '@/lib';
 import { useLocale } from 'next-intl';
-import { DEFAULT_LOCALE } from '@/helpers/constants';
 
 interface IDatePicker {
   id: string;
@@ -34,7 +34,7 @@ const DatePicker: FC<IDatePicker> = ({ id, name, className, error, placeholder, 
       inputName={name}
       placeholder={placeholder}
       inputClassName={cn(className, 'bg-base-100 input input-bordered w-full text-base-200', error && 'border-error')}
-      primaryColor='amber'
+      dateLooking='middle'
       displayFormat='YYYY-MM-DD'
       maxDate={minAllowedDate}
       asSingle

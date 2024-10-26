@@ -4,12 +4,12 @@ import { Form, Input, Title } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
 import { DeleteButton } from '@/components/simple/DeleteButton';
 
-import { updateProfileAction } from '@/services';
-import { schemas } from '@/lib';
-import { DEFAULT_LOCALE } from '@/helpers/constants';
-import { deleteProfile } from '@/services/api/delete-account';
-import { NovaPostOptions } from '@/components/simple/NovaPostOptions';
 import { inputFieldAdapter } from '@/adapters/input';
+import { NovaPostOptions } from '@/components/simple/NovaPostOptions';
+import { DEFAULT_LOCALE } from '@/helpers/constants';
+import { schemas } from '@/lib';
+import { updateProfileAction } from '@/services';
+import { deleteProfile } from '@/services/api/delete-account';
 
 export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any) => {
   const schema = schemas.profile(locale);
@@ -18,7 +18,9 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
   const updatedContactsFields = data.contacts.map((input: any) => inputFieldAdapter(input, state));
 
   const printInputs = (data: any) => {
-    return data?.map((input: any) => <Input key={input.id} disabled={input.type === 'email'} {...input} />);
+    return data?.map((input: any) => (
+      <Input containerClass='w-full' key={input.id} disabled={input.type === 'email'} {...input} />
+    ));
   };
 
   const formActions = (action: any) => {

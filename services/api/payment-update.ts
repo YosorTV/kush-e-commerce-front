@@ -9,6 +9,8 @@ interface IPayment {
   products: any[];
   customer: any;
   userId: number;
+  paytype: string;
+  status: string;
 }
 
 export const paymentCallback = async (data: IPayment) => {

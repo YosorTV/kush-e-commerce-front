@@ -1,17 +1,18 @@
 'use client';
 
-import { useEffect, useMemo, useRef, FC, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
-import { useCart } from '@/store';
 import { liqPayAdapter } from '@/adapters/payment';
 import { Button } from '@/components/elements';
-import { paymentCallback } from '@/services/api/payment-update';
 import { formatPrice } from '@/helpers/formatters';
+import { toaster } from '@/lib';
+import { useScrollLock } from '@/lib/hooks';
+import { paymentCallback } from '@/services/api/payment-update';
+import { useCart } from '@/store';
 import { CartItemType } from '@/types/store';
 import { debounce } from 'lodash';
-import { useScrollLock } from '@/lib/hooks';
 
 interface ICartCheckout {
   currency: number;
@@ -42,26 +43,32 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   }, [cartStore.cart, locale, currency]);
 
   const debouncedCallback = useCallback(
-    debounce(async ({ data, signature, ...rest }) => {
-      const customer = {
-        ...cartStore.delivery,
-        customer_city: cartStore.delivery.self ? '' : cartStore.delivery.novapostCity.label,
-        customer_warehouse: cartStore.delivery.self ? '' : cartStore.delivery.novapostWarehouse.label,
-        self_delivery: cartStore.delivery.self
-      };
-
-      await paymentCallback({
+    debounce(async ({ data, signature, paytype, status }) => {
+      const result = await paymentCallback({
         data,
         signature,
+        status,
+        paytype,
         products,
-        customer,
-        userId: Number(session?.user?.id) || null
+        userId: Number(session?.user?.id) || null,
+        customer: {
+          ...cartStore.delivery,
+          customer_city: cartStore.delivery.self ? '' : cartStore.delivery.novapostCity.label,
+          customer_warehouse: cartStore.delivery.self ? '' : cartStore.delivery.novapostWarehouse.label,
+          self_delivery: cartStore.delivery.self
+        }
       });
 
-      if (rest?.result === 'ok') {
+      if (result.status === 200) {
+        cartStore.globalReset();
         cartStore.setForm('success');
       }
+
+      toaster({ key: 'success', message: result.message });
+
+      return result;
     }, 500),
+
     [cartStore.delivery, products, session]
   );
 
@@ -85,6 +92,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       <Button onClick={handleBack} className='btn btn-link relative left-5 mx-5 justify-start'>
         {t('system.stepBack')}
       </Button>
+
       <div ref={liqPayContainerRef} id='liqpay_checkout' />
     </div>
   );

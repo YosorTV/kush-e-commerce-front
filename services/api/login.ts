@@ -4,7 +4,7 @@ interface LoginUserProps {
   identifier: string;
   password: string;
   remember: string;
-  localse: string;
+  locale: string;
 }
 
 export async function login(user: LoginUserProps) {

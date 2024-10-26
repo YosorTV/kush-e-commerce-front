@@ -1,6 +1,6 @@
 import { generateStrapiQuery } from '@/lib';
-import { getStrapiData } from '../strapi';
 import { STRAPI_QUERIES } from '../queries';
+import { getStrapiData } from '../strapi';
 
 export async function getSizesData({ locale }: { locale: string }) {
   const sizeApi = STRAPI_QUERIES.SIZE({ locale });

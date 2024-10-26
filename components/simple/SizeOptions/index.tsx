@@ -1,8 +1,8 @@
 'use client';
 
-import { FC } from 'react';
 import { cn } from '@/lib';
 import { useCart } from '@/store';
+import { FC } from 'react';
 
 interface ISizeOptions {
   sizes: any[];
@@ -10,12 +10,12 @@ interface ISizeOptions {
   title: string;
 }
 
-export const SizeOptions: FC<ISizeOptions> = ({ sizes, title, data }) => {
+export const SizeOptions: FC<ISizeOptions> = ({ sizes, title }) => {
   const state = useCart();
 
-  const availableSizes = sizes.map((size) => size.size);
+  const availableSizes = sizes.map(({ size }) => size).sort((a, b) => a - b);
 
-  const printSize = ({ size }: any) => {
+  const printSize = (size: number) => {
     return (
       <label key={size} className='w-min'>
         <input type='radio' name='size' value={size} className='hidden' disabled={availableSizes.includes(size)} />
@@ -38,7 +38,7 @@ export const SizeOptions: FC<ISizeOptions> = ({ sizes, title, data }) => {
   return (
     <div className='flex flex-col gap-y-5'>
       <p className='text-lg font-semibold'>{title}</p>
-      {data.length > 0 && <div className='flex flex-wrap gap-3'>{data.map(printSize)}</div>}
+      {availableSizes.length > 0 && <div className='flex flex-wrap gap-3'>{availableSizes.map(printSize)}</div>}
     </div>
   );
 };

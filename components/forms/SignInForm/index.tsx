@@ -20,7 +20,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
     if (!data) return;
 
     return data.map((input: any) => (
-      <Input autoComplete={input.type === 'email' ? 'email' : ''} key={input.id} {...input} />
+      <Input autoComplete={input.type === 'email' && 'email'} key={input.id} {...input} />
     ));
   };
 

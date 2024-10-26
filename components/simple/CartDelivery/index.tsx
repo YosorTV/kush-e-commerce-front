@@ -1,35 +1,39 @@
 'use client';
 
 import { Button } from '@/components/elements';
-import { useCart } from '@/store';
 import { DeliveryForm, PeronalCheckoutForm } from '@/components/forms';
+import { useCart } from '@/store';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
+import { ROOT } from '@/helpers/constants';
+import { isFormIncomplete } from '@/helpers/validator';
+import { useRouter } from '@/lib';
+import { useScrollLock } from '@/lib/hooks';
 import { getMe } from '@/services/api/get-me';
 import { useTranslations } from 'next-intl';
-import { isFormIncomplete } from '@/helpers/validator';
-import { useScrollLock } from '@/lib/hooks';
 
 export const CartDelivery = () => {
   const [user, setUser] = useState(null);
 
+  const router = useRouter();
   const t = useTranslations();
   const cartStore = useCart();
+  const session = useSession();
+
+  useScrollLock(cartStore.isOpen);
+
+  const fetchProfileData = useCallback(async () => {
+    const { data } = await getMe({ token: session.data.accessToken });
+
+    setUser(data);
+  }, [session.data.accessToken, getMe]);
 
   const handleBack = () => {
     cartStore.setForm('cart');
     cartStore.resetDelivery();
-  };
 
-  useScrollLock(cartStore.isOpen);
-
-  const session = useSession();
-
-  const fetchProfileData = async () => {
-    const { data } = await getMe({ token: session.data.accessToken });
-
-    setUser(data);
+    router.push(ROOT);
   };
 
   useEffect(() => {

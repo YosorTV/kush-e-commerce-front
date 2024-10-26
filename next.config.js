@@ -5,6 +5,15 @@ const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
 
 const nextConfig = {
   reactStrictMode: false,
+  async rewrites() {
+    return [
+      {
+        source: '/.well-known/apple-developer-merchantid-domain-association',
+        destination: '/.well-known/apple-developer-merchantid-domain-association',
+        locale: false
+      }
+    ];
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
   },
@@ -16,9 +25,6 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true
-  },
-  env: {
-    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL
   },
   images: {
     loader: 'custom',

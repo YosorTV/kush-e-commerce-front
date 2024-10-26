@@ -1,19 +1,22 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/elements';
 
+import { useRouter } from '@/lib';
 import { useCart } from '@/store';
 
 export const Success = () => {
   const cartStore = useCart();
+  const router = useRouter();
   const t = useTranslations('cart');
 
   const handleClose = () => {
-    cartStore.globalReset();
     cartStore.onToggle();
+    cartStore.globalReset();
+    router.push('/');
   };
 
   return (

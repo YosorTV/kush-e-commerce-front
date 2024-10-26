@@ -1,9 +1,9 @@
 'use server';
 
-import { schemas } from '@/lib/zod';
 import { signIn, signOut } from '@/auth';
-import { AuthError } from 'next-auth';
 import { DEFAULT_LOCALE, ROOT } from '@/helpers/constants';
+import { schemas } from '@/lib/zod';
+import { AuthError } from 'next-auth';
 
 export async function authUserAction(prevState: any, formData: FormData) {
   try {

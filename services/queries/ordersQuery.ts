@@ -11,5 +11,6 @@ export const ordersQuery = ({ locale = DEFAULT_LOCALE, email, page, pageSize }: 
   pagination: {
     page,
     pageSize
-  }
+  },
+  sort: ['updatedAt:desc']
 });

@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
-import { IOrderCard } from '@/types/components';
-import { StrapiImage } from '../StrapiImage';
-import StatusBadge from '../StatusBadge';
-import { cn, getStatusBorder } from '@/lib';
-import { formatDate } from '@/helpers/formatters';
-import { Price } from '../Price';
 import { NextLink } from '@/components/elements';
+import { formatDate } from '@/helpers/formatters';
+import { IOrderCard } from '@/types/components';
+import { Price } from '../Price';
+import StatusBadge from '../StatusBadge';
+import { StrapiImage } from '../StrapiImage';
 
 export const OrderCardMobile: FC<IOrderCard> = ({
   id,
@@ -22,7 +21,7 @@ export const OrderCardMobile: FC<IOrderCard> = ({
   t
 }) => {
   return (
-    <div className={cn('group card image-full h-80 overflow-hidden rounded-none border-2', getStatusBorder(status))}>
+    <div className='group card image-full h-80 w-full overflow-hidden rounded-none border-2 border-base-100'>
       <figure className='overflow-hidden !rounded-none'>
         <StrapiImage
           src={image.url}
@@ -33,21 +32,17 @@ export const OrderCardMobile: FC<IOrderCard> = ({
           className='aspect-square h-full w-full transform-gpu object-cover transition-all duration-300 group-hover:scale-105'
         />
       </figure>
-      <div className='card-body gap-y-5 !rounded-none text-xs font-medium !text-white'>
+      <div className='card-body gap-y-5 !rounded-none font-medium !text-white'>
         <div className='grid grid-cols-1'>
           <div className='flex flex-col gap-2.5'>
-            <span>{t('order', { number: id })}</span>
-            <p>
+            <p className='pb-4'>
               {t('status')}&nbsp;
               <StatusBadge status={status} />
             </p>
             <span className='whitespace-nowrap'>{t('name', { name })}</span>
             <span className='whitespace-nowrap'>{t('quantity', { number: quantity })}</span>
             <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
-              {t('price')} <Price price={parseFloat(price)} currency={1} className='!text-xs' />
-            </span>
-            <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
-              {t('total')} <Price price={parseFloat(amount)} currency={1} className='!text-xs' />
+              {t('price')} <Price price={parseFloat(price)} currency={1} className='text-xs' />
             </span>
             <span>{t('date', { date: formatDate(publishedAt) })}</span>
             <span>

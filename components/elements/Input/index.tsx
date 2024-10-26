@@ -6,9 +6,9 @@ import { InputProps } from '@/types/components';
 
 import 'react-phone-input-2/lib/style.css';
 
-import { InputPhone } from '@/components/elements/Input/InputPhone';
 import { InputDefault } from '@/components/elements/Input/InputDefault';
 import { InputPassword } from '@/components/elements/Input/InputPassword';
+import { InputPhone } from '@/components/elements/Input/InputPhone';
 import { useMemo } from 'react';
 import DatePicker from '../DatePicker';
 
@@ -85,7 +85,7 @@ export const Input = ({
   }, [className, error, id, name, placeholder, rest, type, validation]);
 
   return (
-    <div className={cn('relative flex w-auto flex-col gap-y-2', containerClass, type === 'hidden' && 'hidden')}>
+    <div className={cn('relative flex flex-col gap-y-2', containerClass, type === 'hidden' && 'hidden')}>
       {label && (
         <label htmlFor={id} className={cn('label label-text p-0', labelStyle)}>
           {label}
